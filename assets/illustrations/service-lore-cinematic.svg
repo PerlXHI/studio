@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Open spellbook with a floating magical butterfly">
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#c8c5ee"/><stop offset=".5" stop-color="#b9d8ed"/><stop offset="1" stop-color="#eadbf2"/></linearGradient>
+ <linearGradient id="pages" x2="0" y2="1"><stop stop-color="#fff9e7"/><stop offset="1" stop-color="#d9c8e7"/></linearGradient>
+ <linearGradient id="cover" x2="1" y2="1"><stop stop-color="#8d83bd"/><stop offset="1" stop-color="#5f6eaa"/></linearGradient>
+ <radialGradient id="magic"><stop stop-color="#fff4cf" stop-opacity=".85"/><stop offset="1" stop-color="#fff4cf" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="400" rx="28" fill="url(#bg)"/><circle cx="300" cy="160" r="160" fill="url(#magic)"/>
+<path d="M95 310q86-33 205 2 119-35 205-2v32q-97-31-205 8-109-39-205-8Z" fill="#9e90c0" opacity=".4"/>
+<path d="M100 231q96-48 200 10v111q-101-49-200-9Zm400 0q-96-48-200 10v111q101-49 200-9Z" fill="url(#cover)" stroke="#fff" stroke-width="5"/>
+<path d="M116 230q86-35 184 18v84q-93-37-184 6Zm368 0q-86-35-184 18v84q93-37 184 6Z" fill="url(#pages)" stroke="#fff5df" stroke-width="4"/>
+<path d="M300 249v96" stroke="#7b6ea9" stroke-width="7"/>
+<g fill="none" stroke="#b3a0c9" stroke-width="3" opacity=".8"><path d="M144 260q66-24 126 12m-121 8q65-21 118 12m-113 9q62-17 110 9M456 260q-66-24-126 12m121 8q-65-21-118 12m113 9q-62-17-110 9"/></g>
+<circle cx="300" cy="281" r="22" fill="#e9d9fa" stroke="#fff" stroke-width="3"/><path d="m300 260 6 14 15 6-15 6-6 15-6-15-15-6 15-6z" fill="#fff4cf"/>
+<g transform="translate(300 145)">
+ <path d="M0 0C-70-90-112-31-58 21-25 46-10 17 0 0 10 17 25 46 58 21 112-31 70-90 0 0Z" fill="#a7a0df" fill-opacity=".85" stroke="#fff" stroke-width="4"/>
+ <path d="M0 0C-35-65-45-29-21 1-7 16-3 10 0 0 3 10 7 16 21 1 45-29 35-65 0 0Z" fill="#f4d4ed"/>
+ <path d="M0 0v54m-4-48q-19-30-31-24m39 24q19-30 31-24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</g>
+<g fill="#fff"><path d="m150 90 5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/><path d="m452 98 4 11 11 4-11 4-4 11-4-11-11-4 11-4z"/><circle cx="215" cy="174" r="3"/><circle cx="404" cy="189" r="3"/></g>
+<path d="M189 196q54-39 100-21m122-4q-48-37-90-20" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 8"/>
+</svg>
