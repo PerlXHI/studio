@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Cute celestial spirit holding a glowing star">
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#c6c1ef"/><stop offset=".5" stop-color="#b9dff1"/><stop offset="1" stop-color="#f1d8ed"/></linearGradient>
+ <radialGradient id="aura"><stop stop-color="#fff8df" stop-opacity=".95"/><stop offset="1" stop-color="#fff8df" stop-opacity="0"/></radialGradient>
+ <linearGradient id="fur" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".55" stop-color="#f2e9ff"/><stop offset="1" stop-color="#c9c4e9"/></linearGradient>
+ <linearGradient id="star" x2="1" y2="1"><stop stop-color="#fff9d9"/><stop offset="1" stop-color="#efc4db"/></linearGradient>
+</defs>
+<rect width="600" height="400" rx="28" fill="url(#bg)"/>
+<circle cx="300" cy="192" r="185" fill="url(#aura)"/>
+<g fill="none" stroke="#fff" stroke-width="2" opacity=".8"><ellipse cx="300" cy="202" rx="245" ry="84" transform="rotate(-15 300 202)"/><ellipse cx="300" cy="202" rx="202" ry="125" transform="rotate(29 300 202)"/></g>
+<g fill="#fff"><path d="m92 84 6 15 15 6-15 6-6 15-6-15-15-6 15-6z"/><path d="m502 95 4 11 11 4-11 4-4 11-4-11-11-4 11-4z"/><circle cx="128" cy="260" r="4"/><circle cx="469" cy="289" r="4"/></g>
+<path d="M215 272q-22-65 9-127 23-47 76-47 53 0 77 47 30 62 8 127-21 63-87 66-63-4-83-66Z" fill="url(#fur)" stroke="#fff" stroke-width="5"/>
+<path d="M229 137q-31-63-2-80 53 8 80 57M361 137q31-63 2-80-53 8-80 57" fill="#e1d8fa" stroke="#fff" stroke-width="5"/>
+<path d="M231 116q-9-41 0-44 30 10 48 48m89-4q9-41 0-44-30 10-48 48" fill="#f0c7df"/>
+<ellipse cx="273" cy="202" rx="10" ry="15" fill="#665b90"/><ellipse cx="328" cy="202" rx="10" ry="15" fill="#665b90"/>
+<path d="M292 221q8 9 16 0" fill="none" stroke="#a987b8" stroke-width="4" stroke-linecap="round"/>
+<ellipse cx="248" cy="226" rx="17" ry="8" fill="#edb6ce" opacity=".7"/><ellipse cx="353" cy="226" rx="17" ry="8" fill="#edb6ce" opacity=".7"/>
+<path d="M220 254q-50 14-54 66 45-4 69-35m143-31q50 14 54 66-45-4-69-35" fill="#e7e0fa" stroke="#fff" stroke-width="4"/>
+<g transform="translate(300 283)"><path d="m0-51 13 34 37 2-28 23 9 36-31-20-31 20 9-36-28-23 37-2z" fill="url(#star)" stroke="#fff" stroke-width="4"/><circle r="11" fill="#fff8dd"/></g>
+<path d="M214 310q-40 27-20 49 28 7 51-22m141-27q40 27 20 49-28 7-51-22" fill="#c1b4e3" stroke="#fff" stroke-width="4"/>
+<path d="M258 95q42-40 84-5" fill="none" stroke="#f7d7b4" stroke-width="10" stroke-linecap="round"/>
+<path d="M277 81q25-20 52 0" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+<g fill="#fff6d8"><path d="m177 155 5 12 12 5-12 5-5 12-5-12-12-5 12-5z"/><path d="m418 164 4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/><path d="m108 317 4 9 9 4-9 4-4 9-4-9-9-4 9-4z"/></g>
+</svg>
