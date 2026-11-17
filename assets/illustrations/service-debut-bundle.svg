@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Celestial crown and crystal debut stage">
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#c9c4f1"/><stop offset=".55" stop-color="#b9dff2"/><stop offset="1" stop-color="#f4deed"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#fff7d9" stop-opacity=".95"/><stop offset="1" stop-color="#fff7d9" stop-opacity="0"/></radialGradient>
+ <linearGradient id="crown" x2="0" y2="1"><stop stop-color="#fff9df"/><stop offset=".52" stop-color="#e4c6e2"/><stop offset="1" stop-color="#a18acb"/></linearGradient>
+</defs>
+<rect width="600" height="400" rx="28" fill="url(#bg)"/><circle cx="300" cy="165" r="194" fill="url(#halo)"/>
+<g fill="none" stroke="#fff" stroke-width="3" opacity=".8"><ellipse cx="300" cy="196" rx="226" ry="70" transform="rotate(-13 300 196)"/><ellipse cx="300" cy="196" rx="178" ry="112" transform="rotate(24 300 196)"/></g>
+<path d="M147 288q153 55 306 0v44q-153 54-306 0Z" fill="#897eb5" opacity=".6"/>
+<path d="M182 253 208 117l73 91 20-151 24 151 73-91 26 136q-121 76-242 0Z" fill="url(#crown)" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
+<path d="M196 246q104 55 208 0" fill="none" stroke="#fff4d9" stroke-width="6"/>
+<g fill="#fff6d9" stroke="#d8c0e6" stroke-width="3"><circle cx="208" cy="120" r="12"/><circle cx="301" cy="56" r="16"/><circle cx="392" cy="120" r="12"/><circle cx="249" cy="236" r="10"/><circle cx="300" cy="248" r="13"/><circle cx="351" cy="236" r="10"/></g>
+<path d="M300 111 312 147l38 1-30 23 11 36-31-21-31 21 11-36-30-23 38-1Z" fill="#fff7dd" stroke="#fff" stroke-width="3"/>
+<path d="M160 337q140-57 280 0" fill="none" stroke="#fff" stroke-width="3" opacity=".75"/>
+<g fill="#fff"><path d="m92 92 5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/><path d="m493 83 5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/><path d="m120 250 4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/><path d="m476 275 4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/></g>
+<g fill="none" stroke="#fff" stroke-width="2" opacity=".8"><path d="M110 175q35-38 71-12" stroke-dasharray="3 8"/><path d="M422 168q35-38 71-12" stroke-dasharray="3 8"/></g>
+</svg>
