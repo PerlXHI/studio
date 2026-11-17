@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Cozy moonlit room fantasy illustration">
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#c9c8f0"/><stop offset=".55" stop-color="#b8d9ef"/><stop offset="1" stop-color="#f1dff6"/></linearGradient>
+ <linearGradient id="night" x2="0" y2="1"><stop stop-color="#514d83"/><stop offset="1" stop-color="#8f87b7"/></linearGradient>
+ <linearGradient id="warm" x2="0" y2="1"><stop stop-color="#fff0cf"/><stop offset="1" stop-color="#e6b9a5"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#fff3d8" stop-opacity=".85"/><stop offset="1" stop-color="#fff3d8" stop-opacity="0"/></radialGradient>
+ <filter id="shadow"><feGaussianBlur stdDeviation="12"/></filter>
+</defs>
+<rect width="600" height="400" rx="28" fill="url(#bg)"/>
+<circle cx="450" cy="95" r="116" fill="url(#glow)"/>
+<path d="M0 286Q95 245 184 275T360 260T600 271V400H0Z" fill="#d8d6ef"/>
+<rect x="64" y="36" width="286" height="235" rx="12" fill="#e8e7f9" stroke="#fff" stroke-width="8"/>
+<rect x="79" y="51" width="256" height="205" rx="5" fill="url(#night)"/>
+<path d="M207 52V256M80 154H334" stroke="#d4d2ee" stroke-width="8"/>
+<circle cx="267" cy="102" r="37" fill="#fff0ce"/>
+<circle cx="282" cy="86" r="36" fill="#575384"/>
+<g fill="#fff2ce"><path d="m124 87 5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/><circle cx="174" cy="116" r="3"/><circle cx="312" cy="184" r="3"/></g>
+<path d="M80 226Q143 205 207 225T334 220V256H80Z" fill="#8e8ab8"/>
+<rect x="48" y="270" width="515" height="92" rx="14" fill="#9589ae"/>
+<rect x="74" y="284" width="466" height="13" rx="6" fill="#c7bad8"/>
+<path d="M77 310H544V355H77Z" fill="#b7a7c8"/>
+<rect x="118" y="220" width="154" height="82" rx="25" fill="#eee8f6"/>
+<path d="M122 269Q200 236 269 271V299H122Z" fill="#b9a6cb"/>
+<path d="M149 244q-8-29 13-38 20 9 14 38M230 243q-5-25 15-36 19 12 11 36" fill="#eee8f6"/>
+<ellipse cx="192" cy="269" rx="50" ry="19" fill="#766b94"/>
+<path d="M212 266q28-5 36 10" fill="none" stroke="#766b94" stroke-width="8" stroke-linecap="round"/>
+<path d="M170 267l7 3m22-3 7 3" stroke="#4d486d" stroke-width="4" stroke-linecap="round"/>
+<rect x="392" y="237" width="46" height="67" rx="8" fill="#786b98"/>
+<path d="M384 242h62l-11-21h-40z" fill="#e9c6a5"/>
+<ellipse cx="415" cy="231" rx="39" ry="22" fill="url(#warm)"/>
+<path d="M414 207q-10-34 12-51" fill="none" stroke="#fff1cc" stroke-width="4"/>
+<path d="M375 290q19-56 38-44 17-42 41 0 17-17 28 44" fill="#817da8"/>
+<path d="M405 278q9-26 19-8 12-26 21 8" fill="#a4c7d3"/>
+<g fill="#fff" opacity=".9"><path d="m505 60 5 12 12 5-12 5-5 12-5-12-12-5 12-5z"/><path d="m52 96 4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/><circle cx="548" cy="176" r="3"/></g>
+<g fill="none" stroke="#fff" stroke-opacity=".65" stroke-width="2"><path d="M370 58q54-34 103 4" stroke-dasharray="3 8"/><path d="M355 330q48-34 91-4"/></g>
+</svg>
