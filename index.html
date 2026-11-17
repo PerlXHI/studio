@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Perivelle – Music &amp; Sound for Streamers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f2ff;--surface:#fff;--ink:#241a3d;--muted:#625a78;--line:#ded5f2;--flame:#e8452c;--flame2:#f59a1f;--night:#241a3d;--on-night:#fff3e6;--r:16px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150f27;--surface:#20173b;--ink:#fbf3ea;--muted:#b7aed0;--line:#3a2d5e;--night:#0d0819}}
+:root[data-theme="dark"]{--bg:#150f27;--surface:#20173b;--ink:#fbf3ea;--muted:#b7aed0;--line:#3a2d5e;--night:#0d0819}
+*{box-sizing:border-box}html{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.6 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",Georgia,sans-serif;line-height:1.05;margin:0}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--flame2);outline-offset:3px}
+a{color:inherit}.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;gap:4px;height:58px;overflow-x:auto}
+.logo{font:800 1.2rem "Bricolage Grotesque",sans-serif;text-decoration:none;margin-right:auto;white-space:nowrap;padding-right:12px}
+nav a.l,#lg{padding:8px 12px;border-radius:99px;text-decoration:none;font:600 .92rem Figtree,sans-serif;white-space:nowrap}
+nav a.l:hover{background:var(--line)}nav a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+#lg{border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;margin-left:6px}
+.hero{background:var(--night);color:var(--on-night);position:relative;overflow:hidden;min-height:70vh;display:grid;align-items:end}
+.scene{position:absolute;inset:0}.scene svg{position:absolute;inset:-4%;width:108%;height:108%;transition:transform .15s ease-out}
+.hero .wrap{position:relative;z-index:2;padding-bottom:48px;padding-top:110px}
+.hero h1{font-size:clamp(2.6rem,9vw,5.6rem);font-weight:800;max-width:11ch}
+.hero p{max-width:46ch;color:#e9dcf5;margin:14px 0 20px}
+.sbox{display:flex;gap:8px;max-width:560px;margin-bottom:16px}
+input,select{font:inherit;padding:11px 14px;border-radius:99px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);min-width:0}
+.sbox input{flex:1}
+.btn,.sbox button,.ctl button{padding:11px 20px;border-radius:99px;background:linear-gradient(135deg,var(--flame),var(--flame2));color:#fff;font:600 1rem Figtree,sans-serif;border:0;cursor:pointer;text-decoration:none;display:inline-block}
+section.v{padding:56px 0}
+h2{font-size:clamp(1.7rem,5vw,2.6rem);margin-bottom:8px}h3{font-size:1.2rem}
+.sub{color:var(--muted);max-width:62ch;margin:0 0 22px}.msg{color:var(--muted);margin:0 0 12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 28px}
+.chip{padding:8px 15px;border-radius:99px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:600 .9rem Figtree,sans-serif;cursor:pointer}
+.ctl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}.ctl input{flex:1 1 200px}
+ul.list{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:10px}
+.row{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.art{width:64px;height:64px;border-radius:12px;display:grid;place-items:center;font-size:1.9rem}
+.info b{font-size:1.05rem}.tag{display:inline-block;font-size:.78rem;font-weight:600;padding:1px 9px;border-radius:99px;background:var(--line);margin:2px 6px 0 0}
+small{color:var(--muted)}
+.act{display:flex;align-items:center;gap:14px}.act button,.card button{padding:8px 14px;border-radius:99px;border:0;background:var(--ink);color:var(--bg);font:600 .88rem Figtree,sans-serif;cursor:pointer}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:8px;justify-items:start}
+details{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 16px;margin-bottom:10px}summary{cursor:pointer;font-weight:600}
+footer{background:var(--night);color:var(--on-night);padding:44px 0 36px}
+footer .row2{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}footer a{margin-right:16px;font-weight:600}
+dialog{border:0;border-radius:var(--r);padding:16px;width:min(720px,94vw);background:var(--surface);color:var(--ink)}dialog::backdrop{background:#000a}
+.ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.ph button{border:0;background:var(--line);color:var(--ink);border-radius:99px;width:36px;height:36px;cursor:pointer}
+.pv{aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}.pv iframe{width:100%;height:100%;border:0}.ph0{color:#fff;display:grid;place-items:center;height:100%;text-align:center;padding:16px}
+dialog a{display:inline-block;margin-top:10px;font-weight:600}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;z-index:50;max-width:90vw}
+@media(max-width:640px){.row{grid-template-columns:56px 1fr}.art{width:56px;height:56px}.act{grid-column:1/-1;justify-content:space-between}}
+@media(prefers-reduced-motion:reduce){.scene svg{transition:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav aria-label="Menu">
+<a class="logo" href="#home">🔥 Perivelle</a>
+<a class="l" href="#musik" data-t="nm"></a><a class="l" href="#lagu" data-t="nl"></a><a class="l" href="#sound" data-t="ns"></a><a class="l" href="#komposer" data-t="nc"></a><a class="l" href="#tag" data-t="ng"></a><a class="l" href="#cari" data-t="nf"></a><a class="l" href="#lisensi" data-t="nli"></a><a class="l" href="#bantuan" data-t="nb"></a><a class="l" href="#riwayat" data-t="nr"></a>
+<button type="button" id="lg"></button>
+</nav></div></header>
+
+<main>
+<div class="v" id="v-home">
+<div class="hero">
+<div class="scene" id="scene" aria-hidden="true">
+<svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" data-d="6"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b1a5c"/><stop offset="1" stop-color="#7a2a52"/></linearGradient></defs><rect width="1200" height="700" fill="url(#sky)"/><circle cx="930" cy="190" r="96" fill="#ffd9a8" opacity=".9"/></svg>
+<svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" data-d="14"><path d="M0 700V470c60-80 90 20 150-60s80 40 140-40 70 60 130-20 90 50 150-50 80 60 140-30 90 40 150-40 80 50 140-30V700z" fill="#e8452c" opacity=".85"/><path d="M0 700V540c70-60 100 20 170-40s90 40 160-30 90 40 150-20 90 40 160-30 90 40 160-20 90 30 150-10V700z" fill="#f59a1f" opacity=".9"/></svg>
+<svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" data-d="26"><g fill="#150f27"><path d="M820 250l22-70 40 38c20-6 40-6 60 0l40-38 22 70c14 20 20 44 20 70 0 60-60 100-112 100s-112-40-112-100c0-26 6-50 20-70z"/><path d="M730 700c0-110 50-200 152-200s152 90 152 200z"/></g><circle cx="860" cy="320" r="9" fill="#ffd9a8"/><circle cx="930" cy="320" r="9" fill="#ffd9a8"/></svg>
+</div>
+<div class="wrap"><h1 data-t="h1"></h1><p data-t="hp"></p>
+<div class="sbox"><input id="hq" type="search" data-p="sph" aria-label="Search"><button type="button" id="hgo" data-t="go"></button></div></div></div>
+<section class="v" style="padding-bottom:24px"><div class="wrap">
+<h2 data-t="hm"></h2><div class="chips" id="hm"></div>
+<h2 data-t="hl"></h2><ul class="list" id="hl2"></ul>
+<a class="btn" href="#semua" data-t="all"></a>
+</div></section>
+</div>
+
+<section class="v" id="v-cat" hidden><div class="wrap">
+<h2 id="ct"></h2><p class="sub" id="cn"></p>
+<div class="ctl"><input id="q" type="search" data-p="qh" aria-label="Search">
+<select id="sm" aria-label="Mood"></select>
+<select id="ss" aria-label="Sort"><option value="new" data-t="so1"></option><option value="pop" data-t="so2"></option><option value="low" data-t="so3"></option></select>
+<button type="button" id="rnd" data-t="rnd"></button></div>
+<ul class="list" id="cl"></ul>
+</div></section>
+
+<section class="v" id="v-komposer" hidden><div class="wrap"><h2 data-t="nc"></h2><p class="sub" data-t="cks"></p><div class="cards" id="cc"></div></div></section>
+
+<section class="v" id="v-tag" hidden><div class="wrap"><h2 data-t="ng"></h2><p class="sub" data-t="tgs"></p>
+<h3 data-t="tk"></h3><div class="chips" id="tk" style="margin-top:10px"></div><h3 data-t="tm"></h3><div class="chips" id="tm" style="margin-top:10px"></div></div></section>
+
+<section class="v" id="v-cari" hidden><div class="wrap">
+<h2 data-t="fh"></h2><p class="sub" data-t="fs"></p>
+<div class="sbox"><input id="fq" type="search" aria-label="Search"><button type="button" id="fgo" data-t="fb"></button></div><ul class="list" id="fr"></ul>
+<h2 data-t="vh"></h2><p class="sub" data-t="vs"></p>
+<div class="sbox"><input id="vq" type="url" placeholder="https://youtube.com/watch?v=..." aria-label="YouTube"><button type="button" id="vgo" data-t="fb"></button></div><p class="msg" id="vm"></p><ul class="list" id="vr"></ul>
+</div></section>
+
+<section class="v" id="v-lisensi" hidden><div class="wrap"><h2 data-t="lh"></h2><p class="sub" data-t="ls"></p>
+<details open><summary data-t="l1"></summary><p class="sub" data-t="l1p"></p></details>
+<details><summary data-t="l2"></summary><p class="sub" data-t="l2p"></p></details>
+<details><summary data-t="l3"></summary><p class="sub" data-t="l3p"></p></details></div></section>
+
+<section class="v" id="v-bantuan" hidden><div class="wrap"><h2 data-t="bh"></h2><p class="sub" data-t="bs"></p>
+<details open><summary data-t="b1"></summary><p class="sub" data-t="b1p"></p></details>
+<details><summary data-t="b2"></summary><p class="sub" data-t="b2p"></p></details>
+<details><summary data-t="b3"></summary><p class="sub" data-t="b3p"></p></details></div></section>
+
+<section class="v" id="v-riwayat" hidden><div class="wrap"><h2 data-t="rh"></h2><p class="sub" data-t="rs"></p>
+<ul class="list" id="hl"></ul><button class="btn" type="button" id="hclr" data-t="rc"></button></div></section>
+</main>
+
+<footer><div class="wrap row2"><div><h3>🔥 Perivelle</h3><p data-t="ft"></p></div><div><a href="#">Discord</a><a href="#">Twitter/X</a><a href="#">YouTube</a><a href="#">Email</a></div></div></footer>
+
+<dialog id="pl" aria-label="Preview"><div class="ph"><b id="pt"></b><button type="button" id="px" aria-label="Close">✕</button></div><div class="pv" id="pv"></div><a id="pyl" target="_blank" rel="noopener" hidden data-t="oy"></a></dialog>
+<div id="toast" role="status" hidden></div>
+
+<script>
+var K={nm:["Musik","Music"],nl:["Lagu","Songs"],ns:["Sound","Sound"],nc:["Komposer","Composers"],ng:["Tag","Tags"],nf:["Cari","Find"],nli:["Lisensi","License"],nb:["Bantuan","Help"],nr:["Riwayat","History"],
+h1:["Suara untuk panggung streammu","Sound for your stream stage"],hp:["BGM, sound alert, stinger, lagu original, dan lore music untuk VTuber. Cari, dengarkan preview, lalu unduh.","BGM, sound alerts, stingers, original songs, and lore music for VTubers. Search, preview, then download."],
+sph:["Cari judul, jenis, atau suasana","Search title, type, or mood"],go:["Cari","Search"],hm:["Cari berdasarkan suasana","Browse by mood"],hl:["Rilisan terbaru","Latest releases"],all:["Lihat semua produk","See all products"],
+qh:["Cari judul, komposer, suasana","Search title, composer, mood"],am:["Semua suasana","All moods"],so1:["Terbaru","Newest"],so2:["Terpopuler","Most popular"],so3:["Termurah","Cheapest"],rnd:["Pilih acak","Random pick"],
+cks:["Orang di balik musik dan sound Perivelle. Ganti dengan tim aslimu.","The people behind Perivelle music and sound. Replace with your real team."],tgs:["Pilih tag untuk melihat produknya.","Pick a tag to see its products."],tk:["Jenis","Type"],tm:["Suasana","Mood"],
+fh:["Pencarian bebas","Free-text search"],fs:["Tulis deskripsi singkat, misalnya “musik santai untuk stream malam” atau “suara donasi lucu”. Pencarian ini mencocokkan kata kunci, bukan AI.","Describe what you need, like “chill music for late streams” or “funny donation sound”. This matches keywords; it is not AI."],fb:["Cari","Search"],
+vh:["Cari lewat video YouTube","Find by YouTube video"],vs:["Tempel link video preview untuk menemukan produknya.","Paste a preview video link to find its product."],
+lh:["Lisensi","License"],ls:["Contoh aturan. Sesuaikan dengan kebijakanmu sebelum toko dibuka.","Sample rules. Adjust them to your policy before launch."],
+l1:["Boleh dilakukan","Allowed"],l1p:["Dipakai di stream, video, dan konten berpenghasilan setelah pembelian.","Use in streams, videos, and monetized content after purchase."],l2:["Tidak boleh dilakukan","Not allowed"],l2p:["Dijual ulang, dibagikan ke orang lain, atau diklaim sebagai karya sendiri.","Reselling, sharing with others, or claiming it as your own work."],l3:["Kredit","Credit"],l3p:["Tulis apakah pembeli wajib mencantumkan “Music by Perivelle”.","State whether buyers must credit “Music by Perivelle”."],
+bh:["Bantuan","Help"],bs:["Pertanyaan yang sering muncul.","Frequently asked questions."],b1:["Bagaimana cara menerima file?","How do I get the files?"],b1p:["Setelah pembayaran dikonfirmasi, link unduhan dikirim lewat email atau Discord.","After payment is confirmed, the download link is sent by email or Discord."],b2:["Bisa pesan lagu atau lore music custom?","Can I order a custom song or lore music?"],b2p:["Bisa. Hubungi kami lewat Discord dan ceritakan karakter serta suasana yang kamu mau.","Yes. Contact us on Discord and tell us about the character and mood you want."],b3:["Format file apa yang diterima?","Which file formats do I get?"],b3p:["Tulis format aslimu, misalnya WAV dan MP3.","Write your real formats, such as WAV and MP3."],
+rh:["Riwayat dengar","Listening history"],rs:["Produk yang terakhir kamu putar di perangkat ini.","Products you played most recently on this device."],rc:["Hapus riwayat","Clear history"],ft:["Ganti tautan di samping dengan milikmu.","Replace the links beside this with yours."],
+pl:["▶ Putar","▶ Play"],by:["Beli","Buy"],of:["oleh","by"],pr:["produk","products"],em:["Belum ada hasil. Ubah kata kunci atau filter.","No results yet. Change the keywords or filters."],vw:["Lihat karya","View works"],
+tb:["Pembayaran belum terhubung. Hubungi kami lewat Discord untuk membeli.","Checkout is not connected yet. Contact us on Discord to buy."],noyt:["Preview YouTube belum dipasang untuk produk ini.<br>Nada contoh diputar dari browser.","No YouTube preview is set for this product yet.<br>A sample tone plays from your browser."],oy:["Buka di YouTube","Open on YouTube"],
+nov:["Tidak ada produk dengan video itu. Pencarian ini hanya mencocokkan video preview produk Perivelle.","No product uses that video. This only matches Perivelle product preview videos."],bad:["Link YouTube tidak dikenali.","That is not a recognized YouTube link."],nr0:["Tidak ada produk untuk dipilih.","Nothing to pick from."]};
+var TT={musik:["Musik","Music"],lagu:["Lagu original","Original songs"],sound:["Sound alert dan stinger","Sound alerts and stingers"],semua:["Semua produk","All products"]};
+var MO={Tenang:"Calm",Ceria:"Cheerful",Sendu:"Melancholy",Lucu:"Funny",Tegang:"Tense",Intens:"Intense",Manis:"Sweet",Harapan:"Hopeful",Misterius:"Mysterious",Fantasi:"Fantasy"};
+var CR=[["Aria","Komposer dan vokal","Composer and vocalist"],["Nox","Sound design","Sound design"]];
+var W={santai:["m","Tenang"],chill:["m","Tenang"],calm:["m","Tenang"],relax:["m","Tenang"],lofi:["m","Tenang"],tenang:["m","Tenang"],sedih:["m","Sendu"],sad:["m","Sendu"],hujan:["m","Sendu"],rain:["m","Sendu"],senang:["m","Ceria"],happy:["m","Ceria"],ceria:["m","Ceria"],cheer:["m","Ceria"],lucu:["m","Lucu"],funny:["m","Lucu"],horor:["m","Tegang"],tegang:["m","Tegang"],tense:["m","Tegang"],scary:["m","Tegang"],raid:["m","Tegang"],semangat:["m","Intens"],epic:["m","Intens"],intens:["m","Intens"],manis:["m","Manis"],sweet:["m","Manis"],cute:["m","Manis"],imut:["m","Manis"],fantas:["m","Fantasi"],misteri:["m","Misterius"],mystery:["m","Misterius"],harapan:["m","Harapan"],hope:["m","Harapan"],alert:["k","Sound Alert"],donasi:["k","Sound Alert"],donat:["k","Sound Alert"],follow:["k","Sound Alert"],transisi:["k","Stinger"],transition:["k","Stinger"],stinger:["k","Stinger"],lagu:["k","OG Song"],song:["k","OG Song"],vokal:["k","OG Song"],lore:["k","Lore Music"],karakter:["k","Lore Music"],character:["k","Lore Music"],bgm:["k","BGM"],latar:["k","BGM"],background:["k","BGM"],gaming:["k","BGM"],game:["k","BGM"]};
+var T=[["Late Night Lo-fi","BGM","Tenang",150000,"🎧","#7a5cff","Aria","2026-11-10",42],["Chill Gaming Loop","BGM","Ceria",130000,"🎮","#35b7a6","Aria","2026-11-02",31],["Rainy Window","BGM","Sendu",140000,"🌧️","#4a6fa5","Aria","2026-10-20",18],["Alert Pack Chibi","Sound Alert","Ceria",80000,"🔔","#f59a1f","Nox","2026-11-12",57],["Donation and Follow Pack","Sound Alert","Lucu",65000,"💖","#ff7aa8","Nox","2026-10-30",49],["Raid Horn","Sound Alert","Tegang",45000,"📯","#c2455a","Nox","2026-10-11",12],["Stinger Api","Stinger","Intens",95000,"⚡","#e8452c","Nox","2026-11-05",27],["Stinger Sakura","Stinger","Manis",85000,"🌸","#ff9bbd","Nox","2026-10-02",15],["Lagu Debut Original","OG Song","Harapan",750000,"🎤","#c2455a","Aria","2026-11-14",6],["Lagu Ulang Tahun Channel","OG Song","Ceria",600000,"🎂","#f59a1f","Aria","2026-09-21",4],["Tema Karakter dan Instrumental","Lore Music","Misterius",900000,"📜","#3b2a78","Aria","2026-11-08",5],["Ambience Dunia Fantasi","Lore Music","Fantasi",350000,"🌌","#2b6cb0","Aria","2026-10-15",9]];
+var YT=["","","","","","","","","","","",""]; // isi ID video YouTube, urutan sama seperti T
+var RATE=16000; // kurs Rp per $1, ubah sesuai kebutuhan
+var G={musik:["BGM","Lore Music"],lagu:["OG Song"],sound:["Sound Alert","Stinger"],semua:null};
+var V=["home","musik","lagu","sound","semua","komposer","tag","cari","lisensi","bantuan","riwayat"];
+var $=function(s){return document.querySelector(s)};
+var lang="id",st={q:"",m:"",s:"new"},cur="home",last=[],dl=$("#pl"),pv=$("#pv"),yl=$("#pyl"),AC;
+try{lang=localStorage.getItem("pv_l")||""}catch(e){}
+if(lang!=="id"&&lang!=="en")lang=(navigator.language||"id").slice(0,2)==="id"?"id":"en";
+function t(k){return K[k][lang==="id"?0:1]}
+function mo(m){return lang==="en"?MO[m]:m}
+function fmt(n){return lang==="en"?"$"+(n/RATE).toFixed(2):"Rp"+n.toLocaleString("id-ID")}
+var M=T.map(function(x){return x[2]}).filter(function(v,i,a){return a.indexOf(v)===i}).sort();
+var KD=T.map(function(x){return x[1]}).filter(function(v,i,a){return a.indexOf(v)===i});
+function rowH(i){var x=T[i];return '<li class="row"><div class="art" style="background:'+x[5]+'33">'+x[4]+'</div><div class="info"><b>'+x[0]+'</b><div><span class="tag">'+x[1]+'</span><span class="tag">'+mo(x[2])+'</span><small>'+t("of")+' '+x[6]+'</small></div></div><div class="act"><b>'+fmt(x[3])+'</b><span><button type="button" data-i="'+i+'">'+t("pl")+'</button> <button type="button" data-b="'+i+'">'+t("by")+'</button></span></div></li>'}
+function fill(el,a){el.innerHTML=a.length?a.map(rowH).join(""):'<li class="empty">'+t("em")+'</li>'}
+function all(){return T.map(function(_,i){return i})}
+function hist(){try{return JSON.parse(localStorage.getItem("pv_h")||"[]")}catch(e){return[]}}
+function addH(i){var h=hist().filter(function(x){return x!==i});h.unshift(i);try{localStorage.setItem("pv_h",JSON.stringify(h.slice(0,20)))}catch(e){}}
+function toast(m){var e=$("#toast");e.textContent=m;e.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(function(){e.hidden=true},3200)}
+function go(v){if(location.hash==="#"+v)route();else location.hash=v}
+function catalog(){var g=G[cur],q=st.q.toLowerCase();
+last=all().filter(function(i){var x=T[i];return(!g||g.indexOf(x[1])>-1)&&(!st.m||x[2]===st.m)&&(!q||(x[0]+" "+x[1]+" "+x[2]+" "+mo(x[2])+" "+x[6]).toLowerCase().indexOf(q)>-1)});
+last.sort(function(a,b){return st.s==="pop"?T[b][8]-T[a][8]:st.s==="low"?T[a][3]-T[b][3]:(T[b][7]<T[a][7]?-1:1)});
+$("#ct").textContent=TT[cur][lang==="id"?0:1];$("#cn").textContent=last.length+" "+t("pr");$("#q").value=st.q;$("#sm").value=st.m;$("#ss").value=st.s;fill($("#cl"),last)}
+function route(keep){var h=location.hash.slice(1),v=V.indexOf(h)>-1?h:"home";cur=v;
+document.querySelectorAll(".v").forEach(function(e){if(e.id)e.hidden=true});
+var id=G.hasOwnProperty(v)?"cat":v;$("#v-"+id).hidden=false;
+document.querySelectorAll("nav a.l").forEach(function(a){a.setAttribute("aria-current",a.getAttribute("href")==="#"+v?"page":"false")});
+if(id==="cat")catalog();
+if(v==="riwayat")fill($("#hl"),hist());
+if(v==="home")fill($("#hl2"),all().sort(function(a,b){return T[b][7]<T[a][7]?-1:1}).slice(0,4));
+if(v==="cari"){fsearch();vsearch()}
+if(!keep)scrollTo(0,0)}
+function ap(){document.documentElement.lang=lang;
+document.querySelectorAll("[data-t]").forEach(function(e){e.textContent=t(e.dataset.t)});
+document.querySelectorAll("[data-p]").forEach(function(e){e.placeholder=t(e.dataset.p)});
+$("#fq").placeholder=t("fs").match(/“[^”]+”/)[0].replace(/[“”]/g,"");
+$("#lg").textContent=lang==="id"?"EN":"ID";$("#lg").setAttribute("aria-label",lang==="id"?"Switch to English (price in $)":"Ganti ke Bahasa Indonesia (harga dalam Rp)");
+var chips=M.map(function(m){return '<button type="button" class="chip" data-m="'+m+'">'+mo(m)+'</button>'}).join("");
+$("#hm").innerHTML=chips;$("#tm").innerHTML=M.map(function(m){var n=T.filter(function(x){return x[2]===m}).length;return '<button type="button" class="chip" data-m="'+m+'">'+mo(m)+' ('+n+')</button>'}).join("");
+$("#tk").innerHTML=KD.map(function(k){var n=T.filter(function(x){return x[1]===k}).length;return '<button type="button" class="chip" data-k="'+k+'">'+k+' ('+n+')</button>'}).join("");
+$("#sm").innerHTML='<option value="">'+t("am")+'</option>'+M.map(function(m){return '<option value="'+m+'">'+mo(m)+'</option>'}).join("");
+$("#cc").innerHTML=CR.map(function(c){var n=T.filter(function(x){return x[6]===c[0]}).length;return '<div class="card"><h3>'+c[0]+'</h3><small>'+c[lang==="id"?1:2]+'</small><span>'+n+' '+t("pr")+'</span><button type="button" data-c="'+c[0]+'">'+t("vw")+'</button></div>'}).join("");
+route(1)}
+function fsearch(){var tok=$("#fq").value.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean),el=$("#fr");if(!tok.length){el.innerHTML="";return}
+var sc={};T.forEach(function(x,i){var s=0,h=x[0].toLowerCase();tok.forEach(function(w){if(h.indexOf(w)>-1)s++;for(var k in W){if(w.indexOf(k)>-1||(w.length>3&&k.indexOf(w)===0)){var v=W[k];if(v[0]==="m"&&x[2]===v[1])s+=2;if(v[0]==="k"&&x[1]===v[1])s+=2}}});if(s)sc[i]=s});
+fill(el,Object.keys(sc).map(Number).sort(function(a,b){return sc[b]-sc[a]}))}
+function vsearch(){var v=$("#vq").value.trim(),el=$("#vr"),m=$("#vm");el.innerHTML="";m.textContent="";if(!v)return;
+var x=v.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/);if(!x){m.textContent=t("bad");return}
+var r=all().filter(function(i){return YT[i]===x[1]});if(r.length)fill(el,r);else m.textContent=t("nov")}
+function play(cat){AC=AC||new (window.AudioContext||window.webkitAudioContext)();var n0=AC.currentTime;
+var N={"BGM":[261.6,329.6,392,523.3,392,329.6],"Sound Alert":[880,1174.7],"Stinger":[196,293.7,440,587.3,880],"OG Song":[392,440,523.3,440,392,329.6,392],"Lore Music":[196,246.9,293.7]}[cat];
+var s0=cat==="Lore Music"?.7:cat==="Sound Alert"?.12:cat==="Stinger"?.09:.22;
+N.forEach(function(f,i){var o=AC.createOscillator(),g=AC.createGain(),s=n0+i*s0,d=cat==="Lore Music"?1.2:s0*1.6;o.type=cat==="Lore Music"?"sine":cat==="Sound Alert"?"square":"triangle";o.frequency.value=f;g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(.12,s+.02);g.gain.exponentialRampToValueAtTime(.001,s+d);o.connect(g);g.connect(AC.destination);o.start(s);o.stop(s+d)})}
+function openP(i){var x=T[i],id=YT[i];$("#pt").textContent=x[0];addH(i);
+if(id){pv.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?rel=0&autoplay=1" title="Preview" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';yl.href="https://www.youtube.com/watch?v="+id;yl.hidden=false}
+else{pv.innerHTML='<div class="ph0">'+t("noyt")+'</div>';yl.hidden=true;play(x[1])}
+dl.showModal()}
+document.addEventListener("click",function(e){var b;
+if(b=e.target.closest("[data-i]"))openP(+b.dataset.i);
+else if(b=e.target.closest("[data-b]"))toast(t("tb"));
+else if(b=e.target.closest("[data-m]")){st.m=b.dataset.m;st.q="";go("semua")}
+else if(b=e.target.closest("[data-k]")){st.q=b.dataset.k;st.m="";go("semua")}
+else if(b=e.target.closest("[data-c]")){st.q=b.dataset.c;st.m="";go("semua")}});
+$("#lg").onclick=function(){lang=lang==="id"?"en":"id";try{localStorage.setItem("pv_l",lang)}catch(e){}ap()};
+$("#hgo").onclick=function(){st.q=$("#hq").value;st.m="";go("semua")};
+$("#hq").addEventListener("keydown",function(e){if(e.key==="Enter")$("#hgo").click()});
+$("#q").oninput=function(){st.q=this.value;catalog()};
+$("#sm").onchange=function(){st.m=this.value;catalog()};
+$("#ss").onchange=function(){st.s=this.value;catalog()};
+$("#rnd").onclick=function(){if(last.length)openP(last[Math.floor(Math.random()*last.length)]);else toast(t("nr0"))};
+$("#fgo").onclick=fsearch;$("#fq").addEventListener("keydown",function(e){if(e.key==="Enter")fsearch()});
+$("#vgo").onclick=vsearch;$("#vq").addEventListener("keydown",function(e){if(e.key==="Enter")vsearch()});
+$("#hclr").onclick=function(){try{localStorage.removeItem("pv_h")}catch(e){}fill($("#hl"),[])};
+$("#px").onclick=function(){dl.close()};
+dl.addEventListener("close",function(){pv.innerHTML=""});
+dl.addEventListener("click",function(e){if(e.target===dl)dl.close()});
+addEventListener("hashchange",function(){route()});ap();
+if(!matchMedia("(prefers-reduced-motion:reduce)").matches){$(".hero").addEventListener("mousemove",function(e){var x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;$("#scene").querySelectorAll("svg").forEach(function(s){var d=+s.dataset.d;s.style.transform="translate("+(-x*d)+"px,"+(-y*d)+"px)"})})}
+</script>
+</body>
+</html>
