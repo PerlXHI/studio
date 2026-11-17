@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Enchanted headphones and flowing musical notes">
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#d9d4fa"/><stop offset=".6" stop-color="#c7e4f4"/><stop offset="1" stop-color="#f3e5f5"/></linearGradient>
+ <linearGradient id="metal" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".45" stop-color="#a79bd5"/><stop offset="1" stop-color="#6d80b5"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#fff5d6" stop-opacity=".85"/><stop offset="1" stop-color="#fff5d6" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="400" rx="28" fill="url(#bg)"/><circle cx="300" cy="188" r="180" fill="url(#glow)"/>
+<g fill="none" stroke="#fff" stroke-width="3" opacity=".75"><path d="M66 272q34-160 160-179t232 58" stroke-dasharray="5 10"/><path d="M83 310q100 55 201 8t228-6"/></g>
+<g transform="rotate(-13 290 200)">
+ <path d="M164 229V175q0-132 130-132t130 132v54" fill="none" stroke="url(#metal)" stroke-width="35" stroke-linecap="round"/>
+ <path d="M164 213v79q0 28 26 28h35q25 0 25-27v-68q0-25-25-25h-35q-26 0-26 13Zm260 0v79q0 28-26 28h-35q-25 0-25-27v-68q0-25 25-25h35q26 0 26 13Z" fill="#8f88bc" stroke="#fff" stroke-width="7"/>
+ <rect x="177" y="219" width="56" height="88" rx="19" fill="#c9c3e9"/><rect x="353" y="219" width="56" height="88" rx="19" fill="#c9c3e9"/>
+ <path d="M190 236v55m176-55v55" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".65"/>
+</g>
+<g fill="#fff3d5" stroke="#e2c9e2" stroke-width="2"><path d="m448 85 5 14 14 5-14 5-5 14-5-14-14-5 14-5z"/><path d="m111 137 4 11 11 4-11 4-4 11-4-11-11-4 11-4z"/></g>
+<g fill="#8e80c8"><path d="M461 201v-66q0-7 7-4l30 14q5 3 5 9v56q0 23-22 23t-20-20q0-17 21-20v-40l-15-7v55q-6 0-6 0Z"/><path d="M103 254v-49q0-6 6-3l24 11q5 2 5 7v42q0 18-17 18t-18-15q0-13 16-16v-30l-11-5v40Z"/></g>
+<g fill="none" stroke="#fff" stroke-width="2" opacity=".9"><path d="M70 340q38-24 74 0t75 0 75 0 75 0 75 0 75 0"/><path d="M420 72q44-25 89 7" stroke-dasharray="3 7"/></g>
+<g fill="#fff"><circle cx="90" cy="88" r="3"/><circle cx="512" cy="292" r="3"/><circle cx="336" cy="71" r="2"/></g>
+</svg>
