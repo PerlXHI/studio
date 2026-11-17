@@ -42,12 +42,63 @@ footer{background:#eae7fa!important;color:#383151!important;border-top:1px solid
 .toast{border-radius:999px;background:#4b426d}
 @media(max-width:600px){.hero:before{right:4%;top:4%}}
 
+
+/* DREAMY HERO ARTWORK */
+.hero-art{isolation:isolate;min-height:0;aspect-ratio:1;max-width:470px;border:1px solid #fff9;border-radius:34px;background:linear-gradient(145deg,#eeeaff,#e4f1ff);box-shadow:0 28px 70px #9183c52b,inset 0 1px 0 #fff;overflow:visible}
+.hero-art:before,.hero-art:after{display:none}
+.hero-visual{position:absolute;inset:0;width:100%;height:100%;border-radius:inherit;overflow:hidden}
+.hero-float{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;padding:11px 14px;border:1px solid #fff;background:#ffffffc9;box-shadow:0 12px 30px #7166a322;backdrop-filter:blur(14px);border-radius:17px;color:#554b7b;animation:hero-drift 6s ease-in-out infinite}
+.hero-float b{display:block;font-size:.76rem;line-height:1.25;font-weight:700}
+.hero-float small{display:block;margin-top:3px;color:#827b9d;font-size:.64rem;line-height:1.25}
+.hero-float-top{top:15%;left:-7%}.hero-float-bottom{right:-6%;bottom:15%;animation-delay:-3s}
+.float-symbol,.float-wave{display:grid;place-items:center;width:33px;height:33px;flex:0 0 33px;border-radius:12px;background:linear-gradient(145deg,#eee8ff,#e1f1ff);color:#8b7bd0;font-size:1.25rem}
+.float-wave{font-size:1.8rem}
+.hero-art-caption{position:absolute;right:7%;top:7%;z-index:2;font:500 .58rem "DM Mono",monospace;letter-spacing:.13em;color:#847aa9}
+@keyframes hero-drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media(max-width:850px){.hero-art{max-width:390px;justify-self:center}.hero-float-top{left:-3%}.hero-float-bottom{right:-3%}}
+@media(max-width:560px){.hero-art{width:min(100%,310px);justify-self:center;margin:18px auto 0;border-radius:26px}.hero-float{padding:8px 10px;gap:7px}.hero-float b{font-size:.66rem}.hero-float small{font-size:.56rem}.hero-float-top{left:-4%;top:12%}.hero-float-bottom{right:-4%;bottom:12%}.hero-art-caption{font-size:.48rem}}
+@media(prefers-reduced-motion:reduce){.hero-float{animation:none}}
+
 </style>
 </head>
 <body>
 <header><div class="wrap"><nav aria-label="Navigasi utama"><a class="brand" href="#home"><span>P.</span> PERIVELLE</a><a class="navlink" href="#catalog" data-t="navShop">Musik</a><a class="navlink" href="gallery.html" data-t="navGallery">Portfolio</a><a class="navlink" href="#custom" data-t="navCustom">Custom</a><a class="navlink" href="#license" data-t="navLicense">Lisensi</a><a class="navlink" href="#services">Layanan</a><a class="navlink" href="#workflow">Workflow</a><a class="navlink" href="#faq" data-t="navFaq">Info</a><div class="nav-actions"><button class="cart-button" id="openCart" type="button"><span data-t="bag">Pilihan</span> <span id="cartCount">0</span></button><button class="quiet" id="language" type="button" aria-label="Ganti bahasa">EN</button></div></nav></div></header>
 <main>
-<section class="hero" id="home"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">AUDIO IDENTITY FOR VTUBERS & CREATORS</p><h1>Lebih dari BGM. <em>Bangun identitas audio duniamu.</em></h1><p>Original BGM, Lore Music, OG Song, Instrumental Cover, Sound Alerts, dan Stinger—dirancang untuk menghidupkan karakter, stream, dan cerita VTuber.</p><div class="actions"><a class="btn" href="#catalog">Dengarkan karya ↘</a><a class="btn secondary" href="#custom">Mulai brief custom</a></div><div class="hero-kicker">Commission status · Perbarui batch & slot di sini</div></div><div class="hero-art" aria-hidden="true"><span class="hero-note mono">PERIVELLE / AUDIO STUDIO</span><div class="wave"><i style="height:18px"></i><i style="height:37px"></i><i style="height:56px"></i><i style="height:30px"></i><i style="height:72px"></i><i style="height:43px"></i><i style="height:62px"></i><i style="height:27px"></i><i style="height:52px"></i><i style="height:35px"></i><i style="height:66px"></i><i style="height:21px"></i></div><span class="hero-note mono">BGM · SONG · SOUND DESIGN</span></div></div></section>
+<section class="hero" id="home"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">AUDIO IDENTITY FOR VTUBERS & CREATORS</p><h1>Lebih dari BGM. <em>Bangun identitas audio duniamu.</em></h1><p>Original BGM, Lore Music, OG Song, Instrumental Cover, Sound Alerts, dan Stinger—dirancang untuk menghidupkan karakter, stream, dan cerita VTuber.</p><div class="actions"><a class="btn" href="#catalog">Dengarkan karya ↘</a><a class="btn secondary" href="#custom">Mulai brief custom</a></div><div class="hero-kicker">Commission status · Perbarui batch & slot di sini</div></div><div class="hero-art" aria-hidden="true">
+<svg class="hero-visual" viewBox="0 0 520 520" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+ <radialGradient id="dream-sky" cx="48%" cy="38%" r="72%"><stop stop-color="#fff"/><stop offset=".5" stop-color="#e9e4ff"/><stop offset="1" stop-color="#d9eaff"/></radialGradient>
+ <radialGradient id="dream-orb" cx="32%" cy="25%" r="75%"><stop stop-color="#fff"/><stop offset=".27" stop-color="#e9e4ff"/><stop offset=".68" stop-color="#b9b1ec"/><stop offset="1" stop-color="#8faedc"/></radialGradient>
+ <linearGradient id="dream-wave" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#9e91d8"/><stop offset=".5" stop-color="#829fce"/><stop offset="1" stop-color="#b39adf"/></linearGradient>
+ <filter id="dream-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="15"/></filter>
+ <filter id="dream-glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <clipPath id="orb-clip"><circle cx="258" cy="252" r="112"/></clipPath>
+</defs>
+<rect width="520" height="520" rx="34" fill="url(#dream-sky)"/>
+<circle cx="256" cy="278" r="170" fill="#b9b0e6" opacity=".2" filter="url(#dream-shadow)"/>
+<g fill="none" stroke="#a69bd5" stroke-width="1.2" opacity=".58"><ellipse cx="258" cy="252" rx="205" ry="91" transform="rotate(-27 258 252)"/><ellipse cx="258" cy="252" rx="174" ry="126" transform="rotate(42 258 252)"/><path d="M65 318C112 392 212 425 318 396s120-65 139-117" stroke-dasharray="3 8"/></g>
+<g fill="#fff"><path d="m96 111 4 12 12 4-12 4-4 12-4-12-12-4 12-4z"/><path d="m400 108 3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><path d="m117 377 3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/><circle cx="373" cy="357" r="3"/><circle cx="164" cy="165" r="2.5"/><circle cx="435" cy="246" r="2.5"/></g>
+<g fill="#b9a9e7"><circle cx="83" cy="239" r="5"/><circle cx="413" cy="169" r="4"/><circle cx="349" cy="430" r="5"/></g>
+<path d="M377 74a43 43 0 1 0 45 61 38 38 0 0 1-45-61z" fill="#fff" filter="url(#dream-glow)"/>
+<circle cx="258" cy="252" r="126" fill="#a99cdb" opacity=".3" filter="url(#dream-shadow)"/>
+<circle cx="258" cy="252" r="112" fill="url(#dream-orb)" stroke="#fff" stroke-opacity=".9" stroke-width="2"/>
+<g clip-path="url(#orb-clip)">
+ <path d="M142 277c47-70 92 68 138-4s83-60 133 1" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="39"/>
+ <path d="M145 214c45-52 89-37 117-2s68 48 111-13" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>
+ <g fill="none" stroke="url(#dream-wave)" stroke-width="5" stroke-linecap="round"><path d="M174 255v-10m14 24v-38m14 47v-56m14 65v-75m14 82v-91m14 88v-70m14 57v-45m14 35v-29m14 21v-14"/></g>
+ <ellipse cx="218" cy="194" rx="42" ry="20" fill="#fff" opacity=".34" transform="rotate(-32 218 194)"/>
+</g>
+<circle cx="258" cy="252" r="112" fill="none" stroke="#fff" stroke-opacity=".76" stroke-width="2"/>
+<path d="M174 163c29-23 65-33 101-29" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".76"/>
+<g transform="translate(385 300)"><circle r="28" fill="#fff" fill-opacity=".5" stroke="#fff" stroke-width="1.5"/><circle r="16" fill="#d6e7ff" fill-opacity=".8"/><path d="M-10-3c5-9 15-9 20 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></g>
+<g transform="translate(128 182)"><circle r="17" fill="#fff" fill-opacity=".55" stroke="#fff" stroke-width="1.4"/><path d="M-7 2c4-8 10-8 14 0" fill="none" stroke="#a69bd5" stroke-width="2" stroke-linecap="round"/></g>
+<g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="m308 135 5 9 9 5-9 5-5 9-5-9-9-5 9-5z"/><path d="m111 292 3 6 6 3-6 3-3 6-3-6-6-3 6-3z"/></g>
+<path d="M51 451c80 26 154 24 214-1s120-23 205 5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2"/>
+</svg>
+<div class="hero-float hero-float-top"><span class="float-symbol">✧</span><span><b>Dreamlike sound</b><small>Music for imagined worlds</small></span></div>
+<div class="hero-float hero-float-bottom"><span class="float-wave">∿</span><span><b>Made for your lore</b><small>BGM · songs · sound design</small></span></div>
+<span class="hero-art-caption mono">PERIVELLE · AUDIO MAGIC</span>
+</div></section>
 <section class="section portfolio-strip" id="portfolio"><div class="wrap"><div class="section-head"><div><p class="eyebrow">PORTFOLIO / SELECTED WORKS</p><h2>Satu studio, banyak bentuk suara.</h2></div><p class="sub">Tiga contoh format karya untuk memperlihatkan spektrum layanan Perivelle.</p></div><div class="portfolio-cards">
 <article class="portfolio-card"><div class="portfolio-art" style="--art:#596b70"><span class="mono">STREAM BGM / LOOP</span><span>◌</span></div><div class="portfolio-copy"><p class="eyebrow">COZY · JUST CHATTING</p><h3>Cozy Room Loop</h3><p>Seamless loop untuk Just Chatting, BRB, dan sesi stream harian.</p></div><div class="mini-player"><label>Audio preview · Loop test</label><audio controls loop preload="none" data-preview="cozy"></audio><span class="help">Preview aktif setelah URL MP3 diatur.</span></div></article>
 <article class="portfolio-card"><div class="portfolio-art" style="--art:#6f6380"><span class="mono">LORE / OG SONG</span><span>☾</span></div><div class="portfolio-copy"><p class="eyebrow">CHARACTER THEME · CINEMATIC</p><h3>Origin of Starlight</h3><p>Tema karakter sinematik untuk debut trailer dan storytelling.</p></div><div class="mini-player"><label>Audio preview</label><audio controls preload="none" data-preview="lore"></audio><span class="help">Preview aktif setelah URL MP3 diatur.</span></div></article>
