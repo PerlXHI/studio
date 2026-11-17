@@ -31,6 +31,46 @@ header{background:rgba(250,249,255,.78);border-color:var(--line);box-shadow:0 8p
 footer{background:#eae7fa!important;color:#383151!important;border-top:1px solid #ddd7f0}footer p{color:#77718f!important}
 .dialog{border-radius:24px;background:#fbfaff}.toast{border-radius:999px;background:#4b426d}
 
+
+/* ETHEREAL CARD SYSTEM — PORTFOLIO PAGE */
+:root{--dream-lavender:#8f82cf;--dream-blue:#9fc5e8;--dream-shadow:0 16px 42px #7568ad14;--dream-shadow-hover:0 22px 48px #7568ad24}
+.hero-side{border-left-color:#ddd6f1;background:linear-gradient(145deg,#ffffff75,#eef3ff75);border-radius:0 20px 20px 0;padding:17px 19px 17px 22px}
+.hero-side strong{color:#554b7d}
+.hero:after{content:"✧  ·  ✦";color:#a99be0}
+.gallery{align-items:stretch;gap:18px}
+.work{position:relative;isolation:isolate;overflow:hidden;border:1px solid #e3def4;border-radius:26px;background:linear-gradient(145deg,#ffffffef 0%,#f5f3ffed 62%,#f0f6ffed 100%);box-shadow:var(--dream-shadow);transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
+.work:hover{transform:translateY(-6px);border-color:#d2c9f0;box-shadow:var(--dream-shadow-hover)}
+.work:before{content:"";position:absolute;z-index:-1;width:175px;height:175px;right:-80px;top:-90px;border-radius:50%;background:radial-gradient(circle,#cfc5f3a1 0%,#dceaff55 44%,transparent 72%);pointer-events:none}
+.art,.dialog-art{position:relative;isolation:isolate;overflow:hidden;color:#fff;background:radial-gradient(circle at 74% 25%,#ffffff5c 0,transparent 27%),linear-gradient(135deg,color-mix(in srgb,var(--art) 70%,#8277bd),color-mix(in srgb,var(--art) 66%,#86b4dc))}
+.art{min-height:236px;padding:19px;border-radius:19px;margin:10px 10px 0}
+.art:before{width:174px;height:174px;right:-24px;bottom:-99px;border-color:#ffffffa0;box-shadow:0 0 0 17px #ffffff19,0 0 0 37px #ffffff0d}
+.art:after{content:"✧";width:auto;height:auto;right:22%;top:17%;bottom:auto;border:0;box-shadow:none;color:#ffffffdf;font:400 2.2rem "Playfair Display",serif;text-shadow:0 0 22px #fff9}
+.art-label,.art-symbol{color:#fff;text-shadow:0 1px 10px #322b5133}
+.art-symbol{font-size:2.7rem;text-shadow:0 0 26px #ffffff8c}
+.work-body{padding:18px 20px 20px}
+.work-meta{color:#8980b1}
+.work h2{color:#393253}
+.work p{color:#77718f}
+.chips{gap:7px;margin-top:auto}
+.chip{border:1px solid #e5e0f4;border-radius:999px;background:#ffffffa8;color:#77709b;padding:5px 9px}
+.work-foot{border-color:#e9e4f6}
+.preview-state{color:#938ab2}
+.view,.filter{border-radius:999px;border-color:#dcd5f0;background:#ffffffb8;color:#7569ad;transition:background .2s ease,transform .2s ease,border-color .2s ease}
+.view:hover,.filter:hover{background:#eeeaff;transform:translateY(-1px)}
+.filter[aria-pressed=true]{background:#8276bf;border-color:#8276bf;color:#fff}
+.control{border-radius:999px;border-color:#e0daf2;background:#ffffffc9}
+.count{color:#9188b1}
+.empty{border:1px dashed #dcd5f0;border-radius:22px;background:#ffffff80}
+.note{border-left-color:#a99bdb;background:#ffffff7a;border-radius:0 16px 16px 0;padding:13px 17px}
+.cta{box-shadow:0 18px 46px #8072bd12}
+.dialog{border-radius:26px;border-color:#e3def4;background:#fbfaff;box-shadow:0 25px 80px #3c315d33}
+.dialog-art{min-height:220px;border-radius:0}
+.dialog-body h2{color:#393253}
+.dialog-body p{color:#77718f}
+.close{border-radius:50%;backdrop-filter:blur(8px)}
+@media(max-width:560px){.art{min-height:205px;margin:8px 8px 0}.work-body{padding:16px}.hero-side{border-left:0;border-top:1px solid #ddd6f1;border-radius:0 0 18px 18px;padding:15px 0 0;background:transparent}}
+@media(prefers-reduced-motion:reduce){.work,.filter,.view{transition:none}.work:hover,.filter:hover,.view:hover{transform:none}}
+
 </style>
 </head>
 <body>
