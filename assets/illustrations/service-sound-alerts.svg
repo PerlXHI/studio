@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Enchanted bell with magical sound waves">
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#d5cff5"/><stop offset=".55" stop-color="#c4e2f4"/><stop offset="1" stop-color="#f3dff0"/></linearGradient>
+ <linearGradient id="bell" x2="0" y2="1"><stop stop-color="#fff8e0"/><stop offset=".45" stop-color="#edc9d4"/><stop offset="1" stop-color="#a88bc8"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#fff5d8" stop-opacity=".9"/><stop offset="1" stop-color="#fff5d8" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="400" rx="28" fill="url(#bg)"/><circle cx="300" cy="180" r="180" fill="url(#halo)"/>
+<g fill="none" stroke="#fff" stroke-width="3" opacity=".78"><path d="M111 112q-54 75-3 151m34-179q-71 96-5 205"/><path d="M489 112q54 75 3 151m-34-179q71 96 5 205"/></g>
+<path d="M300 63q-22 0-22 27v22q-4 44-52 106-25 34-24 83h196q1-49-24-83-48-62-52-106V90q0-27-22-27Z" fill="url(#bell)" stroke="#fff" stroke-width="7"/>
+<path d="M226 236q74 31 148 0" fill="none" stroke="#fff8e5" stroke-width="6" opacity=".9"/>
+<path d="M265 62q35-34 70 0" fill="none" stroke="#fff4dc" stroke-width="11" stroke-linecap="round"/>
+<circle cx="300" cy="305" r="27" fill="#b58fc9" stroke="#fff" stroke-width="5"/>
+<path d="M279 300q21 14 42 0" fill="none" stroke="#fff1d3" stroke-width="3"/>
+<g fill="#fff3d7"><path d="m300 132 8 20 20 8-20 8-8 20-8-20-20-8 20-8z"/><path d="m174 184 5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/><path d="m426 184 5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/><path d="m112 307 4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/></g>
+<g fill="#fff"><circle cx="214" cy="72" r="3"/><circle cx="385" cy="93" r="3"/><circle cx="458" cy="315" r="3"/><circle cx="142" cy="275" r="3"/></g>
+<path d="M160 342q64-45 128 0t128 0" fill="none" stroke="#fff" stroke-width="3" opacity=".8"/>
+</svg>
