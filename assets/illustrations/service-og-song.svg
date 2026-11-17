@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Vintage magical studio microphone with roses and music notes">
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#d5d0f5"/><stop offset=".55" stop-color="#c7e4f2"/><stop offset="1" stop-color="#f3dff0"/></linearGradient>
+ <linearGradient id="mic" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".45" stop-color="#b7a9d9"/><stop offset="1" stop-color="#7c85b9"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#fff5df" stop-opacity=".8"/><stop offset="1" stop-color="#fff5df" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="400" rx="28" fill="url(#bg)"/><circle cx="300" cy="175" r="180" fill="url(#glow)"/>
+<g fill="none" stroke="#fff" stroke-width="3" opacity=".7"><path d="M73 276q58-44 113-3t111-1 112 1 117-3"/><path d="M95 116q42-46 92-17" stroke-dasharray="4 8"/></g>
+<path d="M300 202v83m-48 0h96m-77-14h58" fill="none" stroke="url(#mic)" stroke-width="13" stroke-linecap="round"/>
+<rect x="252" y="61" width="96" height="176" rx="48" fill="url(#mic)" stroke="#fff" stroke-width="6"/>
+<path d="M268 87v94m20-105v115m20-115v115m20-105v94" stroke="#fff" stroke-width="4" opacity=".75"/>
+<path d="M253 170q47 29 94 0" fill="none" stroke="#8c83b5" stroke-width="4"/>
+<path d="M228 164q0 116 72 116t72-116" fill="none" stroke="#fff" stroke-width="7"/>
+<g transform="translate(161 267)">
+ <path d="M0 30q-28-39 0-59 27-19 44 7 17 27-8 54Z" fill="#dcaecb" stroke="#fff" stroke-width="3"/>
+ <path d="M20 12q-13-31 7-35 20 7 8 30" fill="#f4d5e5"/>
+ <path d="M21 38q-26 12-34 42m49-44q24 6 39 36" fill="none" stroke="#89ad9e" stroke-width="7" stroke-linecap="round"/>
+</g>
+<g transform="translate(430 280)">
+ <path d="M0 30q-28-39 0-59 27-19 44 7 17 27-8 54Z" fill="#e8c4d9" stroke="#fff" stroke-width="3"/>
+ <path d="M20 12q-13-31 7-35 20 7 8 30" fill="#fff0e0"/>
+ <path d="M21 38q-26 12-34 42m49-44q24 6 39 36" fill="none" stroke="#89ad9e" stroke-width="7" stroke-linecap="round"/>
+</g>
+<g fill="#fff4d7"><path d="m130 82 5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/><path d="m462 89 5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/></g>
+<g fill="#8a80c0"><path d="M399 130v-48q0-6 6-3l25 12q5 2 5 7v42q0 19-18 19t-18-16q0-14 17-17V94l-12-6v42Z"/><path d="M181 137v-34q0-5 5-2l19 9q4 2 4 5v29q0 14-14 14t-14-12q0-11 13-13v-20l-9-4v28Z"/></g>
+<circle cx="300" cy="322" r="6" fill="#fff2d5"/>
+</svg>
