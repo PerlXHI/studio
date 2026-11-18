@@ -40,7 +40,8 @@ export default async function handler(req,res) {
         return res.status(200).json({ok:true,order:rows[0]});
       }
       if(body.kind==="order") {
-        const id=String(body.requestId||"").trim().toUpperCase();
+        const rawId=String(body.requestId||"").trim();
+        const id=/^PV-\\d{8}-[A-F0-9]{6,24}$/i.test(rawId)?rawId.toUpperCase():rawId;
         const patch={};
         if(body.status!==undefined){if(!STATUSES.includes(body.status))return res.status(400).json({ok:false,message:"Invalid status."});patch.status=body.status;}
         for(const field of ["status_note","preview_url","delivery_url","quoted_price","quotation_note","admin_note"]) {
