@@ -1,14 +1,14 @@
-import { isAdmin, supabaseConfig } from "./_admin.js";
+import { isAdmin, supabaseConfig, supabaseHeaders, hasTrustedOrigin } from "./_admin.js";
 
 const STATUSES=["Awaiting Review","Quotation Sent","Awaiting Payment","In Production","Revision","Completed","On Hold","Cancelled"];
 const KEYS=["service_prices","catalog_products","studio_links"];
 async function db(path,options={}) {
   const {url,key}=supabaseConfig();
-  return fetch(url+"/rest/v1/"+path,{...options,headers:{apikey:key,Authorization:"Bearer "+key,"Content-Type":"application/json",...(options.headers||{})}});
+  return fetch(url+"/rest/v1/"+path,{...options,headers:supabaseHeaders(key,{"Content-Type":"application/json",...(options.headers||{})})});
 }
 export default async function handler(req,res) {
   if (!isAdmin(req)) return res.status(401).json({ok:false,message:"Please sign in to the admin dashboard."});
-  if (req.method === "PATCH" && req.headers.origin) { try { if (new URL(req.headers.origin).hostname !== "perivelle.vercel.app") return res.status(403).json({ok:false,message:"Origin not allowed."}); } catch { return res.status(403).json({ok:false,message:"Invalid origin."}); } }
+  if (req.method === "PATCH" && !hasTrustedOrigin(req)) return res.status(403).json({ok:false,message:"Origin not allowed."});
   const {url,key}=supabaseConfig();
   if (!url||!key) return res.status(503).json({ok:false,message:"Supabase server configuration is missing."});
   if (req.method==="GET") {
