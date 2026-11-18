@@ -705,7 +705,7 @@ setLanguage("en");
 
 /* NAVBAR VIEW ROUTING: each top-level section opens as its own studio view */
 (function(){
- const PAGE_BY_HASH={home:"home",portfolio:"portfolio",catalog:"catalog",services:"services",workflow:"services",credits:"services",team:"team",custom:"custom",track:"track",license:"license",faq:"faq"};
+ const PAGE_BY_HASH={home:"home",portfolio:"portfolio",catalog:"catalog",services:"services",workflow:"services",credits:"services",team:"team",custom:"custom","commission-request":"custom",track:"track",license:"license",faq:"faq"};
  const PAGE_TITLES={home:"Perivelle — Original BGM for Creators",portfolio:"Portfolio — Perivelle",catalog:"Music Catalog — Perivelle",services:"Audio Services — Perivelle",team:"Our Team — Perivelle",custom:"Custom Commission — Perivelle",track:"Track Commission — Perivelle",license:"Licensing — Perivelle",faq:"FAQ — Perivelle"};
  function currentKey(){const key=(location.hash||"#home").slice(1).toLowerCase();return PAGE_BY_HASH[key]||"home"}
  function renderView(scroll){
@@ -726,7 +726,13 @@ setLanguage("en");
   if(!PAGE_BY_HASH[raw])return;
   event.preventDefault();
   const next="#"+raw;
-  if(location.hash!==next)history.pushState({view:raw},"",next);
+  if(location.hash!==next)history.pushState({view:PAGE_BY_HASH[raw]},"",next);
+  if(raw==="commission-request"){
+   renderView(false);
+   const target=document.getElementById("commission-request");
+   if(target)target.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+   return;
+  }
   renderView(true);
  });
  window.addEventListener("popstate",function(){renderView(true)});
