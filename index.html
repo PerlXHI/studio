@@ -384,7 +384,7 @@ html[data-theme="dark"] .navlink[aria-current="page"]:hover{color:#fff!important
 .track-search{margin-top:30px;padding:20px;border:1px solid #e7e1f4;border-radius:20px;background:#ffffffb8;display:grid;gap:9px}
 .track-search label{font-weight:700;font-size:.88rem;color:#393253}
 .track-input-row{display:flex;gap:9px}
-.track-input-row input{flex:1;min-width:0;border:1px solid #ded8f2;border-radius:999px;padding:12px 16px;background:#fff;color:#292344;font:500 .9rem "DM Mono",monospace;text-transform:uppercase}
+.track-input-row input{flex:1;min-width:0;border:1px solid #ded8f2;border-radius:999px;padding:12px 16px;background:#fff;color:#292344;font:500 .9rem "DM Mono",monospace}
 .track-search small{color:#8981a8;font-size:.76rem}
 .track-result{max-width:850px;margin:24px auto 0;padding:clamp(20px,4vw,34px);border:1px solid #e3def4;border-radius:26px;background:linear-gradient(145deg,#ffffffef,#f5f3ffed);box-shadow:0 16px 42px #7568ad14}
 .track-result-head{display:flex;justify-content:space-between;gap:16px;align-items:center}
@@ -705,7 +705,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   if(!id){input.focus();return}
   button.disabled=true;button.textContent="Checking…";message.textContent="Looking up your commission securely…";result.hidden=true;
   try{
-   const response=await fetch("/api/track-commission?id="+encodeURIComponent(id),{headers:{"Accept":"application/json"}});
+   const response=await fetch("/api/track-commission?id="+encodeURIComponent(id),{cache:"no-store",headers:{"Accept":"application/json"}});
    const data=await response.json().catch(function(){return{}});
    if(!response.ok||!data.ok)throw new Error(data.message||"We could not find that Request ID.");
    render(data);message.textContent="";
