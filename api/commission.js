@@ -75,6 +75,11 @@ export default async function handler(req, res) {
       headers: { ...databaseHeaders, "Prefer": "return=minimal" },
       body: JSON.stringify({
         request_id: requestId,
+        brief: {
+          name: fields[0][1], contact: fields[1][1], type: fields[2][1], license: fields[3][1],
+          moodBpm: fields[4][1], duration: fields[5][1], character: fields[6][1],
+          reference: fields[7][1], deadline: fields[8][1], budget: fields[9][1], extra: fields[10][1]
+        },
         status: "Awaiting Review",
         status_note: "Your request has been received and is waiting for our team to review it.",
         timeline: [{ status: "Awaiting Review", at: createdAt, note: "Your request has been received." }]
