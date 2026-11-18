@@ -56,7 +56,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ ok: false, message: "Please complete all required fields." });
   }
 
-  const requestId = `PV-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${globalThis.crypto.randomUUID().replace(/-/g, "").slice(0, 12).toUpperCase()}`;
+  const requestId = `PV-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${globalThis.crypto.randomUUID().replace(/-/g, "").slice(0, 24).toUpperCase()}`;
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!supabaseUrl || !supabaseKey) {
