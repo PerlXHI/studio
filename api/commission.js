@@ -67,10 +67,12 @@ export default async function handler(req, res) {
   }
 
   const createdAt = new Date().toISOString();
+  // Supabase secret keys (sb_secret_...) are API keys, not JWTs:
+  // send them through apikey only. Legacy service_role JWTs use both headers.
   const databaseHeaders = {
     "Content-Type": "application/json",
     "apikey": supabaseKey,
-    "Authorization": "Bearer " + supabaseKey
+    ...(supabaseKey.startsWith("sb_secret_") ? {} : { "Authorization": "Bearer " + supabaseKey })
   };
   try {
     const saveResponse = await fetch(supabaseUrl.replace(/\/$/, "") + "/rest/v1/commission_requests", {
