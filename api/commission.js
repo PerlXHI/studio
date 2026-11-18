@@ -34,6 +34,10 @@ export default async function handler(req, res) {
   const clean = (value, max = 1000) =>
     String(value ?? "").replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "").trim().slice(0, max);
 
+  // Quietly discard bot submissions caught by the hidden honeypot field.
+  if (clean(data.website, 120)) return res.status(200).json({ ok: true });
+
+
   const fields = [
     ["Name / stage name", clean(data.name, 80)],
     ["Discord username", clean(data.contact, 120)],
