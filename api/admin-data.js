@@ -7,7 +7,8 @@ async function db(path,options={}) {
   return fetch(url+"/rest/v1/"+path,{...options,headers:{apikey:key,Authorization:"Bearer "+key,"Content-Type":"application/json",...(options.headers||{})}});
 }
 export default async function handler(req,res) {
-  if (!isAdmin(req)) return res.status(401).json({ok:false,message:"Please sign in to the admin dashboard."});\n  if (req.method === "PATCH" && req.headers.origin) { try { if (new URL(req.headers.origin).hostname !== "perivelle.vercel.app") return res.status(403).json({ok:false,message:"Origin not allowed."}); } catch { return res.status(403).json({ok:false,message:"Invalid origin."}); } }
+  if (!isAdmin(req)) return res.status(401).json({ok:false,message:"Please sign in to the admin dashboard."});
+  if (req.method === "PATCH" && req.headers.origin) { try { if (new URL(req.headers.origin).hostname !== "perivelle.vercel.app") return res.status(403).json({ok:false,message:"Origin not allowed."}); } catch { return res.status(403).json({ok:false,message:"Invalid origin."}); } }
   const {url,key}=supabaseConfig();
   if (!url||!key) return res.status(503).json({ok:false,message:"Supabase server configuration is missing."});
   if (req.method==="GET") {
@@ -49,6 +50,8 @@ export default async function handler(req,res) {
       if(body.kind==="setting") {
         if(!KEYS.includes(body.key))return res.status(400).json({ok:false,message:"Unknown setting."});
         const value=body.value;
+        if(body.key==="studio_links"){for(const item of Object.values(value||{})){if(item&&!/^https:\/\//i.test(String(item)))return res.status(400).json({ok:false,message:"Studio links must use HTTPS URLs."});}}
+        if(body.key==="catalog_products" && Array.isArray(value)){for(const item of value){if(item.preview&&!/^https:\/\//i.test(String(item.preview)))return res.status(400).json({ok:false,message:"Audio preview links must use HTTPS URLs."});}}
         if(!value||typeof value!=="object")return res.status(400).json({ok:false,message:"Setting value must be an object or array."});
         const payload={setting_key:body.key,setting_value:value};
         const response=await db("studio_settings?on_conflict=setting_key",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=representation"},body:JSON.stringify(payload)});
