@@ -806,6 +806,36 @@ setLanguage("en");
 })();
 
 </script>
+
+<style>
+.client-trust-section{background:linear-gradient(180deg,#f4f1ff,#f0f7ff);border-top:1px solid #e5e0f4}
+.client-showcase-grid,.testimonial-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.client-showcase-card,.testimonial-card{min-width:0;padding:22px;border:1px solid #e3def4;border-radius:24px;background:#ffffffc9;box-shadow:0 14px 34px #7568ad12}
+.client-showcase-card h3,.testimonial-card h3{margin:8px 0;color:#393253;font:600 1.35rem/1.2 "Playfair Display",Georgia,serif}
+.client-showcase-card p,.testimonial-card p{color:#77718f;font-size:.9rem}
+.client-showcase-card a{color:#7167ad;font-weight:700;text-decoration:none}
+.testimonial-quote{font:italic 1rem/1.65 "Playfair Display",Georgia,serif!important;color:#51496f!important}
+.trust-empty{grid-column:1/-1;margin:0;padding:26px;border:1px dashed #d8d0ed;border-radius:18px;color:#827b9d;text-align:center;background:#ffffff70}
+.testimonial-heading{margin-top:58px}
+@media(max-width:760px){.client-showcase-grid,.testimonial-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){.client-showcase-grid,.testimonial-grid{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ fetch("/api/site-config",{headers:{"Accept":"application/json"}}).then(r=>r.ok?r.json():null).then(payload=>{
+  const settings=payload&&payload.settings||{};
+  const projects=(Array.isArray(settings.client_showcase)?settings.client_showcase:[]).filter(x=>x&&x.published&&x.client&&x.project);
+  const testimonials=(Array.isArray(settings.testimonials)?settings.testimonials:[]).filter(x=>x&&x.published&&x.client&&x.quote);
+  const projectRoot=document.getElementById("clientShowcaseGrid"),testimonialRoot=document.getElementById("testimonialGrid");
+  if(projectRoot)projectRoot.innerHTML=projects.length?projects.map(x=>'<article class="client-showcase-card"><p class="eyebrow">'+esc(x.service||"FEATURED PROJECT")+'</p><h3>'+esc(x.project)+'</h3><p>Created for '+esc(x.client)+'</p>'+(x.description?'<p>'+esc(x.description)+'</p>':'')+(x.link?'<a href="'+esc(x.link)+'" target="_blank" rel="noopener noreferrer">View project ↗</a>':'')+'</article>').join(""):'<p class="trust-empty">Client projects will appear here as they are approved for showcase.</p>';
+  if(testimonialRoot)testimonialRoot.innerHTML=testimonials.length?testimonials.map(x=>'<article class="testimonial-card"><p class="testimonial-quote">“'+esc(x.quote)+'”</p><h3>'+esc(x.client)+'</h3><p>'+esc(x.role||"Perivelle client")+'</p></article>').join(""):'<p class="trust-empty">Client testimonials will appear here when available.</p>';
+ }).catch(()=>{});
+})();
+</script>
+
+</body>
+</html>
 </body>
 </html>
 
