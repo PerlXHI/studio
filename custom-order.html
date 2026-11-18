@@ -22,6 +22,50 @@ input,select,textarea{border-radius:14px;background:#fff;border-color:#e0daf2}
 .submit,.copy{background:linear-gradient(120deg,#9182d1,#8bbce4);color:white;box-shadow:0 9px 24px #8d80cb38}
 footer{color:var(--muted)}
 
+
+/* RESPONSIVE MODERN PASS */
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{min-width:320px;overflow-x:clip;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{width:min(100% - 40px,820px)}
+.top{min-width:0}
+.top>*{min-width:0}
+button,input,select,textarea{font-size:16px}
+input,select,textarea{min-height:46px}
+textarea{min-height:125px}
+form,.result{min-width:0}
+.field{min-width:0}
+.field.wide{min-width:0}
+.submit,.copy,.top button{min-height:44px;touch-action:manipulation}
+.intro h1{overflow-wrap:anywhere}
+@media(max-width:700px){
+ .wrap{width:min(100% - 32px,820px)}
+ header{padding:12px 0}
+ .intro{padding:36px 0 20px}
+ .intro h1{font-size:clamp(2.2rem,9vw,3.5rem)}
+ form,.result{margin-bottom:30px}
+}
+@media(max-width:560px){
+ .wrap{width:calc(100% - 28px)}
+ .top{gap:8px}
+ .brand{font-size:1.08rem}
+ .intro{padding-top:30px}
+ .intro h1{font-size:clamp(2rem,10vw,3rem);line-height:1.04}
+ .intro p{font-size:.94rem}
+ .grid{grid-template-columns:1fr;gap:13px}
+ .wide{grid-column:auto}
+ form,.result{padding:16px;border-radius:19px}
+ .hint{font-size:.85rem;margin-bottom:17px}
+ .submit,.copy{width:100%;padding:12px 16px}
+ .result{margin-top:-12px}
+ .result textarea{min-height:190px}
+}
+@media(max-width:360px){
+ .wrap{width:calc(100% - 24px)}
+ .top{align-items:flex-start}
+ .top button{padding:8px 12px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
 </style>
 </head>
 <body>
