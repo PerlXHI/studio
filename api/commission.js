@@ -59,7 +59,11 @@ export default async function handler(req, res) {
     return res.status(400).json({ ok: false, message: "Please complete all required fields." });
   }
 
-  const requestId = `PV-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${globalThis.crypto.randomUUID().replace(/-/g, "").slice(0, 24).toUpperCase()}`;
+  const idPart = (value, max = 80) => clean(value, max).normalize("NFKC").replace(/-/g, " ").replace(/[^\p{L}\p{N} '&.]/gu, "").replace(/\s+/g, " ").trim().slice(0, max) || "Unknown";
+  const dateParts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Jakarta", year: "2-digit", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
+  const dateCode = ["year", "month", "day"].map(key => dateParts.find(part => part.type === key)?.value || "").join("");
+  const baseRequestId = dateCode + " - " + idPart(fields[2][1]) + " - " + idPart(fields[0][1]);
+  let requestId = baseRequestId;
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!supabaseUrl || !supabaseKey) {
@@ -75,21 +79,26 @@ export default async function handler(req, res) {
     ...(supabaseKey.startsWith("sb_secret_") ? {} : { "Authorization": "Bearer " + supabaseKey })
   };
   try {
-    const saveResponse = await fetch(supabaseUrl.replace(/\/$/, "") + "/rest/v1/commission_requests", {
-      method: "POST",
-      headers: { ...databaseHeaders, "Prefer": "return=minimal" },
-      body: JSON.stringify({
-        request_id: requestId,
-        brief: {
-          name: fields[0][1], contact: fields[1][1], type: fields[2][1], license: fields[3][1],
-          moodBpm: fields[4][1], duration: fields[5][1], character: fields[6][1],
-          reference: fields[7][1], deadline: fields[8][1], budget: fields[9][1], extra: fields[10][1]
-        },
-        status: "Awaiting Review",
-        status_note: "Your request has been received and is waiting for our team to review it.",
-        timeline: [{ status: "Awaiting Review", at: createdAt, note: "Your request has been received." }]
-      })
-    });
+    let saveResponse;
+    for (let attempt = 0; attempt < 10; attempt++) {
+      saveResponse = await fetch(supabaseUrl.replace(/\/$/, "") + "/rest/v1/commission_requests", {
+        method: "POST",
+        headers: { ...databaseHeaders, "Prefer": "return=minimal" },
+        body: JSON.stringify({
+          request_id: requestId,
+          brief: {
+            name: fields[0][1], contact: fields[1][1], type: fields[2][1], license: fields[3][1],
+            moodBpm: fields[4][1], duration: fields[5][1], character: fields[6][1],
+            reference: fields[7][1], deadline: fields[8][1], budget: fields[9][1], extra: fields[10][1]
+          },
+          status: "Awaiting Review",
+          status_note: "Your request has been received and is waiting for our team to review it.",
+          timeline: [{ status: "Awaiting Review", at: createdAt, note: "Your request has been received." }]
+        })
+      });
+      if (saveResponse.status !== 409) break;
+      requestId = baseRequestId + " - " + String(attempt + 2).padStart(2, "0");
+    }
     if (!saveResponse.ok) {
       const errorBody = (await saveResponse.text().catch(() => "")).slice(0, 2000);
       console.error("[commission] Supabase insert failed", {
