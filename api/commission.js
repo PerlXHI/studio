@@ -56,12 +56,17 @@ export default async function handler(req, res) {
     return res.status(400).json({ ok: false, message: "Please complete all required fields." });
   }
 
+  const requestId = `PV-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${globalThis.crypto.randomUUID().slice(0, 6).toUpperCase()}`;
   const embed = {
     title: "New Commission Request",
-    description: "A new request has been submitted through the Perivelle website.",
+    description: `A new request has been submitted through the Perivelle website.\\nRequest ID: **${requestId}**`,
     color: 0x9B8BDA,
-    fields: fields.map(([name, value]) => ({ name, value: value || "—", inline: false })),
-    footer: { text: "PERIVELLE STUDIO · Awaiting Review" },
+    fields: [
+      { name: "Request ID", value: requestId, inline: true },
+      { name: "Current Status", value: "Awaiting Review", inline: true },
+      ...fields.map(([name, value]) => ({ name, value: value || "—", inline: false }))
+    ],
+    footer: { text: "PERIVELLE STUDIO · Status: Awaiting Review" },
     timestamp: new Date().toISOString()
   };
 
@@ -76,7 +81,7 @@ export default async function handler(req, res) {
       return res.status(502).json({ ok: false, message: "Discord could not receive the request. Please try again later." });
     }
 
-    return res.status(200).json({ ok: true, message: "Your commission request has been sent to Perivelle." });
+    return res.status(200).json({ ok: true, requestId, status: "Awaiting Review", message: "Your commission request has been sent to Perivelle." });
   } catch {
     return res.status(502).json({ ok: false, message: "Unable to send your request right now. Please try again later." });
   }
