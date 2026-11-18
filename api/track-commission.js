@@ -40,7 +40,8 @@ export default async function handler(req, res) {
     return res.status(200).json({
       ok: true, requestId: record.request_id,
       status: ALLOWED_STATUSES.includes(record.status) ? record.status : "Awaiting Review",
-      statusNote: record.status_note || "",\n      previewUrl: record.preview_url || "", deliveryUrl: record.delivery_url || "", quotedPrice: record.quoted_price || "", quotationNote: record.quotation_note || "",
+      statusNote: record.status_note || "",
+      previewUrl: record.preview_url || "", deliveryUrl: record.delivery_url || "", quotedPrice: record.quoted_price || "", quotationNote: record.quotation_note || "",
       createdAt: record.created_at, updatedAt: record.updated_at,
       timeline: Array.isArray(record.timeline) ? record.timeline : []
     });
