@@ -540,6 +540,8 @@ html[data-theme="dark"] .track-help p{color:#b7b0cc}
  <div class="track-result" id="trackResult" hidden aria-live="polite">
   <div class="track-result-head"><div><p class="eyebrow">REQUEST OVERVIEW</p><h3 id="trackResultId"></h3></div><span class="track-status-pill" id="trackStatus"></span></div>
   <p class="track-note" id="trackStatusNote"></p>
+  <p class="track-note" id="trackQuote" hidden></p>
+  <div class="track-note" id="trackLinks" hidden></div>
   <div class="track-meta"><div><span>SUBMITTED</span><strong id="trackCreated"></strong></div><div><span>LAST UPDATED</span><strong id="trackUpdated"></strong></div></div>
   <div class="track-progress"><p class="eyebrow">PRODUCTION JOURNEY</p><div class="track-steps" id="trackSteps"></div></div>
  </div>
@@ -565,7 +567,7 @@ var TXT={en:{navShop:"Music",navGallery:"Portfolio",navCustom:"Custom",navLicens
 var lang="en",cart=[],favorites=[],showFavorites=false,$=function(s){return document.querySelector(s)};
 document.querySelectorAll("audio[data-preview]").forEach(function(a){var key=a.dataset.preview;if(AUDIO_PREVIEWS[key])a.src=AUDIO_PREVIEWS[key];else{a.controls=false;a.insertAdjacentText("afterend"," Preview is not available yet.")}});function readList(k){try{var v=JSON.parse(localStorage.getItem(k)||"[]");return Array.isArray(v)?v:[]}catch(e){return[]}}cart=readList("pv_cart").filter(function(id){return products.some(function(p){return p.id===id})});favorites=readList("pv_fav").filter(function(id){return products.some(function(p){return p.id===id})});function tr(k){return TXT[lang][k]||k}function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}function fmt(n){return lang==="id"?"Rp"+n.toLocaleString("id-ID"):"$"+(n/16000).toFixed(2)}function save(){try{localStorage.setItem("pv_cart",JSON.stringify(cart));localStorage.setItem("pv_fav",JSON.stringify(favorites))}catch(e){}}function moodName(m){return m}
 function setLanguage(next){lang="en";document.documentElement.lang="en";document.querySelectorAll("[data-t]").forEach(function(e){e.textContent=tr(e.dataset.t)});document.querySelectorAll("[data-ph]").forEach(function(e){e.placeholder=tr(e.dataset.ph)});$("#favoritesOnly").setAttribute("aria-pressed",showFavorites);renderMood();renderProducts();renderCart();if($("#productDialog").open)showProduct($("#productDialog").dataset.product)}function renderMood(){var s=$("#mood"),old=s.value;s.innerHTML='<option value="">'+esc(tr("allMoods"))+'</option>'+Array.from(new Set(products.map(function(p){return p.mood}))).sort().map(function(m){return '<option value="'+esc(m)+'">'+esc(moodName(m))+'</option>'}).join("");s.value=old}
-function card(p){var fav=favorites.indexOf(p.id)!==-1;return '<article class="product"><div class="product-art" style="--art:'+esc(p.color)+'"><span class="art-type">'+esc(p.type)+' · '+esc(p.genre)+'</span><button class="favorite" type="button" data-fav="'+esc(p.id)+'" aria-label="Favorite" aria-pressed="'+fav+'">'+(fav?"♥":"♡")+'</button><span class="art-id">PERIVELLE / '+esc(p.id.slice(0,4).toUpperCase())+'</span></div><div class="product-body"><p class="eyebrow" style="margin:0">'+esc(moodName(p.mood))+' · '+esc(p.duration)+'</p><h3 class="product-title">'+esc(p.name)+'</h3><p class="product-desc">'+esc(p.description)+'</p><p class="product-meta">'+esc(p.format)+' · '+esc("Preview not attached")+'</p><div class="product-bottom"><span class="price">'+fmt(p.price)+'</span><div class="card-buttons"><button class="btn secondary small-btn" type="button" data-detail="'+esc(p.id)+'">'+esc(tr("details"))+'</button><button class="btn small-btn" type="button" data-add="'+esc(p.id)+'" aria-label="'+esc(tr("addCart"))+': '+esc(p.name)+'">+</button></div></div></div></article>'}
+function card(p){var fav=favorites.indexOf(p.id)!==-1;return '<article class="product"><div class="product-art" style="--art:'+esc(p.color)+'"><span class="art-type">'+esc(p.type)+' · '+esc(p.genre)+'</span><button class="favorite" type="button" data-fav="'+esc(p.id)+'" aria-label="Favorite" aria-pressed="'+fav+'">'+(fav?"♥":"♡")+'</button><span class="art-id">PERIVELLE / '+esc(p.id.slice(0,4).toUpperCase())+'</span></div><div class="product-body"><p class="eyebrow" style="margin:0">'+esc(moodName(p.mood))+' · '+esc(p.duration)+'</p><h3 class="product-title">'+esc(p.name)+'</h3><p class="product-desc">'+esc(p.description)+'</p><p class="product-meta">'+esc(p.format)+(p.preview?' · <a href="'+esc(p.preview)+'" target="_blank" rel="noopener noreferrer">Listen to preview ↗</a>':' · '+esc("Preview not attached"))+'</p><div class="product-bottom"><span class="price">'+fmt(p.price)+'</span><div class="card-buttons"><button class="btn secondary small-btn" type="button" data-detail="'+esc(p.id)+'">'+esc(tr("details"))+'</button><button class="btn small-btn" type="button" data-add="'+esc(p.id)+'" aria-label="'+esc(tr("addCart"))+': '+esc(p.name)+'">+</button></div></div></div></article>'}
 function renderProducts(){var q=$("#search").value.trim().toLowerCase(),m=$("#mood").value,sort=$("#sort").value,list=products.filter(function(p){return(!q||(p.name+" "+p.genre+" "+moodName(p.mood)+" "+p.type+" "+p.description).toLowerCase().indexOf(q)>-1)&&(!m||m===p.mood)&&(!showFavorites||favorites.indexOf(p.id)!==-1)});list.sort(function(a,b){if(sort==="price-low")return a.price-b.price;if(sort==="price-high")return b.price-a.price;if(sort==="newest")return b.date.localeCompare(a.date);return b.date.localeCompare(a.date)});$("#products").innerHTML=list.length?list.map(card).join(""):'<div class="empty">'+esc(tr("empty"))+'</div>';$("#resultCount").textContent=list.length+" "+("releases");$("#favoritesOnly").setAttribute("aria-pressed",showFavorites)}function cartMessage(items){var total=items.reduce(function(a,p){return a+p.price},0);return tr("cartBrief")+"\n\n"+items.map(function(p){return "• "+p.name+" — "+fmt(p.price)+" ("+p.type+", "+p.genre+")"}).join("\n")+"\n\n"+tr("price")+": "+fmt(total)+"\n\n"+("Please confirm availability, licensing, and payment details.")}
 function renderCart(){var items=cart.map(function(id){return products.find(function(p){return p.id===id})}).filter(Boolean);var countNode=$("#cartCount");if(countNode)countNode.textContent=items.length;var content=$("#cartContent"),summary=$("#cartSummary"),send=$("#sendCart");if(!items.length){content.innerHTML='<p class="empty">'+esc(tr("cartEmpty"))+'</p>';summary.hidden=true;send.hidden=true;return}var total=items.reduce(function(a,p){return a+p.price},0);content.innerHTML='<ul class="cart-list">'+items.map(function(p){return '<li><strong>'+esc(p.name)+'</strong> — '+fmt(p.price)+' <button type="button" class="quiet" data-remove="'+esc(p.id)+'">×</button></li>'}).join("")+'</ul><p><strong>'+esc(tr("price"))+': '+fmt(total)+'</strong></p>';summary.value=cartMessage(items);summary.hidden=true;send.hidden=false}
 function showProduct(id){var p=products.find(function(x){return x.id===id});if(!p)return;$("#productDialog").dataset.product=id;$("#productHeading").textContent=p.name;$("#productDetail").innerHTML='<p>'+esc(p.description)+'</p><p><strong>'+esc(tr("price"))+':</strong> '+fmt(p.price)+'</p><p><strong>'+esc(tr("type"))+':</strong> '+esc(p.type)+' · <strong>'+esc(tr("mood"))+':</strong> '+esc(moodName(p.mood))+' · <strong>'+esc(tr("genre"))+':</strong> '+esc(p.genre)+'</p><p><strong>'+esc(tr("duration"))+':</strong> '+esc(p.duration)+' · <strong>'+esc(tr("format"))+':</strong> '+esc(p.format)+'</p><p class="help">'+esc("Audio preview is not available yet. Please confirm licensing and availability through Discord.")+'</p>';$("#detailAdd").dataset.add=id;$("#productDialog").showModal()}function toast(msg){var t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(function(){t.hidden=true},2600)}function addCart(id){if(cart.indexOf(id)<0){cart.push(id);save();renderCart();renderProducts();toast(tr("added"))}else $("#cartDialog").showModal()}
@@ -625,7 +627,19 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
  function render(data){
   document.getElementById("trackResultId").textContent=data.requestId;
   document.getElementById("trackStatus").textContent=data.status;
-  document.getElementById("trackStatusNote").textContent=data.statusNote||labels[data.status]||"Please contact Perivelle if you need more information.";
+  document.getElementById("trackStatusNote").textContent=data.statusNote||labels[data.status]||"Please contact Perivelle if you need more information."; 
+  const quote=document.getElementById("trackQuote");
+  quote.hidden=!data.quotedPrice;
+  quote.textContent=data.quotedPrice?"Quoted price: "+data.quotedPrice:"";
+  const links=document.getElementById("trackLinks");
+  links.replaceChildren();
+  [["Preview",data.previewUrl],["Final delivery",data.deliveryUrl]].forEach(function(item){
+   if(!item[1])return;
+   try{const url=new URL(item[1]);if(url.protocol!=="https:"&&url.protocol!=="http:")return;
+    const a=document.createElement("a");a.href=url.href;a.target="_blank";a.rel="noopener noreferrer";a.textContent=item[0]+" ↗";a.style.marginRight="16px";links.appendChild(a);
+   }catch(e){}
+  });
+  links.hidden=!links.childNodes.length;
   document.getElementById("trackCreated").textContent=dateLabel(data.createdAt);
   document.getElementById("trackUpdated").textContent=dateLabel(data.updatedAt);
   const steps=document.getElementById("trackSteps");
@@ -659,6 +673,30 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
  const params=new URLSearchParams(location.search);
  const initial=params.get("id");
  if(initial){input.value=initial.toUpperCase();form.requestSubmit()}
+})();
+
+/* LOAD ADMIN-MANAGED PUBLIC STUDIO SETTINGS */
+(async function(){
+ try{
+  const response=await fetch("/api/site-config",{headers:{"Accept":"application/json"}});
+  if(!response.ok)return;
+  const payload=await response.json(),settings=payload.settings||{};
+  if(Array.isArray(settings.catalog_products)){
+   settings.catalog_products.forEach(function(item){
+    const product=products.find(function(p){return p.id===item.id});
+    if(product){if(Number.isFinite(Number(item.price)))product.price=Number(item.price);product.preview=String(item.preview||"");}
+   });
+   renderProducts();renderCart();
+  }
+  if(Array.isArray(settings.service_prices)){
+   document.querySelectorAll(".service-card").forEach(function(card,index){
+    const item=settings.service_prices[index];
+    const node=card.querySelector(".starting");
+    if(item&&node)node.textContent=item.price?"STARTING AT · "+item.price:"CONTACT FOR A QUOTE";
+   });
+  }
+  if(settings.studio_links&&settings.studio_links.discord)DISCORD_URL=settings.studio_links.discord;
+ }catch(error){console.warn("Public studio settings could not be loaded.");}
 })();
 
 setLanguage("en");
