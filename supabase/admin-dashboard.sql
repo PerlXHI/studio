@@ -6,6 +6,7 @@ alter table public.commission_requests
   add column if not exists preview_url text not null default '',
   add column if not exists delivery_url text not null default '',
   add column if not exists quoted_price text not null default '',
+  add column if not exists quotation_note text not null default '',
   add column if not exists admin_note text not null default '';
 
 create table if not exists public.studio_settings (
