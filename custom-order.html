@@ -66,10 +66,17 @@ form,.result{min-width:0}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
+
+/* SHARED STUDIO NAVIGATION */
+.top-links{display:flex;align-items:center;justify-content:flex-end;gap:5px 8px;flex-wrap:wrap}
+.top-links a{padding:7px 10px;border-radius:999px;text-decoration:none;color:#665c8d;font-size:.83rem;font-weight:600;white-space:nowrap}
+.top-links a:hover{background:#eeeaff;color:#473d70}
+@media(max-width:700px){.top{align-items:flex-start;flex-direction:column;gap:8px}.top-links{justify-content:flex-start;gap:5px}.top-links a{padding:6px 9px;font-size:.76rem}}
+@media(max-width:370px){.top-links{gap:4px}.top-links a{padding:6px 7px;font-size:.71rem}}
 </style>
 </head>
 <body>
-<header><div class="wrap top"><a class="brand" href="index.html">🔥 Perivelle</a></div></header>
+<header><div class="wrap top"><a class="brand" href="index.html#home">Perivelle</a><nav class="top-links" aria-label="Main navigation"><a href="index.html#home">Home</a><a href="gallery.html">Portfolio</a><a href="index.html#catalog">Music</a><a href="index.html#services">Services</a><a href="index.html#custom">Commission</a><a href="index.html#license">Licensing</a><a href="index.html#faq">FAQ</a></nav></div></header>
 <main class="wrap">
 <section class="intro"><h1 data-i18n="title">Describe the music you imagine.</h1><p data-i18n="intro">Tell us about your custom BGM or music—from its concept, vibe, and genre to any references. We’ll turn your input into a brief you can send to the Perivelle team.</p></section>
 <form id="briefForm">
