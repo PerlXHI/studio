@@ -521,7 +521,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   });
   var result=await response.json().catch(function(){return{}});
   if(!response.ok||!result.ok)throw new Error(result.message||"Your request could not be sent. Please try again.");
-  status.textContent="✦ Your commission request has been sent successfully! The Perivelle team will review it and contact you on Discord.";
+  status.textContent="✦ Request sent successfully! Your Request ID is "+(result.requestId||"confirmed")+" · Status: "+(result.status||"Awaiting Review")+". Keep this ID for any follow-up. The Perivelle team will contact you on Discord.";
   f.reset();
  }catch(error){
   status.textContent=error.message||"Something went wrong. Please try again later.";
