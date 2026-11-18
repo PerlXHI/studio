@@ -116,6 +116,10 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ ok: true, requestId, status: "Awaiting Review", message: "Your commission request has been sent to Perivelle." });
   } catch {
+    await fetch(supabaseUrl.replace(/\/$/, "") + "/rest/v1/commission_requests?request_id=eq." + encodeURIComponent(requestId), {
+      method: "DELETE",
+      headers: databaseHeaders
+    }).catch(() => {});
     return res.status(502).json({ ok: false, message: "Unable to send your request right now. Please try again later." });
   }
 }
