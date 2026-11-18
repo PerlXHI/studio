@@ -311,6 +311,52 @@ input,select,textarea{font-size:16px;min-width:0}
 }
 @media(prefers-reduced-motion:reduce){.team-card{transition:none}}
 
+
+/* GLOBAL LIGHT / DARK THEME */
+html[data-theme="dark"]{color-scheme:dark;--paper:#171629;--card:#24213a;--ink:#f1efff;--muted:#b4aecb;--line:#403b5b;--green:#a99be8;--rust:#c6b4ff}
+html[data-theme="dark"] body{background:radial-gradient(ellipse at 12% 8%,#30294c 0,transparent 36%),radial-gradient(ellipse at 88% 28%,#1e3449 0,transparent 34%),linear-gradient(180deg,#171629 0%,#1b1a30 55%,#171629 100%);color:#f1efff}
+html[data-theme="dark"] header{background:rgba(25,23,44,.88);border-color:#403b5b}
+html[data-theme="dark"] .navlink{color:#b4aecb}
+html[data-theme="dark"] .navlink:hover,html[data-theme="dark"] .brand{color:#f1efff}
+html[data-theme="dark"] .quiet,html[data-theme="dark"] .cart-button,html[data-theme="dark"] .toolbar button{background:#292641;color:#eeeaff;border-color:#514a70}
+html[data-theme="dark"] .hero{background:radial-gradient(ellipse at 82% 25%,#34445d99,transparent 36%),radial-gradient(ellipse at 64% 80%,#44345f99,transparent 38%);border-color:#403b5b}
+html[data-theme="dark"] .hero h1,html[data-theme="dark"] h2,html[data-theme="dark"] h3{color:#f1efff}
+html[data-theme="dark"] .hero h1 em,html[data-theme="dark"] .brand span{color:#c1b3ff}
+html[data-theme="dark"] .hero-copy>p:not(.eyebrow),html[data-theme="dark"] .section-head .sub,html[data-theme="dark"] .product-desc,html[data-theme="dark"] .product-meta,html[data-theme="dark"] .team-bio{color:#b4aecb}
+html[data-theme="dark"] .hero-art{background:linear-gradient(145deg,#393353,#26394e);border-color:#514a70}
+html[data-theme="dark"] .portfolio-strip,html[data-theme="dark"] .custom-band{background:linear-gradient(120deg,#292541,#202d40)!important;border-color:#403b5b}
+html[data-theme="dark"] .portfolio-card,html[data-theme="dark"] .product,html[data-theme="dark"] .service-card,html[data-theme="dark"] .step-card,html[data-theme="dark"] .credit-card,html[data-theme="dark"] .license-panel,html[data-theme="dark"] .team-card{background:linear-gradient(145deg,#292640,#22253a 72%,#202d40);border-color:#45405f;box-shadow:0 14px 36px #09081755}
+html[data-theme="dark"] .portfolio-copy h3,html[data-theme="dark"] .team-info h3,html[data-theme="dark"] .service-card h3,html[data-theme="dark"] .team-note strong,html[data-theme="dark"] .team-cta h3{color:#f1efff}
+html[data-theme="dark"] .portfolio-copy p:not(.eyebrow),html[data-theme="dark"] .service-card p,html[data-theme="dark"] .step-card p,html[data-theme="dark"] .credit-card p{color:#b4aecb}
+html[data-theme="dark"] .mini-player,html[data-theme="dark"] .team-note{background:#292640;border-color:#45405f;color:#b4aecb}
+html[data-theme="dark"] .team-hero{background:radial-gradient(circle at 82% 20%,#34445d 0,transparent 34%),radial-gradient(circle at 15% 90%,#44345f 0,transparent 40%),linear-gradient(135deg,#292640,#22253a 60%,#202d40);border-color:#45405f}
+html[data-theme="dark"] .team-hero h2{color:#f1efff}
+html[data-theme="dark"] .team-lead{color:#c1bbd7}
+html[data-theme="dark"] .team-tags span{background:#332f4d;border-color:#514a70;color:#d2c9ff}
+html[data-theme="dark"] .team-cta{background:linear-gradient(110deg,#30294c,#26394e);border-color:#514a70}
+html[data-theme="dark"] .team-cta p:not(.eyebrow){color:#c1bbd7}
+html[data-theme="dark"] .control,html[data-theme="dark"] .field input,html[data-theme="dark"] .field select,html[data-theme="dark"] .field textarea,html[data-theme="dark"] input,html[data-theme="dark"] select,html[data-theme="dark"] textarea,html[data-theme="dark"] .summary{background:#211f35;color:#f1efff;border-color:#514a70}
+html[data-theme="dark"] .form{background:#24213a;border-color:#45405f}
+html[data-theme="dark"] .field label{color:#e5e0fa}
+html[data-theme="dark"] .faq details{border-color:#45405f}
+html[data-theme="dark"] .faq summary{color:#f1efff}
+html[data-theme="dark"] .faq details p{color:#b4aecb}
+html[data-theme="dark"] footer{background:#100f1d!important;color:#f1efff!important;border-color:#403b5b}
+html[data-theme="dark"] footer p{color:#b4aecb!important}
+html[data-theme="dark"] .modal{background:#24213a;color:#f1efff;border-color:#514a70}
+html[data-theme="dark"] .modal::backdrop{background:#080713d9}
+html[data-theme="dark"] .close{color:#f1efff;border-color:#514a70}
+html[data-theme="dark"] .btn{background:#8274c4;border-color:#8274c4;color:#fff}
+html[data-theme="dark"] .btn.secondary{background:transparent;color:#d5ccff;border-color:#8274c4}
+html[data-theme="dark"] .starting{color:#c6b8ff;border-color:#514a70}
+.theme-toggle{position:fixed;right:22px;bottom:22px;z-index:30;width:54px;height:54px;border:1px solid #ded8f2;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.92);color:#554b7b;box-shadow:0 8px 28px #33265b2b;backdrop-filter:blur(14px);cursor:pointer;font-size:1.35rem;transition:transform .2s ease,box-shadow .2s ease}
+.theme-toggle:hover{transform:translateY(-3px);box-shadow:0 12px 32px #33265b38}
+.theme-toggle:focus-visible{outline:3px solid #9b8bd7;outline-offset:4px}
+html[data-theme="dark"] .theme-toggle{background:rgba(42,38,65,.94);color:#f6e9a8;border-color:#514a70}
+.theme-toggle .theme-icon{line-height:1}
+@media(max-width:560px){.theme-toggle{right:15px;bottom:15px;width:49px;height:49px}}
+@media(prefers-reduced-motion:reduce){.theme-toggle{transition:none}}
+
 </style>
 </head>
 <body>
@@ -403,6 +449,7 @@ input,select,textarea{font-size:16px;min-width:0}
 <footer><div class="wrap foot"><strong>PERIVELLE <span style="color:#b6563b">✳</span></strong><p data-t="footerText">Original music for creators. Contact us on Discord for commissions and inquiries.</p><a class="navlink" href="gallery.html" data-t="footerPortfolio">View portfolio ↗</a></div></footer>
 <dialog class="modal" id="cartDialog" aria-labelledby="cartHeading"><div class="modal-head"><h2 id="cartHeading" data-t="cartTitle">Your selection</h2><button class="close" type="button" data-close="cartDialog" aria-label="Close">×</button></div><p class="help" data-t="cartInfo">Checkout is not connected yet. Copy your selection and send it through Discord for confirmation.</p><div id="cartContent"></div><textarea class="summary" id="cartSummary" readonly hidden aria-label="Selection summary"></textarea><div class="modal-actions"><button class="btn" id="sendCart" type="button" hidden data-t="sendDiscord">Copy & Open Discord ↗</button><button class="quiet" id="clearCart" type="button" data-t="clearCart">Clear selection</button></div><p class="status" id="cartStatus" role="status" aria-live="polite"></p></dialog>
 <dialog class="modal" id="productDialog" aria-labelledby="productHeading"><div class="modal-head"><h2 id="productHeading"></h2><button class="close" type="button" data-close="productDialog" aria-label="Close">×</button></div><div id="productDetail"></div><button class="btn" id="detailAdd" type="button" data-t="addCart">Add to selection</button></dialog>
+<button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="theme-icon" aria-hidden="true">☾</span></button>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script>
 var DISCORD_URL="https://discord.com/app";
@@ -450,6 +497,25 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
  window.addEventListener("popstate",function(){renderView(true)});
  window.addEventListener("hashchange",function(){renderView(true)});
  renderView(false);
+})();
+
+
+/* THEME SWITCHER — saved across studio pages */
+(function(){
+ const root=document.documentElement,button=document.getElementById("themeToggle");
+ if(!button)return;
+ let saved="light";try{saved=localStorage.getItem("pv_theme")||"light"}catch(e){}
+ function apply(theme){
+  const dark=theme==="dark";root.dataset.theme=dark?"dark":"light";
+  button.setAttribute("aria-label",dark?"Switch to light mode":"Switch to dark mode");
+  button.title=dark?"Switch to light mode":"Switch to dark mode";
+  button.querySelector(".theme-icon").textContent=dark?"☀":"☾";
+ }
+ apply(saved==="dark"?"dark":"light");
+ button.addEventListener("click",function(){
+  const next=root.dataset.theme==="dark"?"light":"dark";apply(next);
+  try{localStorage.setItem("pv_theme",next)}catch(e){}
+ });
 })();
 
 </script>
