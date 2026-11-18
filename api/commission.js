@@ -7,8 +7,11 @@ export default async function handler(req, res) {
   const origin = req.headers.origin;
   if (origin) {
     try {
-      const host = new URL(origin).hostname;
-      if (host !== "perivelle.vercel.app") {
+      const parsedOrigin = new URL(origin);
+      const requestHost = String(req.headers.host || "").toLowerCase();
+      const originHost = parsedOrigin.host.toLowerCase();
+      const isLocalhost = parsedOrigin.hostname === "localhost" || parsedOrigin.hostname === "127.0.0.1";
+      if ((!isLocalhost && parsedOrigin.protocol !== "https:") || !requestHost || originHost !== requestHost) {
         return res.status(403).json({ ok: false, message: "Origin not allowed." });
       }
     } catch {
