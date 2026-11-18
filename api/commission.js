@@ -59,7 +59,7 @@ export default async function handler(req, res) {
   const requestId = `PV-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${globalThis.crypto.randomUUID().slice(0, 6).toUpperCase()}`;
   const embed = {
     title: "New Commission Request",
-    description: `A new request has been submitted through the Perivelle website.\\nRequest ID: **${requestId}**`,
+    description: `A new request has been submitted through the Perivelle website.\nRequest ID: **${requestId}**`,
     color: 0x9B8BDA,
     fields: [
       { name: "Request ID", value: requestId, inline: true },
