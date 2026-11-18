@@ -56,7 +56,36 @@ export default async function handler(req, res) {
     return res.status(400).json({ ok: false, message: "Please complete all required fields." });
   }
 
-  const requestId = `PV-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${globalThis.crypto.randomUUID().slice(0, 6).toUpperCase()}`;
+  const requestId = `PV-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${globalThis.crypto.randomUUID().replace(/-/g, "").slice(0, 12).toUpperCase()}`;
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!supabaseUrl || !supabaseKey) {
+    return res.status(503).json({ ok: false, message: "Commission tracking is not configured yet. Please contact Perivelle." });
+  }
+
+  const createdAt = new Date().toISOString();
+  const databaseHeaders = {
+    "Content-Type": "application/json",
+    "apikey": supabaseKey,
+    "Authorization": "Bearer " + supabaseKey
+  };
+  try {
+    const saveResponse = await fetch(supabaseUrl.replace(/\/$/, "") + "/rest/v1/commission_requests", {
+      method: "POST",
+      headers: { ...databaseHeaders, "Prefer": "return=minimal" },
+      body: JSON.stringify({
+        request_id: requestId,
+        status: "Awaiting Review",
+        status_note: "Your request has been received and is waiting for our team to review it.",
+        timeline: [{ status: "Awaiting Review", at: createdAt, note: "Your request has been received." }]
+      })
+    });
+    if (!saveResponse.ok) {
+      return res.status(502).json({ ok: false, message: "We could not register your tracking ID. Please try again later." });
+    }
+  } catch {
+    return res.status(502).json({ ok: false, message: "Commission tracking is temporarily unavailable. Please try again later." });
+  }
   const embed = {
     title: "New Commission Request",
     description: `A new request has been submitted through the Perivelle website.\nRequest ID: **${requestId}**`,
@@ -78,6 +107,10 @@ export default async function handler(req, res) {
     });
 
     if (!discordResponse.ok) {
+      await fetch(supabaseUrl.replace(/\/$/, "") + "/rest/v1/commission_requests?request_id=eq." + encodeURIComponent(requestId), {
+        method: "DELETE",
+        headers: databaseHeaders
+      }).catch(() => {});
       return res.status(502).json({ ok: false, message: "Discord could not receive the request. Please try again later." });
     }
 
