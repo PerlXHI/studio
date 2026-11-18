@@ -31,7 +31,7 @@ export default async function handler(req,res) {
         const id=String(body.requestId||"").trim().toUpperCase();
         const patch={};
         if(body.status!==undefined){if(!STATUSES.includes(body.status))return res.status(400).json({ok:false,message:"Invalid status."});patch.status=body.status;}
-        for(const field of ["status_note","preview_url","delivery_url","quoted_price","admin_note"]) {
+        for(const field of ["status_note","preview_url","delivery_url","quoted_price","quotation_note","admin_note"]) {
           if(body[field]!==undefined) {
             const value=String(body[field]??"").trim();
             if(value.length>1600)return res.status(400).json({ok:false,message:"A field is too long."});
