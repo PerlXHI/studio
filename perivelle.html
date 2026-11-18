@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -147,10 +147,10 @@ dialog{max-height:min(86vh,780px);overflow:auto;overscroll-behavior:contain}
 </style>
 </head>
 <body>
-<header><div class="wrap"><nav aria-label="Menu">
-<a class="logo" href="#home">🔥 Perivelle</a>
+<header><div class="wrap"><nav aria-label="Main navigation">
+<a class="logo" href="#home">Perivelle</a>
 <a class="l" href="#musik" data-t="nm"></a><a class="l" href="#lagu" data-t="nl"></a><a class="l" href="#sound" data-t="ns"></a><a class="l" href="#komposer" data-t="nc"></a><a class="l" href="#tag" data-t="ng"></a><a class="l" href="#cari" data-t="nf"></a><a class="l" href="#lisensi" data-t="nli"></a><a class="l" href="#bantuan" data-t="nb"></a><a class="l" href="#riwayat" data-t="nr"></a>
-<button type="button" id="lg"></button>
+
 </nav></div></header>
 
 <main>
@@ -173,8 +173,8 @@ dialog{max-height:min(86vh,780px);overflow:auto;overscroll-behavior:contain}
 <section class="v" id="v-cat" hidden><div class="wrap">
 <h2 id="ct"></h2><p class="sub" id="cn"></p>
 <div class="ctl"><input id="q" type="search" data-p="qh" aria-label="Search">
-<select id="sm" aria-label="Mood"></select>
-<select id="ss" aria-label="Sort"><option value="new" data-t="so1"></option><option value="pop" data-t="so2"></option><option value="low" data-t="so3"></option></select>
+<select id="sm" aria-label="Filter by mood"></select>
+<select id="ss" aria-label="Sort products"><option value="new" data-t="so1"></option><option value="pop" data-t="so2"></option><option value="low" data-t="so3"></option></select>
 <button type="button" id="rnd" data-t="rnd"></button></div>
 <ul class="list" id="cl"></ul>
 </div></section>
@@ -188,7 +188,7 @@ dialog{max-height:min(86vh,780px);overflow:auto;overscroll-behavior:contain}
 <h2 data-t="fh"></h2><p class="sub" data-t="fs"></p>
 <div class="sbox"><input id="fq" type="search" aria-label="Search"><button type="button" id="fgo" data-t="fb"></button></div><ul class="list" id="fr"></ul>
 <h2 data-t="vh"></h2><p class="sub" data-t="vs"></p>
-<div class="sbox"><input id="vq" type="url" placeholder="https://youtube.com/watch?v=..." aria-label="YouTube"><button type="button" id="vgo" data-t="fb"></button></div><p class="msg" id="vm"></p><ul class="list" id="vr"></ul>
+<div class="sbox"><input id="vq" type="url" placeholder="https://youtube.com/watch?v=..." aria-label="YouTube video URL"><button type="button" id="vgo" data-t="fb"></button></div><p class="msg" id="vm"></p><ul class="list" id="vr"></ul>
 </div></section>
 
 <section class="v" id="v-lisensi" hidden><div class="wrap"><h2 data-t="lh"></h2><p class="sub" data-t="ls"></p>
@@ -207,7 +207,7 @@ dialog{max-height:min(86vh,780px);overflow:auto;overscroll-behavior:contain}
 
 <footer><div class="wrap row2"><div><h3>🔥 Perivelle</h3><p data-t="ft"></p></div><div><a href="#">Discord</a><a href="#">Twitter/X</a><a href="#">YouTube</a><a href="#">Email</a></div></div></footer>
 
-<dialog id="pl" aria-label="Preview"><div class="ph"><b id="pt"></b><button type="button" id="px" aria-label="Close">✕</button></div><div class="pv" id="pv"></div><a id="pyl" target="_blank" rel="noopener" hidden data-t="oy"></a></dialog>
+<dialog id="pl" aria-label="Product preview"><div class="ph"><b id="pt"></b><button type="button" id="px" aria-label="Close">✕</button></div><div class="pv" id="pv"></div><a id="pyl" target="_blank" rel="noopener" hidden data-t="oy"></a></dialog>
 <div id="toast" role="status" hidden></div>
 
 <script>
@@ -229,15 +229,13 @@ var TT={musik:["Musik","Music"],lagu:["Lagu original","Original songs"],sound:["
 var MO={Tenang:"Calm",Ceria:"Cheerful",Sendu:"Melancholy",Lucu:"Funny",Tegang:"Tense",Intens:"Intense",Manis:"Sweet",Harapan:"Hopeful",Misterius:"Mysterious",Fantasi:"Fantasy"};
 var CR=[["Aria","Komposer dan vokal","Composer and vocalist"],["Nox","Sound design","Sound design"]];
 var W={santai:["m","Tenang"],chill:["m","Tenang"],calm:["m","Tenang"],relax:["m","Tenang"],lofi:["m","Tenang"],tenang:["m","Tenang"],sedih:["m","Sendu"],sad:["m","Sendu"],hujan:["m","Sendu"],rain:["m","Sendu"],senang:["m","Ceria"],happy:["m","Ceria"],ceria:["m","Ceria"],cheer:["m","Ceria"],lucu:["m","Lucu"],funny:["m","Lucu"],horor:["m","Tegang"],tegang:["m","Tegang"],tense:["m","Tegang"],scary:["m","Tegang"],raid:["m","Tegang"],semangat:["m","Intens"],epic:["m","Intens"],intens:["m","Intens"],manis:["m","Manis"],sweet:["m","Manis"],cute:["m","Manis"],imut:["m","Manis"],fantas:["m","Fantasi"],misteri:["m","Misterius"],mystery:["m","Misterius"],harapan:["m","Harapan"],hope:["m","Harapan"],alert:["k","Sound Alert"],donasi:["k","Sound Alert"],donat:["k","Sound Alert"],follow:["k","Sound Alert"],transisi:["k","Stinger"],transition:["k","Stinger"],stinger:["k","Stinger"],lagu:["k","OG Song"],song:["k","OG Song"],vokal:["k","OG Song"],lore:["k","Lore Music"],karakter:["k","Lore Music"],character:["k","Lore Music"],bgm:["k","BGM"],latar:["k","BGM"],background:["k","BGM"],gaming:["k","BGM"],game:["k","BGM"]};
-var T=[["Late Night Lo-fi","BGM","Tenang",150000,"🎧","#7a5cff","Aria","2026-11-10",42],["Chill Gaming Loop","BGM","Ceria",130000,"🎮","#35b7a6","Aria","2026-11-02",31],["Rainy Window","BGM","Sendu",140000,"🌧️","#4a6fa5","Aria","2026-10-20",18],["Alert Pack Chibi","Sound Alert","Ceria",80000,"🔔","#f59a1f","Nox","2026-11-12",57],["Donation and Follow Pack","Sound Alert","Lucu",65000,"💖","#ff7aa8","Nox","2026-10-30",49],["Raid Horn","Sound Alert","Tegang",45000,"📯","#c2455a","Nox","2026-10-11",12],["Stinger Api","Stinger","Intens",95000,"⚡","#e8452c","Nox","2026-11-05",27],["Stinger Sakura","Stinger","Manis",85000,"🌸","#ff9bbd","Nox","2026-10-02",15],["Lagu Debut Original","OG Song","Harapan",750000,"🎤","#c2455a","Aria","2026-11-14",6],["Lagu Ulang Tahun Channel","OG Song","Ceria",600000,"🎂","#f59a1f","Aria","2026-09-21",4],["Tema Karakter dan Instrumental","Lore Music","Misterius",900000,"📜","#3b2a78","Aria","2026-11-08",5],["Ambience Dunia Fantasi","Lore Music","Fantasi",350000,"🌌","#2b6cb0","Aria","2026-10-15",9]];
+var T=[["Late Night Lo-fi","BGM","Tenang",150000,"🎧","#7a5cff","Aria","2026-11-10",42],["Chill Gaming Loop","BGM","Ceria",130000,"🎮","#35b7a6","Aria","2026-11-02",31],["Rainy Window","BGM","Sendu",140000,"🌧️","#4a6fa5","Aria","2026-10-20",18],["Alert Pack Chibi","Sound Alert","Ceria",80000,"🔔","#f59a1f","Nox","2026-11-12",57],["Donation and Follow Pack","Sound Alert","Lucu",65000,"💖","#ff7aa8","Nox","2026-10-30",49],["Raid Horn","Sound Alert","Tegang",45000,"📯","#c2455a","Nox","2026-10-11",12],["Flame Stinger","Stinger","Intens",95000,"⚡","#e8452c","Nox","2026-11-05",27],["Sakura Stinger","Stinger","Manis",85000,"🌸","#ff9bbd","Nox","2026-10-02",15],["Original Debut Song","OG Song","Harapan",750000,"🎤","#c2455a","Aria","2026-11-14",6],["Channel Anniversary Song","OG Song","Ceria",600000,"🎂","#f59a1f","Aria","2026-09-21",4],["Character Theme & Instrumental","Lore Music","Misterius",900000,"📜","#3b2a78","Aria","2026-11-08",5],["Fantasy World Ambience","Lore Music","Fantasi",350000,"🌌","#2b6cb0","Aria","2026-10-15",9]];
 var YT=["","","","","","","","","","","",""]; // isi ID video YouTube, urutan sama seperti T
 var RATE=16000; // kurs Rp per $1, ubah sesuai kebutuhan
 var G={musik:["BGM","Lore Music"],lagu:["OG Song"],sound:["Sound Alert","Stinger"],semua:null};
 var V=["home","musik","lagu","sound","semua","komposer","tag","cari","lisensi","bantuan","riwayat"];
 var $=function(s){return document.querySelector(s)};
-var lang="id",st={q:"",m:"",s:"new"},cur="home",last=[],dl=$("#pl"),pv=$("#pv"),yl=$("#pyl"),AC;
-try{lang=localStorage.getItem("pv_l")||""}catch(e){}
-if(lang!=="id"&&lang!=="en")lang=(navigator.language||"id").slice(0,2)==="id"?"id":"en";
+var lang="en",st={q:"",m:"",s:"new"},cur="home",last=[],dl=$("#pl"),pv=$("#pv"),yl=$("#pyl"),AC;
 function t(k){return K[k][lang==="id"?0:1]}
 function mo(m){return lang==="en"?MO[m]:m}
 function fmt(n){return lang==="en"?"$"+(n/RATE).toFixed(2):"Rp"+n.toLocaleString("id-ID")}
@@ -267,7 +265,7 @@ function ap(){document.documentElement.lang=lang;
 document.querySelectorAll("[data-t]").forEach(function(e){e.textContent=t(e.dataset.t)});
 document.querySelectorAll("[data-p]").forEach(function(e){e.placeholder=t(e.dataset.p)});
 $("#fq").placeholder=t("fs").match(/“[^”]+”/)[0].replace(/[“”]/g,"");
-$("#lg").textContent=lang==="id"?"EN":"ID";$("#lg").setAttribute("aria-label",lang==="id"?"Switch to English (price in $)":"Ganti ke Bahasa Indonesia (harga dalam Rp)");
+
 var chips=M.map(function(m){return '<button type="button" class="chip" data-m="'+m+'">'+mo(m)+'</button>'}).join("");
 $("#hm").innerHTML=chips;$("#tm").innerHTML=M.map(function(m){var n=T.filter(function(x){return x[2]===m}).length;return '<button type="button" class="chip" data-m="'+m+'">'+mo(m)+' ('+n+')</button>'}).join("");
 $("#tk").innerHTML=KD.map(function(k){var n=T.filter(function(x){return x[1]===k}).length;return '<button type="button" class="chip" data-k="'+k+'">'+k+' ('+n+')</button>'}).join("");
@@ -294,7 +292,7 @@ else if(b=e.target.closest("[data-b]"))toast(t("tb"));
 else if(b=e.target.closest("[data-m]")){st.m=b.dataset.m;st.q="";go("semua")}
 else if(b=e.target.closest("[data-k]")){st.q=b.dataset.k;st.m="";go("semua")}
 else if(b=e.target.closest("[data-c]")){st.q=b.dataset.c;st.m="";go("semua")}});
-$("#lg").onclick=function(){lang=lang==="id"?"en":"id";try{localStorage.setItem("pv_l",lang)}catch(e){}ap()};
+
 $("#hgo").onclick=function(){st.q=$("#hq").value;st.m="";go("semua")};
 $("#hq").addEventListener("keydown",function(e){if(e.key==="Enter")$("#hgo").click()});
 $("#q").oninput=function(){st.q=this.value;catalog()};
