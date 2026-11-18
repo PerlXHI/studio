@@ -1,7 +1,7 @@
 import { isAdmin, supabaseConfig, supabaseHeaders, hasTrustedOrigin } from "./_admin.js";
 
 const STATUSES=["Awaiting Review","Quotation Sent","Awaiting Payment","In Production","Revision","Completed","On Hold","Cancelled"];
-const KEYS=["service_prices","catalog_products","studio_links","client_showcase","testimonials"];
+const KEYS=["service_prices","catalog_products","studio_links"];
 async function db(path,options={}) {
   const {url,key}=supabaseConfig();
   return fetch(url+"/rest/v1/"+path,{...options,headers:supabaseHeaders(key,{"Content-Type":"application/json",...(options.headers||{})})});
@@ -64,8 +64,6 @@ export default async function handler(req,res) {
         const value=body.value;
         if(body.key==="studio_links"){for(const item of Object.values(value||{})){if(item&&!/^https:\/\//i.test(String(item)))return res.status(400).json({ok:false,message:"Studio links must use HTTPS URLs."});}}
         if(body.key==="catalog_products" && Array.isArray(value)){for(const item of value){if(item.preview&&!/^https:\/\//i.test(String(item.preview)))return res.status(400).json({ok:false,message:"Audio preview links must use HTTPS URLs."});}}
-        if(body.key==="client_showcase" && Array.isArray(value)){if(value.length>30)return res.status(400).json({ok:false,message:"Too many showcase entries."});for(const item of value){if(item.link&&!/^https:\/\//i.test(String(item.link)))return res.status(400).json({ok:false,message:"Project links must use HTTPS URLs."});}}
-        if(body.key==="testimonials" && Array.isArray(value) && value.length>30)return res.status(400).json({ok:false,message:"Too many testimonials."});
         if(!value||typeof value!=="object")return res.status(400).json({ok:false,message:"Setting value must be an object or array."});
         const payload={setting_key:body.key,setting_value:value};
         const response=await db("studio_settings?on_conflict=setting_key",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=representation"},body:JSON.stringify(payload)});
