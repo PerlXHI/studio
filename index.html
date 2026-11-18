@@ -242,6 +242,13 @@ input,select,textarea{font-size:16px;min-width:0}
 @media(prefers-reduced-motion:reduce){.page-view:not([hidden]){animation:none}}
 
 
+/* PRODUCER AVATAR VARIATIONS */
+.team-card:not(.team-card-featured){grid-template-columns:140px 1fr}
+.team-avatar-bybi{background:radial-gradient(circle at 50% 35%,#fff 0 8%,#e5dcff 35%,transparent 67%),linear-gradient(145deg,#d9cef8,#e5eaff)}
+.team-avatar-rei{background:radial-gradient(circle at 50% 35%,#fff 0 8%,#dceaff 35%,transparent 67%),linear-gradient(145deg,#d7e8ff,#e8e0fa)}
+.team-avatar-yoz{background:radial-gradient(circle at 50% 35%,#fff 0 8%,#f0ddff 35%,transparent 67%),linear-gradient(145deg,#e8d9f8,#d9eaff)}
+.team-avatar span{font:600 3.2rem "Playfair Display",Georgia,serif;color:#8b7bd0;text-shadow:0 2px 18px #fff}
+@media(max-width:650px){.team-card:not(.team-card-featured){grid-template-columns:1fr}}
 /* OUR TEAM — ETHEREAL PRODUCER PROFILES */
 .team-page{min-height:70vh}
 .team-hero{position:relative;overflow:hidden;padding:clamp(34px,7vw,78px);border:1px solid #e2dcf5;border-radius:34px;background:radial-gradient(circle at 82% 20%,#dcecff 0,transparent 32%),radial-gradient(circle at 15% 90%,#e8ddff 0,transparent 38%),linear-gradient(135deg,#fff 0%,#f4f0ff 55%,#edf6ff 100%);box-shadow:0 20px 55px #7568ad12}
@@ -315,11 +322,19 @@ input,select,textarea{font-size:16px;min-width:0}
   <div class="section-head team-heading"><div><p class="eyebrow">OUR TEAM / MUSIC PRODUCERS</p><h2>Every world begins with a sound.</h2></div><p class="sub">Get to know the producers who bring each brief to life.</p></div>
   <div class="team-grid">
    <article class="team-card team-card-featured">
-    <div class="team-avatar" aria-hidden="true"><span>✧</span><i>∿</i></div>
-    <div class="team-info"><p class="eyebrow">MUSIC PRODUCER</p><h3>Producer Profile</h3><p class="team-bio">Add the producer’s name, creative background, signature genres, and the kind of worlds they love to score.</p><div class="team-tags"><span>Original BGM</span><span>Sound Design</span><span>Composition</span></div></div>
+    <div class="team-avatar team-avatar-bybi" aria-hidden="true"><span>B</span><i>✧</i></div>
+    <div class="team-info"><p class="eyebrow">MUSIC PRODUCER · PERIVELLE</p><h3>bybi</h3><p class="team-bio">Creating original sounds and musical atmospheres for virtual worlds, characters, and creators.</p><div class="team-tags"><span>Music Production</span><span>Original Music</span><span>Creative Audio</span></div></div>
+   </article>
+   <article class="team-card">
+    <div class="team-avatar team-avatar-rei" aria-hidden="true"><span>R</span><i>☾</i></div>
+    <div class="team-info"><p class="eyebrow">MUSIC PRODUCER · PERIVELLE</p><h3>rei</h3><p class="team-bio">Shaping musical ideas into expressive soundscapes for characters, streams, and stories.</p><div class="team-tags"><span>Music Production</span><span>Original Music</span><span>Creative Audio</span></div></div>
+   </article>
+   <article class="team-card">
+    <div class="team-avatar team-avatar-yoz" aria-hidden="true"><span>Y</span><i>✦</i></div>
+    <div class="team-info"><p class="eyebrow">MUSIC PRODUCER · PERIVELLE</p><h3>yoz</h3><p class="team-bio">Bringing fresh musical ideas to life through original compositions and thoughtful production.</p><div class="team-tags"><span>Music Production</span><span>Original Music</span><span>Creative Audio</span></div></div>
    </article>
   </div>
-  <div class="team-note"><span>✦</span><p><strong>Every creator has a signature sound.</strong><br>Our producer profiles will feature their musical specialties, selected works, and creative approach.</p></div>
+  <div class="team-note"><span>✦</span><p><strong>Every creator has a signature sound.</strong><br>Explore the people behind Perivelle and discover the sounds they create together.</p></div>
   <div class="team-cta"><div><p class="eyebrow">LET’S CREATE SOMETHING PERSONAL</p><h3>Have a world in mind?</h3><p>Tell us about your character, story, or stream concept.</p></div><a class="btn" href="#custom">Work with Perivelle ↗</a></div>
  </div>
 </section>
