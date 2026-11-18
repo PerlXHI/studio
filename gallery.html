@@ -140,10 +140,14 @@ input,select,textarea{font-size:16px;min-width:0}
  *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
+
+/* SHARED NAVIGATION SYSTEM */
+.navlink[aria-current="page"]{color:#5e5399;background:linear-gradient(110deg,#eeeaff,#eaf4ff);border:1px solid #ddd6f3;padding:8px 12px;border-radius:999px}
+@media(max-width:700px){header .wrap{width:calc(100% - 30px)}nav{gap:7px}}
 </style>
 </head>
 <body>
-<header><div class="wrap"><nav aria-label="Main navigation"><a class="brand" href="index.html"><span>P.</span> PERIVELLE</a><a class="navlink" href="index.html#catalog">Music catalog</a><a class="navlink" href="index.html#custom">Custom commission</a><a class="navlink" href="index.html#license">Licensing</a></nav></div></header>
+<header><div class="wrap"><nav aria-label="Main navigation"><a class="brand" href="index.html#home"><span>P.</span> PERIVELLE</a><a class="navlink" href="index.html#home">Home</a><a class="navlink" href="gallery.html" aria-current="page">Portfolio</a><a class="navlink" href="index.html#catalog">Music</a><a class="navlink" href="index.html#services">Services</a><a class="navlink" href="index.html#custom">Commission</a><a class="navlink" href="index.html#license">Licensing</a><a class="navlink" href="index.html#faq">FAQ</a></nav></div></header>
 <main>
 <section class="hero"><div class="wrap hero-grid"><div><p class="eyebrow">PORTFOLIO / SELECTED WORKS</p><h1>Music to <em>build your world.</em></h1><p>A collection of Perivelle BGM, sound design, and original music concepts for streamers and creators. Select a piece to explore its brief, mood, and production details.</p></div><aside class="hero-side"><strong>Sound in context</strong>Every piece begins with a mood, a story, and the world where its sound will live.</aside></div></section>
 <section class="section"><div class="wrap"><div class="toolbar"><input id="search" class="control" type="search" placeholder="Search works, genres, or moods" aria-label="Search portfolio"><select id="sort" class="control" aria-label="Sort works"><option value="featured">Featured works</option><option value="az">Name A–Z</option></select></div><div class="filters" role="group" aria-label="Filter work categories"><button class="filter" type="button" data-filter="all" aria-pressed="true">All works</button><button class="filter" type="button" data-filter="BGM" aria-pressed="false">BGM</button><button class="filter" type="button" data-filter="Sound design" aria-pressed="false">Sound design</button><button class="filter" type="button" data-filter="Original music" aria-pressed="false">Original music</button></div><p id="count" class="count" aria-live="polite"></p><div id="gallery" class="gallery"></div><p class="note">Note: the entries shown are sample concepts from the Perivelle catalog, not claims of commissioned client projects. Replace descriptions, artwork, credits, and audio links with real work before publishing.</p></div></section>
