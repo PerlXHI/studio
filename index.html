@@ -132,6 +132,95 @@ footer{background:#eae7fa!important;color:#383151!important;border-top:1px solid
 .service-card{padding-top:24px}
 @media(max-width:560px){.service-art{height:145px;margin:-21px -18px 15px;border-radius:18px 18px 14px 14px}}
 
+
+/* RESPONSIVE MODERN PASS */
+html{scroll-padding-top:94px}
+body{min-width:320px;overflow-x:clip}
+img,svg,iframe,video{max-width:100%}
+.wrap{width:min(1160px,calc(100% - 44px))}
+nav{min-width:0}
+button,a,.btn,.small-btn,.quiet,.cart-button{touch-action:manipulation}
+input,select,textarea{font-size:16px;min-width:0}
+.portfolio-card,.product,.service-card,.step-card,.credit-card,.license-panel{min-width:0}
+.portfolio-copy p,.product-desc,.service-card p,.step-card p,.credit-card p{overflow-wrap:anywhere}
+.toolbar>*{min-width:0}
+.mini-player audio{display:block;max-width:100%}
+.mini-player iframe{display:block}
+.form>*{min-width:0}
+.form input,.form select,.form textarea{min-height:46px}
+.form textarea{min-height:120px}
+.modal{max-width:calc(100vw - 28px)}
+@media(max-width:900px){
+ .wrap{width:min(100% - 36px,1160px)}
+ .hero{padding:68px 0 60px}
+ .hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(250px,.9fr);gap:28px}
+ .hero h1{font-size:clamp(3rem,7vw,5.3rem)}
+ .portfolio-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .portfolio-card:last-child{grid-column:1/-1}
+ .products{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .service-grid,.credit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .custom-grid{grid-template-columns:1fr;gap:26px}
+ .workflow-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .license-columns{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ html{scroll-padding-top:126px}
+ nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px 9px;padding:10px 0;min-height:0}
+ .brand{order:0;flex:1 1 auto}
+ .nav-actions{order:1;margin-left:auto;flex:0 0 auto}
+ .navlink{order:2;flex:0 0 auto;padding:7px 10px;border:1px solid #e5e0f4;border-radius:999px;background:#ffffff9c;font-size:.76rem}
+ .hero-grid{grid-template-columns:1fr;gap:24px}
+ .hero-art{justify-self:center;width:min(100%,390px);margin:8px auto 0}
+ .hero-copy>p:not(.eyebrow){max-width:62ch}
+ .section{padding:58px 0}
+ .section-head{align-items:flex-start}
+ .custom-grid{gap:20px}
+ .toolbar{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .toolbar input{grid-column:1/-1}
+}
+@media(max-width:560px){
+ .wrap{width:calc(100% - 30px)}
+ nav{gap:6px 7px}
+ .brand{font-size:.94rem}
+ .nav-actions{gap:5px}
+ .cart-button,.quiet{min-height:38px;padding:7px 10px;font-size:.75rem}
+ .navlink{font-size:.72rem;padding:6px 9px}
+ .hero{padding:52px 0 48px}
+ .hero h1{font-size:clamp(2.75rem,13vw,4.2rem);max-width:11ch;line-height:1.02}
+ .hero-copy>p:not(.eyebrow){font-size:.94rem}
+ .hero-art{width:min(100%,320px)}
+ .hero-float-top{left:-3%}.hero-float-bottom{right:-3%}
+ .actions{gap:8px}.actions .btn{flex:1 1 145px;padding:11px 13px}
+ .section{padding:48px 0}
+ .section-head{display:block;margin-bottom:20px}
+ .section-head .sub{margin-top:8px}
+ .portfolio-cards,.products,.service-grid,.workflow-grid,.credit-grid,.license-columns{grid-template-columns:1fr}
+ .portfolio-card:last-child{grid-column:auto}
+ .portfolio-art{height:160px}
+ .service-card{min-height:0}
+ .toolbar{grid-template-columns:1fr 1fr;gap:8px}
+ .toolbar input{grid-column:1/-1}
+ .toolbar .control,.toolbar button{min-height:44px;font-size:.84rem}
+ .form{grid-template-columns:1fr;padding:16px;gap:13px}
+ .field.wide{grid-column:auto}
+ .field input,.field select,.field textarea{min-height:46px}
+ .btn{min-height:43px}
+ .modal{padding:17px;border-radius:20px}
+ .modal-head h2{font-size:1.45rem}
+ .cart-list{padding-left:19px}
+ footer .foot{display:block}
+ footer p{margin-top:9px}
+}
+@media(max-width:370px){
+ .navlink{font-size:.68rem;padding:6px 8px}
+ .hero h1{font-size:2.65rem}
+ .actions .btn{flex-basis:100%}
+ .toolbar{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
 </style>
 </head>
 <body>
