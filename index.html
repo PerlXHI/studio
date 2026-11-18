@@ -557,8 +557,8 @@ html[data-theme="dark"] .success-status strong{background:#3a345a;color:#d5caff}
   <p class="track-lead">Enter the Request ID from your confirmation message to check the latest progress of your commission.</p>
   <form class="track-search" id="trackForm">
    <label for="trackRequestId">Your Request ID</label>
-   <div class="track-input-row"><input id="trackRequestId" name="requestId" type="text" placeholder="PV-20261118-XXXXXXXXXXXXXXXXXXXXXXXX" autocomplete="off" autocapitalize="characters" maxlength="39" required><button class="btn" id="trackSubmit" type="submit">Track request ↗</button></div>
-   <small>Example: PV-20261118-AB12CD34EF56. Your Request ID was shown after submitting your brief.</small>
+   <div class="track-input-row"><input id="trackRequestId" name="requestId" type="text" placeholder="261118 - Instrumental Cover - Kana" autocomplete="off" autocapitalize="words" maxlength="220" required><button class="btn" id="trackSubmit" type="submit">Track request ↗</button></div>
+   <small>Example: 261118 - Instrumental Cover - Kana. Your Request ID was shown after submitting your brief. Older Request IDs are still supported.</small>
   </form>
  </div>
  <div class="track-result" id="trackResult" hidden aria-live="polite">
@@ -701,7 +701,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
  }
  form.addEventListener("submit",async function(event){
   event.preventDefault();
-  const id=input.value.trim().toUpperCase();
+  const id=input.value.trim();
   if(!id){input.focus();return}
   button.disabled=true;button.textContent="Checking…";message.textContent="Looking up your commission securely…";result.hidden=true;
   try{
