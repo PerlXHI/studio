@@ -439,6 +439,28 @@ html[data-theme="dark"] .success-id-panel{background:linear-gradient(135deg,#302
 html[data-theme="dark"] .success-id-panel strong{color:#e7e0ff}
 html[data-theme="dark"] .success-id-panel .quiet{background:#302b4b;color:#eeeaff;border-color:#514a70}
 html[data-theme="dark"] .success-status strong{background:#3a345a;color:#d5caff}
+
+/* FLOATING CONTACT MENU */
+.contact-widget{position:fixed;left:22px;bottom:22px;z-index:31;font-family:inherit}
+.contact-trigger{display:flex;align-items:center;gap:10px;padding:13px 19px;border:1px solid #ded8f2;border-radius:999px;background:rgba(255,255,255,.94);color:#554b7b;box-shadow:0 8px 28px #33265b2b;backdrop-filter:blur(14px);font-weight:700;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
+.contact-trigger:hover{transform:translateY(-3px);box-shadow:0 12px 32px #33265b38}
+.contact-trigger .contact-symbol{font-size:1.15rem;line-height:1}
+.contact-menu{position:absolute;left:0;bottom:calc(100% + 12px);width:min(250px,calc(100vw - 36px));padding:12px;border:1px solid #ded8f2;border-radius:20px;background:rgba(255,255,255,.97);box-shadow:0 14px 40px #33265b26;backdrop-filter:blur(18px);display:grid;gap:6px}
+.contact-menu[hidden]{display:none}
+.contact-menu-title{margin:3px 8px 6px;color:#82799f;font:500 .68rem/1.4 "DM Mono",monospace;letter-spacing:.12em;text-transform:uppercase}
+.contact-option{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:12px;color:#494164;text-decoration:none;font-size:.92rem;font-weight:600;transition:background .18s ease}
+.contact-option:hover{background:#f0edff}
+.contact-option[hidden]{display:none}
+.contact-option .contact-option-icon{width:25px;text-align:center;font-size:1.05rem}
+.contact-trigger:focus-visible,.contact-option:focus-visible{outline:3px solid #9b8bd7;outline-offset:3px}
+html[data-theme="dark"] .contact-trigger{background:rgba(42,38,65,.96);color:#f1efff;border-color:#514a70}
+html[data-theme="dark"] .contact-menu{background:rgba(35,32,55,.98);border-color:#514a70}
+html[data-theme="dark"] .contact-menu-title{color:#b4aecb}
+html[data-theme="dark"] .contact-option{color:#f1efff}
+html[data-theme="dark"] .contact-option:hover{background:#40395f}
+@media(max-width:560px){.contact-widget{left:15px;bottom:15px}.contact-trigger{padding:12px 16px;font-size:.9rem}.contact-menu{width:220px}}
+@media(prefers-reduced-motion:reduce){.contact-trigger,.contact-option{transition:none}}
+
 </style>
 </head>
 <body>
@@ -591,6 +613,16 @@ html[data-theme="dark"] .success-status strong{background:#3a345a;color:#d5caff}
  <div class="modal-actions"><button class="btn" type="button" data-close="commissionSuccessDialog">Lovely, thank you ✧</button></div>
 </dialog>
 <dialog class="modal" id="productDialog" aria-labelledby="productHeading"><div class="modal-head"><h2 id="productHeading"></h2><button class="close" type="button" data-close="productDialog" aria-label="Close">×</button></div><div id="productDetail"></div><button class="btn" id="detailAdd" type="button" data-t="addCart">Add to selection</button></dialog>
+<div class="contact-widget" id="contactWidget">
+ <button class="contact-trigger" id="contactTrigger" type="button" aria-expanded="false" aria-controls="contactMenu"><span class="contact-symbol" aria-hidden="true">✉</span><span>Contact Us</span><span aria-hidden="true">⌃</span></button>
+ <nav class="contact-menu" id="contactMenu" aria-label="Contact options" hidden>
+  <p class="contact-menu-title">Get in touch</p>
+  <a class="contact-option" id="contactDiscord" href="#" target="_blank" rel="noopener noreferrer" hidden><span class="contact-option-icon" aria-hidden="true">◈</span><span>Discord</span></a>
+  <a class="contact-option" id="contactVgen" href="#" target="_blank" rel="noopener noreferrer" hidden><span class="contact-option-icon" aria-hidden="true">✦</span><span>VGen</span></a>
+  <a class="contact-option" id="contactEmail" href="#" hidden><span class="contact-option-icon" aria-hidden="true">✉</span><span>Email</span></a>
+  <a class="contact-option" id="contactTwitter" href="#" target="_blank" rel="noopener noreferrer" hidden><span class="contact-option-icon" aria-hidden="true">𝕏</span><span>Twitter / X</span></a>
+ </nav>
+</div>
 <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="theme-icon" aria-hidden="true">☾</span></button>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script>
@@ -718,6 +750,37 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
  if(initial){input.value=initial.toUpperCase();form.requestSubmit()}
 })();
 
+/* FLOATING CONTACT MENU */
+(function(){
+ const widget=document.getElementById("contactWidget"),trigger=document.getElementById("contactTrigger"),menu=document.getElementById("contactMenu");
+ if(!widget||!trigger||!menu)return;
+ function setLink(id,url,kind){
+  const link=document.getElementById(id);if(!link)return;
+  let target="";
+  if(kind==="email"){
+   const email=String(url||"").trim();
+   if(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email))target="mailto:"+email;
+  }else{
+   const value=String(url||"").trim();
+   if(/^https:\\/\\//i.test(value))target=value;
+  }
+  if(target){link.href=target;link.hidden=false}else{link.removeAttribute("href");link.hidden=true}
+ }
+ function applyLinks(links){
+  links=links||{};
+  setLink("contactDiscord",links.discord);
+  setLink("contactVgen",links.vgen);
+  setLink("contactEmail",links.email,"email");
+  setLink("contactTwitter",links.twitter);
+ }
+ function close(){menu.hidden=true;trigger.setAttribute("aria-expanded","false")}
+ trigger.addEventListener("click",function(){const opening=menu.hidden;menu.hidden=!opening;trigger.setAttribute("aria-expanded",String(opening))});
+ document.addEventListener("click",function(event){if(!widget.contains(event.target))close()});
+ document.addEventListener("keydown",function(event){if(event.key==="Escape"&&!menu.hidden){close();trigger.focus()}});
+ window.addEventListener("perivelle:contact-links",function(event){applyLinks(event.detail||{})});
+ window.addEventListener("perivelle:contact-ready",function(event){applyLinks(event.detail||{})});
+})();
+
 /* LOAD ADMIN-MANAGED PUBLIC STUDIO SETTINGS */
 (async function(){
  try{
@@ -738,7 +801,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     if(item&&node)node.textContent=item.price?"STARTING AT · "+item.price:"CONTACT FOR A QUOTE";
    });
   }
-  if(settings.studio_links&&settings.studio_links.discord)DISCORD_URL=settings.studio_links.discord;
+  if(settings.studio_links&&settings.studio_links.discord)DISCORD_URL=settings.studio_links.discord;\n  window.dispatchEvent(new CustomEvent("perivelle:contact-ready",{detail:settings.studio_links||{}}));
  }catch(error){console.warn("Public studio settings could not be loaded.");}
 })();
 
