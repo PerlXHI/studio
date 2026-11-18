@@ -69,6 +69,81 @@ header{background:rgba(250,249,255,.82);border-color:var(--line)}
 footer{background:#eae7fa;color:#383151;border-top:1px solid #ddd7f0}
 #toast{background:#4b426d;color:#fff;border-radius:999px}
 
+
+/* RESPONSIVE MODERN PASS */
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{min-width:320px;overflow-x:clip}
+.wrap{width:min(100% - 40px,1000px)}
+img,svg,iframe,video{max-width:100%}
+button,a,.btn,.chip{touch-action:manipulation}
+input,select,button{font-size:16px;min-width:0}
+nav{scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scroll-snap-type:x proximity}
+nav::-webkit-scrollbar{display:none}
+.logo,nav a.l,#lg{flex-shrink:0;scroll-snap-align:start}
+nav a.l,#lg{min-height:40px;display:inline-flex;align-items:center;justify-content:center}
+.sbox input{min-width:0}
+.ctl>*{min-width:0}
+.list,.row,.info{min-width:0}
+.info{overflow-wrap:anywhere}
+.cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+dialog{max-height:min(86vh,780px);overflow:auto;overscroll-behavior:contain}
+@media(max-width:800px){
+ .wrap{width:calc(100% - 34px)}
+ .hero{min-height:62svh}
+ .hero .wrap{padding-top:88px;padding-bottom:40px}
+ .hero h1{font-size:clamp(2.7rem,8.5vw,4.8rem)}
+ section.v{padding:46px 0}
+ .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:640px){
+ html{scroll-padding-top:68px}
+ .wrap{width:calc(100% - 30px)}
+ header .wrap{width:100%;padding-left:15px;padding-right:15px}
+ nav{height:54px;gap:4px;padding:0 0 3px}
+ .logo{font-size:1.06rem;padding-right:8px}
+ nav a.l,#lg{font-size:.78rem;padding:7px 10px}
+ #lg{margin-left:3px}
+ .hero{min-height:0;min-height:64svh;border-radius:0 0 24px 24px}
+ .hero .wrap{padding-top:72px;padding-bottom:34px}
+ .hero h1{font-size:clamp(2.55rem,12vw,4rem);max-width:10ch}
+ .hero p{font-size:.94rem;max-width:38ch}
+ .sbox{flex-direction:column;gap:9px;width:100%;max-width:100%}
+ .sbox input,.sbox button{width:100%;min-height:46px}
+ section.v{padding:40px 0}
+ h2{font-size:clamp(1.55rem,7vw,2.15rem)}
+ .chips{gap:7px;margin-bottom:22px}
+ .chip{min-height:40px;padding:8px 12px}
+ .ctl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .ctl input{grid-column:1/-1;width:100%}
+ .ctl input,.ctl select,.ctl button{width:100%;min-height:45px}
+ .row{grid-template-columns:52px minmax(0,1fr);gap:11px;padding:11px;border-radius:18px}
+ .art{width:52px;height:52px;font-size:1.55rem}
+ .act{grid-column:1/-1;justify-content:space-between;gap:8px;flex-wrap:wrap;padding-top:3px}
+ .act button,.card button{min-height:40px}
+ .cards{grid-template-columns:1fr;gap:12px}
+ .card{padding:18px}
+ details{padding:12px 14px}
+ footer{padding:34px 0 28px}
+ footer .row2{align-items:flex-start;flex-direction:column;gap:12px}
+ footer a{display:inline-block;margin:4px 12px 4px 0}
+ dialog{width:calc(100% - 22px);padding:13px;border-radius:18px}
+ .ph{gap:10px}
+ .pv{border-radius:10px}
+}
+@media(max-width:380px){
+ .wrap{width:calc(100% - 24px)}
+ nav{gap:3px}
+ .logo{font-size:.98rem}
+ nav a.l,#lg{font-size:.72rem;padding:6px 8px}
+ .hero h1{font-size:2.4rem}
+ .ctl{grid-template-columns:1fr}
+ .ctl input{grid-column:auto}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .scene svg{transition:none}
+}
+
 </style>
 </head>
 <body>
