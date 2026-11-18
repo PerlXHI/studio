@@ -512,12 +512,7 @@ html[data-theme="dark"] .success-status strong{background:#3a345a;color:#d5caff}
 <article class="portfolio-card"><div class="portfolio-art portfolio-art-cozy" role="img" aria-label="Cozy moonlit room illustration with a crescent-lit window"><span class="mono">STREAM BGM / LOOP</span><span>◌</span></div><div class="portfolio-copy"><p class="eyebrow">COZY · JUST CHATTING</p><h3>Cozy Room Loop</h3><p>A seamless loop for Just Chatting, BRB, and everyday streams.</p></div><div class="mini-player"><label>Audio preview · Seamless loop test</label><audio controls loop preload="none" data-preview="cozy"></audio><span class="help">Preview will be available once the MP3 URL is added.</span></div></article>
 <article class="portfolio-card"><div class="portfolio-art portfolio-art-starlight" role="img" aria-label="Celestial compass and fantasy castle illustration"><span class="mono">LORE / OG SONG</span><span>☾</span></div><div class="portfolio-copy"><p class="eyebrow">CHARACTER THEME · CINEMATIC</p><h3>Origin of Starlight</h3><p>A cinematic character theme for debut trailers and storytelling.</p></div><div class="mini-player"><label>Audio preview</label><audio controls preload="none" data-preview="lore"></audio><span class="help">Preview will be available once the MP3 URL is added.</span></div></article>
 <article class="portfolio-card"><div class="portfolio-art portfolio-art-spirit" role="img" aria-label="Celestial spirit illustration for sound alerts"><span class="mono">SFX / BRANDING PACK</span><span>✳</span></div><div class="portfolio-copy"><p class="eyebrow">KEY-MATCHED · TRANSITION</p><h3>Signature Alert Kit</h3><p>Sound alerts matched to your BGM key and transition stingers.</p></div><div class="mini-player"><label>Sound Alerts · Video preview</label><div style="position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:10px;background:#111"><iframe src="https://www.youtube-nocookie.com/embed/iUBVMpHvyWg" title="Perivelle Sound Alerts preview" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><span class="help">Play the Sound Alerts preview directly on the Perivelle website.</span></div></article></div></div></section>
-<section class="section client-trust-section"><div class="wrap">
- <div class="section-head"><div><p class="eyebrow">CLIENT SHOWCASE</p><h2>Made for creators’ worlds.</h2></div><p class="sub">Selected projects shared with permission from our clients.</p></div>
- <div class="client-showcase-grid" id="clientShowcaseGrid"><p class="trust-empty">Client projects will appear here as they are approved for showcase.</p></div>
- <div class="section-head testimonial-heading"><div><p class="eyebrow">KIND WORDS</p><h2>Stories from our clients.</h2></div><p class="sub">Feedback from creators we have had the pleasure to work with.</p></div>
- <div class="testimonial-grid" id="testimonialGrid"><p class="trust-empty">Client testimonials will appear here when available.</p></div>
-</div></section></div>
+</div>
 <div class="page-view" data-page="catalog" hidden><section class="section" id="catalog"><div class="wrap"><div class="section-head"><div><p class="eyebrow" data-t="catalogEyebrow">THE SOUND COLLECTION</p><h2 data-t="catalogTitle">Find the right sound.</h2></div><p class="sub" data-t="catalogText">Browse releases by title, genre, and mood. The prices and details shown are sample content and should be replaced with your official catalog information.</p></div><div class="toolbar"><input class="control" id="search" type="search" data-ph="searchPlaceholder" placeholder="Search by title, genre, or mood" aria-label="Search music"><select class="control" id="mood" aria-label="Filter by mood"></select><select class="control" id="sort" aria-label="Sort catalog"><option value="featured" data-t="featured">Featured</option><option value="price-low" data-t="priceLow">Lowest price</option><option value="price-high" data-t="priceHigh">Highest price</option><option value="newest" data-t="newest">Newest</option></select><button id="favoritesOnly" type="button" aria-pressed="false" data-t="favoritesOnly">♡ Favorites</button></div><p id="resultCount" class="result-count" aria-live="polite"></p><div class="products" id="products"></div></div></section></div>
 <div class="page-view" data-page="services" hidden><section class="section" id="services"><div class="wrap"><div class="section-head"><div><p class="eyebrow">SERVICES / STARTING AT</p><h2>Perivelle audio services.</h2></div><p class="sub">Starting prices should reflect your official rates. Final quotes depend on complexity, duration, licensing, and deadline.</p></div><div class="service-grid">
 <article class="service-card"><div class="service-art service-art-bgm" role="img" aria-label="Enchanted headphones surrounded by flowing musical notes"></div><p class="eyebrow">01 / STREAMING</p><h3>Custom BGM Loop</h3><p>A 1:00–1:30 seamless loop for Just Chatting, Loading, BRB, and everyday streams.</p><span class="starting">STARTING AT · [ADD PRICE]</span></article>
@@ -836,32 +831,3 @@ setLanguage("en");
 
 </body>
 </html>
-</body>
-</html>
-
-<style>
-.client-trust-section{background:linear-gradient(180deg,#f4f1ff,#f0f7ff);border-top:1px solid #e5e0f4}
-.client-showcase-grid,.testimonial-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.client-showcase-card,.testimonial-card{min-width:0;padding:22px;border:1px solid #e3def4;border-radius:24px;background:#ffffffc9;box-shadow:0 14px 34px #7568ad12}
-.client-showcase-card h3,.testimonial-card h3{margin:8px 0;color:#393253;font:600 1.35rem/1.2 "Playfair Display",Georgia,serif}
-.client-showcase-card p,.testimonial-card p{color:#77718f;font-size:.9rem}
-.client-showcase-card a{color:#7167ad;font-weight:700;text-decoration:none}
-.testimonial-quote{font:italic 1rem/1.65 "Playfair Display",Georgia,serif!important;color:#51496f!important}
-.trust-empty{grid-column:1/-1;margin:0;padding:26px;border:1px dashed #d8d0ed;border-radius:18px;color:#827b9d;text-align:center;background:#ffffff70}
-.testimonial-heading{margin-top:58px}
-@media(max-width:760px){.client-showcase-grid,.testimonial-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:540px){.client-showcase-grid,.testimonial-grid{grid-template-columns:1fr}}
-</style>
-<script>
-(function(){
- const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
- fetch("/api/site-config",{headers:{"Accept":"application/json"}}).then(r=>r.ok?r.json():null).then(payload=>{
-  const settings=payload&&payload.settings||{};
-  const projects=(Array.isArray(settings.client_showcase)?settings.client_showcase:[]).filter(x=>x&&x.published&&x.client&&x.project);
-  const testimonials=(Array.isArray(settings.testimonials)?settings.testimonials:[]).filter(x=>x&&x.published&&x.client&&x.quote);
-  const projectRoot=document.getElementById("clientShowcaseGrid"),testimonialRoot=document.getElementById("testimonialGrid");
-  if(projectRoot)projectRoot.innerHTML=projects.length?projects.map(x=>'<article class="client-showcase-card"><p class="eyebrow">'+esc(x.service||"FEATURED PROJECT")+'</p><h3>'+esc(x.project)+'</h3><p>Created for '+esc(x.client)+'</p>'+(x.description?'<p>'+esc(x.description)+'</p>':'')+(x.link?'<a href="'+esc(x.link)+'" target="_blank" rel="noopener noreferrer">View project ↗</a>':'')+'</article>').join(""):'<p class="trust-empty">Client projects will appear here as they are approved for showcase.</p>';
-  if(testimonialRoot)testimonialRoot.innerHTML=testimonials.length?testimonials.map(x=>'<article class="testimonial-card"><p class="testimonial-quote">“'+esc(x.quote)+'”</p><h3>'+esc(x.client)+'</h3><p>'+esc(x.role||"Perivelle client")+'</p></article>').join(""):'<p class="trust-empty">Client testimonials will appear here when available.</p>';
- }).catch(()=>{});
-})();
-</script>
