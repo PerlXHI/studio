@@ -28,6 +28,14 @@ export default async function handler(req,res) {
     if(typeof body==="string"){try{body=JSON.parse(body)}catch{return res.status(400).json({ok:false,message:"Invalid JSON."})}}
     if(!body||typeof body!=="object") return res.status(400).json({ok:false,message:"Invalid request."});
     try {
+      if(body.kind==="archive") {
+        const id=String(body.requestId||"").trim().toUpperCase();
+        if(!/^PV-\d{8}-[A-F0-9]{6,24}$/.test(id)||typeof body.archived!=="boolean")return res.status(400).json({ok:false,message:"Invalid archive request."});
+        const response=await db("commission_requests?request_id=eq."+encodeURIComponent(id),{method:"PATCH",headers:{Prefer:"return=representation"},body:JSON.stringify({is_archived:body.archived})});
+        if(!response.ok)throw new Error("Archive update failed");
+        const rows=await response.json();if(!rows.length)return res.status(404).json({ok:false,message:"Order not found."});
+        return res.status(200).json({ok:true,order:rows[0]});
+      }
       if(body.kind==="order") {
         const id=String(body.requestId||"").trim().toUpperCase();
         const patch={};
