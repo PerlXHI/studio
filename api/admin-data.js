@@ -62,7 +62,7 @@ export default async function handler(req,res) {
       if(body.kind==="setting") {
         if(!KEYS.includes(body.key))return res.status(400).json({ok:false,message:"Unknown setting."});
         const value=body.value;
-        if(body.key==="studio_links"){for(const item of Object.values(value||{})){if(item&&!/^https:\/\//i.test(String(item)))return res.status(400).json({ok:false,message:"Studio links must use HTTPS URLs."});}}
+        if(body.key==="studio_links"){for(const [name,item] of Object.entries(value||{})){if(!item)continue;if(name==="email"){if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(String(item)))return res.status(400).json({ok:false,message:"Enter a valid contact email address."});}else if(!/^https:\\/\\//i.test(String(item)))return res.status(400).json({ok:false,message:"Studio links must use HTTPS URLs."});}}
         if(body.key==="catalog_products" && Array.isArray(value)){for(const item of value){if(item.preview&&!/^https:\/\//i.test(String(item.preview)))return res.status(400).json({ok:false,message:"Audio preview links must use HTTPS URLs."});}}
         if(!value||typeof value!=="object")return res.status(400).json({ok:false,message:"Setting value must be an object or array."});
         const payload={setting_key:body.key,setting_value:value};
