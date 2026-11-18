@@ -8,6 +8,7 @@ alter table public.commission_requests
   add column if not exists quoted_price text not null default '',
   add column if not exists quotation_note text not null default '',
   add column if not exists admin_note text not null default '';
+  add column if not exists is_archived boolean not null default false;
 
 create table if not exists public.studio_settings (
   setting_key text primary key,
