@@ -759,10 +759,10 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   let target="";
   if(kind==="email"){
    const email=String(url||"").trim();
-   if(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email))target="mailto:"+email;
+   if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))target="mailto:"+email;
   }else{
    const value=String(url||"").trim();
-   if(/^https:\\/\\//i.test(value))target=value;
+   if(/^https:\/\//i.test(value))target=value;
   }
   if(target){link.href=target;link.hidden=false}else{link.removeAttribute("href");link.hidden=true}
  }
