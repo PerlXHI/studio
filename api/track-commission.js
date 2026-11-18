@@ -11,8 +11,11 @@ export default async function handler(req, res) {
     return res.status(405).json({ ok: false, message: "Method not allowed." });
   }
 
-  const requestId = String(req.query?.id || "").trim().toUpperCase();
-  if (!/^PV-\d{8}-[A-F0-9]{6,24}$/.test(requestId)) {
+  const rawRequestId = String(req.query?.id || "").trim();
+  const isLegacyId = /^PV-\d{8}-[A-F0-9]{6,24}$/i.test(rawRequestId);
+  const requestId = isLegacyId ? rawRequestId.toUpperCase() : rawRequestId;
+  const isReadableId = /^\d{6} - [\p{L}\p{N} '&.]{1,80} - [\p{L}\p{N} '&.]{1,80}(?: - \d{2,4})?$/u.test(requestId);
+  if (!isLegacyId && !isReadableId) {
     return res.status(400).json({ ok: false, message: "Enter a valid Request ID." });
   }
 
