@@ -801,7 +801,8 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     if(item&&node)node.textContent=item.price?"STARTING AT · "+item.price:"CONTACT FOR A QUOTE";
    });
   }
-  if(settings.studio_links&&settings.studio_links.discord)DISCORD_URL=settings.studio_links.discord;\n  window.dispatchEvent(new CustomEvent("perivelle:contact-ready",{detail:settings.studio_links||{}}));
+  if(settings.studio_links&&settings.studio_links.discord)DISCORD_URL=settings.studio_links.discord;
+  window.dispatchEvent(new CustomEvent("perivelle:contact-ready",{detail:settings.studio_links||{}}));
  }catch(error){console.warn("Public studio settings could not be loaded.");}
 })();
 
