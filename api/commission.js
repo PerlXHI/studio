@@ -89,9 +89,23 @@ export default async function handler(req, res) {
       })
     });
     if (!saveResponse.ok) {
-      return res.status(502).json({ ok: false, message: "We could not register your tracking ID. Please try again later." });
+      const errorBody = (await saveResponse.text().catch(() => "")).slice(0, 2000);
+      console.error("[commission] Supabase insert failed", {
+        status: saveResponse.status,
+        statusText: saveResponse.statusText,
+        response: errorBody
+      });
+      return res.status(502).json({
+        ok: false,
+        message: "We could not register your tracking ID. Please try again later.",
+        diagnostic: "SUPABASE_INSERT_" + saveResponse.status
+      });
     }
-  } catch {
+  } catch (error) {
+    console.error("[commission] Supabase request threw an error", {
+      name: error?.name || "Error",
+      message: error?.message || "Unknown fetch error"
+    });
     return res.status(502).json({ ok: false, message: "Commission tracking is temporarily unavailable. Please try again later." });
   }
   const embed = {
