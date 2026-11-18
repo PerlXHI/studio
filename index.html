@@ -541,6 +541,7 @@ html[data-theme="dark"] .track-help p{color:#b7b0cc}
   <div class="track-result-head"><div><p class="eyebrow">REQUEST OVERVIEW</p><h3 id="trackResultId"></h3></div><span class="track-status-pill" id="trackStatus"></span></div>
   <p class="track-note" id="trackStatusNote"></p>
   <p class="track-note" id="trackQuote" hidden></p>
+  <p class="track-note" id="trackQuotation" hidden></p>
   <div class="track-note" id="trackLinks" hidden></div>
   <div class="track-meta"><div><span>SUBMITTED</span><strong id="trackCreated"></strong></div><div><span>LAST UPDATED</span><strong id="trackUpdated"></strong></div></div>
   <div class="track-progress"><p class="eyebrow">PRODUCTION JOURNEY</p><div class="track-steps" id="trackSteps"></div></div>
@@ -631,6 +632,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   const quote=document.getElementById("trackQuote");
   quote.hidden=!data.quotedPrice;
   quote.textContent=data.quotedPrice?"Quoted price: "+data.quotedPrice:"";
+  const quotation=document.getElementById("trackQuotation");quotation.hidden=!data.quotationNote;quotation.textContent=data.quotationNote||"";
   const links=document.getElementById("trackLinks");
   links.replaceChildren();
   [["Preview",data.previewUrl],["Final delivery",data.deliveryUrl]].forEach(function(item){
