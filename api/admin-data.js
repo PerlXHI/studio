@@ -7,7 +7,7 @@ async function db(path,options={}) {
   return fetch(url+"/rest/v1/"+path,{...options,headers:{apikey:key,Authorization:"Bearer "+key,"Content-Type":"application/json",...(options.headers||{})}});
 }
 export default async function handler(req,res) {
-  if (!isAdmin(req)) return res.status(401).json({ok:false,message:"Please sign in to the admin dashboard."});
+  if (!isAdmin(req)) return res.status(401).json({ok:false,message:"Please sign in to the admin dashboard."});\n  if (req.method === "PATCH" && req.headers.origin) { try { if (new URL(req.headers.origin).hostname !== "perivelle.vercel.app") return res.status(403).json({ok:false,message:"Origin not allowed."}); } catch { return res.status(403).json({ok:false,message:"Invalid origin."}); } }
   const {url,key}=supabaseConfig();
   if (!url||!key) return res.status(503).json({ok:false,message:"Supabase server configuration is missing."});
   if (req.method==="GET") {
