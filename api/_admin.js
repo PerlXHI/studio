@@ -17,7 +17,7 @@ export function isAdmin(req) {
   if (!secret()) return false;
   const raw = String(req.headers.cookie || "").split(";").map(x=>x.trim()).find(x=>x.startsWith(COOKIE+"="));
   if (!raw) return false;
-  const token = decodeURIComponent(raw.slice(COOKIE.length+1));
+  let token; try { token = decodeURIComponent(raw.slice(COOKIE.length+1)); } catch { return false; }
   const parts = token.split(".");
   if (parts.length !== 2) return false;
   const expected = sign(parts[0]);
