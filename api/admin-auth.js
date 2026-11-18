@@ -12,7 +12,7 @@ export default async function handler(req,res) {
     clearSessionCookie(res);
     return res.status(200).json({ok:true});
   }
-  const password=String(req.body?.password||"");
+  let body=req.body; if(typeof body==="string"){try{body=JSON.parse(body)}catch{return res.status(400).json({ok:false,message:"Invalid request."})}}\n  const password=String(body?.password||"");
   const expected=process.env.ADMIN_PASSWORD||"";
   if (!expected || !process.env.ADMIN_SESSION_SECRET) return res.status(503).json({ok:false,message:"Admin login is not configured. Add ADMIN_PASSWORD and ADMIN_SESSION_SECRET in Vercel."});
   if (!same(password,expected)) return res.status(401).json({ok:false,message:"Incorrect password."});
