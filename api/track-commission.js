@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
   try {
     const query = new URLSearchParams({
-      select: "request_id,status,status_note,created_at,updated_at,timeline,preview_url,delivery_url,quoted_price",
+      select: "request_id,status,status_note,created_at,updated_at,timeline,preview_url,delivery_url,quoted_price,quotation_note",
       request_id: "eq." + requestId,
       limit: "1"
     });
@@ -40,7 +40,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       ok: true, requestId: record.request_id,
       status: ALLOWED_STATUSES.includes(record.status) ? record.status : "Awaiting Review",
-      statusNote: record.status_note || "",\n      previewUrl: record.preview_url || "", deliveryUrl: record.delivery_url || "", quotedPrice: record.quoted_price || "",
+      statusNote: record.status_note || "",\n      previewUrl: record.preview_url || "", deliveryUrl: record.delivery_url || "", quotedPrice: record.quoted_price || "", quotationNote: record.quotation_note || "",
       createdAt: record.created_at, updatedAt: record.updated_at,
       timeline: Array.isArray(record.timeline) ? record.timeline : []
     });
