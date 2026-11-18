@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   }
 
   const requestId = String(req.query?.id || "").trim().toUpperCase();
-  if (!/^PV-\d{8}-[A-F0-9]{6,12}$/.test(requestId)) {
+  if (!/^PV-\d{8}-[A-F0-9]{6,24}$/.test(requestId)) {
     return res.status(400).json({ ok: false, message: "Enter a valid Request ID." });
   }
 
