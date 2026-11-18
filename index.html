@@ -374,10 +374,51 @@ html[data-theme="dark"] .navlink[aria-current="page"]:hover{color:#fff!important
 /* COMMISSION PAGE — semi-manual request flow */
 .commission-page{padding-top:clamp(36px,6vw,76px)}.commission-hero{position:relative;overflow:hidden;padding:clamp(28px,5vw,58px);border:1px solid var(--line);border-radius:30px;background:radial-gradient(circle at 88% 12%,#dcecffaa,transparent 32%),radial-gradient(circle at 12% 100%,#e8e0ffbb,transparent 38%),linear-gradient(135deg,#fff,#f5f2ff);box-shadow:0 18px 50px #6556a014}.commission-hero h2{max-width:15ch;font-size:clamp(2.3rem,6vw,4.4rem);margin:10px 0 16px}.commission-hero h2 em{color:#8b7bd0;font-style:normal}.commission-hero .sub{max-width:62ch}.commission-hero .btn{display:inline-flex;margin-top:12px;text-decoration:none}.commission-note,.commission-form-foot{display:block;margin-top:14px;color:var(--muted);font-size:.86rem}.commission-section-head{margin:54px 0 20px}.commission-section-head h2,.commission-form-intro h2,.commission-bottom h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-top:7px}.commission-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.commission-steps article{padding:20px;border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:0 10px 30px #6556a00b}.commission-steps article>span{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#eeeaff;color:#7767bb;font-weight:800}.commission-steps h3{font-size:1.08rem;margin:14px 0 7px}.commission-steps p,.commission-form-intro>.sub,.commission-bottom .sub{color:var(--muted);font-size:.94rem}.commission-form-layout{display:grid;grid-template-columns:minmax(220px,.75fr) minmax(0,1.25fr);gap:clamp(22px,4vw,48px);align-items:start;margin-top:66px;scroll-margin-top:30px}.commission-form-intro{position:sticky;top:30px}.commission-policy{margin-top:24px;padding:20px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#fff,#f5f2ff)}.commission-policy strong{display:block;margin-bottom:9px}.commission-policy ul{padding-left:19px;margin:0;color:var(--muted);font-size:.9rem}.commission-policy li+li{margin-top:7px}.commission-form{min-width:0}.commission-form .field{min-width:0}.commission-form .field input,.commission-form .field select,.commission-form .field textarea{width:100%;max-width:100%}.commission-form .form-note{grid-column:1/-1;color:var(--muted);font-size:.86rem}.commission-bottom{margin:62px 0 18px;padding:clamp(24px,4vw,40px);text-align:center;border:1px solid var(--line);border-radius:24px;background:linear-gradient(120deg,#f0edff,#eaf5ff)}.commission-bottom .sub{margin-bottom:0}html[data-theme="dark"] .commission-hero{background:radial-gradient(circle at 88% 12%,#34445d88,transparent 32%),radial-gradient(circle at 12% 100%,#44345f88,transparent 38%),linear-gradient(135deg,#292640,#202d40);border-color:#45405f}html[data-theme="dark"] .commission-hero h2 em{color:#c1b3ff}html[data-theme="dark"] .commission-steps article,html[data-theme="dark"] .commission-policy{background:linear-gradient(145deg,#292640,#22253a);border-color:#45405f}html[data-theme="dark"] .commission-steps article>span{background:#393252;color:#d2c9ff}html[data-theme="dark"] .commission-bottom{background:linear-gradient(120deg,#30294c,#26394e);border-color:#514a70}@media(max-width:900px){.commission-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.commission-form-layout{grid-template-columns:1fr}.commission-form-intro{position:static}}@media(max-width:560px){.commission-page{padding-top:28px}.commission-hero{padding:24px 20px;border-radius:22px}.commission-section-head{margin-top:40px}.commission-steps{grid-template-columns:1fr}.commission-steps article{padding:17px}.commission-form-layout{margin-top:44px}.commission-policy{padding:16px}.commission-bottom{margin-top:44px}}
 
+
+/* COMMISSION TRACKING PAGE */
+.track-page{padding-top:clamp(36px,6vw,76px)}
+.track-hero{max-width:850px;margin:0 auto;padding:clamp(26px,5vw,54px);border:1px solid #e3def4;border-radius:30px;background:radial-gradient(circle at 88% 12%,#dcecffaa,transparent 32%),radial-gradient(circle at 12% 100%,#e8e0ffbb,transparent 38%),linear-gradient(135deg,#fff,#f5f2ff);box-shadow:0 18px 50px #6556a014}
+.track-hero h2{font:600 clamp(2.25rem,6vw,4rem)/1.08 "Playfair Display",Georgia,serif;letter-spacing:-.04em;margin:12px 0;color:#30294c}
+.track-hero h2 em{font-style:normal;color:#8b7bd0}
+.track-lead{max-width:62ch;color:#77718f}
+.track-search{margin-top:30px;padding:20px;border:1px solid #e7e1f4;border-radius:20px;background:#ffffffb8;display:grid;gap:9px}
+.track-search label{font-weight:700;font-size:.88rem;color:#393253}
+.track-input-row{display:flex;gap:9px}
+.track-input-row input{flex:1;min-width:0;border:1px solid #ded8f2;border-radius:999px;padding:12px 16px;background:#fff;color:#292344;font:500 .9rem "DM Mono",monospace;text-transform:uppercase}
+.track-search small{color:#8981a8;font-size:.76rem}
+.track-result{max-width:850px;margin:24px auto 0;padding:clamp(20px,4vw,34px);border:1px solid #e3def4;border-radius:26px;background:linear-gradient(145deg,#ffffffef,#f5f3ffed);box-shadow:0 16px 42px #7568ad14}
+.track-result-head{display:flex;justify-content:space-between;gap:16px;align-items:center}
+.track-result-head h3{font:600 clamp(1.4rem,4vw,2rem) "DM Mono",monospace;letter-spacing:-.04em;margin:5px 0;color:#393253;overflow-wrap:anywhere}
+.track-status-pill{display:inline-flex;align-items:center;justify-content:center;border:1px solid #d9d0f2;border-radius:999px;padding:8px 13px;background:#eeeaff;color:#7164ad;font-size:.76rem;font-weight:700;white-space:nowrap}
+.track-note{padding:13px 15px;border-radius:15px;background:#f1efff;color:#625b83;font-size:.9rem}
+.track-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;padding:16px 0;border-block:1px solid #e9e4f6}
+.track-meta div{display:grid;gap:5px}.track-meta span{font:500 .64rem "DM Mono",monospace;letter-spacing:.1em;color:#8981a8}.track-meta strong{font-size:.86rem;color:#4b446d}
+.track-progress{margin-top:24px}.track-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:15px}
+.track-step{position:relative;min-height:104px;padding:13px;border:1px solid #e5e0f4;border-radius:16px;background:#ffffffb8;opacity:.58}
+.track-step.is-done,.track-step.is-current{opacity:1;border-color:#bcb0e7;background:linear-gradient(145deg,#f4f0ff,#edf5ff)}
+.track-step b{display:block;font-size:.78rem;color:#554b7b;margin-top:9px}.track-step small{display:block;font-size:.65rem;color:#8981a8;margin-top:4px}
+.track-step i{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#eeeaff;color:#8b7bd0;font-style:normal;font-size:.76rem;font-weight:700}
+.track-step.is-current i{background:#8276bf;color:white;box-shadow:0 0 0 5px #8276bf20}
+.track-message{max-width:850px;margin:14px auto;color:#a05e75;font-size:.86rem;min-height:1.3em}
+.track-help{max-width:850px;margin:26px auto 0;display:flex;gap:14px;align-items:flex-start;padding:20px;border:1px solid #e5e0f4;border-radius:20px;background:linear-gradient(120deg,#f0edff,#eaf5ff);color:#51496f}
+.track-help>span{font-size:1.5rem;color:#9586d5}.track-help strong{font-size:.9rem}.track-help p{margin:5px 0 0;color:#77718f;font-size:.84rem}
+html[data-theme="dark"] .track-hero,html[data-theme="dark"] .track-result{background:linear-gradient(145deg,#292640,#22253a);border-color:#45405f}
+html[data-theme="dark"] .track-hero h2,html[data-theme="dark"] .track-result-head h3{color:#eeeaff}
+html[data-theme="dark"] .track-lead,html[data-theme="dark"] .track-search small,html[data-theme="dark"] .track-meta span{color:#aaa2c5}
+html[data-theme="dark"] .track-search,html[data-theme="dark"] .track-step{background:#302d49;border-color:#494363}
+html[data-theme="dark"] .track-search label,html[data-theme="dark"] .track-step b,html[data-theme="dark"] .track-meta strong{color:#e6e0ff}
+html[data-theme="dark"] .track-input-row input{background:#211f35;color:#f5f1ff;border-color:#514a70}
+html[data-theme="dark"] .track-note{background:#393252;color:#d6cff2}
+html[data-theme="dark"] .track-step.is-done,html[data-theme="dark"] .track-step.is-current{background:linear-gradient(145deg,#393252,#29394e);border-color:#7167ad}
+html[data-theme="dark"] .track-help{background:linear-gradient(120deg,#30294c,#26394e);border-color:#514a70}
+html[data-theme="dark"] .track-help p{color:#b7b0cc}
+@media(max-width:700px){.track-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.track-result-head{align-items:flex-start;flex-direction:column}}
+@media(max-width:520px){.track-input-row{flex-direction:column}.track-input-row .btn{width:100%}.track-meta{grid-template-columns:1fr}.track-steps{gap:8px}.track-step{min-height:92px;padding:11px}}
+
 </style>
 </head>
 <body>
-<header><div class="wrap"><nav aria-label="Main navigation"><a class="brand" href="#home" data-page-link="home"><span>P.</span> PERIVELLE</a><a class="navlink" href="#home" data-page-link="home" aria-current="page">Home</a><a class="navlink" href="#portfolio" data-page-link="portfolio">Portfolio</a><a class="navlink" href="#catalog" data-page-link="catalog">Music</a><a class="navlink" href="#services" data-page-link="services">Services</a><a class="navlink" href="#team" data-page-link="team">Our Team</a><a class="navlink" href="#custom" data-page-link="custom">Commission</a><a class="navlink" href="#license" data-page-link="license">Licensing</a><a class="navlink" href="#faq" data-page-link="faq">FAQ</a></nav></div></header>
+<header><div class="wrap"><nav aria-label="Main navigation"><a class="brand" href="#home" data-page-link="home"><span>P.</span> PERIVELLE</a><a class="navlink" href="#home" data-page-link="home" aria-current="page">Home</a><a class="navlink" href="#portfolio" data-page-link="portfolio">Portfolio</a><a class="navlink" href="#catalog" data-page-link="catalog">Music</a><a class="navlink" href="#services" data-page-link="services">Services</a><a class="navlink" href="#team" data-page-link="team">Our Team</a><a class="navlink" href="#custom" data-page-link="custom">Commission</a><a class="navlink" href="#track" data-page-link="track">Track</a><a class="navlink" href="#license" data-page-link="license">Licensing</a><a class="navlink" href="#faq" data-page-link="faq">FAQ</a></nav></div></header>
 <main id="main-content">
 <div class="page-view" data-page="home"><section class="hero" id="home"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">AUDIO IDENTITY FOR VTUBERS & CREATORS</p><h1>More than BGM. <em>Build your world’s audio identity.</em></h1><p>Original BGM, lore music, original songs, instrumental covers, sound alerts, and stingers—crafted to bring your VTuber character, stream, and story to life.</p><div class="actions"><a class="btn" href="#catalog">Explore the music ↘</a><a class="btn secondary" href="#custom">Start a commission</a></div><div class="hero-kicker">Commission status · Update your batch and available slots here</div></div><div class="hero-art" aria-hidden="true">
 <svg class="hero-visual" viewBox="0 0 520 520" focusable="false" xmlns="http://www.w3.org/2000/svg">
@@ -483,6 +524,30 @@ html[data-theme="dark"] .navlink[aria-current="page"]:hover{color:#fff!important
 <div class="commission-bottom"><p class="eyebrow">A QUESTION BEFORE YOU ORDER?</p><h2>Not sure what your project needs?</h2><p class="sub">Send us a message on Discord first. We’ll help you figure out the right direction.</p></div>
 </div></section></div>
 <div class="page-view" data-page="license" hidden><section class="section" id="license"><div class="wrap faq"><p class="eyebrow">LICENSING / DELIVERABLES</p><h2>Usage rights, clearly defined.</h2><p class="sub">Review and align this policy framework with your rights and distribution processes before publishing it as a guarantee.</p><div class="license-columns"><article class="license-panel"><p class="eyebrow">CATALOG / READY-MADE</p><h3>Non-Exclusive</h3><ul><li>Commercial usage rights for VTuber content, as defined in the written license.</li><li>The work remains owned by Perivelle and may be licensed to other buyers.</li><li>Resale or redistribution of raw files is not permitted.</li></ul></article><article class="license-panel"><p class="eyebrow">CUSTOM / ORIGINAL RELEASE</p><h3>Exclusive / Full Buyout</h3><ul><li>For custom commissions and original songs, subject to the agreement.</li><li>Composition rights, master ownership, credits, and usage limits must be stated in writing.</li><li>A full buyout does not automatically include third-party material or cover-song rights.</li></ul></article></div><details open><summary>Monetization & Content ID</summary><p>Target policy: monetized content on YouTube, Twitch, and TikTok is permitted under the applicable license; Perivelle works are not registered with third-party Content ID systems. Publish this claim only after all samples, collaborators, distribution, and rights administration have been cleared.</p></details><details><summary>File specifications & deliverables</summary><p>24-bit WAV masters; BGM exported as seamless loops; original songs and covers may include off-vocal or instrumental versions; stems are available as an add-on or according to the package. Compressed MP3 previews are provided for streaming.</p></details><details><summary>Revisions & Rush Orders</summary><p>Includes two minor revisions after demo approval. Major concept changes, additional stems, rush orders, and out-of-scope revisions may incur extra fees agreed in advance.</p></details></div></section></div>
+
+<div class="page-view" data-page="track" hidden>
+<section class="section track-page" id="track"><div class="wrap">
+ <div class="track-hero">
+  <p class="eyebrow">COMMISSION TRACKING</p>
+  <h2>Every step, <em>beautifully in view.</em></h2>
+  <p class="track-lead">Enter the Request ID from your confirmation message to check the latest progress of your commission.</p>
+  <form class="track-search" id="trackForm">
+   <label for="trackRequestId">Your Request ID</label>
+   <div class="track-input-row"><input id="trackRequestId" name="requestId" type="text" placeholder="PV-20261118-XXXXXXXXXXXX" autocomplete="off" autocapitalize="characters" maxlength="27" required><button class="btn" id="trackSubmit" type="submit">Track request ↗</button></div>
+   <small>Example: PV-20261118-AB12CD34EF56. Your Request ID was shown after submitting your brief.</small>
+  </form>
+ </div>
+ <div class="track-result" id="trackResult" hidden aria-live="polite">
+  <div class="track-result-head"><div><p class="eyebrow">REQUEST OVERVIEW</p><h3 id="trackResultId"></h3></div><span class="track-status-pill" id="trackStatus"></span></div>
+  <p class="track-note" id="trackStatusNote"></p>
+  <div class="track-meta"><div><span>SUBMITTED</span><strong id="trackCreated"></strong></div><div><span>LAST UPDATED</span><strong id="trackUpdated"></strong></div></div>
+  <div class="track-progress"><p class="eyebrow">PRODUCTION JOURNEY</p><div class="track-steps" id="trackSteps"></div></div>
+ </div>
+ <p class="track-message" id="trackMessage" role="status" aria-live="polite"></p>
+ <div class="track-help"><span>✧</span><div><strong>Need help with your request?</strong><p>If you have questions about your quotation or commission, contact the Perivelle team on Discord and include your Request ID.</p></div></div>
+</div></section>
+</div>
+
 <div class="page-view" data-page="faq" hidden><section class="section" id="faq" style="padding-top:0"><div class="wrap faq"><p class="eyebrow" data-t="faqEyebrow">ORDER INFORMATION</p><h2 data-t="faqTitle">Before you choose.</h2><details><summary data-t="faqQ1">How do I order?</summary><p data-t="faqA1">Submit the commission form to generate your brief, then copy it and send it to Perivelle on Discord. We will review your request and send a quotation. Full payment is required after you approve the quotation and before production begins.</p></details><details><summary data-t="faqQ2">Are audio previews available?</summary><p data-t="faqA2">Audio preview files have not yet been added to this sample catalog. Add an official preview link for each product before launch.</p></details><details><summary data-t="faqQ3">Is my custom brief sent automatically?</summary><p data-t="faqA3">No. Your brief is generated in your browser, copied, and Discord opens so you can send it manually. No data is stored on a server.</p></details></div></section></div>
 </main>
 <footer><div class="wrap foot"><strong>PERIVELLE <span style="color:#b6563b">✳</span></strong><p data-t="footerText">Original music for creators. Contact us on Discord for commissions and inquiries.</p><a class="navlink" href="gallery.html" data-t="footerPortfolio">View portfolio ↗</a></div></footer>
@@ -530,12 +595,78 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   button.textContent="Send commission request ↗";
  }
 });
+
+/* COMMISSION REQUEST TRACKING */
+(function(){
+ const form=document.getElementById("trackForm");
+ if(!form)return;
+ const input=document.getElementById("trackRequestId");
+ const button=document.getElementById("trackSubmit");
+ const result=document.getElementById("trackResult");
+ const message=document.getElementById("trackMessage");
+ const order=["Awaiting Review","Quotation Sent","Awaiting Payment","In Production","Revision","Completed"];
+ const labels={
+  "Awaiting Review":"Our team is reviewing your brief.",
+  "Quotation Sent":"Your quotation has been prepared and sent.",
+  "Awaiting Payment":"Your order is waiting for payment confirmation.",
+  "In Production":"Your commission is currently being produced.",
+  "Revision":"Your commission is in the agreed revision stage.",
+  "Completed":"Your commission has been completed."
+ };
+ function dateLabel(value){
+  if(!value)return "—";
+  const date=new Date(value);
+  if(Number.isNaN(date.getTime()))return "—";
+  return date.toLocaleString("en-GB",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"});
+ }
+ function escapeHtml(value){
+  return String(value||"").replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]});
+ }
+ function render(data){
+  document.getElementById("trackResultId").textContent=data.requestId;
+  document.getElementById("trackStatus").textContent=data.status;
+  document.getElementById("trackStatusNote").textContent=data.statusNote||labels[data.status]||"Please contact Perivelle if you need more information.";
+  document.getElementById("trackCreated").textContent=dateLabel(data.createdAt);
+  document.getElementById("trackUpdated").textContent=dateLabel(data.updatedAt);
+  const steps=document.getElementById("trackSteps");
+  const current=order.indexOf(data.status);
+  const timeline=Array.isArray(data.timeline)?data.timeline:[];
+  steps.innerHTML=order.map(function(status,index){
+   const event=timeline.slice().reverse().find(function(item){return item.status===status});
+   const done=current>=0?index<current:(data.status==="Cancelled"||data.status==="On Hold")?false:false;
+   const active=index===current;
+   const date=event?dateLabel(event.at):index===0?dateLabel(data.createdAt):"Pending";
+   return '<div class="track-step '+(done?"is-done ":"")+(active?"is-current":"")+'"><i>'+(done?"✓":String(index+1).padStart(2,"0"))+'</i><b>'+escapeHtml(status)+'</b><small>'+escapeHtml(date)+'</small></div>';
+  }).join("");
+  if(data.status==="On Hold"||data.status==="Cancelled"){
+   steps.insertAdjacentHTML("beforeend",'<div class="track-step is-current"><i>!</i><b>'+escapeHtml(data.status)+'</b><small>Contact Perivelle for details</small></div>');
+  }
+  result.hidden=false;
+ }
+ form.addEventListener("submit",async function(event){
+  event.preventDefault();
+  const id=input.value.trim().toUpperCase();
+  if(!id){input.focus();return}
+  button.disabled=true;button.textContent="Checking…";message.textContent="Looking up your commission securely…";result.hidden=true;
+  try{
+   const response=await fetch("/api/track-commission?id="+encodeURIComponent(id),{headers:{"Accept":"application/json"}});
+   const data=await response.json().catch(function(){return{}});
+   if(!response.ok||!data.ok)throw new Error(data.message||"We could not find that Request ID.");
+   render(data);message.textContent="";
+  }catch(error){message.textContent=error.message||"Tracking is temporarily unavailable. Please try again."}
+  finally{button.disabled=false;button.textContent="Track request ↗"}
+ });
+ const params=new URLSearchParams(location.search);
+ const initial=params.get("id");
+ if(initial){input.value=initial.toUpperCase();form.requestSubmit()}
+})();
+
 setLanguage("en");
 
 /* NAVBAR VIEW ROUTING: each top-level section opens as its own studio view */
 (function(){
- const PAGE_BY_HASH={home:"home",portfolio:"portfolio",catalog:"catalog",services:"services",workflow:"services",credits:"services",team:"team",custom:"custom",license:"license",faq:"faq"};
- const PAGE_TITLES={home:"Perivelle — Original BGM for Creators",portfolio:"Portfolio — Perivelle",catalog:"Music Catalog — Perivelle",services:"Audio Services — Perivelle",team:"Our Team — Perivelle",custom:"Custom Commission — Perivelle",license:"Licensing — Perivelle",faq:"FAQ — Perivelle"};
+ const PAGE_BY_HASH={home:"home",portfolio:"portfolio",catalog:"catalog",services:"services",workflow:"services",credits:"services",team:"team",custom:"custom",track:"track",license:"license",faq:"faq"};
+ const PAGE_TITLES={home:"Perivelle — Original BGM for Creators",portfolio:"Portfolio — Perivelle",catalog:"Music Catalog — Perivelle",services:"Audio Services — Perivelle",team:"Our Team — Perivelle",custom:"Custom Commission — Perivelle",track:"Track Commission — Perivelle",license:"Licensing — Perivelle",faq:"FAQ — Perivelle"};
  function currentKey(){const key=(location.hash||"#home").slice(1).toLowerCase();return PAGE_BY_HASH[key]||"home"}
  function renderView(scroll){
   const key=currentKey();
