@@ -1,3 +1,5 @@
+import { supabaseHeaders } from "./_admin.js";
+
 const ALLOWED_STATUSES = [
   "Awaiting Review", "Quotation Sent", "Awaiting Payment", "In Production",
   "Revision", "Completed", "On Hold", "Cancelled"
@@ -27,7 +29,7 @@ export default async function handler(req, res) {
       limit: "1"
     });
     const response = await fetch(supabaseUrl.replace(/\/$/, "") + "/rest/v1/commission_requests?" + query, {
-      headers: { "apikey": supabaseKey, "Authorization": "Bearer " + supabaseKey }
+      headers: supabaseHeaders(supabaseKey)
     });
     if (!response.ok) {
       return res.status(502).json({ ok: false, message: "We could not retrieve this request right now." });
