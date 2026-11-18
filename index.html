@@ -415,6 +415,30 @@ html[data-theme="dark"] .track-help p{color:#b7b0cc}
 @media(max-width:700px){.track-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.track-result-head{align-items:flex-start;flex-direction:column}}
 @media(max-width:520px){.track-input-row{flex-direction:column}.track-input-row .btn{width:100%}.track-meta{grid-template-columns:1fr}.track-steps{gap:8px}.track-step{min-height:92px;padding:11px}}
 
+
+/* COMMISSION SUCCESS POPUP */
+.success-dialog{width:min(520px,calc(100% - 28px));max-width:520px;text-align:center;padding:clamp(24px,5vw,38px);box-shadow:0 28px 90px #33265a35}
+.success-dialog::backdrop{background:#17132bc9;backdrop-filter:blur(7px)}
+.success-mark{display:grid;place-items:center;width:66px;height:66px;margin:0 auto 15px;border-radius:22px;background:linear-gradient(145deg,#eee8ff,#e1f2ff);color:#8b7bd0;font-size:2rem;box-shadow:0 12px 28px #9183c52b}
+.success-eyebrow{margin:0 0 8px;color:#8b7bd0}
+.success-dialog h2{margin:0;color:#393253;font:600 clamp(1.8rem,6vw,2.35rem)/1.12 "Playfair Display",Georgia,serif}
+.success-copy{max-width:390px;margin:13px auto 22px;color:#77718f;font-size:.92rem}
+.success-id-panel{display:grid;gap:8px;justify-items:center;padding:16px;border:1px solid #e3def4;border-radius:18px;background:linear-gradient(135deg,#f5f1ff,#eff7ff)}
+.success-id-panel .mono{font-size:.64rem}
+.success-id-panel strong{font:500 clamp(.86rem,3.5vw,1.05rem) "DM Mono",monospace;overflow-wrap:anywhere;color:#514779}
+.success-id-panel .quiet{padding:6px 13px;background:#fff;border-color:#ddd5f1}
+.success-status{margin:16px 0 4px;color:#77718f;font-size:.84rem}
+.success-status strong{display:inline-block;margin-left:5px;padding:4px 10px;border-radius:999px;background:#eeeaff;color:#7163ad;font-size:.78rem}
+.success-followup{margin:0;color:#8982a0;font-size:.78rem}
+.success-dialog .modal-actions{justify-content:center;margin-top:22px}
+.success-dialog .btn{padding:11px 22px}
+html[data-theme="dark"] .success-dialog{background:#24213a;border-color:#514a70}
+html[data-theme="dark"] .success-dialog h2{color:#f1efff}
+html[data-theme="dark"] .success-copy,html[data-theme="dark"] .success-status{color:#b4aecb}
+html[data-theme="dark"] .success-id-panel{background:linear-gradient(135deg,#302b4b,#253449);border-color:#514a70}
+html[data-theme="dark"] .success-id-panel strong{color:#e7e0ff}
+html[data-theme="dark"] .success-id-panel .quiet{background:#302b4b;color:#eeeaff;border-color:#514a70}
+html[data-theme="dark"] .success-status strong{background:#3a345a;color:#d5caff}
 </style>
 </head>
 <body>
@@ -555,6 +579,16 @@ html[data-theme="dark"] .track-help p{color:#b7b0cc}
 </main>
 <footer><div class="wrap foot"><strong>PERIVELLE <span style="color:#b6563b">✳</span></strong><p data-t="footerText">Original music for creators. Contact us on Discord for commissions and inquiries.</p><a class="navlink" href="gallery.html" data-t="footerPortfolio">View portfolio ↗</a></div></footer>
 <dialog class="modal" id="cartDialog" aria-labelledby="cartHeading"><div class="modal-head"><h2 id="cartHeading" data-t="cartTitle">Your selection</h2><button class="close" type="button" data-close="cartDialog" aria-label="Close">×</button></div><p class="help" data-t="cartInfo">Checkout is not connected yet. Copy your selection and send it through Discord for confirmation.</p><div id="cartContent"></div><textarea class="summary" id="cartSummary" readonly hidden aria-label="Selection summary"></textarea><div class="modal-actions"><button class="btn" id="sendCart" type="button" hidden data-t="sendDiscord">Copy & Open Discord ↗</button><button class="quiet" id="clearCart" type="button" data-t="clearCart">Clear selection</button></div><p class="status" id="cartStatus" role="status" aria-live="polite"></p></dialog>
+<dialog class="modal success-dialog" id="commissionSuccessDialog" aria-labelledby="commissionSuccessTitle">
+ <div class="success-mark" aria-hidden="true">✦</div>
+ <p class="eyebrow success-eyebrow">COMMISSION REQUEST RECEIVED</p>
+ <h2 id="commissionSuccessTitle">Your request is on its way!</h2>
+ <p class="success-copy">Thank you for choosing Perivelle. We’ve received your brief and will contact you on Discord after reviewing it.</p>
+ <div class="success-id-panel"><span class="mono">YOUR REQUEST ID</span><strong id="successRequestId">—</strong><button class="quiet" id="copySuccessRequestId" type="button">Copy ID</button></div>
+ <p class="success-status">Current status <strong id="successRequestStatus">Awaiting Review</strong></p>
+ <p class="success-followup">Keep your Request ID for follow-ups. You can use it anytime on the Track page.</p>
+ <div class="modal-actions"><button class="btn" type="button" data-close="commissionSuccessDialog">Lovely, thank you ✧</button></div>
+</dialog>
 <dialog class="modal" id="productDialog" aria-labelledby="productHeading"><div class="modal-head"><h2 id="productHeading"></h2><button class="close" type="button" data-close="productDialog" aria-label="Close">×</button></div><div id="productDetail"></div><button class="btn" id="detailAdd" type="button" data-t="addCart">Add to selection</button></dialog>
 <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="theme-icon" aria-hidden="true">☾</span></button>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
@@ -573,7 +607,7 @@ function renderProducts(){var q=$("#search").value.trim().toLowerCase(),m=$("#mo
 function renderCart(){var items=cart.map(function(id){return products.find(function(p){return p.id===id})}).filter(Boolean);var countNode=$("#cartCount");if(countNode)countNode.textContent=items.length;var content=$("#cartContent"),summary=$("#cartSummary"),send=$("#sendCart");if(!items.length){content.innerHTML='<p class="empty">'+esc(tr("cartEmpty"))+'</p>';summary.hidden=true;send.hidden=true;return}var total=items.reduce(function(a,p){return a+p.price},0);content.innerHTML='<ul class="cart-list">'+items.map(function(p){return '<li><strong>'+esc(p.name)+'</strong> — '+fmt(p.price)+' <button type="button" class="quiet" data-remove="'+esc(p.id)+'">×</button></li>'}).join("")+'</ul><p><strong>'+esc(tr("price"))+': '+fmt(total)+'</strong></p>';summary.value=cartMessage(items);summary.hidden=true;send.hidden=false}
 function showProduct(id){var p=products.find(function(x){return x.id===id});if(!p)return;$("#productDialog").dataset.product=id;$("#productHeading").textContent=p.name;$("#productDetail").innerHTML='<p>'+esc(p.description)+'</p><p><strong>'+esc(tr("price"))+':</strong> '+fmt(p.price)+'</p><p><strong>'+esc(tr("type"))+':</strong> '+esc(p.type)+' · <strong>'+esc(tr("mood"))+':</strong> '+esc(moodName(p.mood))+' · <strong>'+esc(tr("genre"))+':</strong> '+esc(p.genre)+'</p><p><strong>'+esc(tr("duration"))+':</strong> '+esc(p.duration)+' · <strong>'+esc(tr("format"))+':</strong> '+esc(p.format)+'</p><p class="help">'+esc("Audio preview is not available yet. Please confirm licensing and availability through Discord.")+'</p>';$("#detailAdd").dataset.add=id;$("#productDialog").showModal()}function toast(msg){var t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(function(){t.hidden=true},2600)}function addCart(id){if(cart.indexOf(id)<0){cart.push(id);save();renderCart();renderProducts();toast(tr("added"))}else $("#cartDialog").showModal()}
 function sendToDiscord(text,status){window.open(DISCORD_URL,"_blank","noopener,noreferrer");function done(ok){status.textContent=ok?tr("copied"):tr("copyFallback")}if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(function(){done(true)}).catch(function(){done(false)})}else{var ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}ta.remove();done(ok)}}
-$("#search").addEventListener("input",renderProducts);$("#mood").addEventListener("change",renderProducts);$("#sort").addEventListener("change",renderProducts);$("#favoritesOnly").addEventListener("click",function(){showFavorites=!showFavorites;renderProducts()});var openCartButton=$("#openCart");if(openCartButton)openCartButton.addEventListener("click",function(){$("#cartDialog").showModal()});document.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;if(b.dataset.fav){var i=favorites.indexOf(b.dataset.fav);if(i<0)favorites.push(b.dataset.fav);else favorites.splice(i,1);save();renderProducts();toast(tr("saved"))}else if(b.dataset.add)addCart(b.dataset.add);else if(b.dataset.detail)showProduct(b.dataset.detail);else if(b.dataset.remove){cart=cart.filter(function(id){return id!==b.dataset.remove});save();renderCart();renderProducts()}else if(b.dataset.close)$("#"+b.dataset.close).close()});$("#detailAdd").addEventListener("click",function(e){addCart(e.currentTarget.dataset.add);$("#productDialog").close()});$("#clearCart").addEventListener("click",function(){cart=[];save();renderCart();renderProducts();$("#cartStatus").textContent=tr("clearDone")});$("#sendCart").addEventListener("click",function(){var items=cart.map(function(id){return products.find(function(p){return p.id===id})}).filter(Boolean);if(!items.length)return;var text=cartMessage(items);$("#cartSummary").value=text;$("#cartSummary").hidden=false;sendToDiscord(text,$("#cartStatus"))});$("#customForm").addEventListener("submit",async function(e){
+$("#search").addEventListener("input",renderProducts);$("#mood").addEventListener("change",renderProducts);$("#sort").addEventListener("change",renderProducts);$("#favoritesOnly").addEventListener("click",function(){showFavorites=!showFavorites;renderProducts()});var openCartButton=$("#openCart");if(openCartButton)openCartButton.addEventListener("click",function(){$("#cartDialog").showModal()});document.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;if(b.dataset.fav){var i=favorites.indexOf(b.dataset.fav);if(i<0)favorites.push(b.dataset.fav);else favorites.splice(i,1);save();renderProducts();toast(tr("saved"))}else if(b.dataset.add)addCart(b.dataset.add);else if(b.dataset.detail)showProduct(b.dataset.detail);else if(b.dataset.remove){cart=cart.filter(function(id){return id!==b.dataset.remove});save();renderCart();renderProducts()}else if(b.dataset.close)$("#"+b.dataset.close).close()});$("#detailAdd").addEventListener("click",function(e){addCart(e.currentTarget.dataset.add);$("#productDialog").close()});$("#copySuccessRequestId").addEventListener("click",async function(){var id=$("#successRequestId").textContent;try{await navigator.clipboard.writeText(id);this.textContent="Copied ✓"}catch(error){this.textContent="Select ID to copy";var range=document.createRange();range.selectNodeContents($("#successRequestId"));var selection=window.getSelection();selection.removeAllRanges();selection.addRange(range)}});$("#clearCart").addEventListener("click",function(){cart=[];save();renderCart();renderProducts();$("#cartStatus").textContent=tr("clearDone")});$("#sendCart").addEventListener("click",function(){var items=cart.map(function(id){return products.find(function(p){return p.id===id})}).filter(Boolean);if(!items.length)return;var text=cartMessage(items);$("#cartSummary").value=text;$("#cartSummary").hidden=false;sendToDiscord(text,$("#cartStatus"))});$("#customForm").addEventListener("submit",async function(e){
  e.preventDefault();
  var f=e.currentTarget;
  if(!f.reportValidity())return;
@@ -589,8 +623,14 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   });
   var result=await response.json().catch(function(){return{}});
   if(!response.ok||!result.ok)throw new Error(result.message||"Your request could not be sent. Please try again.");
-  status.textContent="✦ Request sent successfully! Your Request ID is "+(result.requestId||"confirmed")+" · Status: "+(result.status||"Awaiting Review")+". Keep this ID for any follow-up. The Perivelle team will contact you on Discord.";
+  var requestId=result.requestId||"confirmed",requestStatus=result.status||"Awaiting Review";
+  status.textContent="";
+  document.getElementById("successRequestId").textContent=requestId;
+  document.getElementById("successRequestStatus").textContent=requestStatus;
   f.reset();
+  var successDialog=document.getElementById("commissionSuccessDialog");
+  if(successDialog&&typeof successDialog.showModal==="function")successDialog.showModal();
+  else status.textContent="✦ Request sent successfully! Your Request ID is "+requestId+" · Status: "+requestStatus+". Keep this ID for any follow-up. The Perivelle team will contact you on Discord.";
  }catch(error){
   status.textContent=error.message||"Something went wrong. Please try again later.";
  }finally{
