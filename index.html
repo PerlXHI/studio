@@ -616,6 +616,36 @@ html[data-theme="dark"] .contact-option:hover{background:#40395f}
 @media(hover:none){.portfolio-category-group:hover{transform:none;box-shadow:0 18px 44px #7164b51c,inset 0 1px 0 #ffffffd9}}
 @media(prefers-reduced-motion:reduce){.portfolio-category-group{transition:none}}
 
+
+/* MOBILE NAVBAR DARK MODE CONTRAST */
+html[data-theme="dark"] header nav .navlink{
+  color:#e4def8!important;
+}
+html[data-theme="dark"] header nav .navlink:hover{
+  color:#ffffff!important;
+}
+html[data-theme="dark"] header nav .navlink[aria-current="page"]{
+  color:#ffffff!important;
+  background:linear-gradient(110deg,#453b68,#30445b)!important;
+  border-color:#76699f!important;
+}
+@media(max-width:760px){
+  html[data-theme="dark"] header nav .navlink{
+    color:#e4def8!important;
+    background:rgba(48,43,73,.92)!important;
+    border:1px solid #514a70!important;
+    box-shadow:0 2px 8px #08071330;
+  }
+  html[data-theme="dark"] header nav .navlink[aria-current="page"]{
+    color:#ffffff!important;
+    background:linear-gradient(110deg,#514477,#344b65)!important;
+    border-color:#8b7db8!important;
+  }
+  html[data-theme="dark"] header nav .brand{
+    color:#f1efff!important;
+  }
+}
+
 </style>
 </head>
 <body>
