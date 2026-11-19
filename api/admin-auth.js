@@ -12,7 +12,7 @@ async function rateLimit(req, action) {
   const forwarded = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim();
   const ip = forwarded || String(req.headers["x-real-ip"] || req.socket?.remoteAddress || "unknown").trim();
   const fingerprint = createHmac("sha256", secret).update(ip).digest("hex");
-  const response = await fetch(url.replace(/\\/$/, "") + "/rest/v1/rpc/pv_admin_login_rate_limit", {
+  const response = await fetch((url.endsWith("/") ? url.slice(0, -1) : url) + "/rest/v1/rpc/pv_admin_login_rate_limit", {
     method: "POST",
     headers: { ...supabaseHeaders(key), "Content-Type": "application/json" },
     body: JSON.stringify({ p_key: fingerprint, p_action: action })
