@@ -29,14 +29,29 @@ export default async function handler(req, res) {
   }
 
   try {
-    const query = new URLSearchParams({
-      select: "request_id,status,status_note,created_at,updated_at,timeline,preview_url,delivery_url,quoted_price,quotation_note,production_updates",
-      request_id: "eq." + requestId,
-      limit: "1"
-    });
-    const response = await fetch(supabaseUrl.replace(/\/$/, "") + "/rest/v1/commission_requests?" + query, {
-      headers: supabaseHeaders(supabaseKey)
-    });
+    const baseFields = "request_id,status,status_note,created_at,updated_at,timeline,preview_url,delivery_url,quoted_price,quotation_note";
+    async function readRequest(includeProductionUpdates) {
+      const query = new URLSearchParams({
+        select: baseFields + (includeProductionUpdates ? ",production_updates" : ""),
+        request_id: "eq." + requestId,
+        limit: "1"
+      });
+      return fetch(supabaseUrl.replace(/\/$/, "") + "/rest/v1/commission_requests?" + query, {
+        headers: supabaseHeaders(supabaseKey)
+      });
+    }
+    let response = await readRequest(true);
+    let productionUpdatesAvailable = true;
+    if (!response.ok) {
+      const errorBody = await response.clone().json().catch(() => ({}));
+      const missingProgressColumn = errorBody.code === "42703" ||
+        errorBody.code === "PGRST204" ||
+        /production_updates.*does not exist|column .*production_updates/i.test(String(errorBody.message || ""));
+      if (missingProgressColumn) {
+        productionUpdatesAvailable = false;
+        response = await readRequest(false);
+      }
+    }
     if (!response.ok) {
       return res.status(502).json({ ok: false, message: "We could not retrieve this request right now." });
     }
@@ -52,7 +67,7 @@ export default async function handler(req, res) {
       previewUrl: record.preview_url || "", deliveryUrl: record.delivery_url || "", quotedPrice: record.quoted_price || "", quotationNote: record.quotation_note || "",
       createdAt: record.created_at, updatedAt: record.updated_at,
       timeline: Array.isArray(record.timeline) ? record.timeline : [],
-      productionUpdates: Array.isArray(record.production_updates) ? record.production_updates : []
+      productionUpdates: productionUpdatesAvailable && Array.isArray(record.production_updates) ? record.production_updates : []
     });
   } catch {
     return res.status(502).json({ ok: false, message: "Tracking is temporarily unavailable. Please try again." });
