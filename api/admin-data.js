@@ -66,7 +66,11 @@ export default async function handler(req,res) {
         if(body.key==="catalog_products" && Array.isArray(value)){for(const item of value){if(item.preview&&!/^https:\/\//i.test(String(item.preview)))return res.status(400).json({ok:false,message:"Audio preview links must use HTTPS URLs."});}}
         if(body.key==="portfolio_videos" && Array.isArray(value)){
           const allowed=["youtube.com","www.youtube.com","youtube-nocookie.com","www.youtube-nocookie.com","youtu.be","vimeo.com","www.vimeo.com","player.vimeo.com"];
-          for(const item of value){if(item.url){let parsed;try{parsed=new URL(String(item.url))}catch{return res.status(400).json({ok:false,message:"Enter a valid YouTube or Vimeo URL."})}if(parsed.protocol!=="https:"||!allowed.includes(parsed.hostname.toLowerCase()))return res.status(400).json({ok:false,message:"Portfolio previews must use HTTPS YouTube or Vimeo URLs."});}}
+          for(const item of value){
+            const urls=Array.isArray(item.videos)?item.videos:(item.url?[item.url]:[]);
+            if(urls.length>30)return res.status(400).json({ok:false,message:"A category can contain up to 30 video previews."});
+            for(const rawUrl of urls){let parsed;try{parsed=new URL(String(rawUrl))}catch{return res.status(400).json({ok:false,message:"Enter a valid YouTube or Vimeo URL."})}if(parsed.protocol!=="https:"||!allowed.includes(parsed.hostname.toLowerCase()))return res.status(400).json({ok:false,message:"Portfolio previews must use HTTPS YouTube or Vimeo URLs."});}
+          }
         }
         if(!value||typeof value!=="object")return res.status(400).json({ok:false,message:"Setting value must be an object or array."});
         const payload={setting_key:body.key,setting_value:value};
