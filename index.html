@@ -979,7 +979,10 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   "Awaiting Payment":"Your order is waiting for payment confirmation.",
   "In Production":"Your commission is currently being produced.",
   "Revision":"Your commission is in the agreed revision stage.",
-  "Completed":"Your commission has been completed."
+  "Completed":"Your commission has been completed.",
+  "Waiting for client response":"Waiting for client response",
+  "Demo ready — Awaiting feedback":"Demo ready — Awaiting feedback",
+  "Preparing final delivery":"Preparing final delivery"
  };
  function dateLabel(value){
   if(!value)return "—";
@@ -1019,6 +1022,9 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
    const date=event?dateLabel(event.at):index===0?dateLabel(data.createdAt):done?"Passed":"Pending";
    return '<div class="track-step '+(done?"is-done ":"")+(active?"is-current":"")+'"><i>'+(done?"✓":String(index+1).padStart(2,"0"))+'</i><b>'+escapeHtml(status)+'</b><small>'+escapeHtml(date)+'</small></div>';
   }).join("");
+  if(["Waiting for client response","Demo ready — Awaiting feedback","Preparing final delivery"].includes(data.status)){
+   steps.insertAdjacentHTML("beforeend",'<div class="track-step is-current"><i>!</i><b>'+escapeHtml(data.status)+'</b><small>'+escapeHtml(dateLabel(data.updatedAt))+"</small></div>");
+  }
   if(data.status==="On Hold"||data.status==="Cancelled"){
    steps.insertAdjacentHTML("beforeend",'<div class="track-step is-current"><i>!</i><b>'+escapeHtml(data.status)+'</b><small>Contact Perivelle for details</small></div>');
   }
