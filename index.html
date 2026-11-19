@@ -475,11 +475,14 @@ html[data-theme="dark"] .contact-option:hover{background:#40395f}
 @media(max-width:560px){.portfolio-grid{grid-template-columns:1fr}}
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&display=swap");
 
-/* Portfolio previews: one full-width video card per row */
+/* Portfolio previews: compact cards matching the Music catalog */
 .portfolio-category-list{display:flex;flex-direction:column;gap:30px}
 .portfolio-category-group{width:100%;min-width:0}
-.portfolio-category-group .portfolio-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
-.portfolio-category-group .portfolio-video-card{width:100%;max-width:100%;}
+.portfolio-category-group .portfolio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.portfolio-category-group .portfolio-video-card{width:100%;max-width:100%;padding:10px}
+.portfolio-category-group .portfolio-video-frame{width:100%;aspect-ratio:16/9}
+@media(max-width:850px){.portfolio-category-group .portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.portfolio-category-group .portfolio-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
