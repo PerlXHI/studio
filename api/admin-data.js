@@ -66,6 +66,7 @@ export default async function handler(req,res) {
             patch[field]=value;
           }
         }
+        if(body.production_updates!==undefined){const lines=String(body.production_updates??"").split(/\r?\n/).map(value=>value.trim()).filter(Boolean);if(lines.length>20||lines.some(value=>value.length>220))return res.status(400).json({ok:false,message:"Use up to 20 progress updates, each no longer than 220 characters."});patch.production_updates=lines.map(text=>({text,at:new Date().toISOString()}));}
         if(!id||!Object.keys(patch).length)return res.status(400).json({ok:false,message:"No order changes supplied."});
         const response=await db("commission_requests?request_id=eq."+encodeURIComponent(id),{method:"PATCH",headers:{Prefer:"return=representation"},body:JSON.stringify(patch)});
         if(!response.ok)throw new Error("Update failed");
@@ -83,6 +84,7 @@ export default async function handler(req,res) {
             const urls=Array.isArray(item.videos)?item.videos:(item.url?[item.url]:[]);
             if(urls.length>30)return res.status(400).json({ok:false,message:"A category can contain up to 30 video previews."});
             for(const rawUrl of urls){let parsed;try{parsed=new URL(String(rawUrl))}catch{return res.status(400).json({ok:false,message:"Enter a valid YouTube or Vimeo URL."})}if(parsed.protocol!=="https:"||!allowed.includes(parsed.hostname.toLowerCase()))return res.status(400).json({ok:false,message:"Portfolio previews must use HTTPS YouTube or Vimeo URLs."});}
+            if(item.featured&&!urls.includes(item.featured))return res.status(400).json({ok:false,message:"Featured video must match one of the category preview URLs."});
           }
         }
         if(!value||typeof value!=="object")return res.status(400).json({ok:false,message:"Setting value must be an object or array."});
