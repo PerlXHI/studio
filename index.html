@@ -392,7 +392,7 @@ html[data-theme="dark"] .navlink[aria-current="page"]:hover{color:#fff!important
 .track-status-pill{display:inline-flex;align-items:center;justify-content:center;border:1px solid #d9d0f2;border-radius:999px;padding:8px 13px;background:#eeeaff;color:#7164ad;font-size:.76rem;font-weight:700;white-space:nowrap}
 .track-note{padding:13px 15px;border-radius:15px;background:#f1efff;color:#625b83;font-size:.9rem}
 .track-resource-link{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin:4px 10px 4px 0;padding:10px 17px;border:1px solid #c9bce9;border-radius:999px;background:linear-gradient(120deg,#eee8ff,#fceafa);color:#66549d;font-size:.82rem;font-weight:700;text-decoration:none;box-shadow:0 5px 14px #8976bd20;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}.track-resource-link:hover{transform:translateY(-2px);border-color:#a99add;box-shadow:0 8px 18px #8976bd30}.track-resource-link:focus-visible{outline:3px solid #a99add;outline-offset:3px}html[data-theme="dark"] .track-resource-link{background:linear-gradient(120deg,#494064,#523c59);border-color:#76669f;color:#f0eaff;box-shadow:0 5px 14px #0003}
-.track-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;padding:16px 0;border-block:1px solid #e9e4f6}
+.track-meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:20px 0;padding:16px 0;border-block:1px solid #e9e4f6}.track-meta [hidden]{display:none!important}
 .track-meta div{display:grid;gap:5px}.track-meta span{font:500 .64rem "DM Mono",monospace;letter-spacing:.1em;color:#8981a8}.track-meta strong{font-size:.86rem;color:#4b446d}
 .track-progress{margin-top:24px}.track-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:15px}
 .track-step{position:relative;min-height:104px;padding:13px;border:1px solid #e5e0f4;border-radius:16px;background:#ffffffb8;opacity:.58}
@@ -880,10 +880,9 @@ html:not([data-theme="dark"]) textarea:focus-visible{outline-color:#d889b7!impor
  <div class="track-result" id="trackResult" hidden aria-live="polite">
   <div class="track-result-head"><div><p class="eyebrow">REQUEST OVERVIEW</p><h3 id="trackResultId"></h3></div><span class="track-status-pill" id="trackStatus"></span></div>
   <p class="track-note" id="trackStatusNote"></p>
-  <p class="track-note" id="trackQuote" hidden></p>
   <p class="track-note" id="trackQuotation" hidden></p>
   <div class="track-links" id="trackLinks" hidden></div>
-  <div class="track-meta"><div><span>SUBMITTED</span><strong id="trackCreated"></strong></div><div><span>LAST UPDATED</span><strong id="trackUpdated"></strong></div></div>
+  <div class="track-meta"><div><span>SUBMITTED</span><strong id="trackCreated"></strong></div><div id="trackQuote" hidden><span>QUOTED PRICE</span><strong id="trackQuotedPrice"></strong></div><div><span>LAST UPDATED</span><strong id="trackUpdated"></strong></div></div>
   <div class="track-progress"><p class="eyebrow">PRODUCTION JOURNEY</p><div class="track-steps" id="trackSteps"></div></div>
  </div>
  <p class="track-message" id="trackMessage" role="status" aria-live="polite"></p>
@@ -997,7 +996,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   document.getElementById("trackStatusNote").textContent=data.statusNote||labels[data.status]||"Please contact Perivelle if you need more information."; 
   const quote=document.getElementById("trackQuote");
   quote.hidden=!data.quotedPrice;
-  quote.textContent=data.quotedPrice?"Quoted price: "+data.quotedPrice:"";
+  document.getElementById("trackQuotedPrice").textContent=data.quotedPrice||"";
   const quotation=document.getElementById("trackQuotation");quotation.hidden=!data.quotationNote;quotation.textContent=data.quotationNote||"";
   const links=document.getElementById("trackLinks");
   links.replaceChildren();
