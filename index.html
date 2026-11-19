@@ -974,6 +974,26 @@ html[data-theme="dark"] .portfolio-category-group>.portfolio-category:after{colo
   width:0!important;
   height:0!important;
 }
+
+
+/* SUBTLE SCROLL DISCOVERY HINT — ONLY FOR CATEGORIES WITH MULTIPLE VIDEOS */
+.portfolio-scroll-hint{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  padding:11px 8px 3px;color:#8b7bbd;
+  font:600 .66rem "DM Sans",sans-serif;letter-spacing:.08em;
+  text-transform:uppercase;opacity:1;transform:translateY(0);
+  transition:opacity .25s ease,transform .25s ease;
+}
+.portfolio-scroll-hint-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:19px;height:19px;border:1px solid #b9a9e8;border-radius:50%;
+  font-size:.85rem;line-height:1;animation:portfolioHintNudge 1.5s ease-in-out infinite;
+}
+.portfolio-scroll-hint.is-hidden{opacity:0;transform:translateY(-4px);pointer-events:none}
+@keyframes portfolioHintNudge{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
+html[data-theme="dark"] .portfolio-scroll-hint{color:#c3b6ed}
+html[data-theme="dark"] .portfolio-scroll-hint-icon{border-color:#8f80c5}
+@media(prefers-reduced-motion:reduce){.portfolio-scroll-hint,.portfolio-scroll-hint-icon{transition:none;animation:none}}
 </style>
 </head>
 <body>
@@ -1379,6 +1399,12 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
      const rail=document.createElement("div");rail.className="portfolio-video-rail";
      validVideos.forEach(function(src,index){rail.appendChild(makeVideoFrame(src,index+1))});
      grid.appendChild(rail);
+     if(validVideos.length>1){
+      const hint=document.createElement("div");hint.className="portfolio-scroll-hint";hint.setAttribute("aria-label","More video previews available below");
+      hint.innerHTML='<span class="portfolio-scroll-hint-icon" aria-hidden="true">↓</span><span>Scroll to explore</span>';
+      grid.appendChild(hint);
+      rail.addEventListener("scroll",function(){if(rail.scrollTop>24)hint.classList.add("is-hidden");else hint.classList.remove("is-hidden")},{passive:true});
+     }
     }
     group.hidden=validVideos.length===0;
    });
