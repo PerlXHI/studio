@@ -1,7 +1,7 @@
 import { isAdmin, supabaseConfig, supabaseHeaders, hasTrustedOrigin } from "./_admin.js";
 
 const STATUSES=["Awaiting Review","Quotation Sent","Awaiting Payment","In Production","Revision","Completed","On Hold","Cancelled"];
-const KEYS=["service_prices","catalog_products","studio_links"];
+const KEYS=["service_prices","catalog_products","studio_links","portfolio_videos"];
 async function db(path,options={}) {
   const {url,key}=supabaseConfig();
   return fetch(url+"/rest/v1/"+path,{...options,headers:supabaseHeaders(key,{"Content-Type":"application/json",...(options.headers||{})})});
@@ -64,6 +64,10 @@ export default async function handler(req,res) {
         const value=body.value;
         if(body.key==="studio_links"){for(const [name,item] of Object.entries(value||{})){if(!item)continue;if(name==="email"){if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(item)))return res.status(400).json({ok:false,message:"Enter a valid contact email address."});}else if(!/^https:\/\//i.test(String(item)))return res.status(400).json({ok:false,message:"Studio links must use HTTPS URLs."});}}
         if(body.key==="catalog_products" && Array.isArray(value)){for(const item of value){if(item.preview&&!/^https:\/\//i.test(String(item.preview)))return res.status(400).json({ok:false,message:"Audio preview links must use HTTPS URLs."});}}
+        if(body.key==="portfolio_videos" && Array.isArray(value)){
+          const allowed=["youtube.com","www.youtube.com","youtube-nocookie.com","www.youtube-nocookie.com","youtu.be","vimeo.com","www.vimeo.com","player.vimeo.com"];
+          for(const item of value){if(item.url){let parsed;try{parsed=new URL(String(item.url))}catch{return res.status(400).json({ok:false,message:"Enter a valid YouTube or Vimeo URL."})}if(parsed.protocol!=="https:"||!allowed.includes(parsed.hostname.toLowerCase()))return res.status(400).json({ok:false,message:"Portfolio previews must use HTTPS YouTube or Vimeo URLs."});}}
+        }
         if(!value||typeof value!=="object")return res.status(400).json({ok:false,message:"Setting value must be an object or array."});
         const payload={setting_key:body.key,setting_value:value};
         const response=await db("studio_settings?on_conflict=setting_key",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=representation"},body:JSON.stringify(payload)});
