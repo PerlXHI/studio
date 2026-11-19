@@ -14,7 +14,7 @@ const STATUS_NOTES={
   "Demo ready — Awaiting feedback":"Demo ready — Awaiting feedback",
   "Preparing final delivery":"Preparing final delivery"
 };
-const KEYS=["service_prices","catalog_products","studio_links","portfolio_videos"];
+const KEYS=["service_prices","catalog_products","studio_links","portfolio_videos","commission_status"];
 async function db(path,options={}) {
   const {url,key}=supabaseConfig();
   return fetch(url+"/rest/v1/"+path,{...options,headers:supabaseHeaders(key,{"Content-Type":"application/json",...(options.headers||{})})});
@@ -76,6 +76,12 @@ export default async function handler(req,res) {
       if(body.kind==="setting") {
         if(!KEYS.includes(body.key))return res.status(400).json({ok:false,message:"Unknown setting."});
         const value=body.value;
+        if(body.key==="commission_status"){
+          const item=value||{};
+          const allowed=["Open","Limited slots","Waitlist","Closed"];
+          if(!allowed.includes(String(item.status||"")))return res.status(400).json({ok:false,message:"Choose a valid commission status."});
+          if(String(item.batch||"").length>60||String(item.slots||"").length>80)return res.status(400).json({ok:false,message:"Commission status details are too long."});
+        }
         if(body.key==="studio_links"){for(const [name,item] of Object.entries(value||{})){if(!item)continue;if(name==="email"){if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(item)))return res.status(400).json({ok:false,message:"Enter a valid contact email address."});}else if(!/^https:\/\//i.test(String(item)))return res.status(400).json({ok:false,message:"Studio links must use HTTPS URLs."});}}
         if(body.key==="catalog_products" && Array.isArray(value)){for(const item of value){if(item.preview&&!/^https:\/\//i.test(String(item.preview)))return res.status(400).json({ok:false,message:"Audio preview links must use HTTPS URLs."});}}
         if(body.key==="portfolio_videos" && Array.isArray(value)){
