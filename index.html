@@ -391,6 +391,7 @@ html[data-theme="dark"] .navlink[aria-current="page"]:hover{color:#fff!important
 .track-result-head h3{font:600 clamp(1.4rem,4vw,2rem) "DM Mono",monospace;letter-spacing:-.04em;margin:5px 0;color:#393253;overflow-wrap:anywhere}
 .track-status-pill{display:inline-flex;align-items:center;justify-content:center;border:1px solid #d9d0f2;border-radius:999px;padding:8px 13px;background:#eeeaff;color:#7164ad;font-size:.76rem;font-weight:700;white-space:nowrap}
 .track-note{padding:13px 15px;border-radius:15px;background:#f1efff;color:#625b83;font-size:.9rem}
+.track-resource-link{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin:4px 10px 4px 0;padding:10px 17px;border:1px solid #c9bce9;border-radius:999px;background:linear-gradient(120deg,#eee8ff,#fceafa);color:#66549d;font-size:.82rem;font-weight:700;text-decoration:none;box-shadow:0 5px 14px #8976bd20;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}.track-resource-link:hover{transform:translateY(-2px);border-color:#a99add;box-shadow:0 8px 18px #8976bd30}.track-resource-link:focus-visible{outline:3px solid #a99add;outline-offset:3px}html[data-theme="dark"] .track-resource-link{background:linear-gradient(120deg,#494064,#523c59);border-color:#76669f;color:#f0eaff;box-shadow:0 5px 14px #0003}
 .track-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;padding:16px 0;border-block:1px solid #e9e4f6}
 .track-meta div{display:grid;gap:5px}.track-meta span{font:500 .64rem "DM Mono",monospace;letter-spacing:.1em;color:#8981a8}.track-meta strong{font-size:.86rem;color:#4b446d}
 .track-progress{margin-top:24px}.track-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:15px}
@@ -1003,7 +1004,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   [["Preview",data.previewUrl],["Final delivery",data.deliveryUrl]].forEach(function(item){
    if(!item[1])return;
    try{const url=new URL(item[1]);if(url.protocol!=="https:"&&url.protocol!=="http:")return;
-    const a=document.createElement("a");a.href=url.href;a.target="_blank";a.rel="noopener noreferrer";a.textContent=item[0]+" ↗";a.style.marginRight="16px";links.appendChild(a);
+    const a=document.createElement("a");a.href=url.href;a.target="_blank";a.rel="noopener noreferrer";a.className="track-resource-link";a.textContent=item[0]+" ↗";links.appendChild(a);
    }catch(e){}
   });
   links.hidden=!links.childNodes.length;
