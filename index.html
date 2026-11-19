@@ -716,70 +716,48 @@ html:not([data-theme="dark"]) .theme-toggle{
  background-color:#f4f1f8;
 }
 
-/* Deeper, low-glare light palette */
+/* Purple-pink palette inspired by the Contact Us mascot */
 html:not([data-theme="dark"]){
- --paper:#dcd9e7!important;
- --card:#e8e5ef!important;
- --ink:#302b43!important;
- --muted:#716b83!important;
- --line:#c9c4d7!important;
- --dream-glass:#e8e5efdc!important;
+ --paper:#eadcf2!important;--card:#f7eaf5!important;--ink:#392743!important;
+ --muted:#806b88!important;--line:#dfc4e2!important;--green:#a66bc0!important;
+ --rust:#d889b7!important;--dream-glass:#f7eaf5e8!important;
 }
 html:not([data-theme="dark"]) body{
- background:#dcd9e7!important;
- color:#302b43!important;
+ background:radial-gradient(ellipse at 12% 8%,#f3d9f0 0,transparent 36%),radial-gradient(ellipse at 88% 28%,#e4dafa 0,transparent 34%),linear-gradient(145deg,#eadcf2 0%,#f1dfef 52%,#e6def5 100%)!important;
+ color:#392743!important;
 }
-html:not([data-theme="dark"]) header{
- background:rgba(220,217,231,.97)!important;
- border-color:#c9c4d7!important;
-}
-html:not([data-theme="dark"]) .home-intro{
- background:linear-gradient(180deg,#e3dfec 0%,#d9dfeb 100%)!important;
- border-color:#c9c4d7!important;
-}
+html:not([data-theme="dark"]) header{background:rgba(242,226,243,.96)!important;border-color:#dfc4e2!important}
+html:not([data-theme="dark"]) .home-intro{background:linear-gradient(125deg,#f3dff0 0%,#e9def8 100%)!important;border-color:#dfc4e2!important}
 html:not([data-theme="dark"]) .home-pillars span,
-html:not([data-theme="dark"]) .contact-menu,
-html:not([data-theme="dark"]) .contact-trigger,
-html:not([data-theme="dark"]) .theme-toggle,
-html:not([data-theme="dark"]) .product,
-html:not([data-theme="dark"]) .portfolio-preview,
-html:not([data-theme="dark"]) .service-card,
-html:not([data-theme="dark"]) .step-card,
-html:not([data-theme="dark"]) .credit-card,
-html:not([data-theme="dark"]) .license-panel,
-html:not([data-theme="dark"]) .team-card,
-html:not([data-theme="dark"]) .form,
-html:not([data-theme="dark"]) .modal{
- background:#e8e5ef!important;
- border-color:#c9c4d7!important;
+html:not([data-theme="dark"]) .contact-menu,html:not([data-theme="dark"]) .contact-trigger,
+html:not([data-theme="dark"]) .theme-toggle,html:not([data-theme="dark"]) .product,
+html:not([data-theme="dark"]) .portfolio-preview,html:not([data-theme="dark"]) .service-card,
+html:not([data-theme="dark"]) .step-card,html:not([data-theme="dark"]) .credit-card,
+html:not([data-theme="dark"]) .license-panel,html:not([data-theme="dark"]) .team-card,
+html:not([data-theme="dark"]) .form,html:not([data-theme="dark"]) .modal{
+ background:linear-gradient(145deg,#faedf7 0%,#f0e5f8 100%)!important;border-color:#dfc4e2!important;
 }
-html:not([data-theme="dark"]) .portfolio-strip,
-html:not([data-theme="dark"]) .custom-band{
- background:#d5d2e1!important;
- border-color:#c9c4d7!important;
+html:not([data-theme="dark"]) .portfolio-strip,html:not([data-theme="dark"]) .custom-band{
+ background:linear-gradient(120deg,#ead5ed 0%,#e6dafa 52%,#f3dce9 100%)!important;border-color:#dcbfe2!important;
 }
-html:not([data-theme="dark"]) .control,
-html:not([data-theme="dark"]) .field input,
-html:not([data-theme="dark"]) .field select,
-html:not([data-theme="dark"]) .field textarea,
-html:not([data-theme="dark"]) input,
-html:not([data-theme="dark"]) select,
-html:not([data-theme="dark"]) textarea,
-html:not([data-theme="dark"]) .summary{
- background:#e2dfeb!important;
- color:#302b43!important;
- border-color:#c4bfd3!important;
+html:not([data-theme="dark"]) .control,html:not([data-theme="dark"]) .field input,
+html:not([data-theme="dark"]) .field select,html:not([data-theme="dark"]) .field textarea,
+html:not([data-theme="dark"]) input,html:not([data-theme="dark"]) select,
+html:not([data-theme="dark"]) textarea,html:not([data-theme="dark"]) .summary{
+ background:#f4e8f4!important;color:#392743!important;border-color:#ddc1e2!important;
 }
-html:not([data-theme="dark"]) footer{
- background:#d5d2e1!important;
- color:#302b43!important;
- border-color:#c4bfd3!important;
+html:not([data-theme="dark"]) footer{background:linear-gradient(110deg,#e2cce9 0%,#efd3e6 100%)!important;color:#392743!important;border-color:#dcbfe2!important}
+html:not([data-theme="dark"]) footer p{color:#806b88!important}
+html:not([data-theme="dark"]) .hero-art,html:not([data-theme="dark"]) .portfolio-video-frame{background:#e5d5ee!important}
+html:not([data-theme="dark"]) .btn,html:not([data-theme="dark"]) .toolbar button[aria-pressed=true]{
+ background:linear-gradient(110deg,#a86bc2,#d487b5)!important;border-color:#a86bc2!important;color:#fff!important;
 }
-html:not([data-theme="dark"]) footer p{color:#716b83!important}
-html:not([data-theme="dark"]) .hero-art,
-html:not([data-theme="dark"]) .portfolio-video-frame{
- background:#d1cddd!important;
-}
+html:not([data-theme="dark"]) .btn.secondary{background:#f8eaf5!important;color:#8b559f!important;border-color:#dcbfe2!important}
+html:not([data-theme="dark"]) .brand span,html:not([data-theme="dark"]) .hero h1 em,
+html:not([data-theme="dark"]) .navlink:hover{color:#a66bc0!important}
+html:not([data-theme="dark"]) button:focus-visible,html:not([data-theme="dark"]) a:focus-visible,
+html:not([data-theme="dark"]) input:focus-visible,html:not([data-theme="dark"]) select:focus-visible,
+html:not([data-theme="dark"]) textarea:focus-visible{outline-color:#d889b7!important}
 </style>
 </head>
 <body>
