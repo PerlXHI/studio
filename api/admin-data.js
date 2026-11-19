@@ -1,6 +1,19 @@
 import { isAdmin, supabaseConfig, supabaseHeaders, hasTrustedOrigin } from "./_admin.js";
 
-const STATUSES=["Awaiting Review","Quotation Sent","Awaiting Payment","In Production","Revision","Completed","On Hold","Cancelled"];
+const STATUSES=["Awaiting Review","Quotation Sent","Awaiting Payment","In Production","Revision","Completed","On Hold","Cancelled","Waiting for client response","Demo ready — Awaiting feedback","Preparing final delivery"];
+const STATUS_NOTES={
+  "Awaiting Review":"Request received",
+  "Quotation Sent":"Check Discord",
+  "Awaiting Payment":"Payment required",
+  "In Production":"Work in progress",
+  "Revision":"Adjustments in progress",
+  "Completed":"Final files ready",
+  "On Hold":"Temporarily paused",
+  "Cancelled":"Request cancelled",
+  "Waiting for client response":"Waiting for client response",
+  "Demo ready — Awaiting feedback":"Demo ready — Awaiting feedback",
+  "Preparing final delivery":"Preparing final delivery"
+};
 const KEYS=["service_prices","catalog_products","studio_links","portfolio_videos"];
 async function db(path,options={}) {
   const {url,key}=supabaseConfig();
@@ -43,8 +56,8 @@ export default async function handler(req,res) {
         const rawId=String(body.requestId||"").trim();
         const id=/^PV-\\d{8}-[A-F0-9]{6,24}$/i.test(rawId)?rawId.toUpperCase():rawId;
         const patch={};
-        if(body.status!==undefined){if(!STATUSES.includes(body.status))return res.status(400).json({ok:false,message:"Invalid status."});patch.status=body.status;}
-        for(const field of ["status_note","preview_url","delivery_url","quoted_price","quotation_note","admin_note"]) {
+        if(body.status!==undefined){if(!STATUSES.includes(body.status))return res.status(400).json({ok:false,message:"Invalid status."});patch.status=body.status;patch.status_note=STATUS_NOTES[body.status];}
+        for(const field of ["preview_url","delivery_url","quoted_price","quotation_note","admin_note"]) {
           if(body[field]!==undefined) {
             const value=String(body[field]??"").trim();
             if(value.length>1600)return res.status(400).json({ok:false,message:"A field is too long."});
