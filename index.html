@@ -1016,7 +1016,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
    const event=timeline.slice().reverse().find(function(item){return item.status===status});
    const done=current>=0?index<current:(data.status==="Cancelled"||data.status==="On Hold")?false:false;
    const active=index===current;
-   const date=event?dateLabel(event.at):index===0?dateLabel(data.createdAt):"Pending";
+   const date=event?dateLabel(event.at):index===0?dateLabel(data.createdAt):done?"Passed":"Pending";
    return '<div class="track-step '+(done?"is-done ":"")+(active?"is-current":"")+'"><i>'+(done?"✓":String(index+1).padStart(2,"0"))+'</i><b>'+escapeHtml(status)+'</b><small>'+escapeHtml(date)+'</small></div>';
   }).join("");
   if(data.status==="On Hold"||data.status==="Cancelled"){
