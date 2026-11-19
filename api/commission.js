@@ -1,3 +1,5 @@
+import { createHash } from "node:crypto";
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -59,6 +61,38 @@ export default async function handler(req, res) {
     return res.status(400).json({ ok: false, message: "Please complete all required fields." });
   }
 
+  // Shared, persistent rate limit: 3 valid submissions per IP every 15 minutes.
+  // The IP is hashed with a server-side secret; the raw address is never stored.
+  const forwardedFor = String(req.headers["x-forwarded-for"] || "");
+  const clientIp = (forwardedFor.split(",")[0] || String(req.headers["x-real-ip"] || "")).trim();
+  const rateLimitSecret = process.env.COMMISSION_RATE_LIMIT_SECRET || process.env.ADMIN_SESSION_SECRET;
+  if (!clientIp || !rateLimitSecret) {
+    return res.status(503).json({ ok: false, message: "The commission form is temporarily unavailable. Please try again later." });
+  }
+  const ipHash = createHash("sha256").update(rateLimitSecret + ":" + clientIp).digest("hex");
+  try {
+    const limitResponse = await fetch(supabaseUrlForRateLimit(), {
+      method: "POST",
+      headers: { ...databaseHeaders, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_ip_hash: ipHash, p_limit: 3, p_window_seconds: 900 })
+    });
+    if (!limitResponse.ok) {
+      const detail = (await limitResponse.text().catch(() => "")).slice(0, 500);
+      console.error("[commission] Rate limit check failed", { status: limitResponse.status, response: detail });
+      return res.status(503).json({ ok: false, message: "The commission form is temporarily unavailable. Please try again later." });
+    }
+    const limitRows = await limitResponse.json();
+    const limit = Array.isArray(limitRows) ? limitRows[0] : limitRows;
+    if (!limit || limit.allowed !== true) {
+      const retryAfter = Math.max(1, Number(limit?.retry_after) || 900);
+      res.setHeader("Retry-After", String(retryAfter));
+      return res.status(429).json({ ok: false, message: "Too many requests from this network. Please wait 15 minutes before submitting another commission request." });
+    }
+  } catch (error) {
+    console.error("[commission] Rate limit request failed", { name: error?.name || "Error" });
+    return res.status(503).json({ ok: false, message: "The commission form is temporarily unavailable. Please try again later." });
+  }
+
   const idPart = (value, max = 80) => clean(value, max).normalize("NFKC").replace(/-/g, " ").replace(/[^\p{L}\p{N} '&.]/gu, "").replace(/\s+/g, " ").trim().slice(0, max) || "Unknown";
   const dateParts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Jakarta", year: "2-digit", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
   const dateCode = ["year", "month", "day"].map(key => dateParts.find(part => part.type === key)?.value || "").join("");
@@ -69,6 +103,9 @@ export default async function handler(req, res) {
   if (!supabaseUrl || !supabaseKey) {
     return res.status(503).json({ ok: false, message: "Commission tracking is not configured yet. Please contact Perivelle." });
   }
+
+  const supabaseRestUrl = supabaseUrl.replace(/\\/$/, "");
+  const supabaseUrlForRateLimit = () => supabaseRestUrl + "/rest/v1/rpc/consume_commission_rate_limit";
 
   const createdAt = new Date().toISOString();
   // Supabase secret keys (sb_secret_...) are API keys, not JWTs:
