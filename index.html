@@ -646,6 +646,33 @@ html[data-theme="dark"] header nav .navlink[aria-current="page"]{
   }
 }
 
+
+/* PORTFOLIO VIDEO LOADING SKELETON */
+.portfolio-video-frame{position:relative;isolation:isolate;background:#e9e5f7!important;overflow:hidden}
+.portfolio-video-frame:before{
+ content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+ background:linear-gradient(105deg,#e9e5f7 8%,#f8f7ff 24%,#dcd6f2 40%,#e9e5f7 58%);
+ background-size:220% 100%;animation:portfolio-skeleton-shimmer 1.35s ease-in-out infinite;
+ opacity:1;transition:opacity .25s ease;
+}
+.portfolio-video-frame:after{
+ content:"";position:absolute;z-index:3;left:50%;top:50%;width:42px;height:42px;
+ transform:translate(-50%,-50%);border:1px solid #ffffffd9;border-radius:15px;
+ background:rgba(255,255,255,.62);box-shadow:0 5px 20px #62558a20;
+ pointer-events:none;
+}
+.portfolio-video-frame iframe{position:relative;z-index:1;opacity:0;transition:opacity .3s ease}
+.portfolio-video-frame.is-loaded:before,.portfolio-video-frame.is-loaded:after{opacity:0}
+.portfolio-video-frame.is-loaded iframe{opacity:1}
+.portfolio-video-frame.is-error:before{background:linear-gradient(135deg,#eeeafb,#e5eefb);animation:none}
+.portfolio-video-frame.is-error:after{content:"Preview unavailable";width:auto;height:auto;padding:9px 13px;border-radius:999px;white-space:nowrap;color:#625985;font:600 .72rem "DM Sans",sans-serif}
+@keyframes portfolio-skeleton-shimmer{to{background-position:-220% 0}}
+html[data-theme="dark"] .portfolio-video-frame{background:#292640!important}
+html[data-theme="dark"] .portfolio-video-frame:before{background:linear-gradient(105deg,#292640 8%,#40395e 24%,#35304f 40%,#292640 58%);background-size:220% 100%}
+html[data-theme="dark"] .portfolio-video-frame.is-error:before{background:linear-gradient(135deg,#292640,#202d40)}
+html[data-theme="dark"] .portfolio-video-frame.is-error:after{color:#e4def8;background:#393252;border-color:#665b89}
+@media(prefers-reduced-motion:reduce){.portfolio-video-frame:before{animation:none;background:#e9e5f7}html[data-theme="dark"] .portfolio-video-frame:before{background:#292640}}
+
 </style>
 </head>
 <body>
@@ -961,6 +988,19 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
  window.addEventListener("perivelle:contact-ready",function(event){applyLinks(event.detail||{})});
 })();
 
+/* PORTFOLIO VIDEO LOADING STATE */
+(function(){
+ function watchFrame(frame){
+  if(!frame||frame.dataset.loadingWatched==="true")return;
+  const iframe=frame.querySelector("iframe");if(!iframe)return;
+  frame.dataset.loadingWatched="true";
+  iframe.addEventListener("load",function(){frame.classList.remove("is-error");frame.classList.add("is-loaded")},{once:true});
+  iframe.addEventListener("error",function(){frame.classList.remove("is-loaded");frame.classList.add("is-error")},{once:true});
+ }
+ document.querySelectorAll(".portfolio-video-frame").forEach(watchFrame);
+ window.perivelleWatchPortfolioFrame=watchFrame;
+})();
+ 
 /* LOAD ADMIN-MANAGED PUBLIC STUDIO SETTINGS */
 (async function(){
  try{
@@ -1007,11 +1047,14 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     const validVideos=urls.map(function(rawUrl){return portfolioEmbed(rawUrl)}).filter(Boolean);
     function makeVideoFrame(src,index){
      const frame=document.createElement("div");frame.className="portfolio-video-frame";
-     const iframe=document.createElement("iframe");iframe.src=src;
+     const iframe=document.createElement("iframe");
      iframe.title="Perivelle "+base.name+" video preview "+(index+1);
      iframe.loading="lazy";iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
      iframe.referrerPolicy="strict-origin-when-cross-origin";iframe.allowFullscreen=true;
-     frame.appendChild(iframe);return frame;
+     frame.appendChild(iframe);
+     if(window.perivelleWatchPortfolioFrame)window.perivelleWatchPortfolioFrame(frame);
+     iframe.src=src;
+     return frame;
     }
     if(validVideos.length){
      const rail=document.createElement("div");rail.className="portfolio-video-rail";
