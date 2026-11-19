@@ -475,15 +475,19 @@ html[data-theme="dark"] .contact-option:hover{background:#40395f}
 @media(max-width:560px){.portfolio-grid{grid-template-columns:1fr}}
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&display=swap");
 
-/* Portfolio video cards: same grid and card shell as Music products */
-.portfolio-category-list{display:flex;flex-direction:column;gap:30px}
-.portfolio-category-group{width:100%;min-width:0}
-.portfolio-category-group .portfolio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
-.portfolio-category-group .portfolio-video-card{width:100%;max-width:100%;padding:0;overflow:hidden}
+/* Portfolio: Music-style category cards with a featured video and a scrollable preview rail */
+.portfolio-category-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+.portfolio-category-group{display:flex;flex-direction:column;min-width:0;overflow:hidden;padding:0}
+.portfolio-category-group>.portfolio-category{order:0;margin:0;padding:18px 19px 14px;color:var(--ink);font-family:"Barlow Condensed","DM Mono",sans-serif;font-size:1.25rem;font-weight:800;letter-spacing:.1em}
+.portfolio-category-group>.portfolio-grid{display:flex;flex-direction:column;gap:0;min-width:0}
+.portfolio-category-group .portfolio-video-card{width:100%;min-width:0;padding:0;overflow:hidden;border:0;border-radius:0;background:transparent;box-shadow:none}
 .portfolio-category-group .portfolio-video-frame{display:block;width:100%;aspect-ratio:16/9;margin:0;border:0;border-radius:0;background:#111;overflow:hidden}
 .portfolio-category-group .portfolio-video-frame iframe{display:block;width:100%;height:100%;border:0}
-@media(max-width:850px){.portfolio-category-group .portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){.portfolio-category-group .portfolio-grid{grid-template-columns:1fr}}
+.portfolio-category-group .portfolio-video-rail{display:flex;gap:10px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;padding:13px 16px 17px; scrollbar-width:thin}
+.portfolio-category-group .portfolio-video-rail .portfolio-video-frame{flex:0 0 76%;aspect-ratio:16/9;border-radius:10px;scroll-snap-align:start}
+.portfolio-category-group .portfolio-video-rail:empty{display:none}
+@media(max-width:850px){.portfolio-category-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.portfolio-category-list{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -842,17 +846,25 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     if(!group)return;
     const grid=group.querySelector(".portfolio-grid");if(!grid)return;
     grid.replaceChildren();
-    urls.forEach(function(rawUrl,index){
-     const src=portfolioEmbed(rawUrl);if(!src)return;
-     const card=document.createElement("article");card.className="product portfolio-video-card";
+    const validVideos=urls.map(function(rawUrl){return portfolioEmbed(rawUrl)}).filter(Boolean);
+    function makeVideoFrame(src,index){
      const frame=document.createElement("div");frame.className="portfolio-video-frame";
      const iframe=document.createElement("iframe");iframe.src=src;
      iframe.title="Perivelle "+base.name+" video preview "+(index+1);
      iframe.loading="lazy";iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
      iframe.referrerPolicy="strict-origin-when-cross-origin";iframe.allowFullscreen=true;
-     frame.appendChild(iframe);card.appendChild(frame);grid.appendChild(card);
-    });
-    group.hidden=urls.length===0;
+     frame.appendChild(iframe);return frame;
+    }
+    if(validVideos.length){
+     const featured=document.createElement("article");featured.className="portfolio-video-card portfolio-video-featured";
+     featured.appendChild(makeVideoFrame(validVideos[0],1));grid.appendChild(featured);
+     if(validVideos.length>1){
+      const rail=document.createElement("div");rail.className="portfolio-video-rail";
+      validVideos.slice(1).forEach(function(src,index){rail.appendChild(makeVideoFrame(src,index+2))});
+      grid.appendChild(rail);
+     }
+    }
+    group.hidden=validVideos.length===0;
    });
   }
   if(Array.isArray(settings.service_prices)){
