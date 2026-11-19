@@ -673,6 +673,12 @@ html[data-theme="dark"] .portfolio-video-frame.is-error:before{background:linear
 html[data-theme="dark"] .portfolio-video-frame.is-error:after{color:#e4def8;background:#393252;border-color:#665b89}
 @media(prefers-reduced-motion:reduce){.portfolio-video-frame:before{animation:none;background:#e9e5f7}html[data-theme="dark"] .portfolio-video-frame:before{background:#292640}}
 
+
+/* FAQ footer: keep the studio identity in a simple, stationary stack */
+footer{position:static!important}
+footer .foot{display:flex!important;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:8px}
+footer .foot strong{display:block}
+footer .foot p{margin:0!important;max-width:520px}
 </style>
 </head>
 <body>
