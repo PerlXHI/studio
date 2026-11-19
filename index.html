@@ -487,6 +487,57 @@ html[data-theme="dark"] .contact-option:hover{background:#40395f}
 .portfolio-category-group .portfolio-video-rail:empty{display:none}
 @media(max-width:850px){.portfolio-category-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.portfolio-category-list{grid-template-columns:1fr}}
+
+/* PORTFOLIO CATEGORY CARDS — polished Music-style shell */
+.portfolio-category-group{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  padding:10px;
+  border:1px solid #e3def4;
+  border-radius:26px;
+  background:linear-gradient(145deg,#ffffffef 0%,#f5f3ffed 62%,#f0f6ffed 100%);
+  box-shadow:0 16px 42px #7568ad14;
+  transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
+}
+.portfolio-category-group:before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:180px;height:180px;right:-85px;top:-105px;
+  border-radius:50%;
+  background:radial-gradient(circle,#cfc5f3a1 0%,#dceaff55 44%,transparent 72%);
+  pointer-events:none;
+}
+.portfolio-category-group:hover{
+  transform:translateY(-5px);
+  border-color:#d2c9f0;
+  box-shadow:0 22px 48px #7568ad24;
+}
+.portfolio-category-group>.portfolio-category{
+  padding:10px 9px 15px;
+  margin:0;
+  color:#665b9b;
+  font-size:1.35rem;
+  letter-spacing:.12em;
+}
+.portfolio-category-group>.portfolio-grid{padding:0;min-width:0}
+.portfolio-category-group .portfolio-video-rail{
+  border:1px solid #e8e2f5;
+  border-radius:19px;
+  box-shadow:inset 0 0 0 1px #ffffff22,0 8px 22px #5f56851c;
+  scrollbar-color:#b9addf #f0edfa;
+  scrollbar-width:thin;
+}
+.portfolio-category-group .portfolio-video-rail .portfolio-video-frame{
+  border-radius:18px;
+}
+.portfolio-category-group .portfolio-video-rail .portfolio-video-frame iframe{
+  border-radius:18px;
+}
+@media(hover:none){.portfolio-category-group:hover{transform:none;box-shadow:0 16px 42px #7568ad14}}
+@media(prefers-reduced-motion:reduce){.portfolio-category-group{transition:none}}
+
 </style>
 </head>
 <body>
