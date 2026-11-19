@@ -963,6 +963,17 @@ html[data-theme="dark"] .portfolio-category-group>.portfolio-category:after{colo
   .portfolio-category-group:hover,.featured-portfolio-card:hover{transform:none}
 }
 
+
+/* HIDE PORTFOLIO SCROLLBARS — KEEP TOUCH / WHEEL SCROLL */
+.portfolio-category-group .portfolio-video-rail{
+  scrollbar-width:none!important;
+  -ms-overflow-style:none;
+}
+.portfolio-category-group .portfolio-video-rail::-webkit-scrollbar{
+  display:none!important;
+  width:0!important;
+  height:0!important;
+}
 </style>
 </head>
 <body>
