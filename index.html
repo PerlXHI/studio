@@ -51,6 +51,41 @@ html[data-theme="dark"] .commission-status-main strong{color:#f1edff}
 html[data-theme="dark"] .commission-status-main span{color:#c0b6d5}
 html[data-theme="dark"] .commission-status-divider{background:linear-gradient(90deg,#4b4265,rgba(75,66,101,.25))}
 html[data-theme="dark"] .commission-status-bottom strong{color:#d4c4ff}
+
+/* HIGH-CONTRAST COMMISSION STATUS CARD IN DARK MODE */
+html[data-theme="dark"] .hero-kicker.commission-status-card{
+ border:1px solid #8b7ac4;
+ background:linear-gradient(135deg,#302849 0%,#292b49 58%,#24364b 100%);
+ box-shadow:0 18px 44px rgba(5,4,18,.48),0 0 0 1px rgba(190,174,255,.12),inset 0 1px 0 rgba(255,255,255,.13);
+}
+html[data-theme="dark"] .hero-kicker.commission-status-card:after{
+ background:radial-gradient(circle,rgba(190,170,255,.34),transparent 72%);
+}
+html[data-theme="dark"] .commission-status-icon{
+ background:#514477;
+ color:#eee6ff;
+ box-shadow:inset 0 0 0 1px #a99add66;
+}
+html[data-theme="dark"] .commission-status-label{color:#e1d8fa}
+html[data-theme="dark"] .commission-status-live{
+ background:#3b3458;
+ color:#f0eaff;
+ border:1px solid #7667a5;
+}
+html[data-theme="dark"] .commission-status-live i{
+ background:#8de0b4;
+ box-shadow:0 0 0 3px #8de0b433,0 0 10px #8de0b477;
+}
+html[data-theme="dark"] .commission-status-main strong{color:#fffaff;text-shadow:0 1px 12px #b8a5ff25}
+html[data-theme="dark"] .commission-status-main span{color:#e0d9f1}
+html[data-theme="dark"] .commission-status-divider{background:linear-gradient(90deg,#8172b2,rgba(129,114,178,.22))}
+html[data-theme="dark"] .commission-status-caption{color:#d0c5e9}
+html[data-theme="dark"] .commission-status-bottom strong{color:#eee5ff}
+html[data-theme="dark"] .hero-kicker.commission-status-card[data-status="open"] .commission-status-live{background:#173f35;color:#a8f0c8;border-color:#397b61}
+html[data-theme="dark"] .hero-kicker.commission-status-card[data-status="limited slots"] .commission-status-live{background:#49351e;color:#ffd69a;border-color:#987044}
+html[data-theme="dark"] .hero-kicker.commission-status-card[data-status="waitlist"] .commission-status-live{background:#3d315f;color:#d9c8ff;border-color:#7865b2}
+html[data-theme="dark"] .hero-kicker.commission-status-card[data-status="closed"] .commission-status-live{background:#4b292f;color:#ffb9c0;border-color:#a65d6a}
+
 @media(max-width:560px){.hero-kicker.commission-status-card{width:100%;padding:15px 16px}.commission-status-bottom{align-items:flex-start;flex-direction:column;gap:5px}.commission-status-bottom strong{text-align:left}}
 @media(prefers-reduced-motion:reduce){.hero-kicker.commission-status-card{transition:none}}.portfolio-card{display:flex;flex-direction:column}.portfolio-copy{flex:1}.mini-player{padding:12px 14px;border-top:1px solid var(--line);display:grid;gap:8px}.mini-player audio{width:100%;height:34px}.mini-player label{font:500 .65rem "DM Mono",monospace;color:var(--muted);text-transform:uppercase}.service-grid,.credit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.service-card,.step-card,.credit-card,.license-panel{border:1px solid var(--line);background:var(--card);padding:20px}.service-card h3,.step-card h3,.credit-card h3,.license-panel h3{font:600 1.25rem "Playfair Display",Georgia,serif;margin:8px 0}.service-card p,.step-card p,.credit-card p{font-size:.86rem;color:var(--muted);margin:0}.starting{display:block;margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font:500 .72rem "DM Mono",monospace;color:var(--green)}.workflow-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.step-no{font:500 .72rem "DM Mono",monospace;color:var(--rust)}.license-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}.license-panel ul{padding-left:19px;color:var(--muted);font-size:.86rem}@media(max-width:850px){.service-grid,.credit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.service-grid,.workflow-grid,.credit-grid,.license-columns{grid-template-columns:1fr}.hero h1{max-width:11ch}}
 
