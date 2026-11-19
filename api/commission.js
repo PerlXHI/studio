@@ -86,7 +86,8 @@ export default async function handler(req, res) {
   // Shared, persistent rate limit: 3 valid submissions per IP every 15 minutes.
   // The IP is hashed with a server-side secret; the raw address is never stored.
   const forwardedFor = String(req.headers["x-forwarded-for"] || "");
-  const clientIp = (forwardedFor.split(",")[0] || String(req.headers["x-real-ip"] || "")).trim();
+  const forwardedIps = forwardedFor.split(",").map(value => value.trim()).filter(Boolean);
+  const clientIp = (forwardedIps[forwardedIps.length - 1] || String(req.headers["x-real-ip"] || "")).trim();
   const rateLimitSecret = process.env.COMMISSION_RATE_LIMIT_SECRET || process.env.ADMIN_SESSION_SECRET;
   if (!clientIp || !rateLimitSecret) {
     return res.status(503).json({ ok: false, message: "The commission form is temporarily unavailable. Please try again later." });
