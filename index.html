@@ -1420,6 +1420,15 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     if(item&&node)node.textContent=item.price?"STARTING AT · "+item.price:"CONTACT FOR A QUOTE";
    });
   }
+  if(settings.commission_status){
+   const status=settings.commission_status;
+   const kicker=document.querySelector(".hero-kicker");
+   if(kicker){
+    const parts=["Commission status",String(status.status||"").trim(),String(status.batch||"").trim(),String(status.slots||"").trim()].filter(Boolean);
+    kicker.textContent=parts.join(" · ");
+    kicker.setAttribute("aria-label",parts.join(", "));
+   }
+  }
   if(settings.studio_links&&settings.studio_links.discord)DISCORD_URL=settings.studio_links.discord;
   window.dispatchEvent(new CustomEvent("perivelle:contact-ready",{detail:settings.studio_links||{}}));
  }catch(error){console.warn("Public studio settings could not be loaded.");}
