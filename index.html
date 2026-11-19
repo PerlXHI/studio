@@ -451,7 +451,7 @@ html[data-theme="dark"] .success-status strong{background:#3a345a;color:#d5caff}
 .contact-option{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:12px;color:#494164;text-decoration:none;font-size:.92rem;font-weight:600;transition:background .18s ease}
 .contact-option:hover{background:#f0edff}
 .contact-option[hidden]{display:none}
-.contact-option .contact-option-icon{width:25px;text-align:center;font-size:1.05rem}
+.contact-option .contact-option-icon{width:25px;height:25px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 25px;text-align:center;font-size:1.05rem}.contact-option-icon svg{width:20px;height:20px;display:block}.vgen-icon{font-weight:900;font-style:italic;font-size:1.2rem;color:#9b78e8}
 .contact-trigger:focus-visible,.contact-option:focus-visible{outline:3px solid #9b8bd7;outline-offset:3px}
 html[data-theme="dark"] .contact-trigger{background:rgba(42,38,65,.96);color:#f1efff;border-color:#514a70}
 html[data-theme="dark"] .contact-menu{background:rgba(35,32,55,.98);border-color:#514a70}
@@ -614,13 +614,13 @@ html[data-theme="dark"] .contact-option:hover{background:#40395f}
 </dialog>
 <dialog class="modal" id="productDialog" aria-labelledby="productHeading"><div class="modal-head"><h2 id="productHeading"></h2><button class="close" type="button" data-close="productDialog" aria-label="Close">×</button></div><div id="productDetail"></div><button class="btn" id="detailAdd" type="button" data-t="addCart">Add to selection</button></dialog>
 <div class="contact-widget" id="contactWidget">
- <button class="contact-trigger" id="contactTrigger" type="button" aria-expanded="false" aria-controls="contactMenu"><img class="contact-logo" src="assets/illustrations/perivellelogo.jpg" alt="Perivelle mascot" aria-hidden="true"><span>Contact Us</span><span aria-hidden="true">⌃</span></button>
+ <button class="contact-trigger" id="contactTrigger" type="button" aria-expanded="false" aria-controls="contactMenu"><img class="contact-logo" src="assets/illustrations/perivellelogo.jpg" alt="Perivelle mascot" aria-hidden="true"><span>Contact Us</span></button>
  <nav class="contact-menu" id="contactMenu" aria-label="Contact options" hidden>
   <p class="contact-menu-title">Get in touch</p>
-  <a class="contact-option" id="contactDiscord" href="#" target="_blank" rel="noopener noreferrer" hidden><span class="contact-option-icon" aria-hidden="true">◈</span><span>Discord</span></a>
-  <a class="contact-option" id="contactVgen" href="#" target="_blank" rel="noopener noreferrer" hidden><span class="contact-option-icon" aria-hidden="true">✦</span><span>VGen</span></a>
-  <a class="contact-option" id="contactEmail" href="#" hidden><span class="contact-option-icon" aria-hidden="true">✉</span><span>Email</span></a>
-  <a class="contact-option" id="contactTwitter" href="#" target="_blank" rel="noopener noreferrer" hidden><span class="contact-option-icon" aria-hidden="true">𝕏</span><span>Twitter / X</span></a>
+  <a class="contact-option" id="contactDiscord" href="#" target="_blank" rel="noopener noreferrer" hidden><span class="contact-option-icon discord-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M19.5 5.2a17 17 0 0 0-4.2-1.3l-.5 1a15 15 0 0 0-5.6 0l-.5-1a17 17 0 0 0-4.2 1.3C1.9 9 1.2 12.7 1.5 16.3a17 17 0 0 0 5.2 2.6l1.1-1.8-1.7-.8.4-.3a12 12 0 0 0 11 0l.4.3-1.7.8 1.1 1.8a17 17 0 0 0 5.2-2.6c.4-4.3-.7-7.8-3-11.1ZM8.8 14.1c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm6.4 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg></span><span>Discord</span></a>
+  <a class="contact-option" id="contactTwitter" href="#" target="_blank" rel="noopener noreferrer" hidden><span class="contact-option-icon x-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-5-7.4L5.5 22H2.3l7.3-8.4L1.8 2h6.5l4.5 6.7L18.9 2Zm-1.1 18h1.7L7.3 3.9H5.5L17.8 20Z"/></svg></span><span>Twitter / X</span></a>
+  <a class="contact-option" id="contactVgen" href="#" target="_blank" rel="noopener noreferrer" hidden><span class="contact-option-icon vgen-icon" aria-hidden="true">V</span><span>VGen</span></a>
+  <a class="contact-option" id="contactEmail" href="#" hidden><span class="contact-option-icon email-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 5h18v14H3V5Zm2 2v.4l7 5.1 7-5.1V7l-7 5-7-5Zm14 10V9.9l-7 5-7-5V17h14Z"/></svg></span><span>Email</span></a>
  </nav>
 </div>
 <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="theme-icon" aria-hidden="true">☾</span></button>
