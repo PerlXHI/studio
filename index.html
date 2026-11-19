@@ -679,6 +679,17 @@ footer{position:static!important}
 footer .foot{display:flex!important;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:8px}
 footer .foot strong{display:block}
 footer .foot p{margin:0!important;max-width:520px}
+
+/* Keep the studio footer pinned to the viewport while the FAQ view is active */
+body:has(.page-view[data-page="faq"]:not([hidden])) footer{
+ position:fixed!important;left:0;right:0;bottom:0;z-index:30;
+ box-shadow:0 -8px 28px rgba(38,31,70,.10);
+}
+body:has(.page-view[data-page="faq"]:not([hidden])) main{padding-bottom:118px}
+@media(max-width:560px){
+ body:has(.page-view[data-page="faq"]:not([hidden])) main{padding-bottom:132px}
+ body:has(.page-view[data-page="faq"]:not([hidden])) footer{padding:20px 0}
+}
 </style>
 </head>
 <body>
