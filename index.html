@@ -690,6 +690,31 @@ body:has(.page-view[data-page="faq"]:not([hidden])) main{padding-bottom:118px}
  body:has(.page-view[data-page="faq"]:not([hidden])) main{padding-bottom:132px}
  body:has(.page-view[data-page="faq"]:not([hidden])) footer{padding:20px 0}
 }
+
+/* Softer light theme: replace stark whites with muted lavender-gray surfaces */
+html:not([data-theme="dark"]){
+ --paper:#efedf5;
+ --card:#f6f4fa;
+ --line:#dedbea;
+ --dream-glass:#f7f5fbd9;
+}
+html:not([data-theme="dark"]) body{
+ background:linear-gradient(180deg,#f1eff7 0%,#eeedf5 58%,#f1eff7 100%);
+}
+html:not([data-theme="dark"]) header{
+ background:rgba(239,237,245,.94);
+}
+html:not([data-theme="dark"]) .home-intro{
+ background:linear-gradient(180deg,#f0eef8 0%,#e9eef7 100%);
+}
+html:not([data-theme="dark"]) .home-pillars span{
+ background:rgba(247,245,251,.82);
+}
+html:not([data-theme="dark"]) .contact-menu,
+html:not([data-theme="dark"]) .contact-trigger,
+html:not([data-theme="dark"]) .theme-toggle{
+ background-color:#f4f1f8;
+}
 </style>
 </head>
 <body>
