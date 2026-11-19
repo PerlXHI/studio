@@ -30,7 +30,7 @@ export default async function handler(req, res) {
 
   try {
     const query = new URLSearchParams({
-      select: "request_id,status,status_note,created_at,updated_at,timeline,preview_url,delivery_url,quoted_price,quotation_note",
+      select: "request_id,status,status_note,created_at,updated_at,timeline,preview_url,delivery_url,quoted_price,quotation_note,production_updates",
       request_id: "eq." + requestId,
       limit: "1"
     });
@@ -51,7 +51,8 @@ export default async function handler(req, res) {
       statusNote: record.status_note || "",
       previewUrl: record.preview_url || "", deliveryUrl: record.delivery_url || "", quotedPrice: record.quoted_price || "", quotationNote: record.quotation_note || "",
       createdAt: record.created_at, updatedAt: record.updated_at,
-      timeline: Array.isArray(record.timeline) ? record.timeline : []
+      timeline: Array.isArray(record.timeline) ? record.timeline : [],
+      productionUpdates: Array.isArray(record.production_updates) ? record.production_updates : []
     });
   } catch {
     return res.status(502).json({ ok: false, message: "Tracking is temporarily unavailable. Please try again." });
