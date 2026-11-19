@@ -2,7 +2,7 @@ import { supabaseHeaders } from "./_admin.js";
 
 const ALLOWED_STATUSES = [
   "Awaiting Review", "Quotation Sent", "Awaiting Payment", "In Production",
-  "Revision", "Completed", "On Hold", "Cancelled"
+  "Revision", "Completed", "On Hold", "Cancelled", "Waiting for client response", "Demo ready — Awaiting feedback", "Preparing final delivery"
 ];
 
 export default async function handler(req, res) {
