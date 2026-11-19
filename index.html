@@ -772,6 +772,197 @@ html:not([data-theme="dark"]) input:focus-visible,html:not([data-theme="dark"]) 
 html:not([data-theme="dark"]) textarea:focus-visible{outline-color:#d889b7!important}
 
 .featured-portfolio{margin:0 0 34px;padding:24px;border:1px solid #e3def4;border-radius:28px;background:linear-gradient(145deg,#fff,#f4f0ff 62%,#edf6ff);box-shadow:0 16px 42px #7568ad14}.featured-portfolio-heading h2{margin:4px 0 8px;color:#393253;font:600 clamp(1.8rem,4vw,2.5rem) "Playfair Display",Georgia,serif}.featured-portfolio-heading p:not(.eyebrow){color:#77718f;margin:0 0 18px}.featured-portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}.featured-portfolio-card{min-width:0;padding:10px;border:1px solid #e4def5;border-radius:20px;background:#ffffffc9}.featured-portfolio-card h3{margin:4px 5px 10px;color:#665b9b;font:800 1.05rem "Barlow Condensed","DM Mono",sans-serif;letter-spacing:.1em;text-transform:uppercase}.featured-portfolio-frame{aspect-ratio:16/9;overflow:hidden;border-radius:14px;background:#171321}.featured-portfolio-frame iframe{display:block;width:100%;height:100%;border:0}.track-production-updates{margin-top:22px;padding:20px;border:1px solid #e4def5;border-radius:20px;background:linear-gradient(145deg,#fff,#f5f2ff)}.track-production-update{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #e9e4f6;color:#51486f}.track-production-update:last-child{border-bottom:0}.track-production-update small{flex:0 0 auto;color:#8b82a6;font-size:.75rem}@media(max-width:560px){.featured-portfolio{padding:16px}.track-production-update{align-items:flex-start;flex-direction:column;gap:5px}}
+
+/* PORTFOLIO — PREMIUM STUDIO SHOWCASE */
+.portfolio-strip{
+  position:relative;
+  overflow:hidden;
+  padding:clamp(48px,7vw,88px) 0;
+  background:
+    radial-gradient(ellipse at 8% 8%,#e4dcff 0,transparent 34%),
+    radial-gradient(ellipse at 94% 24%,#dceeff 0,transparent 32%),
+    linear-gradient(180deg,#f6f3ff 0%,#f0f3ff 54%,#f8f6ff 100%)!important;
+  border:0;
+}
+.portfolio-intro{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:36px;
+  min-height:260px;
+  margin:0 0 44px;
+  padding:clamp(28px,5vw,58px);
+  overflow:hidden;
+  border:1px solid #ffffffd9;
+  border-radius:34px;
+  background:linear-gradient(112deg,#fffefaed 0%,#f1edffed 54%,#e8f4ffed 100%);
+  box-shadow:0 24px 70px #6556a018,inset 0 1px 0 #fff;
+}
+.portfolio-intro:before,.portfolio-intro:after{
+  content:"";position:absolute;pointer-events:none;border-radius:50%;
+}
+.portfolio-intro:before{
+  width:360px;height:360px;right:8%;top:-235px;
+  border:1px solid #a99be45c;
+  box-shadow:0 0 0 22px #b7a9ed12,0 0 0 48px #b7a9ed0d,0 0 0 78px #b7a9ed09;
+}
+.portfolio-intro:after{
+  width:210px;height:210px;right:18%;bottom:-165px;
+  background:radial-gradient(circle,#c5b8f55c,transparent 70%);
+}
+.portfolio-intro-copy{position:relative;z-index:1;max-width:650px}
+.portfolio-intro-copy .eyebrow{color:#887bbd;font-size:.68rem;letter-spacing:.17em}
+.portfolio-intro-copy h2{
+  margin:13px 0 14px;
+  color:#30294c;
+  font:600 clamp(2.6rem,6vw,5.25rem)/.98 "Playfair Display",Georgia,serif;
+  letter-spacing:-.055em;
+}
+.portfolio-intro-copy h2 em{
+  color:#8c7bc9;font-weight:600;
+}
+.portfolio-intro-copy>p:last-child{
+  max-width:530px;margin:0;color:#77718f;font-size:clamp(.92rem,1.4vw,1.04rem);line-height:1.8;
+}
+.portfolio-intro-mark{
+  position:relative;z-index:1;flex:0 0 190px;width:190px;height:190px;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  border:1px solid #ffffffd9;border-radius:50%;
+  background:radial-gradient(circle at 35% 28%,#fff 0,#eeeaff 48%,#deedff 100%);
+  box-shadow:0 20px 50px #8f82cf2b,inset 0 0 0 10px #ffffff55;
+}
+.portfolio-intro-mark:before,.portfolio-intro-mark:after{
+  content:"";position:absolute;inset:14px;border:1px solid #a99bdf75;border-radius:50%;
+}
+.portfolio-intro-mark:after{inset:-12px;border-style:dashed;border-color:#a99bdf70}
+.portfolio-intro-mark>span{position:absolute;top:27px;color:#9b8bd4;font-size:1.2rem}
+.portfolio-intro-mark i{
+  display:block;width:5px;height:var(--bar,32px);border-radius:9px;
+  background:linear-gradient(180deg,#9c8bdb,#8ebce4);
+  box-shadow:0 0 12px #a99be45c;
+}
+.portfolio-intro-mark i:nth-of-type(1){--bar:24px}
+.portfolio-intro-mark i:nth-of-type(2){--bar:48px}
+.portfolio-intro-mark i:nth-of-type(3){--bar:72px}
+.portfolio-intro-mark i:nth-of-type(4){--bar:43px}
+.portfolio-intro-mark i:nth-of-type(5){--bar:29px}
+.portfolio-intro-mark small{
+  position:absolute;bottom:30px;color:#8579b4;
+  font:500 .48rem "DM Mono",monospace;letter-spacing:.13em;
+}
+.portfolio-section-label{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  margin:0 2px 18px;color:#8a80ac;
+  font:500 .65rem "DM Mono",monospace;letter-spacing:.15em;
+}
+.portfolio-section-label span:first-child{color:#665b9b}
+.featured-portfolio{
+  margin:0 0 34px;padding:clamp(18px,3vw,30px);
+  border:1px solid #e1daf5;border-radius:30px;
+  background:linear-gradient(135deg,#fffefaed,#f0edffed 60%,#eaf4ffed);
+  box-shadow:0 18px 48px #7164b516;
+}
+.featured-portfolio-heading h2{font-size:clamp(1.8rem,3.8vw,2.65rem);letter-spacing:-.04em}
+.featured-portfolio-heading p:not(.eyebrow){max-width:560px;line-height:1.7}
+.featured-portfolio-card{
+  padding:11px;border:1px solid #e5def5;border-radius:22px;
+  background:#ffffffd9;box-shadow:0 10px 28px #6d609817;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.featured-portfolio-card:hover{transform:translateY(-4px);box-shadow:0 18px 34px #6d609825}
+.featured-portfolio-frame{border-radius:15px;box-shadow:0 8px 22px #30294c24}
+.portfolio-category-list{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:22px;align-items:stretch;
+}
+.portfolio-category-group{
+  padding:13px;border:1px solid #e1daf5;border-radius:27px;
+  background:linear-gradient(145deg,#ffffffed 0%,#f5f2ffed 58%,#eff6ffed 100%);
+  box-shadow:0 14px 38px #6556a014,inset 0 1px 0 #fff;
+  transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease;
+}
+.portfolio-category-group:hover{
+  transform:translateY(-5px);border-color:#cfc4ef;
+  box-shadow:0 24px 48px #6556a022,inset 0 1px 0 #fff;
+}
+.portfolio-category-group>.portfolio-category{
+  display:flex;align-items:center;gap:11px;
+  padding:7px 7px 16px;color:#443b68;
+  font-size:1.38rem;letter-spacing:.14em;
+}
+.portfolio-category-group>.portfolio-category:before{
+  width:6px;height:24px;border-radius:8px;
+  background:linear-gradient(180deg,#a18cde,#8cbce5);
+  box-shadow:0 0 14px #a18cde66;
+}
+.portfolio-category-group>.portfolio-category:after{
+  content:"0" counter(portfolio-category) " / COLLECTION";
+  margin-left:auto;color:#9b91b9;
+  font:500 .56rem "DM Mono",monospace;letter-spacing:.12em;
+}
+.portfolio-category-list{counter-reset:portfolio-category}
+.portfolio-category-group{counter-increment:portfolio-category}
+.portfolio-category-group .portfolio-video-rail{
+  aspect-ratio:16/9;border:1px solid #e7e1f5;border-radius:19px;
+  background:#211d32;box-shadow:0 12px 28px #4d426b24;
+  scrollbar-color:#b7a9e4 #eeeafa;
+}
+.portfolio-category-group .portfolio-video-rail .portfolio-video-frame,
+.portfolio-category-group .portfolio-video-rail .portfolio-video-frame iframe{
+  border-radius:18px;
+}
+@media(max-width:760px){
+  .portfolio-intro{min-height:220px}
+  .portfolio-intro-mark{flex-basis:145px;width:145px;height:145px;transform:scale(.9)}
+  .portfolio-category-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+}
+@media(max-width:560px){
+  .portfolio-intro{display:block;padding:27px 23px 25px;border-radius:26px;margin-bottom:32px}
+  .portfolio-intro-copy h2{font-size:clamp(2.45rem,13vw,3.6rem)}
+  .portfolio-intro-mark{width:118px;height:118px;margin:28px auto 4px;transform:none}
+  .portfolio-intro-mark:before{inset:10px}.portfolio-intro-mark:after{inset:-8px}
+  .portfolio-intro-mark>span{top:13px}
+  .portfolio-intro-mark small{bottom:15px;font-size:.4rem}
+  .portfolio-intro-mark i:nth-of-type(3){--bar:47px}
+  .portfolio-intro-mark i:nth-of-type(2){--bar:34px}
+  .portfolio-intro-mark i:nth-of-type(4){--bar:30px}
+  .portfolio-intro-mark i:nth-of-type(1){--bar:18px}
+  .portfolio-intro-mark i:nth-of-type(5){--bar:21px}
+  .portfolio-section-label{font-size:.55rem;letter-spacing:.1em}
+  .portfolio-category-list{grid-template-columns:1fr;gap:16px}
+  .portfolio-category-group{padding:11px;border-radius:23px}
+}
+html[data-theme="dark"] .portfolio-strip{
+  background:radial-gradient(ellipse at 8% 8%,#40365f 0,transparent 35%),radial-gradient(ellipse at 94% 24%,#263d58 0,transparent 34%),linear-gradient(180deg,#211d32,#1c2034 55%,#211d32)!important;
+}
+html[data-theme="dark"] .portfolio-intro{
+  border-color:#554b75;background:linear-gradient(112deg,#302945,#292941 55%,#243447);
+  box-shadow:0 24px 70px #08071355,inset 0 1px 0 #ffffff12;
+}
+html[data-theme="dark"] .portfolio-intro-copy h2{color:#f1edff}
+html[data-theme="dark"] .portfolio-intro-copy h2 em{color:#c0afff}
+html[data-theme="dark"] .portfolio-intro-copy>p:last-child{color:#c0bad5}
+html[data-theme="dark"] .portfolio-intro-mark{background:radial-gradient(circle at 35% 28%,#554a73,#303b58);border-color:#756a98}
+html[data-theme="dark"] .portfolio-intro-mark small,html[data-theme="dark"] .portfolio-intro-mark>span{color:#d1c4ff}
+html[data-theme="dark"] .portfolio-section-label{color:#aaa1c7}
+html[data-theme="dark"] .portfolio-section-label span:first-child{color:#d0c4ff}
+html[data-theme="dark"] .featured-portfolio{border-color:#554b75;background:linear-gradient(135deg,#302945,#292941 60%,#243447)}
+html[data-theme="dark"] .featured-portfolio-heading h2{color:#f1edff}
+html[data-theme="dark"] .featured-portfolio-heading p:not(.eyebrow){color:#c0bad5}
+html[data-theme="dark"] .featured-portfolio-card{border-color:#5a5077;background:#ffffff0c}
+html[data-theme="dark"] .portfolio-category-group{
+  border-color:#51486e;background:linear-gradient(145deg,#302945,#292941 58%,#243447);
+  box-shadow:0 14px 38px #08071344,inset 0 1px 0 #ffffff12;
+}
+html[data-theme="dark"] .portfolio-category-group:hover{border-color:#786ba5;box-shadow:0 24px 48px #08071366}
+html[data-theme="dark"] .portfolio-category-group>.portfolio-category{color:#e7e0ff}
+html[data-theme="dark"] .portfolio-category-group>.portfolio-category:after{color:#a9a0c6}
+@media(prefers-reduced-motion:reduce){
+  .portfolio-category-group,.featured-portfolio-card{transition:none}
+  .portfolio-category-group:hover,.featured-portfolio-card:hover{transform:none}
+}
+
 </style>
 </head>
 <body>
@@ -841,7 +1032,7 @@ html:not([data-theme="dark"]) textarea:focus-visible{outline-color:#d889b7!impor
  </div>
 </section>
 </div>
-<div class="page-view" data-page="portfolio" hidden><section class="section portfolio-strip" id="portfolio"><div class="wrap"><section class="featured-portfolio" id="featuredPortfolio" hidden><div class="featured-portfolio-heading"><p class="eyebrow">SELECTED WORKS</p><h2>Featured Portfolio</h2><p>A closer look at selected Perivelle productions.</p></div><div class="featured-portfolio-grid" id="featuredPortfolioGrid"></div></section><div class="portfolio-category-list"><section class="portfolio-category-group" data-portfolio-category="bgm"><h3 class="portfolio-category">BGM</h3><div class="portfolio-grid"></div></section><section class="portfolio-category-group" data-portfolio-category="sound-alerts"><h3 class="portfolio-category">SOUND ALERTS</h3><div class="portfolio-grid"><article class="product portfolio-video-card"><div class="portfolio-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/iUBVMpHvyWg" title="Perivelle Sound Alerts video preview" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></article></div></section><section class="portfolio-category-group" data-portfolio-category="stinger"><h3 class="portfolio-category">STINGER</h3><div class="portfolio-grid"></div></section><section class="portfolio-category-group" data-portfolio-category="og-song"><h3 class="portfolio-category">OG SONG</h3><div class="portfolio-grid"></div></section><section class="portfolio-category-group" data-portfolio-category="lore-music"><h3 class="portfolio-category">LORE MUSIC</h3><div class="portfolio-grid"></div></section></div></div></section></div><div class="page-view" data-page="catalog" hidden><section class="section" id="catalog"><div class="wrap"><div class="section-head"><div><p class="eyebrow" data-t="catalogEyebrow">THE SOUND COLLECTION</p><h2 data-t="catalogTitle">Find the right sound.</h2></div><p class="sub" data-t="catalogText">Browse releases by title, genre, and mood. The prices and details shown are sample content and should be replaced with your official catalog information.</p></div><div class="toolbar"><input class="control" id="search" type="search" data-ph="searchPlaceholder" placeholder="Search by title, genre, or mood" aria-label="Search music"><select class="control" id="mood" aria-label="Filter by mood"></select><select class="control" id="sort" aria-label="Sort catalog"><option value="featured" data-t="featured">Featured</option><option value="price-low" data-t="priceLow">Lowest price</option><option value="price-high" data-t="priceHigh">Highest price</option><option value="newest" data-t="newest">Newest</option></select><button id="favoritesOnly" type="button" aria-pressed="false" data-t="favoritesOnly">♡ Favorites</button></div><p id="resultCount" class="result-count" aria-live="polite"></p><div class="products" id="products"></div></div></section></div>
+<div class="page-view" data-page="portfolio" hidden><section class="section portfolio-strip" id="portfolio"><div class="wrap"><div class="portfolio-intro"><div class="portfolio-intro-copy"><p class="eyebrow">THE PERIVELLE SHOWCASE · AUDIO MADE PERSONAL</p><h2>Every world has a <em>soundtrack.</em></h2><p>Explore original music and custom audio crafted to bring each creator’s identity, atmosphere, and story to life.</p></div><div class="portfolio-intro-mark" aria-hidden="true"><span>✳</span><i></i><i></i><i></i><i></i><i></i><small>LISTEN · FEEL · IMAGINE</small></div></div><div class="portfolio-section-label"><span>SELECTED WORKS</span><span>01 — 05 / COLLECTIONS</span></div><section class="featured-portfolio" id="featuredPortfolio" hidden><div class="featured-portfolio-heading"><p class="eyebrow">SELECTED WORKS</p><h2>Featured Portfolio</h2><p>A closer look at selected Perivelle productions.</p></div><div class="featured-portfolio-grid" id="featuredPortfolioGrid"></div></section><div class="portfolio-category-list"><section class="portfolio-category-group" data-portfolio-category="bgm"><h3 class="portfolio-category">BGM</h3><div class="portfolio-grid"></div></section><section class="portfolio-category-group" data-portfolio-category="sound-alerts"><h3 class="portfolio-category">SOUND ALERTS</h3><div class="portfolio-grid"><article class="product portfolio-video-card"><div class="portfolio-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/iUBVMpHvyWg" title="Perivelle Sound Alerts video preview" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></article></div></section><section class="portfolio-category-group" data-portfolio-category="stinger"><h3 class="portfolio-category">STINGER</h3><div class="portfolio-grid"></div></section><section class="portfolio-category-group" data-portfolio-category="og-song"><h3 class="portfolio-category">OG SONG</h3><div class="portfolio-grid"></div></section><section class="portfolio-category-group" data-portfolio-category="lore-music"><h3 class="portfolio-category">LORE MUSIC</h3><div class="portfolio-grid"></div></section></div></div></section></div><div class="page-view" data-page="catalog" hidden><section class="section" id="catalog"><div class="wrap"><div class="section-head"><div><p class="eyebrow" data-t="catalogEyebrow">THE SOUND COLLECTION</p><h2 data-t="catalogTitle">Find the right sound.</h2></div><p class="sub" data-t="catalogText">Browse releases by title, genre, and mood. The prices and details shown are sample content and should be replaced with your official catalog information.</p></div><div class="toolbar"><input class="control" id="search" type="search" data-ph="searchPlaceholder" placeholder="Search by title, genre, or mood" aria-label="Search music"><select class="control" id="mood" aria-label="Filter by mood"></select><select class="control" id="sort" aria-label="Sort catalog"><option value="featured" data-t="featured">Featured</option><option value="price-low" data-t="priceLow">Lowest price</option><option value="price-high" data-t="priceHigh">Highest price</option><option value="newest" data-t="newest">Newest</option></select><button id="favoritesOnly" type="button" aria-pressed="false" data-t="favoritesOnly">♡ Favorites</button></div><p id="resultCount" class="result-count" aria-live="polite"></p><div class="products" id="products"></div></div></section></div>
 <div class="page-view" data-page="services" hidden><section class="section" id="services"><div class="wrap"><div class="section-head"><div><p class="eyebrow">SERVICES / STARTING AT</p><h2>Perivelle audio services.</h2></div><p class="sub">Starting prices should reflect your official rates. Final quotes depend on complexity, duration, licensing, and deadline.</p></div><div class="service-grid">
 <article class="service-card"><div class="service-art service-art-bgm" role="img" aria-label="Enchanted headphones surrounded by flowing musical notes"></div><p class="eyebrow">01 / STREAMING</p><h3>Custom BGM Loop</h3><p>A 1:00–1:30 seamless loop for Just Chatting, Loading, BRB, and everyday streams.</p><span class="starting">STARTING AT · [ADD PRICE]</span></article>
 <article class="service-card"><div class="service-art service-art-alerts" role="img" aria-label="Magical bell surrounded by sound waves"></div><p class="eyebrow">02 / INTERACTION</p><h3>Sound Alerts & Stinger</h3><p>A set of 5–7 SFX matched to your BGM key, plus a 1–3 second transition stinger.</p><span class="starting">STARTING AT · [ADD PRICE]</span></article>
