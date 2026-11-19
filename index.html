@@ -543,7 +543,7 @@ html[data-theme="dark"] .contact-option:hover{background:#40395f}
  </div>
 </section>
 </div>
-<div class="page-view" data-page="portfolio" hidden><section class="section portfolio-strip" id="portfolio"><div class="wrap"><div class="portfolio-grid"><article class="product portfolio-video-card"><h3 class="portfolio-category">BGM</h3><div class="portfolio-video-frame"><div class="portfolio-video-empty" aria-label="BGM video preview will be added later"></div></div></article><article class="product portfolio-video-card"><h3 class="portfolio-category">SOUND ALERTS</h3><div class="portfolio-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/iUBVMpHvyWg" title="Perivelle Sound Alerts video preview" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></article><article class="product portfolio-video-card"><h3 class="portfolio-category">STINGER</h3><div class="portfolio-video-frame"><div class="portfolio-video-empty" aria-label="Stinger video preview will be added later"></div></div></article><article class="product portfolio-video-card"><h3 class="portfolio-category">OG SONG</h3><div class="portfolio-video-frame"><div class="portfolio-video-empty" aria-label="OG Song video preview will be added later"></div></div></article><article class="product portfolio-video-card"><h3 class="portfolio-category">LORE MUSIC</h3><div class="portfolio-video-frame"><div class="portfolio-video-empty" aria-label="Lore Music video preview will be added later"></div></div></article></div></div></section>
+<div class="page-view" data-page="portfolio" hidden><section class="section portfolio-strip" id="portfolio"><div class="wrap"><div class="portfolio-grid"><article class="product portfolio-video-card" data-portfolio-category="bgm"><h3 class="portfolio-category">BGM</h3><div class="portfolio-video-frame"><div class="portfolio-video-empty" aria-label="BGM video preview will be added later"></div></div></article><article class="product portfolio-video-card" data-portfolio-category="sound-alerts"><h3 class="portfolio-category">SOUND ALERTS</h3><div class="portfolio-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/iUBVMpHvyWg" title="Perivelle Sound Alerts video preview" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></article><article class="product portfolio-video-card" data-portfolio-category="stinger"><h3 class="portfolio-category">STINGER</h3><div class="portfolio-video-frame"><div class="portfolio-video-empty" aria-label="Stinger video preview will be added later"></div></div></article><article class="product portfolio-video-card" data-portfolio-category="og-song"><h3 class="portfolio-category">OG SONG</h3><div class="portfolio-video-frame"><div class="portfolio-video-empty" aria-label="OG Song video preview will be added later"></div></div></article><article class="product portfolio-video-card" data-portfolio-category="lore-music"><h3 class="portfolio-category">LORE MUSIC</h3><div class="portfolio-video-frame"><div class="portfolio-video-empty" aria-label="Lore Music video preview will be added later"></div></div></article></div></div></section>
 </div>
 <div class="page-view" data-page="catalog" hidden><section class="section" id="catalog"><div class="wrap"><div class="section-head"><div><p class="eyebrow" data-t="catalogEyebrow">THE SOUND COLLECTION</p><h2 data-t="catalogTitle">Find the right sound.</h2></div><p class="sub" data-t="catalogText">Browse releases by title, genre, and mood. The prices and details shown are sample content and should be replaced with your official catalog information.</p></div><div class="toolbar"><input class="control" id="search" type="search" data-ph="searchPlaceholder" placeholder="Search by title, genre, or mood" aria-label="Search music"><select class="control" id="mood" aria-label="Filter by mood"></select><select class="control" id="sort" aria-label="Sort catalog"><option value="featured" data-t="featured">Featured</option><option value="price-low" data-t="priceLow">Lowest price</option><option value="price-high" data-t="priceHigh">Highest price</option><option value="newest" data-t="newest">Newest</option></select><button id="favoritesOnly" type="button" aria-pressed="false" data-t="favoritesOnly">♡ Favorites</button></div><p id="resultCount" class="result-count" aria-live="polite"></p><div class="products" id="products"></div></div></section></div>
 <div class="page-view" data-page="services" hidden><section class="section" id="services"><div class="wrap"><div class="section-head"><div><p class="eyebrow">SERVICES / STARTING AT</p><h2>Perivelle audio services.</h2></div><p class="sub">Starting prices should reflect your official rates. Final quotes depend on complexity, duration, licensing, and deadline.</p></div><div class="service-grid">
@@ -803,6 +803,45 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     if(product){if(Number.isFinite(Number(item.price)))product.price=Number(item.price);product.preview=String(item.preview||"");}
    });
    renderProducts();renderCart();
+  }
+  if(Array.isArray(settings.portfolio_videos)){
+   function portfolioEmbed(value){
+    try{
+     const url=new URL(String(value||""));
+     if(url.protocol!=="https:")return "";
+     const host=url.hostname.toLowerCase();
+     if(host==="youtu.be"){
+      const id=url.pathname.split("/").filter(Boolean)[0];
+      return id?"https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id):"";
+     }
+     if(["youtube.com","www.youtube.com","youtube-nocookie.com","www.youtube-nocookie.com"].includes(host)){
+      if(url.pathname==="/watch"){const id=url.searchParams.get("v");return id?"https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id):""}
+      const match=url.pathname.match(/^\/(?:embed|shorts)\/([A-Za-z0-9_-]+)/);
+      return match?"https://www.youtube-nocookie.com/embed/"+encodeURIComponent(match[1]):"";
+     }
+     if(["vimeo.com","www.vimeo.com","player.vimeo.com"].includes(host)){
+      const id=url.pathname.split("/").filter(Boolean).pop();
+      return id&&/^\d+$/.test(id)?"https://player.vimeo.com/video/"+id:"";
+     }
+    }catch(error){}
+    return "";
+   }
+   settings.portfolio_videos.forEach(function(item){
+    const id=String(item.id||"").replace(/[^a-z0-9-]/gi,"");
+    const card=document.querySelector('[data-portfolio-category="'+id+'"]');
+    if(!card)return;
+    const frame=card.querySelector(".portfolio-video-frame");if(!frame)return;
+    const src=portfolioEmbed(item.url);
+    if(src){
+     const iframe=document.createElement("iframe");iframe.src=src;
+     iframe.title="Perivelle "+String(item.name||"Portfolio")+" video preview";
+     iframe.loading="lazy";iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+     iframe.referrerPolicy="strict-origin-when-cross-origin";iframe.allowFullscreen=true;frame.replaceChildren(iframe);
+    }else{
+     const empty=document.createElement("div");empty.className="portfolio-video-empty";
+     empty.setAttribute("aria-label",String(item.name||"Portfolio")+" video preview will be added later");frame.replaceChildren(empty);
+    }
+   });
   }
   if(Array.isArray(settings.service_prices)){
    document.querySelectorAll(".service-card").forEach(function(card,index){
