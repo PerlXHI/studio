@@ -1089,6 +1089,23 @@ html[data-theme="dark"] .portfolio-scroll-hint-icon{border-color:#8f80c5}
 .featured-portfolio-frame{border-radius:11px}
 @media(max-width:850px){.portfolio-category-list,.featured-portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}}
 @media(max-width:560px){.portfolio-category-list,.featured-portfolio-grid{grid-template-columns:1fr;gap:12px}.portfolio-category-group{padding:9px;border-radius:17px}}
+/* CONTACT US — direct icon links, no popup card */
+.contact-menu{width:auto;padding:0;border:0;border-radius:0;background:transparent!important;box-shadow:none!important;backdrop-filter:none;display:flex;align-items:center;gap:9px}
+.contact-menu[hidden]{display:none}
+.contact-menu-title{display:none}
+.contact-option{width:42px;height:42px;padding:0;display:flex;justify-content:center;align-items:center;border:1px solid #ded8f2;border-radius:50%;background:rgba(255,255,255,.94);box-shadow:0 6px 18px #33265b20;color:#554b7b}
+.contact-option>span:last-child{display:none}
+.contact-option .contact-option-icon{width:22px;height:22px;flex-basis:22px}
+.contact-option .contact-option-icon svg{width:22px;height:22px}
+.contact-option:hover{transform:translateY(-2px);background:#f0edff}
+html[data-theme="dark"] .contact-option{background:rgba(42,38,65,.96);color:#f1efff;border-color:#514a70}
+@media(max-width:560px){.contact-menu{gap:7px}.contact-option{width:38px;height:38px}}
+
+/* CONTACT ICONS — fully transparent backgrounds */
+.contact-menu,.contact-option,.contact-option:hover{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
+.contact-option{width:38px;height:38px;padding:0;border-radius:0;transform:none}
+.contact-option:hover{transform:translateY(-2px)}
+html[data-theme="dark"] .contact-option{background:transparent!important;border:0!important;box-shadow:none!important}
 </style>
 <link rel="icon" type="image/jpeg" href="/assets/illustrations/perivellelogo.jpg">
 <link rel="apple-touch-icon" href="/assets/illustrations/perivellelogo.jpg">
@@ -1602,21 +1619,3 @@ setLanguage("en");
 
 </body>
 </html>
-
-/* CONTACT US — direct icon links, no popup card */
-.contact-menu{width:auto;padding:0;border:0;border-radius:0;background:transparent!important;box-shadow:none!important;backdrop-filter:none;display:flex;align-items:center;gap:9px}
-.contact-menu[hidden]{display:none}
-.contact-menu-title{display:none}
-.contact-option{width:42px;height:42px;padding:0;display:flex;justify-content:center;align-items:center;border:1px solid #ded8f2;border-radius:50%;background:rgba(255,255,255,.94);box-shadow:0 6px 18px #33265b20;color:#554b7b}
-.contact-option>span:last-child{display:none}
-.contact-option .contact-option-icon{width:22px;height:22px;flex-basis:22px}
-.contact-option .contact-option-icon svg{width:22px;height:22px}
-.contact-option:hover{transform:translateY(-2px);background:#f0edff}
-html[data-theme="dark"] .contact-option{background:rgba(42,38,65,.96);color:#f1efff;border-color:#514a70}
-@media(max-width:560px){.contact-menu{gap:7px}.contact-option{width:38px;height:38px}}
-
-/* CONTACT ICONS — fully transparent backgrounds */
-.contact-menu,.contact-option,.contact-option:hover{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
-.contact-option{width:38px;height:38px;padding:0;border-radius:0;transform:none}
-.contact-option:hover{transform:translateY(-2px)}
-html[data-theme="dark"] .contact-option{background:transparent!important;border:0!important;box-shadow:none!important}
