@@ -1614,3 +1614,9 @@ setLanguage("en");
 .contact-option:hover{transform:translateY(-2px);background:#f0edff}
 html[data-theme="dark"] .contact-option{background:rgba(42,38,65,.96);color:#f1efff;border-color:#514a70}
 @media(max-width:560px){.contact-menu{gap:7px}.contact-option{width:38px;height:38px}}
+
+/* CONTACT ICONS — fully transparent backgrounds */
+.contact-menu,.contact-option,.contact-option:hover{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
+.contact-option{width:38px;height:38px;padding:0;border-radius:0;transform:none}
+.contact-option:hover{transform:translateY(-2px)}
+html[data-theme="dark"] .contact-option{background:transparent!important;border:0!important;box-shadow:none!important}
