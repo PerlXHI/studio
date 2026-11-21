@@ -1509,7 +1509,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     card.dataset.status=availability.toLowerCase();
     card.setAttribute("aria-label",["Commission availability",availability,batch,slots].join(", "));
     const live=card.querySelector(".commission-status-live");
-    if(live)live.lastChild.textContent=" LIVE UPDATE";
+    if(live)live.lastChild.textContent=" "+(availability.toLowerCase()==="open"?"OPEN":availability.toUpperCase());
    }
   }
   if(settings.studio_links&&settings.studio_links.discord)DISCORD_URL=settings.studio_links.discord;
