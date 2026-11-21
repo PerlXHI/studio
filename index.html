@@ -53,23 +53,22 @@ html[data-theme="dark"] .commission-status-divider{background:linear-gradient(90
 html[data-theme="dark"] .commission-status-bottom strong{color:#d4c4ff}
 
 
-/* COMMISSION AVAILABILITY — refined compact horizontal card */
-.hero-kicker.commission-status-card{display:block;width:min(100%,460px);padding:12px 15px;margin-top:16px;border:1px solid #ded8f0;border-radius:14px;background:linear-gradient(112deg,rgba(255,255,255,.98),rgba(246,243,255,.96) 58%,rgba(237,245,255,.97));box-shadow:0 7px 20px rgba(93,76,145,.08),inset 0 1px 0 rgba(255,255,255,.9);backdrop-filter:blur(10px);transition:border-color .2s ease,box-shadow .2s ease}
+/* COMMISSION AVAILABILITY — single-line compact layout */
+.hero-kicker.commission-status-card{display:flex;align-items:center;flex-wrap:nowrap;gap:10px;width:min(100%,480px);padding:10px 13px;margin-top:16px;border:1px solid #ded8f0;border-radius:13px;background:linear-gradient(112deg,rgba(255,255,255,.98),rgba(246,243,255,.96) 58%,rgba(237,245,255,.97));box-shadow:0 7px 20px rgba(93,76,145,.08),inset 0 1px 0 rgba(255,255,255,.9);backdrop-filter:blur(10px)}
 .hero-kicker.commission-status-card:before{display:none}
-.commission-status-top{display:flex;align-items:center;gap:8px;min-height:25px}
-.commission-status-icon{display:grid;place-items:center;flex:0 0 24px;width:24px;height:24px;border-radius:8px;font-size:.76rem}
-.commission-status-label{font-size:.57rem;line-height:1;letter-spacing:.13em}
-.commission-status-live{display:inline-flex;align-items:center;gap:6px;margin-left:auto;padding:5px 8px;border-radius:999px;font-size:.54rem;line-height:1;letter-spacing:.06em;white-space:nowrap}
-.commission-status-main{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0 9px}
-.commission-status-main strong{font-size:clamp(.94rem,1.8vw,1.1rem);font-weight:700;line-height:1.2;letter-spacing:-.025em}
-.commission-status-main span{max-width:48%;padding:5px 9px;border:1px solid rgba(130,112,177,.16);border-radius:8px;background:rgba(237,232,255,.48);font-size:.69rem;line-height:1.2;text-align:center}
+.commission-status-top,.commission-status-main,.commission-status-bottom{display:contents}
+.commission-status-icon{display:grid;place-items:center;flex:0 0 23px;width:23px;height:23px;border-radius:7px;font-size:.72rem;order:0}
+.commission-status-label{flex:0 0 auto;font-size:.55rem;line-height:1;letter-spacing:.11em;white-space:nowrap;order:1}
+.commission-status-live{display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;margin:0;padding:5px 8px;border-radius:999px;font-size:.55rem;line-height:1;letter-spacing:.04em;white-space:nowrap;order:2}
+.commission-status-live i{width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:#62ad87;box-shadow:0 0 0 3px #62ad8720}
+.commission-status-main strong{display:none}
+.commission-status-main span{flex:1 1 auto;min-width:0;max-width:none;padding:0;border:0;background:transparent;font-size:.69rem;line-height:1.2;text-align:left;white-space:nowrap;order:3}
 .commission-status-divider{display:none}
-.commission-status-bottom{display:flex;justify-content:flex-end;align-items:center;padding-top:0}
-.commission-status-bottom strong{display:inline-flex;align-items:center;padding:5px 9px;border:1px solid #d9d0f0;border-radius:8px;background:rgba(237,232,255,.72);font-size:.66rem;font-weight:650;line-height:1.15;color:#65558f}
+.commission-status-bottom strong{display:inline-flex;align-items:center;flex:0 0 auto;margin-left:auto;padding:5px 8px;border:1px solid #d9d0f0;border-radius:8px;background:rgba(237,232,255,.72);font-size:.64rem;font-weight:650;line-height:1.1;color:#65558f;white-space:nowrap;order:4}
 html[data-theme="dark"] .hero-kicker.commission-status-card{border-color:#7666a6;background:linear-gradient(112deg,#302849 0%,#292b49 58%,#24364b 100%);box-shadow:0 10px 26px rgba(5,4,15,.38),inset 0 1px 0 rgba(255,255,255,.10)}
-html[data-theme="dark"] .commission-status-main span{border-color:#71619d;background:rgba(64,54,93,.55);color:#eee5ff}
+html[data-theme="dark"] .commission-status-main span{color:#e0d9f1}
 html[data-theme="dark"] .commission-status-bottom strong{border-color:#71619d;background:#40365d;color:#eee5ff}
-@media(max-width:600px){.hero-kicker.commission-status-card{padding:10px 12px;border-radius:12px}.commission-status-main{align-items:flex-start;flex-direction:column;gap:6px;margin:9px 0}.commission-status-main span{max-width:100%;text-align:left}.commission-status-bottom{justify-content:flex-start}.commission-status-bottom strong{font-size:.65rem;padding:4px 7px}}
+@media(max-width:600px){.hero-kicker.commission-status-card{flex-wrap:wrap;gap:8px;padding:10px 12px}.commission-status-main span{flex:1 1 100%;white-space:normal;order:3}.commission-status-bottom strong{margin-left:auto}}
  
 /* HIGH-CONTRAST COMMISSION STATUS CARD IN DARK MODE */
 html[data-theme="dark"] .hero-kicker.commission-status-card{
