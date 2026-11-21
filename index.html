@@ -1421,7 +1421,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   setLink("contactTwitter",links.twitter);
  }
  function close(){menu.hidden=true;trigger.setAttribute("aria-expanded","false")}
- trigger.addEventListener("click",function(){const opening=menu.hidden;menu.hidden=!opening;trigger.setAttribute("aria-expanded",String(opening))});
+ trigger.addEventListener("click",function(){close()});
  document.addEventListener("click",function(event){if(!widget.contains(event.target))close()});
  document.addEventListener("keydown",function(event){if(event.key==="Escape"&&!menu.hidden){close();trigger.focus()}});
  window.addEventListener("perivelle:contact-links",function(event){applyLinks(event.detail||{})});
