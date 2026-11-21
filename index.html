@@ -52,6 +52,16 @@ html[data-theme="dark"] .commission-status-main span{color:#c0b6d5}
 html[data-theme="dark"] .commission-status-divider{background:linear-gradient(90deg,#4b4265,rgba(75,66,101,.25))}
 html[data-theme="dark"] .commission-status-bottom strong{color:#d4c4ff}
 
+
+/* COMMISSION AVAILABILITY — refined prominent layout */
+.hero-kicker.commission-status-card{width:min(100%,470px);padding:21px 22px 19px;border-radius:22px;border-width:1px;box-shadow:0 18px 46px rgba(92,73,150,.16);}
+.commission-status-top{gap:10px}.commission-status-icon{width:34px;height:34px;border-radius:11px;font-size:1rem}.commission-status-label{font-size:.68rem;letter-spacing:.16em}.commission-status-live{padding:6px 9px;font-size:.6rem}
+.commission-status-main{gap:6px;margin:17px 0 16px}.commission-status-main strong{font-size:clamp(1.4rem,3vw,1.8rem);letter-spacing:-.045em}.commission-status-main span{font-size:.9rem}
+.commission-status-divider{opacity:.9}.commission-status-bottom{padding-top:14px;align-items:center}.commission-status-caption{font-size:.65rem;letter-spacing:.12em}.commission-status-bottom strong{font-size:1rem;font-weight:700;padding:8px 12px;border-radius:12px;background:rgba(125,103,184,.11);border:1px solid rgba(125,103,184,.18)}
+html[data-theme="dark"] .hero-kicker.commission-status-card{border-color:#a393d8;background:linear-gradient(125deg,#393052 0%,#302f50 55%,#263b51 100%);box-shadow:0 20px 50px rgba(4,4,15,.46),0 0 26px rgba(158,135,224,.12)}
+html[data-theme="dark"] .commission-status-bottom strong{background:#4a3e69;border-color:#8b79bc;color:#fff;box-shadow:inset 0 1px 0 #ffffff18}
+@media(max-width:600px){.hero-kicker.commission-status-card{padding:17px 16px;border-radius:18px}.commission-status-main strong{font-size:1.35rem}.commission-status-bottom strong{font-size:.88rem;padding:7px 9px}}
+
 /* HIGH-CONTRAST COMMISSION STATUS CARD IN DARK MODE */
 html[data-theme="dark"] .hero-kicker.commission-status-card{
  border:1px solid #8b7ac4;
@@ -1065,10 +1075,10 @@ html[data-theme="dark"] .portfolio-scroll-hint-icon{border-color:#8f80c5}
 <header><div class="wrap"><nav aria-label="Main navigation"><a class="brand" href="#home" data-page-link="home"><span>P.</span> PERIVELLE</a><a class="navlink" href="#home" data-page-link="home" aria-current="page">Home</a><a class="navlink" href="#portfolio" data-page-link="portfolio">Portfolio</a><a class="navlink" href="#services" data-page-link="services">Services</a><a class="navlink" href="#team" data-page-link="team">Our Team</a><a class="navlink" href="#custom" data-page-link="custom">Commission</a><a class="navlink" href="#track" data-page-link="track">Track</a><a class="navlink" href="#license" data-page-link="license">Licensing</a><a class="navlink" href="#faq" data-page-link="faq">FAQ</a></nav></div></header>
 <main id="main-content">
 <div class="page-view" data-page="home"><section class="hero" id="home"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">AUDIO IDENTITY FOR VTUBERS & CREATORS</p><h1>More than BGM. <em>Build your world’s audio identity.</em></h1><p>Original BGM, lore music, original songs, instrumental covers, sound alerts, and stingers—crafted to bring your VTuber character, stream, and story to life.</p><div class="actions"><a class="btn" href="#portfolio">Explore the portfolio ↘</a><a class="btn secondary" href="#custom">Start a commission</a></div><div class="commission-status-card hero-kicker" id="publicCommissionStatus" aria-label="Commission availability">
- <div class="commission-status-top"><span class="commission-status-icon" aria-hidden="true">✦</span><span class="commission-status-label">COMMISSION AVAILABILITY</span><span class="commission-status-live"><i></i> LIVE</span></div>
+ <div class="commission-status-top"><span class="commission-status-icon" aria-hidden="true">✦</span><span class="commission-status-label">COMMISSIONS</span><span class="commission-status-live"><i></i> LIVE UPDATE</span></div>
  <div class="commission-status-main"><strong id="publicCommissionAvailability">Status update soon</strong><span id="publicCommissionBatch">Batch details will appear here</span></div>
  <div class="commission-status-divider"></div>
- <div class="commission-status-bottom"><span class="commission-status-caption">CURRENT CAPACITY</span><strong id="publicCommissionSlots">Check back for available slots</strong></div>
+ <div class="commission-status-bottom"><span class="commission-status-caption">AVAILABLE SLOTS</span><strong id="publicCommissionSlots">Check back for available slots</strong></div>
 </div></div><div class="hero-art" aria-hidden="true">
 <svg class="hero-visual" viewBox="0 0 520 520" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
