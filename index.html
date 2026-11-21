@@ -1075,9 +1075,7 @@ html[data-theme="dark"] .portfolio-scroll-hint-icon{border-color:#8f80c5}
 <main id="main-content">
 <div class="page-view" data-page="home"><section class="hero" id="home"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">AUDIO IDENTITY FOR VTUBERS & CREATORS</p><h1>More than BGM. <em>Build your world’s audio identity.</em></h1><p>Original BGM, lore music, original songs, instrumental covers, sound alerts, and stingers—crafted to bring your VTuber character, stream, and story to life.</p><div class="actions"><a class="btn" href="#portfolio">Explore the portfolio ↘</a><a class="btn secondary" href="#custom">Start a commission</a></div><div class="commission-status-card hero-kicker" id="publicCommissionStatus" aria-label="Commission availability">
  <div class="commission-status-top"><span class="commission-status-icon" aria-hidden="true">✦</span><span class="commission-status-label">COMMISSIONS</span><span class="commission-status-live"><i></i> LIVE UPDATE</span></div>
- <div class="commission-status-main"><strong id="publicCommissionAvailability">Status update soon</strong><span id="publicCommissionBatch">Batch details will appear here</span></div>
- <div class="commission-status-divider"></div>
- <div class="commission-status-bottom"><span class="commission-status-caption">AVAILABLE SLOTS</span><strong id="publicCommissionSlots">Check back for available slots</strong></div>
+ <div class="commission-status-main"><span id="publicCommissionBatch">Batch details will appear here</span></div>
 </div></div><div class="hero-art" aria-hidden="true">
 <svg class="hero-visual" viewBox="0 0 520 520" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
@@ -1510,7 +1508,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     card.dataset.status=availability.toLowerCase();
     card.setAttribute("aria-label",["Commission availability",availability,batch,slots].join(", "));
     const live=card.querySelector(".commission-status-live");
-    if(live)live.lastChild.textContent=" "+(availability.toLowerCase()==="open"?"OPEN":availability.toUpperCase());
+    if(live)live.lastChild.textContent=" LIVE UPDATE";
    }
   }
   if(settings.studio_links&&settings.studio_links.discord)DISCORD_URL=settings.studio_links.discord;
