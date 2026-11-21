@@ -53,13 +53,14 @@ html[data-theme="dark"] .commission-status-divider{background:linear-gradient(90
 html[data-theme="dark"] .commission-status-bottom strong{color:#d4c4ff}
 
 
-/* COMMISSION AVAILABILITY — compact horizontal card */
-.hero-kicker.commission-status-card{width:min(100%,560px);padding:13px 16px;border-radius:15px}
-.commission-status-top{gap:8px}.commission-status-icon{width:28px;height:28px;border-radius:9px;font-size:.85rem}.commission-status-label{font-size:.6rem;letter-spacing:.12em}.commission-status-live{padding:4px 7px;font-size:.55rem}
-.commission-status-main{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:9px 0 8px}.commission-status-main strong{font-size:clamp(1rem,2vw,1.22rem);letter-spacing:-.03em}.commission-status-main span{font-size:.78rem;text-align:right}
-.commission-status-divider{display:none}.commission-status-bottom{padding-top:0;gap:10px}.commission-status-caption{font-size:.57rem;letter-spacing:.09em}.commission-status-bottom strong{font-size:.75rem;padding:5px 8px;border-radius:9px}
-html[data-theme="dark"] .hero-kicker.commission-status-card{box-shadow:0 12px 30px rgba(4,4,15,.35),0 0 18px rgba(158,135,224,.08)}
-@media(max-width:600px){.hero-kicker.commission-status-card{padding:12px 13px;border-radius:14px}.commission-status-main{align-items:flex-start;flex-direction:column;gap:2px}.commission-status-main strong{font-size:1.12rem}.commission-status-main span{text-align:left}.commission-status-bottom strong{font-size:.7rem;padding:5px 7px}}
+/* COMMISSION AVAILABILITY — modern elongated card */
+.hero-kicker.commission-status-card{display:block;width:min(100%,560px);padding:16px 19px;margin-top:22px;border:1px solid #ded8f0;border-radius:18px;background:linear-gradient(112deg,rgba(255,255,255,.97),rgba(244,241,255,.94) 58%,rgba(232,242,255,.96));box-shadow:0 12px 32px rgba(93,76,145,.10),inset 0 1px 0 rgba(255,255,255,.9);backdrop-filter:blur(14px);transition:border-color .2s ease,box-shadow .2s ease}
+.hero-kicker.commission-status-card:before{display:none}.commission-status-top{display:flex;align-items:center;gap:9px}.commission-status-icon{width:29px;height:29px;border-radius:10px}.commission-status-label{font-size:.62rem;letter-spacing:.14em}.commission-status-live{margin-left:auto;padding:5px 9px;font-size:.57rem;letter-spacing:.08em}
+.commission-status-main{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin:12px 0 11px}.commission-status-main strong{font-size:clamp(1.05rem,2.2vw,1.3rem);font-weight:700;letter-spacing:-.035em}.commission-status-main span{font-size:.8rem;text-align:right}
+.commission-status-divider{display:none}.commission-status-bottom{display:flex;justify-content:flex-end;align-items:center;padding-top:0}.commission-status-bottom strong{padding:6px 10px;border:1px solid #d9d0f0;border-radius:10px;background:rgba(237,232,255,.72);font-size:.74rem;font-weight:650;color:#65558f}
+html[data-theme="dark"] .hero-kicker.commission-status-card{border-color:#7666a6;background:linear-gradient(112deg,#302849 0%,#292b49 58%,#24364b 100%);box-shadow:0 16px 38px rgba(5,4,15,.42),inset 0 1px 0 rgba(255,255,255,.10)}
+html[data-theme="dark"] .commission-status-bottom strong{border-color:#71619d;background:#40365d;color:#eee5ff}
+@media(max-width:600px){.hero-kicker.commission-status-card{padding:14px 15px;border-radius:15px}.commission-status-main{align-items:flex-start;flex-direction:column;gap:3px}.commission-status-main span{text-align:left}.commission-status-bottom{justify-content:flex-start}.commission-status-bottom strong{font-size:.72rem}}
 
 /* HIGH-CONTRAST COMMISSION STATUS CARD IN DARK MODE */
 html[data-theme="dark"] .hero-kicker.commission-status-card{
@@ -1075,7 +1076,7 @@ html[data-theme="dark"] .portfolio-scroll-hint-icon{border-color:#8f80c5}
 <main id="main-content">
 <div class="page-view" data-page="home"><section class="hero" id="home"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">AUDIO IDENTITY FOR VTUBERS & CREATORS</p><h1>More than BGM. <em>Build your world’s audio identity.</em></h1><p>Original BGM, lore music, original songs, instrumental covers, sound alerts, and stingers—crafted to bring your VTuber character, stream, and story to life.</p><div class="actions"><a class="btn" href="#portfolio">Explore the portfolio ↘</a><a class="btn secondary" href="#custom">Start a commission</a></div><div class="commission-status-card hero-kicker" id="publicCommissionStatus" aria-label="Commission availability">
  <div class="commission-status-top"><span class="commission-status-icon" aria-hidden="true">✦</span><span class="commission-status-label">COMMISSIONS</span><span class="commission-status-live"><i></i> LIVE UPDATE</span></div>
- <div class="commission-status-main"><span id="publicCommissionBatch">Batch details will appear here</span></div>
+ <div class="commission-status-main"><strong id="publicCommissionAvailability">Status update soon</strong><span id="publicCommissionBatch">Batch details will appear here</span></div>
  <div class="commission-status-bottom"><strong id="publicCommissionSlots">3 Available Slots</strong></div>
 </div></div><div class="hero-art" aria-hidden="true">
 <svg class="hero-visual" viewBox="0 0 520 520" focusable="false" xmlns="http://www.w3.org/2000/svg">
