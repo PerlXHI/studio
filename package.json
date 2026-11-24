@@ -1,0 +1,13 @@
+{
+  "name": "perivelle-studio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Perivelle Studio static website build",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:check": "node --check scripts/build.mjs"
+  },
+  "devDependencies": {
+    "nunjucks": "^3.2.4"
+  }
+}
