@@ -4,10 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7f6ff">
-<title>Perivelle — Original BGM for Creators</title>
-<meta name="description" content="Original BGM, sound alerts, portfolio, and custom music for creators.">
+<title>Perivelle Studio — Sound that brings your world to life</title>
+<meta name="description" content="Perivelle Studio creates original music, sound design, and audio experiences for VTubers, streamers, and creators.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/webp" href="assets/brand/pfp.webp">
 <style>
 :root{--paper:#f4f0e7;--card:#fbf9f4;--ink:#202a23;--muted:#6d766d;--line:#d8d8ca;--green:#415b49;--rust:#b6563b;--r:5px;color-scheme:light}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:82px}body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 "DM Sans",system-ui,sans-serif}a{color:inherit}button,input,select,textarea{font:inherit}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--rust);outline-offset:3px}.wrap{width:min(1160px,calc(100% - 44px));margin:auto}.mono,.eyebrow{font:500 .72rem/1.4 "DM Mono",monospace;text-transform:uppercase;letter-spacing:.13em;color:var(--muted)}
 header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}nav{min-height:70px;display:flex;align-items:center;gap:22px}.brand{display:inline-flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.04em;text-decoration:none;margin-right:auto;white-space:nowrap}.brand img{display:block;width:34px;height:34px;object-fit:contain;border-radius:7px;background:#000;flex:0 0 34px}.brand span{color:var(--rust)}.navlink{font-size:.88rem;text-decoration:none;color:var(--muted);white-space:nowrap}.navlink:hover{color:var(--ink)}.nav-actions{display:flex;gap:8px;align-items:center}.quiet,.cart-button{border:1px solid var(--line);background:transparent;color:var(--ink);padding:8px 12px;border-radius:var(--r);font-size:.84rem;cursor:pointer;white-space:nowrap}
@@ -1106,53 +1107,409 @@ html[data-theme="dark"] .contact-menu{background:rgba(35,30,52,.97)!important;bo
 html[data-theme="dark"] .contact-option{color:#f1eaff}
 html[data-theme="dark"] .contact-option .x-icon{color:#f4f1ff}
 @media(max-width:560px){.contact-menu{width:205px;padding:11px}.contact-option{padding:9px 10px}}
+
+/* PERIVELLE SOFT PINK / VIOLET REDESIGN */
+:root{
+ --pv-violet:#6e3acc;--pv-pink:#ff5093;--pv-deep:#d12d76;--pv-orchid:#c67ebf;--pv-lilac:#a7c1fc;
+ --pv-blush:#f1e3ee;--pv-paper:#fcf8fc;--pv-plum:#462e52;--pv-muted:#71627a;--pv-line:#eadfed;
+ --pv-card:rgba(255,255,255,.78);--pv-shadow:0 18px 54px rgba(85,48,115,.09);
+ color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px;background:var(--pv-paper)}
+body{margin:0;background:radial-gradient(ellipse at 8% 5%,#f1e2ff 0,transparent 34%),radial-gradient(ellipse at 92% 20%,#ffe4f0 0,transparent 27%),linear-gradient(180deg,#fcf8fc,#f8f3fb 65%,#fcf8fc);color:var(--pv-plum);font:400 16px/1.65 Inter,system-ui,sans-serif}
+h1,h2,h3,h4{font-family:Sora,Inter,sans-serif;color:var(--pv-plum);letter-spacing:-.045em}
+a{color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--pv-pink);outline-offset:4px}
+.page-view[hidden],.contact-menu[hidden],.toast[hidden]{display:none!important}
+.wrap{width:min(1240px,calc(100% - 48px));margin:0 auto}
+.pv-header{position:sticky;top:0;z-index:50;background:rgba(252,248,252,.84);backdrop-filter:blur(18px);border-bottom:1px solid rgba(234,223,237,.86);box-shadow:0 5px 24px rgba(70,46,82,.035)}
+.pv-header nav{min-height:76px;display:flex;align-items:center;gap:clamp(12px,2.2vw,28px);overflow:visible}
+.pv-brand{display:inline-flex;align-items:center;gap:10px;margin-right:auto;text-decoration:none;color:var(--pv-plum);font:800 1.45rem/1 Sora,sans-serif;letter-spacing:-.075em;white-space:nowrap}
+.pv-brand-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:linear-gradient(140deg,#8d57de,#ff7db4);overflow:hidden;box-shadow:0 7px 16px #9b6edb36}
+.pv-brand-mark img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.pv-brand-star{color:var(--pv-pink);margin-left:2px}
+.pv-header .navlink{font-size:.86rem;font-weight:650;text-decoration:none;color:#554463;padding:9px 15px;border-radius:999px;transition:background .2s,color .2s;white-space:nowrap}
+.pv-header .navlink:hover,.pv-header .navlink[aria-current=page]{background:#f0e4fc;color:#5425a9}
+.pv-nav-cta{display:inline-flex;align-items:center;gap:8px;margin-left:3px;padding:11px 21px;border-radius:999px;background:linear-gradient(105deg,var(--pv-pink),#ed3f91);color:white;text-decoration:none;font-size:.85rem;font-weight:750;box-shadow:0 9px 22px rgba(255,80,147,.22);white-space:nowrap}
+.pv-nav-cta:hover,.pv-primary:hover{transform:translateY(-2px);box-shadow:0 13px 25px rgba(255,80,147,.3)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 21px;border:1px solid transparent;border-radius:999px;background:linear-gradient(105deg,var(--pv-pink),#ee4597);color:#fff;text-decoration:none;font-size:.9rem;font-weight:750;line-height:1.2;box-shadow:0 9px 22px rgba(255,80,147,.2);transition:transform .2s,box-shadow .2s}
+.btn.secondary,.pv-secondary{background:rgba(255,255,255,.6);color:#5c348d;border-color:#c9a5ea;box-shadow:none}
+.btn.secondary:hover,.pv-secondary:hover{background:#f4e9fc;border-color:#a77ad6}
+.pv-hero{position:relative;isolation:isolate;overflow:hidden;padding:clamp(56px,7.3vw,98px) 0 32px;background:linear-gradient(112deg,rgba(255,255,255,.53),rgba(248,236,255,.4) 52%,rgba(255,232,242,.45))}
+.pv-hero:before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse at 69% 50%,#e8d9ff 0,transparent 38%),radial-gradient(ellipse at 100% 5%,#ffd7e9 0,transparent 26%)}
+.pv-hero:after{content:"";position:absolute;z-index:-1;left:-5%;right:-5%;bottom:-115px;height:180px;background:#fcf8fc;border-radius:50% 50% 0 0 / 28% 28% 0 0}
+.pv-hero-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(440px,1.08fr);align-items:center;gap:clamp(24px,4vw,56px);min-height:500px}
+.pv-hero-copy{position:relative;z-index:2;max-width:590px;padding-bottom:20px}
+.pv-eyebrow{display:flex;align-items:center;gap:9px;margin:0 0 18px;color:#9a5c9f;font-size:.68rem;font-weight:800;letter-spacing:.16em;line-height:1.3}
+.pv-eyebrow>span{width:8px;height:8px;border-radius:50%;background:var(--pv-pink);box-shadow:0 0 0 5px rgba(255,80,147,.12)}
+.pv-hero .pv-eyebrow{display:inline-flex;padding:8px 15px;border-radius:999px;background:linear-gradient(100deg,#b87bd8,#d77ab9);color:white}
+.pv-hero .pv-eyebrow>span{background:white;box-shadow:0 0 0 4px #ffffff2c}
+.pv-hero h1{max-width:10ch;margin:0 0 22px;font-size:clamp(3.2rem,6.25vw,5.65rem);font-weight:800;line-height:.99;letter-spacing:-.075em}
+.pv-hero h1 em,.pv-section-head h2 em,.pv-about-copy h2 em,.pv-team-heading h2 em,.pv-faq-copy h2 em,.pv-bottom-cta h2 em{font-style:normal;color:var(--pv-pink)}
+.pv-hero-lead{max-width:475px;margin:0 0 27px;color:#65556f;font-size:1rem;line-height:1.7}
+.pv-actions{display:flex;flex-wrap:wrap;gap:12px}
+.pv-play-icon{font-size:.78rem}
+.pv-hero-status{width:min(100%,390px);margin-top:32px;padding:13px 16px;border:1px solid #e6d7eb;border-radius:17px;background:rgba(255,255,255,.66);box-shadow:0 10px 28px rgba(83,50,106,.06)}
+.pv-hero-status .commission-status-top{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.pv-hero-status .commission-status-icon{color:var(--pv-pink)}
+.pv-hero-status .commission-status-label{font-size:.62rem;font-weight:800;letter-spacing:.13em;color:#856991}
+.pv-hero-status .commission-status-live{margin-left:auto;font-size:.61rem;color:#7c6b83}
+.pv-hero-status .commission-status-live i{display:inline-block;width:7px;height:7px;margin-right:5px;border-radius:50%;background:#71c58b}
+.pv-hero-status .commission-status-main{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.pv-hero-status .commission-status-main strong{font:750 1rem Sora,sans-serif;color:var(--pv-plum)}
+.pv-hero-status .commission-status-main span,.pv-hero-status .commission-status-bottom{font-size:.75rem;color:#796b80}
+.pv-hero-status .commission-status-bottom{display:none}
+.pv-hero-art{position:relative;display:grid;place-items:center;min-height:510px;isolation:isolate}
+.pv-hero-art:before{content:"";position:absolute;z-index:-2;width:min(90%,510px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 40%,#fff 0,#f4ddff 42%,#d6c5f4 68%,rgba(214,197,244,0) 72%);filter:blur(2px)}
+.pv-hero-art:after{content:"";position:absolute;z-index:-1;bottom:8%;left:10%;right:8%;height:58px;border-radius:50%;background:#a17ac455;filter:blur(20px)}
+.pv-mascot{position:relative;z-index:2;width:min(100%,690px);height:auto;object-fit:contain;filter:drop-shadow(0 17px 22px rgba(90,49,112,.13));animation:pv-float 6s ease-in-out infinite}
+.pv-orbit{position:absolute;z-index:0;border:1.5px solid rgba(175,128,220,.38);border-radius:50%;pointer-events:none}
+.pv-orbit-a{width:83%;height:42%;transform:rotate(-20deg)}
+.pv-orbit-b{width:72%;height:60%;transform:rotate(24deg);border-color:rgba(255,112,169,.28)}
+.pv-spark{position:absolute;color:var(--pv-pink);font-size:2.2rem;text-shadow:0 0 18px rgba(255,80,147,.35)}
+.pv-spark-a{top:8%;right:17%}.pv-spark-b{top:24%;left:3%;font-size:1.55rem;color:#a675e5}.pv-spark-c{bottom:12%;right:8%;font-size:1.55rem}
+.pv-wave-card{position:absolute;z-index:3;top:15%;right:0;display:flex;align-items:center;gap:4px;padding:13px 16px;border:1px solid #ffffffc9;border-radius:16px;background:rgba(255,255,255,.7);box-shadow:0 12px 28px rgba(84,48,115,.1);transform:rotate(5deg)}
+.pv-wave-card span,.pv-wave-card i{display:block;width:3px;border-radius:8px;background:linear-gradient(180deg,#bd86ec,#fa72b3)}
+.pv-wave-card span{height:13px}.pv-wave-card i{height:25px}.pv-wave-card i:nth-child(2n){height:18px}.pv-wave-card i:nth-child(3n){height:32px}.pv-wave-card i:nth-child(4n){height:11px}
+.pv-art-caption{position:absolute;bottom:5%;left:50%;transform:translateX(-50%);padding:7px 13px;border:1px solid #ffffffbd;border-radius:999px;background:#fff9;color:#9677ad;font-size:.58rem;font-weight:800;letter-spacing:.15em;white-space:nowrap}
+.pv-caption-dot{display:inline-block;width:6px;height:6px;margin-right:7px;border-radius:50%;background:var(--pv-pink)}
+@keyframes pv-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.pv-trusted{position:relative;z-index:2;padding:18px 0 26px;background:linear-gradient(90deg,#fbf6fc,#fffafd,#fbf4fc);border-bottom:1px solid #f0e6f0}
+.pv-trusted-inner{display:flex;align-items:center;justify-content:center;gap:10px 13px;flex-wrap:wrap}
+.pv-trusted-label{margin-right:10px;color:#76627f;font-size:.67rem;font-weight:800;letter-spacing:.08em}
+.pv-trust-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid #eadcf1;border-radius:999px;background:#fff9;color:#5a4666;font-size:.76rem;font-weight:650}
+.pv-trust-pill b{color:#9e72ce;font-size:1rem}
+.pv-trust-more{color:#74637b;font-size:.74rem}
+.pv-section{padding:clamp(56px,6vw,82px) 0}
+.pv-section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:26px}
+.pv-section-head h2,.pv-about-copy h2,.pv-team-heading h2,.pv-faq-copy h2{margin:0;color:var(--pv-plum);font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.08}
+.pv-section-head p:not(.pv-eyebrow){margin:8px 0 0;color:#74647b}
+.pv-section-head .pv-eyebrow{margin-bottom:9px}
+.pv-text-link{display:inline-flex;align-items:center;gap:7px;color:#8a43c4;font-size:.83rem;font-weight:750;text-decoration:none;white-space:nowrap}
+.pv-text-link:hover{text-decoration:underline;text-underline-offset:4px}
+.pv-work-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:17px}
+.pv-work-card{position:relative;display:flex;flex-direction:column;min-height:320px;overflow:hidden;border:1px solid #e8dced;border-radius:22px;background:white;text-decoration:none;box-shadow:0 12px 34px rgba(74,49,89,.06);transition:transform .25s,box-shadow .25s}
+.pv-work-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(74,49,89,.12)}
+.pv-work-card>img{width:100%;height:230px;object-fit:cover;display:block;background:#eadcf5;transition:transform .45s}
+.pv-work-card:hover>img{transform:scale(1.035)}
+.pv-work-featured>img{height:230px}
+.pv-work-tag{position:absolute;top:13px;left:13px;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.88);color:#8b4bb3;font-size:.6rem;font-weight:850;letter-spacing:.09em}
+.pv-work-meta{display:grid;gap:3px;padding:14px 17px 18px}
+.pv-work-meta strong{font:750 1.03rem Sora,sans-serif;color:#4b315a}
+.pv-work-meta small{color:#887991;font-size:.73rem}
+.pv-work-arrow{position:absolute;right:15px;bottom:17px;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#f5e8fc;color:#8d4dc0;font-weight:800}
+.pv-concept-note{margin:13px 0 0;color:#907e98;font-size:.68rem}
+.pv-services-preview{padding-top:24px}
+.pv-service-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:13px}
+.pv-service-card{min-height:190px;padding:18px 16px;border:1px solid #e8dced;border-radius:20px;background:linear-gradient(150deg,rgba(255,255,255,.95),rgba(248,238,252,.8));text-decoration:none;box-shadow:0 9px 24px rgba(74,49,89,.04);transition:transform .22s,border-color .22s}
+.pv-service-card:hover{transform:translateY(-4px);border-color:#d7b9e8}
+.pv-service-icon{display:grid;place-items:center;width:40px;height:40px;margin-bottom:15px;border-radius:13px;background:linear-gradient(140deg,#f5d7f1,#e6d8ff);color:#a64dc4;font-size:1.55rem;font-weight:800}
+.pv-service-card strong{display:block;margin-bottom:6px;color:#4b3159;font:700 .83rem Sora,sans-serif;letter-spacing:-.025em}
+.pv-service-card p{margin:0;color:#776780;font-size:.72rem;line-height:1.5}
+.pv-about-preview{padding:10px 0 28px}
+.pv-about-panel{display:grid;grid-template-columns:.85fr 1.15fr;align-items:center;gap:35px;min-height:300px;padding:28px 34px;border:1px solid #eadcf0;border-radius:28px;background:linear-gradient(110deg,#fff,#fbf4ff 55%,#f4e6fb);box-shadow:var(--pv-shadow);overflow:hidden}
+.pv-about-copy{padding:15px 0 15px 18px}
+.pv-about-copy .pv-eyebrow{margin-bottom:12px}
+.pv-about-copy h2{max-width:11ch;font-size:clamp(1.8rem,3.3vw,2.55rem)}
+.pv-about-copy>p:not(.pv-eyebrow){max-width:440px;margin:14px 0 20px;color:#74647b;font-size:.88rem}
+.pv-about-copy .btn{padding:10px 18px;font-size:.8rem}
+.pv-about-art{position:relative;height:270px;overflow:hidden;border-radius:22px;clip-path:ellipse(76% 88% at 60% 52%)}
+.pv-about-art img{width:100%;height:100%;object-fit:cover;object-position:center}
+.pv-about-sticker{position:absolute;right:14px;top:13px;padding:10px 13px;border:1px solid #fff;border-radius:13px;background:#fff9;color:#8e51bb;font-size:.62rem;font-weight:850;letter-spacing:.08em;transform:rotate(6deg)}
+.pv-team-preview{padding:30px 0 42px}
+.pv-team-row{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:20px 0;border-top:1px solid #eee2ef;border-bottom:1px solid #eee2ef}
+.pv-team-heading .pv-eyebrow{margin-bottom:7px}
+.pv-team-heading h2{font-size:clamp(1.55rem,2.6vw,2.1rem)}
+.pv-team-heading>p:last-child{margin:7px 0 0;color:#806f88;font-size:.82rem}
+.pv-team-avatars{display:flex;align-items:center;gap:13px}
+.pv-team-avatar{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none}
+.pv-team-avatar>span,.pv-team-avatar>img{display:grid;place-items:center;width:63px;height:63px;object-fit:cover;border:1px solid #e5d1f0;border-radius:17px;background:linear-gradient(145deg,#f5e5fb,#e2d8ff);color:#7148a1;font:800 1.5rem Sora,sans-serif}
+.pv-team-avatar small{color:#6b5876;font-size:.68rem;font-weight:700}
+.pv-avatar-two>span{background:linear-gradient(145deg,#ffe5ef,#f2daf2);color:#c45c91}
+.pv-avatar-three>span{background:linear-gradient(145deg,#eee0ff,#dce7ff);color:#7653b1}
+.pv-avatar-four>img{padding:2px;background:#fff}
+.pv-team-avatar:hover>span,.pv-team-avatar:hover>img{transform:translateY(-3px)}
+.pv-faq-preview{padding:35px 0 70px}
+.pv-faq-grid{display:grid;grid-template-columns:.65fr 1.35fr;gap:50px;align-items:start}
+.pv-faq-copy .pv-eyebrow{margin-bottom:10px}
+.pv-faq-copy h2{font-size:clamp(1.8rem,3.2vw,2.4rem)}
+.pv-faq-copy>p:not(.pv-eyebrow){margin:12px 0 17px;color:#7b6b83;font-size:.85rem}
+.pv-faq-list{display:grid;gap:9px}
+.pv-faq-list details{border:1px solid #e9ddef;border-radius:14px;background:rgba(255,255,255,.72);overflow:hidden}
+.pv-faq-list summary{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:14px 17px;cursor:pointer;list-style:none;color:#4f385b;font-size:.82rem;font-weight:750}
+.pv-faq-list summary::-webkit-details-marker{display:none}
+.pv-faq-list summary span{color:#8854b6;font-size:1.1rem;transition:transform .2s}
+.pv-faq-list details[open] summary span{transform:rotate(180deg)}
+.pv-faq-list details p{margin:0;padding:0 17px 16px;color:#7c6b83;font-size:.78rem}
+.pv-bottom-cta{padding:0 0 34px}
+.pv-bottom-cta-inner{position:relative;display:flex;align-items:center;gap:25px;min-height:150px;padding:24px 34px 24px 26px;border:1px solid #e9dcef;border-radius:27px;background:linear-gradient(105deg,#f2e5ff,#fff5fa 62%,#fce9f2);overflow:hidden;box-shadow:0 12px 35px rgba(77,49,100,.06)}
+.pv-bottom-cta-inner>img{align-self:flex-end;width:180px;height:142px;object-fit:contain;object-position:bottom;flex:0 0 auto;margin:-28px 0 -24px -8px;filter:drop-shadow(0 10px 10px #8b5a9a2a)}
+.pv-bottom-cta-inner>div{flex:1;min-width:0}
+.pv-bottom-cta .pv-eyebrow{margin-bottom:6px}
+.pv-bottom-cta h2{margin:0;font-size:clamp(1.45rem,2.8vw,2.1rem);font-weight:800}
+.pv-bottom-cta p:last-child{margin:4px 0 0;color:#75647e;font-size:.82rem}
+.pv-footer{padding:42px 0 32px;background:linear-gradient(120deg,#62409c,#7652b3 55%,#563783);color:#fff}
+.pv-footer-grid{display:grid;grid-template-columns:1.5fr .75fr .9fr .9fr 1.2fr;gap:30px}
+.pv-footer .brand{color:white;font-size:1.35rem}
+.pv-footer .pv-brand-mark{width:34px;height:34px;background:#ffffff22;box-shadow:none}
+.pv-footer .pv-brand-star{color:#ff8cbc}
+.pv-footer-brand>p,.pv-footer-grid>div:last-child>p{max-width:280px;color:#ede3fb;font-size:.75rem;line-height:1.6}
+.pv-footer-brand>small{display:block;margin-top:25px;color:#d7c8ea;font-size:.65rem}
+.pv-footer-grid>div:not(.pv-footer-brand){display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.pv-footer-grid>div>strong{margin-bottom:7px;color:#fff;font:750 .78rem Sora,sans-serif}
+.pv-footer-grid a:not(.brand){color:#ede3fb;font-size:.72rem;text-decoration:none}
+.pv-footer-grid a:not(.brand):hover{color:white;text-decoration:underline;text-underline-offset:3px}
+.pv-footer-grid .pv-footer-cta{padding:9px 13px;border:1px solid #ffffff70;border-radius:999px;background:#ffffff18}
+#contactWidget{z-index:60}
+.contact-trigger{display:flex;align-items:center;gap:8px;padding:11px 16px;border:0;border-radius:999px;background:linear-gradient(105deg,#ff5093,#d83b93);color:white;box-shadow:0 10px 28px #ab498c35;font-weight:750}
+.contact-trigger .contact-logo{width:25px;height:25px;object-fit:cover;border-radius:50%;background:#fff}
+.contact-menu{border-radius:18px!important;border-color:#eaddef!important;background:rgba(255,250,255,.97)!important}
+.theme-toggle{width:42px;height:42px;border:1px solid #eaddef;border-radius:50%;background:#fff;color:#79549b;box-shadow:0 8px 22px #563c7020}
+@media(max-width:1000px){
+ .pv-hero-grid{grid-template-columns:1fr 1fr;gap:18px}
+ .pv-hero h1{font-size:clamp(3rem,6vw,4.7rem)}
+ .pv-hero-art{min-height:430px}
+ .pv-service-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .pv-footer-grid{grid-template-columns:1.3fr 1fr 1fr;row-gap:28px}
+}
+@media(max-width:760px){
+ .wrap{width:min(100% - 36px,640px)}
+ .pv-header nav{min-height:66px;gap:5px;overflow-x:auto;scrollbar-width:none}
+ .pv-header nav::-webkit-scrollbar{display:none}
+ .pv-brand{font-size:1.2rem;gap:7px;margin-right:8px}
+ .pv-brand-mark{width:30px;height:30px;border-radius:10px}
+ .pv-header .navlink{padding:8px 10px;font-size:.75rem}
+ .pv-nav-cta{padding:9px 13px;font-size:.76rem}
+ .pv-hero{padding:46px 0 24px}
+ .pv-hero-grid{grid-template-columns:1fr;gap:0;min-height:0}
+ .pv-hero-copy{max-width:100%;padding-bottom:0}
+ .pv-hero h1{max-width:11ch;font-size:clamp(3.1rem,11.3vw,5rem)}
+ .pv-hero-lead{max-width:540px}
+ .pv-hero-art{min-height:340px;margin-top:8px}
+ .pv-mascot{width:min(100%,550px)}
+ .pv-wave-card{top:6%;right:5%}
+ .pv-trusted-inner{justify-content:flex-start}
+ .pv-trusted-label{width:100%;margin:0 0 4px;text-align:center}
+ .pv-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .pv-work-featured{grid-column:1/-1}
+ .pv-work-card,.pv-work-card>img{min-height:0}
+ .pv-work-card>img{height:190px}
+ .pv-work-featured>img{height:225px}
+ .pv-about-panel{grid-template-columns:1fr;padding:25px;gap:20px}
+ .pv-about-copy{padding:0}
+ .pv-about-art{height:245px;clip-path:none}
+ .pv-team-row{flex-wrap:wrap}
+ .pv-team-avatars{order:3;width:100%;justify-content:center}
+ .pv-faq-grid{grid-template-columns:1fr;gap:22px}
+ .pv-footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px}
+ .pv-footer-brand{grid-column:1/-1}
+}
+@media(max-width:520px){
+ .wrap{width:calc(100% - 30px)}
+ .pv-header nav{gap:2px}
+ .pv-brand{font-size:1.08rem;margin-right:4px}
+ .pv-brand-mark{width:27px;height:27px}
+ .pv-header .navlink{padding:7px 8px;font-size:.69rem}
+ .pv-header .navlink:nth-of-type(4){display:none}
+ .pv-nav-cta{padding:8px 10px;font-size:.68rem}
+ .pv-hero{padding-top:38px}
+ .pv-hero h1{font-size:clamp(2.8rem,12vw,4rem);max-width:10ch}
+ .pv-hero-lead{font-size:.9rem}
+ .pv-actions{gap:8px}
+ .pv-actions .btn{padding:11px 14px;font-size:.78rem}
+ .pv-hero-status{margin-top:23px}
+ .pv-hero-art{min-height:270px;margin-top:8px}
+ .pv-wave-card{transform:scale(.82) rotate(5deg);transform-origin:top right;right:0}
+ .pv-art-caption{bottom:2%;font-size:.5rem}
+ .pv-trusted{padding:14px 0 19px}
+ .pv-trust-pill{padding:7px 10px;font-size:.68rem}
+ .pv-section{padding:47px 0}
+ .pv-section-head{align-items:flex-start;flex-direction:column;gap:11px;margin-bottom:20px}
+ .pv-section-head h2{font-size:2.15rem}
+ .pv-work-grid{grid-template-columns:1fr;gap:12px}
+ .pv-work-featured{grid-column:auto}
+ .pv-work-card>img,.pv-work-featured>img{height:210px}
+ .pv-service-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .pv-service-card{min-height:168px;padding:15px 13px}
+ .pv-service-card strong{font-size:.76rem}
+ .pv-service-card p{font-size:.68rem}
+ .pv-about-panel{padding:20px;border-radius:22px}
+ .pv-about-art{height:205px}
+ .pv-team-row{gap:18px}
+ .pv-team-avatars{gap:9px}
+ .pv-team-avatar>span,.pv-team-avatar>img{width:54px;height:54px;border-radius:14px}
+ .pv-faq-preview{padding:24px 0 50px}
+ .pv-bottom-cta-inner{flex-wrap:wrap;gap:14px;padding:20px 19px}
+ .pv-bottom-cta-inner>img{width:90px;height:95px;margin:-5px 0 -20px -5px}
+ .pv-bottom-cta-inner>div{flex:1 1 calc(100% - 110px)}
+ .pv-bottom-cta-inner>.btn{width:100%;margin-top:5px}
+ .pv-footer{padding:34px 0 25px}
+ .pv-footer-grid{gap:22px 16px}
+ .pv-footer-grid>div>strong{font-size:.73rem}
+ .pv-footer-grid a:not(.brand),.pv-footer-brand>p{font-size:.68rem}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
 </style>
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAAGFBMVEUAAAD9WaFRHDP18fabN2NfXV9wKEiin6Ph7EosAAAESUlEQVR42u2cT2sTQRjG350kbaGUJCCCB2ULHoUq0qM09eBRAwq9tl9AevHzNFdv+QD+CXgUoUcPgnuW1mStRdumiQfbprDTZOedZ+bF+j6XNttsnl9nJjPPbN4NkUqlUqlUKpVKpVKpVCqVSnVdNfdY2L/ZbJV6YhLIf5FoPCjzTBPMv6SMsH8QALNIogCmTqIAbv54ADMmWYBxQxZgvUGiAOu7JArg7o8FYPhDATj+SACWPxCA548D2OL5wwC2uiQKwPYHJaJlW/iJmIiWB/xzjbA/AiD18QcApLnX6RVvgKuH8e8yp1c97atLvglK2N8TwN/fDwDg7wWA8PcZhC4bsBAtYPd/GA3A7r/yxjWWV7D+Pfo57zYRMVvAXOUfaQzYN6Acfx4A0J8HsIbz50WypuVYvzA7hYtktnPYoQCUivORLEDC9scAJN9lU3HNwx8BUPsmm4r9/P0BPP29ASqe/r4AlT3ZVEze/p4A/vsqT4DJBNiOeYFiEgcsU2CM1dCmVeHVsGaEAcxQGGBIwgD8t4FB2aeyACn1ZAF6wmOgRjQvCvCUaLgtCPA8I6IPr6TWgo0v58vAra77WsBZUJOFi99+0cbCxYI0+nFn9bOJc31goqPWpQe7Il1Qe9nz6AJIHvg7Cm53xfLA6xYRPeoKJqL5e0SfJBPREf+FQGvBLp3IAmyzzwxTR/QfAmTU0i5QAAVg7pFgANnZz3XhFnAuJQEBnGcB91IObAswSkmgAMtd2XcBq5QDCMAr5YABdJmlHDCAF8xPjWAAb//VtaCKeZU6+1RIC9hLKQbRAOz+z6K1QHWJ6LTo34kFYOz/fyfaGBh7+SOK2SzHVjqy84BLKYER9g8B4FZKgQI4ZfrjW6DfI1EA50XZHyC7/MC9lALUAmcX2xilFNAu4JRyGGF/JACvlAQHwCylMML+OABuKQcIoFITDaU+pSRG2N8V4O6cJZJ5ldK4AaT7i5vF9W+PiH213g0gzYk6hJUTQE54OQBUm1P+2AoPAKml9wAI5F8aIJR/WYBg/iUBZvtn7L11mSdh7qWYmibL+/dnFLMF6IKQ/38ZgLD+swFMWP+ZAKZOogCuN/OjAYzrzfxgAJt/GhNgreifZxEBLDdzPxhF7AKL/8q7iFOx5ROgs/gbaSou+nuUroJCqZEGGEcFsHQB3YwJMG4Xj53cILpcUx+2C3buF4+dNlLwUJj2Yu8tBEm+iW2B6ZHM+sUWqx8JOA/MyIQzvlojfCa09ULkVJw0RFuAKBnIZkIaJcIANMqFAQITlJnVRofCAHR8KAxAxwfCADQ8EAYIR1B6aQ1FUH5tD0TgEC7CELikm2FfOhVTXRogqwsDUNYQBqCvbWEA2mkLA6AJOHlnEpXjXCkNG5VZ2ywkAW+fByRgbjRxBNydLoyAn/qThti7ALpl4gOMEvC1Egb8E1KpVCqVSqVSqVQqlUqlUqmugf4AirTYciVwT/UAAAAASUVORK5CYII=">
 <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAAGFBMVEUAAAD9WaFRHDP18fabN2NfXV9wKEiin6Ph7EosAAAESUlEQVR42u2cT2sTQRjG350kbaGUJCCCB2ULHoUq0qM09eBRAwq9tl9AevHzNFdv+QD+CXgUoUcPgnuW1mStRdumiQfbprDTZOedZ+bF+j6XNttsnl9nJjPPbN4NkUqlUqlUKpVKpVKpVCqVSnVdNfdY2L/ZbJV6YhLIf5FoPCjzTBPMv6SMsH8QALNIogCmTqIAbv54ADMmWYBxQxZgvUGiAOu7JArg7o8FYPhDATj+SACWPxCA548D2OL5wwC2uiQKwPYHJaJlW/iJmIiWB/xzjbA/AiD18QcApLnX6RVvgKuH8e8yp1c97atLvglK2N8TwN/fDwDg7wWA8PcZhC4bsBAtYPd/GA3A7r/yxjWWV7D+Pfo57zYRMVvAXOUfaQzYN6Acfx4A0J8HsIbz50WypuVYvzA7hYtktnPYoQCUivORLEDC9scAJN9lU3HNwx8BUPsmm4r9/P0BPP29ASqe/r4AlT3ZVEze/p4A/vsqT4DJBNiOeYFiEgcsU2CM1dCmVeHVsGaEAcxQGGBIwgD8t4FB2aeyACn1ZAF6wmOgRjQvCvCUaLgtCPA8I6IPr6TWgo0v58vAra77WsBZUJOFi99+0cbCxYI0+nFn9bOJc31goqPWpQe7Il1Qe9nz6AJIHvg7Cm53xfLA6xYRPeoKJqL5e0SfJBPREf+FQGvBLp3IAmyzzwxTR/QfAmTU0i5QAAVg7pFgANnZz3XhFnAuJQEBnGcB91IObAswSkmgAMtd2XcBq5QDCMAr5YABdJmlHDCAF8xPjWAAb//VtaCKeZU6+1RIC9hLKQbRAOz+z6K1QHWJ6LTo34kFYOz/fyfaGBh7+SOK2SzHVjqy84BLKYER9g8B4FZKgQI4ZfrjW6DfI1EA50XZHyC7/MC9lALUAmcX2xilFNAu4JRyGGF/JACvlAQHwCylMML+OABuKQcIoFITDaU+pSRG2N8V4O6cJZJ5ldK4AaT7i5vF9W+PiH213g0gzYk6hJUTQE54OQBUm1P+2AoPAKml9wAI5F8aIJR/WYBg/iUBZvtn7L11mSdh7qWYmibL+/dnFLMF6IKQ/38ZgLD+swFMWP+ZAKZOogCuN/OjAYzrzfxgAJt/GhNgreifZxEBLDdzPxhF7AKL/8q7iFOx5ROgs/gbaSou+nuUroJCqZEGGEcFsHQB3YwJMG4Xj53cILpcUx+2C3buF4+dNlLwUJj2Yu8tBEm+iW2B6ZHM+sUWqx8JOA/MyIQzvlojfCa09ULkVJw0RFuAKBnIZkIaJcIANMqFAQITlJnVRofCAHR8KAxAxwfCADQ8EAYIR1B6aQ1FUH5tD0TgEC7CELikm2FfOhVTXRogqwsDUNYQBqCvbWEA2mkLA6AJOHlnEpXjXCkNG5VZ2ywkAW+fByRgbjRxBNydLoyAn/qThti7ALpl4gOMEvC1Egb8E1KpVCqVSqVSqVQqlUqlUqmugf4AirTYciVwT/UAAAAASUVORK5CYII=">
 </head>
 <body>
-<header><div class="wrap"><nav aria-label="Main navigation"><a class="brand" href="#home" data-page-link="home"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAAGFBMVEUAAAD9WaFRHDP18fabN2NfXV9wKEiin6Ph7EosAAAESUlEQVR42u2cT2sTQRjG350kbaGUJCCCB2ULHoUq0qM09eBRAwq9tl9AevHzNFdv+QD+CXgUoUcPgnuW1mStRdumiQfbprDTZOedZ+bF+j6XNttsnl9nJjPPbN4NkUqlUqlUKpVKpVKpVCqVSnVdNfdY2L/ZbJV6YhLIf5FoPCjzTBPMv6SMsH8QALNIogCmTqIAbv54ADMmWYBxQxZgvUGiAOu7JArg7o8FYPhDATj+SACWPxCA548D2OL5wwC2uiQKwPYHJaJlW/iJmIiWB/xzjbA/AiD18QcApLnX6RVvgKuH8e8yp1c97atLvglK2N8TwN/fDwDg7wWA8PcZhC4bsBAtYPd/GA3A7r/yxjWWV7D+Pfo57zYRMVvAXOUfaQzYN6Acfx4A0J8HsIbz50WypuVYvzA7hYtktnPYoQCUivORLEDC9scAJN9lU3HNwx8BUPsmm4r9/P0BPP29ASqe/r4AlT3ZVEze/p4A/vsqT4DJBNiOeYFiEgcsU2CM1dCmVeHVsGaEAcxQGGBIwgD8t4FB2aeyACn1ZAF6wmOgRjQvCvCUaLgtCPA8I6IPr6TWgo0v58vAra77WsBZUJOFi99+0cbCxYI0+nFn9bOJc31goqPWpQe7Il1Qe9nz6AJIHvg7Cm53xfLA6xYRPeoKJqL5e0SfJBPREf+FQGvBLp3IAmyzzwxTR/QfAmTU0i5QAAVg7pFgANnZz3XhFnAuJQEBnGcB91IObAswSkmgAMtd2XcBq5QDCMAr5YABdJmlHDCAF8xPjWAAb//VtaCKeZU6+1RIC9hLKQbRAOz+z6K1QHWJ6LTo34kFYOz/fyfaGBh7+SOK2SzHVjqy84BLKYER9g8B4FZKgQI4ZfrjW6DfI1EA50XZHyC7/MC9lALUAmcX2xilFNAu4JRyGGF/JACvlAQHwCylMML+OABuKQcIoFITDaU+pSRG2N8V4O6cJZJ5ldK4AaT7i5vF9W+PiH213g0gzYk6hJUTQE54OQBUm1P+2AoPAKml9wAI5F8aIJR/WYBg/iUBZvtn7L11mSdh7qWYmibL+/dnFLMF6IKQ/38ZgLD+swFMWP+ZAKZOogCuN/OjAYzrzfxgAJt/GhNgreifZxEBLDdzPxhF7AKL/8q7iFOx5ROgs/gbaSou+nuUroJCqZEGGEcFsHQB3YwJMG4Xj53cILpcUx+2C3buF4+dNlLwUJj2Yu8tBEm+iW2B6ZHM+sUWqx8JOA/MyIQzvlojfCa09ULkVJw0RFuAKBnIZkIaJcIANMqFAQITlJnVRofCAHR8KAxAxwfCADQ8EAYIR1B6aQ1FUH5tD0TgEC7CELikm2FfOhVTXRogqwsDUNYQBqCvbWEA2mkLA6AJOHlnEpXjXCkNG5VZ2ywkAW+fByRgbjRxBNydLoyAn/qThti7ALpl4gOMEvC1Egb8E1KpVCqVSqVSqVQqlUqlUqmugf4AirTYciVwT/UAAAAASUVORK5CYII=" alt="" aria-hidden="true"> PERIVELLE</a><a class="navlink" href="#home" data-page-link="home" aria-current="page">Home</a><a class="navlink" href="#portfolio" data-page-link="portfolio">Portfolio</a><a class="navlink" href="#services" data-page-link="services">Services</a><a class="navlink" href="#team" data-page-link="team">Our Team</a><a class="navlink" href="#custom" data-page-link="custom">Commission</a><a class="navlink" href="#track" data-page-link="track">Track</a><a class="navlink" href="#license" data-page-link="license">Licensing</a><a class="navlink" href="#faq" data-page-link="faq">FAQ</a></nav></div></header>
+<header class="pv-header">
+  <div class="wrap">
+    <nav aria-label="Main navigation">
+      <a class="brand pv-brand" href="#home" data-page-link="home" aria-label="Perivelle Studio home">
+        <span class="pv-brand-mark"><img src="assets/brand/pfp.webp" alt="" aria-hidden="true"></span>
+        <span>perivelle<span class="pv-brand-star">✦</span></span>
+      </a>
+      <a class="navlink" href="#home" data-page-link="home" aria-current="page">Home</a>
+      <a class="navlink" href="#team" data-page-link="team">Studio</a>
+      <a class="navlink" href="#portfolio" data-page-link="portfolio">Works</a>
+      <a class="navlink" href="#services" data-page-link="services">Services</a>
+      <a class="navlink" href="#custom" data-page-link="custom">Commission</a>
+      <a class="pv-nav-cta" href="#custom">Contact <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
 <main id="main-content">
-<div class="page-view" data-page="home"><section class="hero" id="home"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">AUDIO IDENTITY FOR VTUBERS & CREATORS</p><h1>More than BGM. <em>Build your world’s audio identity.</em></h1><p>Original BGM, lore music, original songs, instrumental covers, sound alerts, and stingers—crafted to bring your VTuber character, stream, and story to life.</p><div class="actions"><a class="btn" href="#portfolio">Explore the portfolio ↘</a><a class="btn secondary" href="#custom">Start a commission</a></div><div class="commission-status-card hero-kicker" id="publicCommissionStatus" aria-label="Commission availability">
- <div class="commission-status-top"><span class="commission-status-icon" aria-hidden="true">✦</span><span class="commission-status-label">COMMISSIONS</span><span class="commission-status-live"><i></i> LIVE UPDATE</span></div>
- <div class="commission-status-main"><strong id="publicCommissionAvailability">Status update soon</strong><span id="publicCommissionBatch">Batch details will appear here</span></div>
- <div class="commission-status-bottom"><strong id="publicCommissionSlots">3 Available Slots</strong></div>
-</div></div><div class="hero-art" aria-hidden="true">
-<svg class="hero-visual" viewBox="0 0 520 520" focusable="false" xmlns="http://www.w3.org/2000/svg">
-<defs>
- <radialGradient id="dream-sky" cx="48%" cy="38%" r="72%"><stop stop-color="#fff"/><stop offset=".5" stop-color="#e9e4ff"/><stop offset="1" stop-color="#d9eaff"/></radialGradient>
- <radialGradient id="dream-orb" cx="32%" cy="25%" r="75%"><stop stop-color="#fff"/><stop offset=".27" stop-color="#e9e4ff"/><stop offset=".68" stop-color="#b9b1ec"/><stop offset="1" stop-color="#8faedc"/></radialGradient>
- <linearGradient id="dream-wave" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#9e91d8"/><stop offset=".5" stop-color="#829fce"/><stop offset="1" stop-color="#b39adf"/></linearGradient>
- <filter id="dream-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="15"/></filter>
- <filter id="dream-glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
- <clipPath id="orb-clip"><circle cx="258" cy="252" r="112"/></clipPath>
-</defs>
-<rect width="520" height="520" rx="34" fill="url(#dream-sky)"/>
-<circle cx="256" cy="278" r="170" fill="#b9b0e6" opacity=".2" filter="url(#dream-shadow)"/>
-<g fill="none" stroke="#a69bd5" stroke-width="1.2" opacity=".58"><ellipse cx="258" cy="252" rx="205" ry="91" transform="rotate(-27 258 252)"/><ellipse cx="258" cy="252" rx="174" ry="126" transform="rotate(42 258 252)"/><path d="M65 318C112 392 212 425 318 396s120-65 139-117" stroke-dasharray="3 8"/></g>
-<g fill="#fff"><path d="m96 111 4 12 12 4-12 4-4 12-4-12-12-4 12-4z"/><path d="m400 108 3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><path d="m117 377 3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/><circle cx="373" cy="357" r="3"/><circle cx="164" cy="165" r="2.5"/><circle cx="435" cy="246" r="2.5"/></g>
-<g fill="#b9a9e7"><circle cx="83" cy="239" r="5"/><circle cx="413" cy="169" r="4"/><circle cx="349" cy="430" r="5"/></g>
-<path d="M377 74a43 43 0 1 0 45 61 38 38 0 0 1-45-61z" fill="#fff" filter="url(#dream-glow)"/>
-<circle cx="258" cy="252" r="126" fill="#a99cdb" opacity=".3" filter="url(#dream-shadow)"/>
-<circle cx="258" cy="252" r="112" fill="url(#dream-orb)" stroke="#fff" stroke-opacity=".9" stroke-width="2"/>
-<g clip-path="url(#orb-clip)">
- <path d="M142 277c47-70 92 68 138-4s83-60 133 1" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="39"/>
- <path d="M145 214c45-52 89-37 117-2s68 48 111-13" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>
- <g fill="none" stroke="url(#dream-wave)" stroke-width="5" stroke-linecap="round"><path d="M174 255v-10m14 24v-38m14 47v-56m14 65v-75m14 82v-91m14 88v-70m14 57v-45m14 35v-29m14 21v-14"/></g>
- <ellipse cx="218" cy="194" rx="42" ry="20" fill="#fff" opacity=".34" transform="rotate(-32 218 194)"/>
-</g>
-<circle cx="258" cy="252" r="112" fill="none" stroke="#fff" stroke-opacity=".76" stroke-width="2"/>
-<path d="M174 163c29-23 65-33 101-29" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".76"/>
-<g transform="translate(385 300)"><circle r="28" fill="#fff" fill-opacity=".5" stroke="#fff" stroke-width="1.5"/><circle r="16" fill="#d6e7ff" fill-opacity=".8"/><path d="M-10-3c5-9 15-9 20 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></g>
-<g transform="translate(128 182)"><circle r="17" fill="#fff" fill-opacity=".55" stroke="#fff" stroke-width="1.4"/><path d="M-7 2c4-8 10-8 14 0" fill="none" stroke="#a69bd5" stroke-width="2" stroke-linecap="round"/></g>
-<g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="m308 135 5 9 9 5-9 5-5 9-5-9-9-5 9-5z"/><path d="m111 292 3 6 6 3-6 3-3 6-3-6-6-3 6-3z"/></g>
-<path d="M51 451c80 26 154 24 214-1s120-23 205 5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2"/>
-</svg>
-<div class="hero-float hero-float-top"><span class="float-symbol">✧</span><span><b>Dreamlike sound</b><small>Music for imagined worlds</small></span></div>
-<div class="hero-float hero-float-bottom"><span class="float-wave">∿</span><span><b>Made for your lore</b><small>BGM · songs · sound design</small></span></div>
-<span class="hero-art-caption mono">PERIVELLE · AUDIO MAGIC</span>
-</div></section><section class="home-intro"><div class="wrap home-intro-inner"><div><p class="eyebrow">A STUDIO FOR YOUR VIRTUAL WORLD</p><h2>One character. One world. A sound that feels like yours.</h2><p>From stream-ready background music to lore themes and signature alerts, Perivelle helps creators build a recognizable audio identity.</p></div><div class="home-pillars"><span>Original compositions</span><span>Seamless stream loops</span><span>Key-matched sound design</span></div><a class="text-link" href="#portfolio">Discover what we create ↗</a></div></section></div>
-<div class="page-view" data-page="team" hidden>
+<div class="page-view" data-page="home">
+  <section class="pv-hero" id="home">
+    <div class="pv-hero-decor pv-hero-decor-one" aria-hidden="true"></div>
+    <div class="pv-hero-decor pv-hero-decor-two" aria-hidden="true"></div>
+    <div class="wrap pv-hero-grid">
+      <div class="pv-hero-copy">
+        <p class="pv-eyebrow"><span></span> PERIVELLE STUDIO</p>
+        <h1>Sound that brings your <em>world to life.</em></h1>
+        <p class="pv-hero-lead">Creative audio studio for VTubers, streamers, and creators. We craft music, sound design, and audio experiences with character.</p>
+        <div class="pv-actions">
+          <a class="btn pv-primary" href="#custom">Commission Now <span aria-hidden="true">↗</span></a>
+          <a class="btn pv-secondary" href="#portfolio"><span class="pv-play-icon" aria-hidden="true">▶</span> Our Showreel</a>
+        </div>
+        <div class="pv-hero-status commission-status-card" id="publicCommissionStatus" aria-label="Commission availability">
+          <div class="commission-status-top"><span class="commission-status-icon" aria-hidden="true">✦</span><span class="commission-status-label">COMMISSION STATUS</span><span class="commission-status-live"><i></i> LIVE</span></div>
+          <div class="commission-status-main"><strong id="publicCommissionAvailability">Status update soon</strong><span id="publicCommissionBatch">New projects and custom requests welcome</span></div>
+          <div class="commission-status-bottom"><strong id="publicCommissionSlots">Check availability</strong></div>
+        </div>
+      </div>
+      <div class="pv-hero-art" aria-label="Perivelle Studio mascot">
+        <div class="pv-orbit pv-orbit-a" aria-hidden="true"></div>
+        <div class="pv-orbit pv-orbit-b" aria-hidden="true"></div>
+        <span class="pv-spark pv-spark-a" aria-hidden="true">✦</span>
+        <span class="pv-spark pv-spark-b" aria-hidden="true">✧</span>
+        <span class="pv-spark pv-spark-c" aria-hidden="true">✦</span>
+        <div class="pv-wave-card" aria-hidden="true"><span></span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <img class="pv-mascot" src="assets/brand/hero-mascot.webp" alt="Perivelle's sleepy white fox mascot wearing pink and purple headphones" width="640" height="397" fetchpriority="high">
+        <div class="pv-art-caption"><span class="pv-caption-dot"></span> A LITTLE MAGIC IN EVERY NOTE</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pv-trusted" aria-label="Who we create for">
+    <div class="wrap pv-trusted-inner">
+      <span class="pv-trusted-label">TRUSTED BY CREATORS & PROJECTS</span>
+      <span class="pv-trust-pill"><b>✧</b> VTubers</span>
+      <span class="pv-trust-pill"><b>◌</b> Streamers</span>
+      <span class="pv-trust-pill"><b>♧</b> Indie Games</span>
+      <span class="pv-trust-pill"><b>✳</b> Content Creators</span>
+      <span class="pv-trust-more">and more...</span>
+    </div>
+  </section>
+
+  <section class="pv-section pv-works-preview">
+    <div class="wrap">
+      <div class="pv-section-head">
+        <div><p class="pv-eyebrow"><span></span> A GLIMPSE OF OUR WORLD</p><h2>Selected <em>Works</em></h2><p>A glimpse of what we’ve been crafting.</p></div>
+        <a class="pv-text-link" href="#portfolio">View All Works <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="pv-work-grid">
+        <a class="pv-work-card pv-work-featured" href="#portfolio">
+          <img src="assets/illustrations/portfolio-origin-starlight.svg" alt="Celestial fantasy artwork for an original music concept" loading="lazy">
+          <span class="pv-work-tag">ORIGINAL BGM</span>
+          <span class="pv-work-meta"><strong>Twilight Frequency</strong><small>Atmospheric · Dreamlike · 02:18</small></span>
+          <span class="pv-work-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="pv-work-card" href="#portfolio">
+          <img src="assets/illustrations/portfolio-cozy-room.svg" alt="Cozy moonlit room artwork" loading="lazy">
+          <span class="pv-work-tag">STREAM BGM</span>
+          <span class="pv-work-meta"><strong>Moonlit Story</strong><small>Warm ambience · Loop</small></span>
+          <span class="pv-work-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="pv-work-card" href="#portfolio">
+          <img src="assets/illustrations/portfolio-signature-alert.svg" alt="Cute celestial mascot holding a glowing star" loading="lazy">
+          <span class="pv-work-tag">SOUND IDENTITY</span>
+          <span class="pv-work-meta"><strong>Starlight Signal</strong><small>Alerts · Stingers · SFX</small></span>
+          <span class="pv-work-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <p class="pv-concept-note">Selected visual previews · Explore the portfolio for current audio samples and project details.</p>
+    </div>
+  </section>
+
+  <section class="pv-section pv-services-preview">
+    <div class="wrap">
+      <div class="pv-section-head">
+        <div><p class="pv-eyebrow"><span></span> MADE FOR YOUR WORLD</p><h2>Our <em>Services</em></h2><p>Audio production tailored to your creative needs.</p></div>
+        <a class="pv-text-link" href="#services">Explore Services <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="pv-service-grid">
+        <a class="pv-service-card" href="#services"><span class="pv-service-icon">〰</span><strong>BGM &amp; Soundtrack</strong><p>Background music for streams, videos, games, and more.</p></a>
+        <a class="pv-service-card" href="#services"><span class="pv-service-icon">♫</span><strong>Original Song</strong><p>Complete music production from composition to mix.</p></a>
+        <a class="pv-service-card" href="#services"><span class="pv-service-icon">♬</span><strong>Sound Alerts</strong><p>Custom alerts, notifications, and interaction sounds.</p></a>
+        <a class="pv-service-card" href="#services"><span class="pv-service-icon">✦</span><strong>Stingers &amp; Jingles</strong><p>Short, memorable audio for transitions and branding.</p></a>
+        <a class="pv-service-card" href="#services"><span class="pv-service-icon">☷</span><strong>Audio Editing</strong><p>Mixing, mastering, and vocal editing for your projects.</p></a>
+        <a class="pv-service-card" href="#services"><span class="pv-service-icon">◇</span><strong>Other Ideas</strong><p>Have a special idea? Let’s discuss it together.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="pv-about-preview">
+    <div class="wrap pv-about-panel">
+      <div class="pv-about-copy">
+        <p class="pv-eyebrow"><span></span> ABOUT US</p>
+        <h2>A creative studio for <em>creator’s worlds.</em></h2>
+        <p>Perivelle Studio is a creative audio studio focused on music and sound production for VTubers, streamers, games, and original projects. We turn ideas into sound, with character, story, and care.</p>
+        <a class="btn pv-secondary" href="#team">Meet the Studio <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="pv-about-art"><img src="assets/illustrations/portfolio-cozy-room.svg" alt="Dreamy illustrated music room with a moonlit window" loading="lazy"><span class="pv-about-sticker">MADE WITH<br>IMAGINATION ✦</span></div>
+    </div>
+  </section>
+
+  <section class="pv-section pv-team-preview">
+    <div class="wrap pv-team-row">
+      <div class="pv-team-heading"><p class="pv-eyebrow"><span></span> THE PEOPLE BEHIND THE SOUND</p><h2>Small team, <em>big imagination.</em></h2><p>Meet the people bringing every sound to life.</p></div>
+      <div class="pv-team-avatars" aria-label="Perivelle team">
+        <a href="#team" class="pv-team-avatar pv-avatar-one" aria-label="Meet bybi"><span>B</span><small>bybi</small></a>
+        <a href="#team" class="pv-team-avatar pv-avatar-two" aria-label="Meet rei"><span>R</span><small>rei</small></a>
+        <a href="#team" class="pv-team-avatar pv-avatar-three" aria-label="Meet yoz"><span>Y</span><small>yoz</small></a>
+        <a href="#team" class="pv-team-avatar pv-avatar-four" aria-label="Meet the studio"><img src="assets/brand/pfp.webp" alt="" loading="lazy"><small>studio</small></a>
+      </div>
+      <a class="pv-text-link" href="#team">Meet the Team <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <section class="pv-section pv-faq-preview">
+    <div class="wrap pv-faq-grid">
+      <div class="pv-faq-copy"><p class="pv-eyebrow"><span></span> FAQ</p><h2>A few things you might <em>wonder.</em></h2><p>Have questions before starting a project? Here are a few quick answers.</p><a class="pv-text-link" href="#faq">Read All FAQs <span aria-hidden="true">↗</span></a></div>
+      <div class="pv-faq-list">
+        <details><summary>What kind of projects do you accept?<span aria-hidden="true">⌄</span></summary><p>We create BGM, original songs, sound alerts, stingers, jingles, audio editing, and other custom audio for VTubers, streamers, and creators.</p></details>
+        <details><summary>How does the commission process work?<span aria-hidden="true">⌄</span></summary><p>Send us your brief and references. We’ll review the details, share a quotation, and begin production after confirmation.</p></details>
+        <details><summary>Can I request a custom package?<span aria-hidden="true">⌄</span></summary><p>Absolutely. Tell us what you have in mind and we’ll discuss a package that fits your project.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="pv-bottom-cta">
+    <div class="wrap pv-bottom-cta-inner">
+      <img src="assets/brand/hero-mascot.webp" alt="" loading="lazy">
+      <div><p class="pv-eyebrow"><span></span> COMMISSION · OPEN FOR IDEAS</p><h2>Let’s create something <em>together!</em></h2><p>Open for commission — music, sound design, and more.</p></div>
+      <a class="btn pv-primary" href="#custom">Make a Request <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+</div><div class="page-view" data-page="team" hidden>
 <section class="section team-page" id="team">
  <div class="wrap">
   <div class="team-hero">
@@ -1245,7 +1602,15 @@ html[data-theme="dark"] .contact-option .x-icon{color:#f4f1ff}
 
 <div class="page-view" data-page="faq" hidden><section class="section" id="faq" style="padding-top:0"><div class="wrap faq"><p class="eyebrow" data-t="faqEyebrow">ORDER INFORMATION</p><h2 data-t="faqTitle">Before you choose.</h2><details><summary data-t="faqQ1">How do I order?</summary><p data-t="faqA1">Submit the commission form to generate your brief, then copy it and send it to Perivelle on Discord. We will review your request and send a quotation. Full payment is required after you approve the quotation and before production begins.</p></details><details><summary data-t="faqQ2">Are audio previews available?</summary><p data-t="faqA2">Audio preview files have not yet been added to this sample catalog. Add an official preview link for each product before launch.</p></details><details><summary data-t="faqQ3">Is my custom brief sent automatically?</summary><p data-t="faqA3">No. Your brief is generated in your browser, copied, and Discord opens so you can send it manually. No data is stored on a server.</p></details></div></section></div>
 </main>
-<footer><div class="wrap foot"><strong>PERIVELLE <span style="color:#b6563b">✳</span></strong><p data-t="footerText">Original music for creators. Contact us on Discord for commissions and inquiries.</p></div></footer>
+<footer class="pv-footer">
+  <div class="wrap pv-footer-grid">
+    <div class="pv-footer-brand"><a class="brand" href="#home" data-page-link="home"><span class="pv-brand-mark"><img src="assets/brand/pfp.webp" alt="" aria-hidden="true"></span><span>perivelle<span class="pv-brand-star">✦</span></span></a><p>Original audio for creators, characters, and the worlds they bring to life.</p><small>© 2026 Perivelle Studio. All rights reserved.</small></div>
+    <div><strong>Explore</strong><a href="#home">Home</a><a href="#team">Studio</a><a href="#portfolio">Works</a></div>
+    <div><strong>Services</strong><a href="#services">BGM &amp; Soundtrack</a><a href="#services">Original Song</a><a href="#services">Sound Alerts</a><a href="#services">Stingers &amp; Jingles</a></div>
+    <div><strong>Company</strong><a href="#custom">Contact</a><a href="#license">Terms of Service</a><a href="#license">Privacy &amp; Licensing</a><a href="#faq">FAQ</a></div>
+    <div><strong>Get in touch</strong><p>Have a project in mind? Reach out and let’s make something memorable.</p><a class="pv-footer-cta" href="#custom">Start a commission ↗</a></div>
+  </div>
+</footer>
 <dialog class="modal" id="cartDialog" aria-labelledby="cartHeading"><div class="modal-head"><h2 id="cartHeading" data-t="cartTitle">Your selection</h2><button class="close" type="button" data-close="cartDialog" aria-label="Close">×</button></div><p class="help" data-t="cartInfo">Checkout is not connected yet. Copy your selection and send it through Discord for confirmation.</p><div id="cartContent"></div><textarea class="summary" id="cartSummary" readonly hidden aria-label="Selection summary"></textarea><div class="modal-actions"><button class="btn" id="sendCart" type="button" hidden data-t="sendDiscord">Copy & Open Discord ↗</button><button class="quiet" id="clearCart" type="button" data-t="clearCart">Clear selection</button></div><p class="status" id="cartStatus" role="status" aria-live="polite"></p></dialog>
 <dialog class="modal success-dialog" id="commissionSuccessDialog" aria-labelledby="commissionSuccessTitle">
  <div class="success-mark" aria-hidden="true">✦</div>
