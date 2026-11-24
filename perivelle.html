@@ -144,6 +144,34 @@ dialog{max-height:min(86vh,780px);overflow:auto;overscroll-behavior:contain}
  .scene svg{transition:none}
 }
 
+
+/* PERIVELLE BRAND SYSTEM — mascot palette */
+:root{--bg:#FCF8FC;--surface:#FFFCFE;--ink:#27162D;--muted:#786779;--line:#EADCE9;--flame:#6E3ACC;--flame2:#FF5093;--night:#462E52;--on-night:#fff7fc}
+:root[data-theme="dark"]{--bg:#1B1220;--surface:#281A2D;--ink:#FFF6FC;--muted:#C7B5C8;--line:#49344D;--night:#120C18}
+body{background:radial-gradient(ellipse at 90% 0%,#AC71CF18,transparent 34%),var(--bg);color:var(--ink)}
+header{background:rgba(252,248,252,.9);border-color:var(--line)}
+.logo,.logo strong{color:var(--night)}
+nav a.l[aria-current="page"],nav a.l:hover{color:#6E3ACC;background:#F1E8F8}
+.hero{background:linear-gradient(125deg,#6E3ACC 0%,#8247CF 58%,#AC71CF 100%);color:#fff}
+.hero h1,.hero p{color:#fff}
+.hero .btn{background:#FF5093;border-color:#FF5093;color:#fff}
+.hero .btn:hover{background:#D12D76;border-color:#D12D76}
+section.v h2{color:var(--night)}
+.card,.row,.panel,dialog{border-color:var(--line);border-radius:18px}
+.card{background:var(--surface);box-shadow:0 12px 30px #462E520D}
+.chip{border-color:#E8D8EC;color:#6E3ACC;background:#F8F1FA}
+.chip.active,.chip[aria-pressed="true"]{background:#6E3ACC;color:#fff;border-color:#6E3ACC}
+button,.button{border-radius:999px}
+button.primary,.primary{background:#6E3ACC;border-color:#6E3ACC}
+button.primary:hover,.primary:hover{background:#5726B2}
+input:focus,select:focus,textarea:focus{outline-color:#FF5093;border-color:#6E3ACC}
+footer{background:#462E52;color:#fff}
+footer a:hover{color:#FF8AB6}
+:root[data-theme="dark"] header{background:rgba(27,18,32,.94)}
+:root[data-theme="dark"] .card,:root[data-theme="dark"] .row{background:#281A2D;border-color:#49344D}
+:root[data-theme="dark"] .chip{background:#302039;color:#EBD8F0;border-color:#59405E}
+:root[data-theme="dark"] .chip.active{background:#6E3ACC;color:#fff}
+
 </style>
 <link rel="icon" type="image/jpeg" href="/assets/illustrations/perivellelogo.jpg">
 <link rel="apple-touch-icon" href="/assets/illustrations/perivellelogo.jpg">
