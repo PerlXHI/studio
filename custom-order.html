@@ -123,6 +123,30 @@ html[data-theme="dark"] .theme-toggle{background:rgba(42,38,65,.94);color:#f6e9a
 /* DARK MODE: keep the current navbar item clearly readable */
 html[data-theme="dark"] .navlink[aria-current="page"]{color:#eee9ff!important;background:linear-gradient(110deg,#393252,#29384d)!important;border:1px solid #665b89!important;box-shadow:0 3px 12px #08071355}
 html[data-theme="dark"] .navlink[aria-current="page"]:hover{color:#fff!important;background:linear-gradient(110deg,#453b68,#30445b)!important}
+
+/* PERIVELLE BRAND SYSTEM — commission */
+:root{--bg:#FCF8FC;--surface:#FFFCFE;--ink:#27162D;--muted:#786779;--line:#EADCE9;--flame:#6E3ACC;--flame2:#FF5093;--night:#462E52;--on-night:#fff7fc;color-scheme:light}
+body{background:radial-gradient(ellipse at 90% 0%,#AC71CF18,transparent 34%),var(--bg);color:var(--ink)}
+header{background:rgba(252,248,252,.92);border-color:var(--line)}
+.logo,.brand{color:#462E52}
+nav a[aria-current="page"]{background:#F1E8F8;color:#6E3ACC}
+.hero{background:linear-gradient(125deg,#6E3ACC 0%,#8247CF 58%,#AC71CF 100%);color:#fff}
+.hero h1,.hero p{color:#fff}
+.hero .btn{background:#FF5093;border-color:#FF5093;color:#fff}
+.btn,.button,button{border-radius:999px}
+.btn.primary,button.primary{background:#6E3ACC;border-color:#6E3ACC}
+.btn.primary:hover,button.primary:hover{background:#5726B2}
+.form,.panel,.card{background:#FFFCFE;border-color:#EADCE9;border-radius:20px;box-shadow:0 14px 36px #462E520D}
+.field input,.field select,.field textarea,input,select,textarea{border-color:#E8D9E7;background:#FFFCFE;color:#27162D;border-radius:12px}
+.field input:focus,.field select:focus,.field textarea:focus,input:focus,select:focus,textarea:focus{border-color:#6E3ACC;outline-color:#FF5093}
+.step,.step-card{border-color:#EADCE9}
+.step.active,.step-card.active{border-color:#6E3ACC;background:#F7F0FA}
+footer{background:#462E52;color:#fff}
+:root[data-theme="dark"]{--bg:#1B1220;--surface:#281A2D;--ink:#FFF6FC;--muted:#C7B5C8;--line:#49344D;--night:#120C18}
+:root[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+:root[data-theme="dark"] .form,:root[data-theme="dark"] .panel,:root[data-theme="dark"] .card{background:#281A2D;border-color:#49344D}
+:root[data-theme="dark"] input,:root[data-theme="dark"] select,:root[data-theme="dark"] textarea{background:#211728;color:#FFF6FC;border-color:#49344D}
+
 </style>
 <link rel="icon" type="image/jpeg" href="/assets/illustrations/perivellelogo.jpg">
 <link rel="apple-touch-icon" href="/assets/illustrations/perivellelogo.jpg">
