@@ -1106,6 +1106,143 @@ html[data-theme="dark"] .contact-menu{background:rgba(35,30,52,.97)!important;bo
 html[data-theme="dark"] .contact-option{color:#f1eaff}
 html[data-theme="dark"] .contact-option .x-icon{color:#f4f1ff}
 @media(max-width:560px){.contact-menu{width:205px;padding:11px}.contact-option{padding:9px 10px}}
+
+/* PERIVELLE — SOFT EDITORIAL HOMEPAGE REFRESH
+   Additive visual layer: preserves existing page structure and functionality. */
+:root{
+ --paper:#faf8ff;--card:#fff;--ink:#302747;--muted:#766f88;
+ --line:#e9e3f2;--green:#8172b5;--rust:#f06c9d;--r:18px;
+ color-scheme:light;
+}
+html{scroll-padding-top:92px}
+body{
+ background:
+  radial-gradient(ellipse at 7% 0%,rgba(233,224,255,.72),transparent 32%),
+  radial-gradient(ellipse at 95% 18%,rgba(222,239,255,.58),transparent 30%),
+  var(--paper);
+ color:var(--ink);
+}
+.wrap{width:min(1160px,calc(100% - 48px))}
+header{
+ background:rgba(250,248,255,.84);
+ border-bottom:1px solid rgba(224,216,239,.84);
+ box-shadow:0 8px 32px rgba(70,52,110,.035);
+}
+nav{min-height:78px;gap:clamp(10px,1.55vw,22px)}
+.brand{font-size:1rem;letter-spacing:.06em}
+.brand img{border-radius:11px;background:#fff;box-shadow:0 4px 14px rgba(48,39,71,.09)}
+.navlink{font-size:.82rem;font-weight:600;transition:color .2s ease,background .2s ease}
+.navlink[aria-current="page"],.navlink:hover{color:#67568f}
+.navlink[aria-current="page"]{background:#eee9fa;padding:8px 12px;border-radius:999px}
+.hero{
+ padding:clamp(76px,10vw,132px) 0 92px;
+ border:0;
+ background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0));
+}
+.hero-grid{grid-template-columns:1.12fr .88fr;gap:clamp(32px,6vw,82px)}
+.hero-copy{max-width:670px}
+.eyebrow{color:#8c7db5;letter-spacing:.16em}
+.hero h1{
+ max-width:11ch;margin:22px 0 24px;
+ font:700 clamp(3.2rem,7.2vw,6.6rem)/.98 "Playfair Display",Georgia,serif;
+ letter-spacing:-.065em;color:#302747;
+}
+.hero h1 em{color:#9a86cf;font-style:italic}
+.hero-copy>p:not(.eyebrow){max-width:560px;color:#746d85;font-size:1.06rem;line-height:1.75}
+.actions{gap:12px}
+.btn{
+ min-height:48px;padding:12px 20px;border-radius:999px;
+ background:#8b79c2;border-color:#8b79c2;
+ box-shadow:0 8px 22px rgba(139,121,194,.18);
+ transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.btn:hover{background:#7664ad;transform:translateY(-2px);box-shadow:0 12px 26px rgba(139,121,194,.23)}
+.btn.secondary{background:rgba(255,255,255,.6);color:#7564a6;border-color:#dcd3ef;box-shadow:none}
+.btn.secondary:hover{background:#f0ebfa}
+.hero-art{
+ max-width:470px;min-height:0;aspect-ratio:1;
+ justify-self:end;border:1px solid rgba(255,255,255,.9);
+ border-radius:36px;
+ background:linear-gradient(145deg,#f0eaff,#e7f2ff 58%,#fceaf2);
+ box-shadow:0 28px 70px rgba(94,77,140,.13);
+}
+.hero-art:before,.hero-art:after{border-color:rgba(149,130,198,.34)}
+.hero-art:after{box-shadow:0 0 0 20px rgba(149,130,198,.06),0 0 0 42px rgba(149,130,198,.04)}
+.hero-visual{width:100%;height:100%;position:relative;z-index:1}
+.commission-status-card.hero-kicker{
+ margin-top:24px;max-width:480px;width:100%;
+ border-radius:14px;border-color:#e3daf3;
+ background:rgba(255,255,255,.78);
+ box-shadow:0 10px 28px rgba(79,60,124,.07);
+}
+.section{padding:clamp(64px,8vw,100px) 0}
+.section h2{color:#302747}
+.section-head{margin-bottom:34px;align-items:end}
+.section-head .sub{line-height:1.7}
+.portfolio-strip,.custom-band{
+ background:linear-gradient(135deg,#f0ecfa 0%,#f4f7ff 55%,#fbf0f5 100%);
+ border-block:1px solid #e9e3f2;
+}
+.portfolio-preview,.product,.service-card,.step-card,.credit-card,.license-panel,.team-card{
+ border-radius:20px;border-color:#e9e3f2;
+ box-shadow:0 10px 30px rgba(66,49,105,.045);
+ transition:transform .22s ease,box-shadow .22s ease;
+}
+.portfolio-preview:hover,.product:hover,.service-card:hover,.team-card:hover{
+ transform:translateY(-4px);box-shadow:0 18px 38px rgba(66,49,105,.09);
+}
+.portfolio-preview h3,.product-title{color:#302747}
+.portfolio-preview h3{font-size:1.22rem}
+.product-art{border-radius:19px 19px 0 0}
+.product-body{padding:20px}
+.product-title{font-size:1.5rem}
+.product-bottom{border-color:#eee9f5}
+.team-hero{
+ border-radius:32px;border-color:#e7def6;
+ background:
+  radial-gradient(circle at 82% 18%,rgba(217,235,255,.9),transparent 34%),
+  radial-gradient(circle at 14% 88%,rgba(238,220,255,.85),transparent 40%),
+  linear-gradient(135deg,#fff 0%,#f7f3ff 58%,#fff3f7 100%);
+ box-shadow:0 20px 55px rgba(100,79,151,.08);
+}
+.team-hero h2{color:#302747}
+.team-hero h2 em{color:#9a86cf}
+.team-lead{color:#746d85;line-height:1.8}
+.team-orbit{color:#a18ed2;border-color:rgba(161,142,210,.42)}
+.custom-grid{gap:clamp(28px,5vw,64px)}
+.form{border-radius:24px;border-color:#e9e3f2;box-shadow:0 18px 42px rgba(70,52,110,.06)}
+.field input,.field select,.field textarea,.control{
+ border-radius:12px;border-color:#e5def0;background:#fff;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#a28ed4}
+.faq details{border-color:#e9e3f2}
+.faq summary{padding:4px 0}
+footer{background:#302747;color:#fff;padding:42px 0}
+footer p{color:#d8d0e7;line-height:1.7}
+.modal{border-radius:24px;box-shadow:0 24px 80px rgba(32,23,54,.2)}
+.theme-toggle{border-radius:50%;border-color:#e8e0f3;box-shadow:0 8px 24px rgba(57,42,91,.12)}
+@media(max-width:850px){
+ .wrap{width:min(100% - 38px,1160px)}
+ nav{gap:9px;min-height:72px}
+ .navlink{font-size:.76rem}
+ .hero-grid{grid-template-columns:1fr .78fr;gap:28px}
+}
+@media(max-width:650px){
+ .wrap{width:calc(100% - 30px)}
+ nav{overflow-x:auto;justify-content:flex-start}
+ .brand{flex:0 0 auto}
+ .navlink{flex:0 0 auto}
+ .hero{padding:58px 0 64px}
+ .hero-grid{grid-template-columns:1fr}
+ .hero h1{font-size:clamp(3.1rem,15vw,5rem);max-width:10ch}
+ .hero-art{width:min(78%,330px);justify-self:center;margin-top:20px;border-radius:28px}
+ .section{padding:58px 0}
+ .team-hero{border-radius:24px}
+}
+@media(prefers-reduced-motion:reduce){
+ .btn,.portfolio-preview,.product,.service-card,.team-card{transition:none}
+}
+
 </style>
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAAGFBMVEUAAAD9WaFRHDP18fabN2NfXV9wKEiin6Ph7EosAAAESUlEQVR42u2cT2sTQRjG350kbaGUJCCCB2ULHoUq0qM09eBRAwq9tl9AevHzNFdv+QD+CXgUoUcPgnuW1mStRdumiQfbprDTZOedZ+bF+j6XNttsnl9nJjPPbN4NkUqlUqlUKpVKpVKpVCqVSnVdNfdY2L/ZbJV6YhLIf5FoPCjzTBPMv6SMsH8QALNIogCmTqIAbv54ADMmWYBxQxZgvUGiAOu7JArg7o8FYPhDATj+SACWPxCA548D2OL5wwC2uiQKwPYHJaJlW/iJmIiWB/xzjbA/AiD18QcApLnX6RVvgKuH8e8yp1c97atLvglK2N8TwN/fDwDg7wWA8PcZhC4bsBAtYPd/GA3A7r/yxjWWV7D+Pfo57zYRMVvAXOUfaQzYN6Acfx4A0J8HsIbz50WypuVYvzA7hYtktnPYoQCUivORLEDC9scAJN9lU3HNwx8BUPsmm4r9/P0BPP29ASqe/r4AlT3ZVEze/p4A/vsqT4DJBNiOeYFiEgcsU2CM1dCmVeHVsGaEAcxQGGBIwgD8t4FB2aeyACn1ZAF6wmOgRjQvCvCUaLgtCPA8I6IPr6TWgo0v58vAra77WsBZUJOFi99+0cbCxYI0+nFn9bOJc31goqPWpQe7Il1Qe9nz6AJIHvg7Cm53xfLA6xYRPeoKJqL5e0SfJBPREf+FQGvBLp3IAmyzzwxTR/QfAmTU0i5QAAVg7pFgANnZz3XhFnAuJQEBnGcB91IObAswSkmgAMtd2XcBq5QDCMAr5YABdJmlHDCAF8xPjWAAb//VtaCKeZU6+1RIC9hLKQbRAOz+z6K1QHWJ6LTo34kFYOz/fyfaGBh7+SOK2SzHVjqy84BLKYER9g8B4FZKgQI4ZfrjW6DfI1EA50XZHyC7/MC9lALUAmcX2xilFNAu4JRyGGF/JACvlAQHwCylMML+OABuKQcIoFITDaU+pSRG2N8V4O6cJZJ5ldK4AaT7i5vF9W+PiH213g0gzYk6hJUTQE54OQBUm1P+2AoPAKml9wAI5F8aIJR/WYBg/iUBZvtn7L11mSdh7qWYmibL+/dnFLMF6IKQ/38ZgLD+swFMWP+ZAKZOogCuN/OjAYzrzfxgAJt/GhNgreifZxEBLDdzPxhF7AKL/8q7iFOx5ROgs/gbaSou+nuUroJCqZEGGEcFsHQB3YwJMG4Xj53cILpcUx+2C3buF4+dNlLwUJj2Yu8tBEm+iW2B6ZHM+sUWqx8JOA/MyIQzvlojfCa09ULkVJw0RFuAKBnIZkIaJcIANMqFAQITlJnVRofCAHR8KAxAxwfCADQ8EAYIR1B6aQ1FUH5tD0TgEC7CELikm2FfOhVTXRogqwsDUNYQBqCvbWEA2mkLA6AJOHlnEpXjXCkNG5VZ2ywkAW+fByRgbjRxBNydLoyAn/qThti7ALpl4gOMEvC1Egb8E1KpVCqVSqVSqVQqlUqlUqmugf4AirTYciVwT/UAAAAASUVORK5CYII=">
 <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAAGFBMVEUAAAD9WaFRHDP18fabN2NfXV9wKEiin6Ph7EosAAAESUlEQVR42u2cT2sTQRjG350kbaGUJCCCB2ULHoUq0qM09eBRAwq9tl9AevHzNFdv+QD+CXgUoUcPgnuW1mStRdumiQfbprDTZOedZ+bF+j6XNttsnl9nJjPPbN4NkUqlUqlUKpVKpVKpVCqVSnVdNfdY2L/ZbJV6YhLIf5FoPCjzTBPMv6SMsH8QALNIogCmTqIAbv54ADMmWYBxQxZgvUGiAOu7JArg7o8FYPhDATj+SACWPxCA548D2OL5wwC2uiQKwPYHJaJlW/iJmIiWB/xzjbA/AiD18QcApLnX6RVvgKuH8e8yp1c97atLvglK2N8TwN/fDwDg7wWA8PcZhC4bsBAtYPd/GA3A7r/yxjWWV7D+Pfo57zYRMVvAXOUfaQzYN6Acfx4A0J8HsIbz50WypuVYvzA7hYtktnPYoQCUivORLEDC9scAJN9lU3HNwx8BUPsmm4r9/P0BPP29ASqe/r4AlT3ZVEze/p4A/vsqT4DJBNiOeYFiEgcsU2CM1dCmVeHVsGaEAcxQGGBIwgD8t4FB2aeyACn1ZAF6wmOgRjQvCvCUaLgtCPA8I6IPr6TWgo0v58vAra77WsBZUJOFi99+0cbCxYI0+nFn9bOJc31goqPWpQe7Il1Qe9nz6AJIHvg7Cm53xfLA6xYRPeoKJqL5e0SfJBPREf+FQGvBLp3IAmyzzwxTR/QfAmTU0i5QAAVg7pFgANnZz3XhFnAuJQEBnGcB91IObAswSkmgAMtd2XcBq5QDCMAr5YABdJmlHDCAF8xPjWAAb//VtaCKeZU6+1RIC9hLKQbRAOz+z6K1QHWJ6LTo34kFYOz/fyfaGBh7+SOK2SzHVjqy84BLKYER9g8B4FZKgQI4ZfrjW6DfI1EA50XZHyC7/MC9lALUAmcX2xilFNAu4JRyGGF/JACvlAQHwCylMML+OABuKQcIoFITDaU+pSRG2N8V4O6cJZJ5ldK4AaT7i5vF9W+PiH213g0gzYk6hJUTQE54OQBUm1P+2AoPAKml9wAI5F8aIJR/WYBg/iUBZvtn7L11mSdh7qWYmibL+/dnFLMF6IKQ/38ZgLD+swFMWP+ZAKZOogCuN/OjAYzrzfxgAJt/GhNgreifZxEBLDdzPxhF7AKL/8q7iFOx5ROgs/gbaSou+nuUroJCqZEGGEcFsHQB3YwJMG4Xj53cILpcUx+2C3buF4+dNlLwUJj2Yu8tBEm+iW2B6ZHM+sUWqx8JOA/MyIQzvlojfCa09ULkVJw0RFuAKBnIZkIaJcIANMqFAQITlJnVRofCAHR8KAxAxwfCADQ8EAYIR1B6aQ1FUH5tD0TgEC7CELikm2FfOhVTXRogqwsDUNYQBqCvbWEA2mkLA6AJOHlnEpXjXCkNG5VZ2ywkAW+fByRgbjRxBNydLoyAn/qThti7ALpl4gOMEvC1Egb8E1KpVCqVSqVSqVQqlUqlUqmugf4AirTYciVwT/UAAAAASUVORK5CYII=">
