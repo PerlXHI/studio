@@ -14,7 +14,7 @@ const STATUS_NOTES={
   "Demo ready — Awaiting feedback":"Demo ready — Awaiting feedback",
   "Preparing final delivery":"Preparing final delivery"
 };
-const KEYS=["service_prices","catalog_products","studio_links","portfolio_videos","commission_status"];
+const KEYS=["service_prices","catalog_products","studio_links","portfolio_videos","commission_status","audio_player"];
 async function db(path,options={}) {
   const {url,key}=supabaseConfig();
   return fetch(url+"/rest/v1/"+path,{...options,headers:supabaseHeaders(key,{"Content-Type":"application/json",...(options.headers||{})})});
@@ -92,6 +92,19 @@ export default async function handler(req,res) {
             for(const rawUrl of urls){let parsed;try{parsed=new URL(String(rawUrl))}catch{return res.status(400).json({ok:false,message:"Enter a valid YouTube or Vimeo URL."})}if(parsed.protocol!=="https:"||!allowed.includes(parsed.hostname.toLowerCase()))return res.status(400).json({ok:false,message:"Portfolio previews must use HTTPS YouTube or Vimeo URLs."});}
             if(item.featured&&!urls.includes(item.featured))return res.status(400).json({ok:false,message:"Featured video must match one of the category preview URLs."});
           }
+        }
+        if(body.key==="audio_player"){
+          const audioSettings=value&&typeof value==="object"?value:{};
+          const tracks=Array.isArray(audioSettings.tracks)?audioSettings.tracks:[];
+          if(tracks.length>12)return res.status(400).json({ok:false,message:"The player supports up to 12 tracks."});
+          for(const track of tracks){
+            const title=String(track.title||"").trim(),artist=String(track.artist||"").trim(),src=String(track.src||"").trim(),cover=String(track.cover||"").trim();
+            if(!title||title.length>80||artist.length>80)return res.status(400).json({ok:false,message:"Each audio track needs a title (up to 80 characters) and an artist name up to 80 characters."});
+            let parsed;try{parsed=new URL(src)}catch{return res.status(400).json({ok:false,message:"Enter a valid direct audio file URL for every track."})}
+            if(parsed.protocol!=="https:")return res.status(400).json({ok:false,message:"Audio files must use HTTPS URLs."});
+            if(cover){let image;try{image=new URL(cover)}catch{return res.status(400).json({ok:false,message:"Enter a valid cover image URL or leave it blank."})}if(image.protocol!=="https:")return res.status(400).json({ok:false,message:"Cover images must use HTTPS URLs."});}
+          }
+          if(audioSettings.enabled!==undefined&&typeof audioSettings.enabled!=="boolean")return res.status(400).json({ok:false,message:"Player visibility must be enabled or disabled."});
         }
         if(!value||typeof value!=="object")return res.status(400).json({ok:false,message:"Setting value must be an object or array."});
         const payload={setting_key:body.key,setting_value:value};

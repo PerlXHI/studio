@@ -1354,6 +1354,264 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
+
+/* FLOATING AUDIO PLAYER */
+.pv-audio-dock{position:fixed;right:88px;bottom:22px;z-index:49;width:54px;height:54px}
+.pv-audio-panel{position:absolute;right:0;bottom:0;width:54px;height:54px;overflow:hidden;opacity:0;pointer-events:none;display:grid;grid-template-columns:1fr;align-content:center;gap:7px;padding:12px 64px 12px 14px;border:1px solid #e5d6ef;border-radius:23px;background:rgba(255,252,255,.97);box-shadow:0 13px 34px rgba(66,40,85,.17);backdrop-filter:blur(18px);transform:translateY(5px);transition:width .28s ease,height .28s ease,opacity .2s ease,transform .28s ease}
+.pv-audio-dock:hover .pv-audio-panel,.pv-audio-dock:focus-within .pv-audio-panel,.pv-audio-dock.is-open .pv-audio-panel,.pv-audio-dock.is-playing .pv-audio-panel{width:306px;height:126px;opacity:1;pointer-events:auto;transform:translateY(0);padding:12px 60px 11px 14px}
+.pv-audio-compact{position:absolute;right:0;bottom:0;z-index:2;width:54px;height:54px;display:grid;place-items:center;border:1px solid #e5d6ef;border-radius:50%;background:linear-gradient(145deg,#fff,#f7eaff);color:#7744a8;box-shadow:0 9px 26px rgba(79,48,102,.16);cursor:pointer;transition:transform .2s ease,background .2s ease}
+.pv-audio-compact:hover{transform:translateY(-3px);background:#f9e6f5}
+.pv-audio-bars{display:flex;align-items:center;justify-content:center;gap:3px;height:23px}
+.pv-audio-bars i{display:block;width:3px;height:9px;border-radius:5px;background:linear-gradient(180deg,#a66de0,#ff5597)}
+.pv-audio-bars i:nth-child(2n){height:15px}.pv-audio-bars i:nth-child(3n){height:21px}.pv-audio-bars i:nth-child(4n){height:12px}
+.pv-audio-dock.is-playing .pv-audio-bars i{animation:pv-audio-wave .7s ease-in-out infinite alternate}
+.pv-audio-dock.is-playing .pv-audio-bars i:nth-child(2n){animation-delay:.17s}.pv-audio-dock.is-playing .pv-audio-bars i:nth-child(3n){animation-delay:.31s}
+@keyframes pv-audio-wave{from{transform:scaleY(.42)}to{transform:scaleY(1.25)}}
+.pv-audio-track{display:flex;align-items:center;gap:10px;min-width:0}
+.pv-audio-track img{width:39px;height:39px;flex:0 0 39px;object-fit:cover;aspect-ratio:1;border-radius:12px;background:#f1e4f7}
+.pv-audio-copy{display:grid;gap:2px;min-width:0}
+.pv-audio-copy strong{max-width:176px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#462e52;font:700 .77rem Sora,sans-serif}
+.pv-audio-copy span{max-width:176px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#846f8e;font-size:.65rem}
+.pv-audio-controls{display:flex;align-items:center;gap:6px;min-width:0}
+.pv-audio-controls button{width:24px;height:24px;display:grid;place-items:center;flex:0 0 24px;padding:0;border:0;border-radius:50%;background:transparent;color:#77538e;font-size:1.15rem;cursor:pointer}
+.pv-audio-controls .pv-audio-play{width:28px;height:28px;flex-basis:28px;background:linear-gradient(135deg,#ff5093,#d65ab5);color:white;font-size:.67rem}
+.pv-audio-controls button:disabled{opacity:.36;cursor:not-allowed}
+.pv-audio-time{margin-left:auto;color:#887a91;font-size:.59rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pv-audio-seek{width:100%;height:4px;min-height:4px;padding:0;margin:0;appearance:none;border:0;border-radius:10px;background:linear-gradient(90deg,#ff579b,#b07be3);cursor:pointer}
+.pv-audio-seek::-webkit-slider-thumb{appearance:none;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #a56acb;box-shadow:0 1px 4px #56326c33}
+.pv-audio-seek::-moz-range-thumb{width:8px;height:8px;border-radius:50%;background:#fff;border:2px solid #a56acb}
+.pv-audio-empty{display:none;margin:0;color:#87758f;font-size:.62rem}
+.pv-audio-dock[data-empty=true] .pv-audio-empty{display:block}
+.pv-audio-dock[data-empty=true] .pv-audio-controls,.pv-audio-dock[data-empty=true] .pv-audio-seek{opacity:.42}
+.pv-audio-dock[data-empty=true] .pv-audio-track img{opacity:.72}
+@media(max-width:560px){.pv-audio-dock{right:76px;bottom:15px}.pv-audio-dock:hover .pv-audio-panel,.pv-audio-dock:focus-within .pv-audio-panel,.pv-audio-dock.is-open .pv-audio-panel,.pv-audio-dock.is-playing .pv-audio-panel{width:min(292px,calc(100vw - 92px));height:126px}.pv-audio-copy strong,.pv-audio-copy span{max-width:155px}.pv-audio-compact{width:49px;height:49px}}
+@media(prefers-reduced-motion:reduce){.pv-audio-dock *,.pv-audio-compact{animation:none!important;transition:none!important}}
+/* LIGHT / NIGHT TOKENS: keep every section readable in either theme */
+html[data-theme="dark"]{
+ color-scheme:dark;
+ --paper:#171321;--card:#211b30;--ink:#f5effb;--muted:#c0b2cb;--line:#493858;--green:#c3a8f3;--rust:#ff83b6;
+ --pv-paper:#171321;--pv-plum:#f5effb;--pv-muted:#c4b5cf;--pv-line:#51405e;--pv-card:rgba(42,32,56,.88);
+ --pv-shadow:0 18px 54px rgba(0,0,0,.24);
+}
+html[data-theme="dark"] body{background:radial-gradient(ellipse at 7% 4%,#332342 0,transparent 34%),radial-gradient(ellipse at 93% 18%,#2c203c 0,transparent 30%),linear-gradient(180deg,#171321,#1b1625 64%,#171321)!important;color:#f5effb!important}
+html[data-theme="dark"] .pv-header{background:rgba(28,21,39,.88);border-color:#493858;box-shadow:0 5px 24px rgba(0,0,0,.18)}
+html[data-theme="dark"] .pv-brand{color:#f5effb}
+html[data-theme="dark"] .pv-header nav .navlink{color:#e5d9ee!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+html[data-theme="dark"] .pv-header nav .navlink:hover,html[data-theme="dark"] .pv-header nav .navlink[aria-current=page]{background:#3a2b4b!important;color:#fff!important;border-color:#604772!important}
+html[data-theme="dark"] .pv-nav-cta{color:#fff;background:linear-gradient(105deg,#ec478d,#c9449f);box-shadow:0 8px 22px #c43e8733}
+html[data-theme="dark"] .pv-hero{background:linear-gradient(115deg,#21172c,#25192f 52%,#2b1b32)}
+html[data-theme="dark"] .pv-hero:before{background:radial-gradient(ellipse at 68% 50%,#4a3264 0,transparent 43%),radial-gradient(ellipse at 100% 4%,#5b294a 0,transparent 28%)}
+html[data-theme="dark"] .pv-hero:after{background:#1b1625}
+html[data-theme="dark"] .pv-hero .pv-eyebrow{background:linear-gradient(100deg,#8051a5,#a84c80);color:#fff}
+html[data-theme="dark"] .pv-hero h1,html[data-theme="dark"] .pv-section-head h2,html[data-theme="dark"] .pv-about-copy h2,html[data-theme="dark"] .pv-team-heading h2,html[data-theme="dark"] .pv-faq-copy h2,html[data-theme="dark"] .pv-bottom-cta h2{color:#f8f1ff}
+html[data-theme="dark"] .pv-hero h1 em,html[data-theme="dark"] .pv-section-head h2 em,html[data-theme="dark"] .pv-about-copy h2 em,html[data-theme="dark"] .pv-team-heading h2 em,html[data-theme="dark"] .pv-faq-copy h2 em,html[data-theme="dark"] .pv-bottom-cta h2 em{color:#ff82b9}
+html[data-theme="dark"] .pv-hero-lead,html[data-theme="dark"] .pv-section-head p:not(.pv-eyebrow),html[data-theme="dark"] .pv-about-copy>p:not(.pv-eyebrow),html[data-theme="dark"] .pv-team-heading>p:last-child,html[data-theme="dark"] .pv-faq-copy>p:not(.pv-eyebrow),html[data-theme="dark"] .pv-bottom-cta p:last-child{color:#d0c1db}
+html[data-theme="dark"] .pv-hero-status{background:#2b2036;border-color:#574265;box-shadow:0 10px 28px #09060f55}
+html[data-theme="dark"] .pv-hero-status .commission-status-label,html[data-theme="dark"] .pv-hero-status .commission-status-main span,html[data-theme="dark"] .pv-hero-status .commission-status-bottom{color:#c9b8d5}
+html[data-theme="dark"] .pv-hero-status .commission-status-main strong{color:#fff}
+html[data-theme="dark"] .pv-hero-art:before{background:radial-gradient(circle at 50% 40%,#4d3d65 0,#443253 42%,#392941 68%,transparent 72%)}
+html[data-theme="dark"] .pv-orbit{border-color:#9670b65e}
+html[data-theme="dark"] .pv-trusted{background:linear-gradient(90deg,#1c1726,#24182b,#1c1726);border-color:#46334e}
+html[data-theme="dark"] .pv-trusted-label,html[data-theme="dark"] .pv-trust-more{color:#cabbd5}
+html[data-theme="dark"] .pv-trust-pill{background:#2b2036;border-color:#574265;color:#e9dff1}
+html[data-theme="dark"] .pv-trust-pill b{color:#ff8bbb}
+html[data-theme="dark"] .pv-text-link{color:#d5a8ff}
+html[data-theme="dark"] .pv-work-card,html[data-theme="dark"] .pv-service-card,html[data-theme="dark"] .pv-faq-list details{background:linear-gradient(145deg,#2b2036,#251d32);border-color:#503c5c;box-shadow:0 12px 34px #08051055}
+html[data-theme="dark"] .pv-work-meta strong,html[data-theme="dark"] .pv-service-card strong,html[data-theme="dark"] .pv-faq-list summary{color:#f4eafa}
+html[data-theme="dark"] .pv-work-meta small,html[data-theme="dark"] .pv-service-card p,html[data-theme="dark"] .pv-faq-list details p{color:#c5b5d0}
+html[data-theme="dark"] .pv-work-tag{background:#281e35ed;color:#e8c8ff}
+html[data-theme="dark"] .pv-work-arrow{background:#443052;color:#f1d8ff}
+html[data-theme="dark"] .pv-concept-note{color:#bdadc9}
+html[data-theme="dark"] .pv-service-icon{background:linear-gradient(140deg,#50325b,#41365e);color:#f5a6d0}
+html[data-theme="dark"] .pv-about-panel{background:linear-gradient(110deg,#2b2036,#2b203d 55%,#34233d);border-color:#584363;box-shadow:0 16px 45px #08051055}
+html[data-theme="dark"] .pv-about-sticker{background:#241a30eF;border-color:#765b82;color:#f1b5dc}
+html[data-theme="dark"] .pv-team-row{border-color:#493858}
+html[data-theme="dark"] .pv-team-avatar>span,html[data-theme="dark"] .pv-team-avatar>img{border-color:#624c71}
+html[data-theme="dark"] .pv-team-avatar small{color:#d7c8e2}
+html[data-theme="dark"] .pv-avatar-two>span{background:linear-gradient(145deg,#63364f,#49334c);color:#ffc1dd}
+html[data-theme="dark"] .pv-avatar-three>span{background:linear-gradient(145deg,#473960,#343a5c);color:#d5c3ff}
+html[data-theme="dark"] .pv-avatar-four>img{background:#fff}
+html[data-theme="dark"] .pv-faq-list details{background:#2b2036;border-color:#564162}
+html[data-theme="dark"] .pv-faq-list summary span{color:#e6a5d1}
+html[data-theme="dark"] .pv-bottom-cta-inner{background:linear-gradient(105deg,#342543,#392438 62%,#3b2639);border-color:#604360;box-shadow:0 12px 35px #08051055}
+html[data-theme="dark"] .pv-footer{background:linear-gradient(120deg,#211833,#30204a 55%,#241631);color:#fff}
+html[data-theme="dark"] .pv-footer-grid a:not(.brand),html[data-theme="dark"] .pv-footer-brand>p,html[data-theme="dark"] .pv-footer-grid>div:last-child>p{color:#eee2f7}
+html[data-theme="dark"] .pv-footer-brand>small{color:#cfc0df}
+html[data-theme="dark"] .pv-primary{background:linear-gradient(105deg,#f34b93,#dc449d);color:#fff}
+html[data-theme="dark"] .pv-secondary{background:#2d233b;color:#efdfff;border-color:#8d70a8}
+html[data-theme="dark"] .pv-audio-panel{background:rgba(35,26,47,.98);border-color:#5a456b;box-shadow:0 13px 34px rgba(0,0,0,.45)}
+html[data-theme="dark"] .pv-audio-copy strong{color:#f6edff}
+html[data-theme="dark"] .pv-audio-copy span,html[data-theme="dark"] .pv-audio-time,html[data-theme="dark"] .pv-audio-empty{color:#c6b5d2}
+html[data-theme="dark"] .pv-audio-controls button{color:#ead9fa}
+html[data-theme="dark"] .pv-audio-controls .pv-audio-play{color:#fff;background:linear-gradient(135deg,#ef5598,#b763d3)}
+html[data-theme="dark"] .pv-audio-compact{background:linear-gradient(145deg,#3b2b4e,#2d253f);border-color:#68517c;color:#f1dfff;box-shadow:0 10px 28px #0007}
+html[data-theme="dark"] .pv-audio-track img{background:#30243d}
+html[data-theme="dark"] .pv-audio-seek{background:linear-gradient(90deg,#f15b9b,#a77bea)}
+/* Existing non-home views: make shared text, forms, cards and media consistent. */
+html[data-theme="dark"] .page-view:not([data-page="home"]){color:#f0eafa}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .eyebrow,html[data-theme="dark"] .page-view:not([data-page="home"]) .mono{color:#c6b6d7}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .section-head h2,html[data-theme="dark"] .page-view:not([data-page="home"]) h2,html[data-theme="dark"] .page-view:not([data-page="home"]) h3{color:#f5edff}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .sub,html[data-theme="dark"] .page-view:not([data-page="home"]) p{color:#c9bdd4}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .product,html[data-theme="dark"] .page-view:not([data-page="home"]) .service-card,html[data-theme="dark"] .page-view:not([data-page="home"]) .step-card,html[data-theme="dark"] .page-view:not([data-page="home"]) .credit-card,html[data-theme="dark"] .page-view:not([data-page="home"]) .license-panel,html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-card,html[data-theme="dark"] .page-view:not([data-page="home"]) .team-card,html[data-theme="dark"] .page-view:not([data-page="home"]) .faq details{background:linear-gradient(145deg,#2a2036,#251e32)!important;border-color:#534060!important;color:#f4eafa!important}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .product-title,html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-copy h3,html[data-theme="dark"] .page-view:not([data-page="home"]) .service-card h3,html[data-theme="dark"] .page-view:not([data-page="home"]) .team-info h3{color:#f7efff}
+html[data-theme="dark"] .page-view:not([data-page="home"]) input,html[data-theme="dark"] .page-view:not([data-page="home"]) select,html[data-theme="dark"] .page-view:not([data-page="home"]) textarea{background:#1e1929!important;border-color:#59466a!important;color:#f5edff!important;color-scheme:dark}
+html[data-theme="dark"] .page-view:not([data-page="home"]) input::placeholder,html[data-theme="dark"] .page-view:not([data-page="home"]) textarea::placeholder{color:#9587a5!important}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .empty{background:#251e32;border-color:#62506f;color:#c8bbd5}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-placeholder,html[data-theme="dark"] .page-view:not([data-page="home"]) .product-preview-fallback{background:#30253d;color:#eee3f8}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-strip{background:linear-gradient(180deg,#1b1625,#211a2b)!important}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq details{background:#2a2036!important}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq summary{color:#f0eafa}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq details p{color:#c9bdd4}
+html[data-theme="dark"] .pv-header .navlink:focus-visible,html[data-theme="dark"] .pv-audio-controls button:focus-visible{outline-color:#ff91c2}
+@media(max-width:560px){.pv-audio-dock{right:74px}.pv-audio-dock:hover .pv-audio-panel,.pv-audio-dock:focus-within .pv-audio-panel,.pv-audio-dock.is-open .pv-audio-panel,.pv-audio-dock.is-playing .pv-audio-panel{width:min(286px,calc(100vw - 90px))}}
+
+
+/* IMAGE / ICON DIMENSIONS — retain native proportions and crisp source pixels */
+img,video,svg{max-width:100%}
+img{height:auto}
+.pv-brand-mark{overflow:hidden}
+.pv-brand-mark img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;padding:1px;image-rendering:auto}
+.pv-mascot{display:block;width:min(100%,720px);height:auto;aspect-ratio:1500/941;object-fit:contain;object-position:center}
+.pv-work-card>img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
+.pv-about-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.pv-team-avatar>img{display:block;width:63px;height:63px;aspect-ratio:1;object-fit:contain;object-position:center}
+.pv-bottom-cta-inner>img{display:block;object-fit:contain;object-position:center bottom}
+.contact-trigger .contact-logo{width:25px;height:25px;aspect-ratio:1;object-fit:contain}
+@media(max-width:760px){.pv-team-avatar>img{width:54px;height:54px}}
+
+
+/* FINAL CONTRAST + LEGACY VIEW NIGHT-MODE PASS */
+html[data-theme="dark"]{
+ --bg:#171321;--surface:#251e32;--ink:#f5effb;--muted:#c7b8d2;--line:#51415f;
+ --night:#1a1424;--on-night:#f8f1ff;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) {
+ color:#f4edf9!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) section,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .section,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-strip,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .catalog,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .custom,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .license,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track{
+ background-color:transparent!important;
+ color:#f4edf9!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .custom-band,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-hero,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-bottom,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-hero,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-note,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-cta,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-hero,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-help,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-search,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-result,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-policy,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-steps article,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .form,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-form{
+ background:linear-gradient(145deg,#2b2038,#241c31)!important;
+ border-color:#574363!important;
+ color:#f3eafa!important;
+ box-shadow:0 12px 34px rgba(0,0,0,.2)!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .custom-band h2,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-hero h2,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-hero h2,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-hero h2,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-cta h3,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-result-head h3{
+ color:#fff5ff!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .custom-band p,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-note,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-form-foot,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-steps p,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-bottom .sub,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-lead,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-search small,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-note,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-message,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-help p,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-lead,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-bio{
+ color:#cdbed8!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-input-row input,
+html[data-theme="dark"] .page-view:not([data-page="home"]) input,
+html[data-theme="dark"] .page-view:not([data-page="home"]) select,
+html[data-theme="dark"] .page-view:not([data-page="home"]) textarea,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .control{
+ color:#f7efff!important;background:#1d1828!important;border-color:#624d72!important;
+ color-scheme:dark;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) input::placeholder,
+html[data-theme="dark"] .page-view:not([data-page="home"]) textarea::placeholder{
+ color:#a99ab5!important;opacity:1;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) label,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .field label,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-search label{
+ color:#f0e6f7!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .small-btn,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .quiet,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .favorite{
+ color:#f2e6ff!important;background:#3c2e4b!important;border-color:#6a5579!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .price,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .starting,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .step-no{
+ color:#ffabd0!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-status-pill,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-step{
+ background:#30243e!important;border-color:#5e4a70!important;color:#f3e8fc!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-step small,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-meta span{
+ color:#bfafcc!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-resource-link{
+ background:#3b2d4b!important;border-color:#685178!important;color:#f0dfff!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .mini-player,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .mini-player audio{
+ background:#241c31!important;border-color:#5a466b!important;color:#fff!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-art,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .product-art,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .service-art{
+ border-color:#5c496b!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq summary,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq summary::after{
+ color:#f3eafa!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq details,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq details p{
+ background:#2b2038!important;border-color:#574363!important;color:#d9cbe3!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .empty,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-placeholder,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .product-preview-fallback{
+ background:#2d233b!important;border-color:#5d496d!important;color:#e4d8ed!important;
+}
+html[data-theme="dark"] .modal,
+html[data-theme="dark"] dialog{
+ background:#251d32!important;color:#f4eafa!important;border-color:#5c496d!important;
+}
+html[data-theme="dark"] .modal p,
+html[data-theme="dark"] dialog p{color:#d1c2dc!important}
+html[data-theme="dark"] .close{background:#3a2a49!important;color:#f7edff!important;border-color:#664e77!important}
+html[data-theme="dark"] .toast{background:#2b2038!important;color:#f6effb!important;border-color:#654f75!important}
+html[data-theme="dark"] footer{background:linear-gradient(120deg,#211833,#30204a 55%,#241631)!important;color:#f7efff!important}
+html[data-theme="dark"] footer p{color:#d6c7e1!important}
+/* Keep the hero mascot inside the source asset's useful pixel density. */
+.pv-mascot{width:min(100%,400px)!important;max-width:400px!important;height:auto!important;object-fit:contain!important;object-position:center!important}
+@media(max-width:760px){.pv-mascot{width:min(100%,360px)!important;max-width:360px!important}}
 </style>
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAAGFBMVEUAAAD9WaFRHDP18fabN2NfXV9wKEiin6Ph7EosAAAESUlEQVR42u2cT2sTQRjG350kbaGUJCCCB2ULHoUq0qM09eBRAwq9tl9AevHzNFdv+QD+CXgUoUcPgnuW1mStRdumiQfbprDTZOedZ+bF+j6XNttsnl9nJjPPbN4NkUqlUqlUKpVKpVKpVCqVSnVdNfdY2L/ZbJV6YhLIf5FoPCjzTBPMv6SMsH8QALNIogCmTqIAbv54ADMmWYBxQxZgvUGiAOu7JArg7o8FYPhDATj+SACWPxCA548D2OL5wwC2uiQKwPYHJaJlW/iJmIiWB/xzjbA/AiD18QcApLnX6RVvgKuH8e8yp1c97atLvglK2N8TwN/fDwDg7wWA8PcZhC4bsBAtYPd/GA3A7r/yxjWWV7D+Pfo57zYRMVvAXOUfaQzYN6Acfx4A0J8HsIbz50WypuVYvzA7hYtktnPYoQCUivORLEDC9scAJN9lU3HNwx8BUPsmm4r9/P0BPP29ASqe/r4AlT3ZVEze/p4A/vsqT4DJBNiOeYFiEgcsU2CM1dCmVeHVsGaEAcxQGGBIwgD8t4FB2aeyACn1ZAF6wmOgRjQvCvCUaLgtCPA8I6IPr6TWgo0v58vAra77WsBZUJOFi99+0cbCxYI0+nFn9bOJc31goqPWpQe7Il1Qe9nz6AJIHvg7Cm53xfLA6xYRPeoKJqL5e0SfJBPREf+FQGvBLp3IAmyzzwxTR/QfAmTU0i5QAAVg7pFgANnZz3XhFnAuJQEBnGcB91IObAswSkmgAMtd2XcBq5QDCMAr5YABdJmlHDCAF8xPjWAAb//VtaCKeZU6+1RIC9hLKQbRAOz+z6K1QHWJ6LTo34kFYOz/fyfaGBh7+SOK2SzHVjqy84BLKYER9g8B4FZKgQI4ZfrjW6DfI1EA50XZHyC7/MC9lALUAmcX2xilFNAu4JRyGGF/JACvlAQHwCylMML+OABuKQcIoFITDaU+pSRG2N8V4O6cJZJ5ldK4AaT7i5vF9W+PiH213g0gzYk6hJUTQE54OQBUm1P+2AoPAKml9wAI5F8aIJR/WYBg/iUBZvtn7L11mSdh7qWYmibL+/dnFLMF6IKQ/38ZgLD+swFMWP+ZAKZOogCuN/OjAYzrzfxgAJt/GhNgreifZxEBLDdzPxhF7AKL/8q7iFOx5ROgs/gbaSou+nuUroJCqZEGGEcFsHQB3YwJMG4Xj53cILpcUx+2C3buF4+dNlLwUJj2Yu8tBEm+iW2B6ZHM+sUWqx8JOA/MyIQzvlojfCa09ULkVJw0RFuAKBnIZkIaJcIANMqFAQITlJnVRofCAHR8KAxAxwfCADQ8EAYIR1B6aQ1FUH5tD0TgEC7CELikm2FfOhVTXRogqwsDUNYQBqCvbWEA2mkLA6AJOHlnEpXjXCkNG5VZ2ywkAW+fByRgbjRxBNydLoyAn/qThti7ALpl4gOMEvC1Egb8E1KpVCqVSqVSqVQqlUqlUqmugf4AirTYciVwT/UAAAAASUVORK5CYII=">
 <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAAGFBMVEUAAAD9WaFRHDP18fabN2NfXV9wKEiin6Ph7EosAAAESUlEQVR42u2cT2sTQRjG350kbaGUJCCCB2ULHoUq0qM09eBRAwq9tl9AevHzNFdv+QD+CXgUoUcPgnuW1mStRdumiQfbprDTZOedZ+bF+j6XNttsnl9nJjPPbN4NkUqlUqlUKpVKpVKpVCqVSnVdNfdY2L/ZbJV6YhLIf5FoPCjzTBPMv6SMsH8QALNIogCmTqIAbv54ADMmWYBxQxZgvUGiAOu7JArg7o8FYPhDATj+SACWPxCA548D2OL5wwC2uiQKwPYHJaJlW/iJmIiWB/xzjbA/AiD18QcApLnX6RVvgKuH8e8yp1c97atLvglK2N8TwN/fDwDg7wWA8PcZhC4bsBAtYPd/GA3A7r/yxjWWV7D+Pfo57zYRMVvAXOUfaQzYN6Acfx4A0J8HsIbz50WypuVYvzA7hYtktnPYoQCUivORLEDC9scAJN9lU3HNwx8BUPsmm4r9/P0BPP29ASqe/r4AlT3ZVEze/p4A/vsqT4DJBNiOeYFiEgcsU2CM1dCmVeHVsGaEAcxQGGBIwgD8t4FB2aeyACn1ZAF6wmOgRjQvCvCUaLgtCPA8I6IPr6TWgo0v58vAra77WsBZUJOFi99+0cbCxYI0+nFn9bOJc31goqPWpQe7Il1Qe9nz6AJIHvg7Cm53xfLA6xYRPeoKJqL5e0SfJBPREf+FQGvBLp3IAmyzzwxTR/QfAmTU0i5QAAVg7pFgANnZz3XhFnAuJQEBnGcB91IObAswSkmgAMtd2XcBq5QDCMAr5YABdJmlHDCAF8xPjWAAb//VtaCKeZU6+1RIC9hLKQbRAOz+z6K1QHWJ6LTo34kFYOz/fyfaGBh7+SOK2SzHVjqy84BLKYER9g8B4FZKgQI4ZfrjW6DfI1EA50XZHyC7/MC9lALUAmcX2xilFNAu4JRyGGF/JACvlAQHwCylMML+OABuKQcIoFITDaU+pSRG2N8V4O6cJZJ5ldK4AaT7i5vF9W+PiH213g0gzYk6hJUTQE54OQBUm1P+2AoPAKml9wAI5F8aIJR/WYBg/iUBZvtn7L11mSdh7qWYmibL+/dnFLMF6IKQ/38ZgLD+swFMWP+ZAKZOogCuN/OjAYzrzfxgAJt/GhNgreifZxEBLDdzPxhF7AKL/8q7iFOx5ROgs/gbaSou+nuUroJCqZEGGEcFsHQB3YwJMG4Xj53cILpcUx+2C3buF4+dNlLwUJj2Yu8tBEm+iW2B6ZHM+sUWqx8JOA/MyIQzvlojfCa09ULkVJw0RFuAKBnIZkIaJcIANMqFAQITlJnVRofCAHR8KAxAxwfCADQ8EAYIR1B6aQ1FUH5tD0TgEC7CELikm2FfOhVTXRogqwsDUNYQBqCvbWEA2mkLA6AJOHlnEpXjXCkNG5VZ2ywkAW+fByRgbjRxBNydLoyAn/qThti7ALpl4gOMEvC1Egb8E1KpVCqVSqVSqVQqlUqlUqmugf4AirTYciVwT/UAAAAASUVORK5CYII=">
@@ -1633,6 +1891,28 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   <a class="contact-option" id="contactEmail" href="#" hidden><span class="contact-option-icon email-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 5h18v14H3V5Zm2 2v.4l7 5.1 7-5.1V7l-7 5-7-5Zm14 10V9.9l-7 5-7-5V17h14Z"/></svg></span><span>Email</span></a>
  </nav>
 </div>
+
+<div class="pv-audio-dock" id="pvAudioDock" data-empty="true" aria-label="Perivelle audio player">
+ <div class="pv-audio-panel" aria-live="polite">
+  <div class="pv-audio-track">
+   <img id="pvAudioCover" src="assets/brand/pfp.webp" alt="" width="40" height="40">
+   <div class="pv-audio-copy"><strong id="pvAudioTitle">Perivelle Audio</strong><span id="pvAudioArtist">Add a track in the dashboard</span></div>
+  </div>
+  <div class="pv-audio-controls">
+   <button type="button" id="pvAudioPrevious" aria-label="Previous track" disabled>‹</button>
+   <button type="button" class="pv-audio-play" id="pvAudioPlay" aria-label="Play audio" disabled>▶</button>
+   <button type="button" id="pvAudioNext" aria-label="Next track" disabled>›</button>
+   <span class="pv-audio-time" id="pvAudioTime">0:00 / 0:00</span>
+  </div>
+  <input class="pv-audio-seek" id="pvAudioSeek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Audio progress" disabled>
+  <p class="pv-audio-empty" id="pvAudioEmpty">Add direct audio links in the admin dashboard.</p>
+ </div>
+ <button class="pv-audio-compact" id="pvAudioCompact" type="button" aria-label="Open audio player" aria-expanded="false">
+  <span class="pv-audio-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+ </button>
+ <audio id="pvAudioElement" preload="none"></audio>
+</div>
+
 <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="theme-icon" aria-hidden="true">☾</span></button>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script>
@@ -1823,12 +2103,70 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
  window.perivelleWatchPortfolioFrame=watchFrame;
 })();
  
+
+/* ADMIN-MANAGED FLOATING AUDIO PLAYER */
+(function(){
+ const dock=document.getElementById("pvAudioDock");if(!dock)return;
+ const audio=document.getElementById("pvAudioElement"),compact=document.getElementById("pvAudioCompact");
+ const cover=document.getElementById("pvAudioCover"),title=document.getElementById("pvAudioTitle"),artist=document.getElementById("pvAudioArtist");
+ const play=document.getElementById("pvAudioPlay"),previous=document.getElementById("pvAudioPrevious"),next=document.getElementById("pvAudioNext");
+ const seek=document.getElementById("pvAudioSeek"),time=document.getElementById("pvAudioTime"),empty=document.getElementById("pvAudioEmpty");
+ let tracks=[],current=0;
+ function safeUrl(value){try{const url=new URL(String(value||""));return url.protocol==="https:"?url.href:""}catch{return""}}
+ function formatTime(value){if(!Number.isFinite(value)||value<0)return"0:00";const m=Math.floor(value/60),s=Math.floor(value%60);return m+":"+String(s).padStart(2,"0")}
+ function currentTrack(){return tracks[current]||null}
+ function sync(){
+  const active=!!currentTrack(),playing=active&&!audio.paused&&!audio.ended;
+  dock.classList.toggle("is-playing",playing);
+  play.textContent=playing?"Ⅱ":"▶";play.setAttribute("aria-label",playing?"Pause audio":"Play audio");
+  compact.setAttribute("aria-label",active?"Open audio player":"Open audio player — no track added yet");
+  time.textContent=formatTime(audio.currentTime)+" / "+formatTime(audio.duration);
+  seek.value=Number.isFinite(audio.duration)&&audio.duration>0?String(audio.currentTime/audio.duration*100):"0";
+  seek.disabled=!active||!Number.isFinite(audio.duration);
+ }
+ function loadTrack(index,autoplay){
+  if(!tracks.length)return;
+  current=(index+tracks.length)%tracks.length;
+  const track=currentTrack();
+  audio.pause();audio.src=track.src;audio.loop=track.loop!==false;audio.load();
+  title.textContent=track.title;artist.textContent=track.artist||"Perivelle Studio";
+  cover.src=track.cover||"assets/brand/pfp.webp";
+  cover.onerror=()=>{cover.src="assets/brand/pfp.webp"};
+  dock.dataset.empty="false";play.disabled=false;previous.disabled=tracks.length<2;next.disabled=tracks.length<2;
+  empty.hidden=true;sync();
+  if(autoplay)audio.play().catch(()=>{artist.textContent="Tap play to start audio";sync()});
+ }
+ window.perivelleSetAudioPlayer=function(config){
+  const source=Array.isArray(config?.tracks)?config.tracks:[];
+  tracks=(config?.enabled===false?[]:source).map(item=>({title:String(item.title||"").trim(),artist:String(item.artist||"").trim(),src:safeUrl(item.src),cover:safeUrl(item.cover),loop:item.loop!==false})).filter(item=>item.title&&item.src);
+  current=0;
+  if(!tracks.length){
+   audio.pause();audio.removeAttribute("src");audio.load();
+   dock.dataset.empty="true";title.textContent="Perivelle Audio";artist.textContent="Add a track in the dashboard";
+   cover.src="assets/brand/pfp.webp";play.disabled=true;previous.disabled=true;next.disabled=true;seek.disabled=true;empty.hidden=false;sync();return;
+  }
+  loadTrack(0,false);
+ };
+ compact.addEventListener("click",function(){const opened=dock.classList.toggle("is-open");compact.setAttribute("aria-expanded",String(opened))});
+ play.addEventListener("click",function(){if(!currentTrack())return;if(audio.paused)audio.play().catch(()=>{artist.textContent="Audio could not be played. Check the file URL.";});else audio.pause()});
+ previous.addEventListener("click",function(){loadTrack(current-1,true)});
+ next.addEventListener("click",function(){loadTrack(current+1,true)});
+ audio.addEventListener("play",sync);audio.addEventListener("pause",sync);audio.addEventListener("timeupdate",sync);audio.addEventListener("loadedmetadata",sync);
+ audio.addEventListener("ended",function(){if(tracks.length>1&&!audio.loop)loadTrack(current+1,true);sync()});
+ audio.addEventListener("error",function(){if(currentTrack())artist.textContent="Audio file could not be loaded";sync()});
+ seek.addEventListener("input",function(){if(Number.isFinite(audio.duration)&&audio.duration>0)audio.currentTime=audio.duration*(Number(seek.value)/100)});
+ dock.addEventListener("mouseenter",()=>{dock.classList.add("is-open");compact.setAttribute("aria-expanded","true")});
+ dock.addEventListener("mouseleave",()=>{if(!dock.classList.contains("is-playing")){dock.classList.remove("is-open");compact.setAttribute("aria-expanded","false")}});
+ document.addEventListener("keydown",event=>{if(event.key==="Escape"&&dock.classList.contains("is-open")){dock.classList.remove("is-open");compact.setAttribute("aria-expanded","false")}});
+})();
+
 /* LOAD ADMIN-MANAGED PUBLIC STUDIO SETTINGS */
 (async function(){
  try{
   const response=await fetch("/api/site-config",{headers:{"Accept":"application/json"}});
   if(!response.ok)return;
   const payload=await response.json(),settings=payload.settings||{};
+  if(window.perivelleSetAudioPlayer)window.perivelleSetAudioPlayer(settings.audio_player||{});
   if(Array.isArray(settings.catalog_products)){
    settings.catalog_products.forEach(function(item){
     const product=products.find(function(p){return p.id===item.id});
@@ -1971,6 +2309,7 @@ setLanguage("en");
   const dark=theme==="dark";root.dataset.theme=dark?"dark":"light";
   button.setAttribute("aria-label",dark?"Switch to light mode":"Switch to dark mode");
   button.title=dark?"Switch to light mode":"Switch to dark mode";
+  button.setAttribute("aria-pressed",String(dark));
   button.querySelector(".theme-icon").textContent=dark?"☀":"☾";
  }
  apply(saved==="dark"?"dark":"light");
