@@ -1,0 +1,1 @@
+Page entry templates belong here. The build maps home.njk, gallery.njk, custom-order.njk, perivelle.njk, and admin.njk to the existing public HTML filenames. Add templates incrementally after their dependencies are audited.
