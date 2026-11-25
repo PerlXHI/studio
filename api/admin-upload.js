@@ -39,8 +39,11 @@ async function ensurePublicBucket(url, key, fileSize) {
     const errorText = await response.text().catch(() => "");
     let detail = {};
     try { detail = JSON.parse(errorText); } catch {}
-    const reason = detail.message || detail.error || detail.hint || errorText || "No error details were returned by Supabase.";
-    throw new Error("Could not check the Supabase Storage bucket. HTTP " + response.status + ": " + String(reason).slice(0, 500));
+    const reason = String(detail.message || detail.error || detail.hint || errorText || "");
+    const bucketMissing = response.status === 400 && /bucket not found/i.test(reason);
+    if (!bucketMissing) {
+      throw new Error("Could not check the Supabase Storage bucket. HTTP " + response.status + ": " + (reason || "No error details were returned by Supabase.").slice(0, 500));
+    }
   }
   response = await fetch(url + "/storage/v1/bucket", {
     method: "POST",
