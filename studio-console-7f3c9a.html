@@ -47,7 +47,12 @@ a{color:#c6a9f3}
 .freebie-admin-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px;margin-top:18px}
 .freebie-entry{margin:14px 0;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
 .freebie-entry-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
-.freebie-entry-head strong{font-size:1rem}
+.freebie-entry-head strong{font-size:1rem;min-width:0;overflow-wrap:anywhere}
+.freebie-entry.is-collapsed .freebie-admin-grid,.freebie-entry.is-collapsed .freebie-publish{display:none}
+.freebie-entry.is-collapsed{padding:12px 16px}
+.freebie-entry.is-collapsed .freebie-entry-head{margin-bottom:0}
+.freebie-entry-controls{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+.freebie-collapse{min-width:88px}
 .freebie-admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .freebie-admin-grid label{display:grid;gap:6px;min-width:0;font-size:.82rem;font-weight:650}
 .freebie-admin-grid input,.freebie-admin-grid select,.freebie-admin-grid textarea{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;padding:10px;background:var(--paper);color:var(--ink);font:inherit;font-size:.86rem}
@@ -232,7 +237,7 @@ function freebieRow(item){
  const artistOptions=freebieArtists.map(x=>'<option value="'+esc(x.id)+'" '+((data.artist||"Perivelle Studio")===x.id?'selected':'')+'>'+esc(x.name)+'</option>').join("");
  const id=esc(data.id||("freebie_"+Date.now()+"_"+Math.random().toString(36).slice(2,7)));
  return '<article class="freebie-entry" data-freebie-id="'+id+'">'+
-  '<div class="freebie-entry-head"><strong>'+esc(data.title||"New free audio")+'</strong><button type="button" class="btn alt" data-remove-freebie>Remove</button></div>'+
+  '<div class="freebie-entry-head"><strong>'+esc(data.title||"New free audio")+'</strong><div class="freebie-entry-controls"><button type="button" class="btn alt freebie-collapse" data-toggle-freebie aria-expanded="true">Minimize</button><button type="button" class="btn alt" data-remove-freebie>Remove</button></div></div>'+
   '<div class="freebie-admin-grid">'+
    '<label>Release title<input data-freebie-title maxlength="100" required value="'+esc(data.title||"")+'" placeholder="e.g. Starlit Café — Cozy BGM"></label>'+
    '<label>Audio type<select data-freebie-category required>'+categoryOptions+'</select></label>'+
@@ -258,6 +263,13 @@ $("#addFreebie").addEventListener("click",()=>{
  $("#freebieRows").insertAdjacentHTML("beforeend",freebieRow({release_date:localAdminDate(),published:false}));
 });
 $("#freebieRows").addEventListener("click",event=>{
+ const toggle=event.target.closest("[data-toggle-freebie]");
+ if(toggle){
+  const entry=toggle.closest(".freebie-entry"),collapsed=entry.classList.toggle("is-collapsed");
+  toggle.textContent=collapsed?"Expand":"Minimize";
+  toggle.setAttribute("aria-expanded",String(!collapsed));
+  return;
+ }
  const remove=event.target.closest("[data-remove-freebie]");
  if(remove)remove.closest(".freebie-entry").remove();
 });
