@@ -2939,7 +2939,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   if(window.perivelleSetAudioPlayer)window.perivelleSetAudioPlayer(settings.audio_player||{});
   if(Array.isArray(settings.catalog_products)){
    const managed=settings.catalog_products;
-   if(managed.some(function(item){return item&&item.name;})){
+   if(!managed.length){products=[];}else if(managed.some(function(item){return item&&item.name;})){
     products=managed.filter(function(item){return item&&item.active!==false;}).map(function(item){return {...item,price:Number(item.price)||0,preview:String(item.preview||""),cover:String(item.cover||""),emoji:item.emoji||"♫",color:item.color||"#75658f"};});
    }else{
     managed.forEach(function(item){const product=products.find(function(p){return p.id===item.id});if(product){if(Number.isFinite(Number(item.price)))product.price=Number(item.price);product.preview=String(item.preview||"");product.cover=String(item.cover||"");}});
