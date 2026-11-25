@@ -14,7 +14,7 @@ const STATUS_NOTES={
   "Demo ready — Awaiting feedback":"Demo ready — Awaiting feedback",
   "Preparing final delivery":"Preparing final delivery"
 };
-const KEYS=["service_prices","catalog_products","studio_links","portfolio_videos","portfolio_categories","studio_producers","freebies","commission_status","audio_player"];
+const KEYS=["service_prices","studio_links","portfolio_videos","portfolio_categories","studio_producers","freebies","commission_status","audio_player"];
 function storageObjectPath(rawUrl,projectUrl){
   if(!rawUrl)return "";
   try{
@@ -106,22 +106,6 @@ export default async function handler(req,res) {
           if(String(item.batch||"").length>60||String(item.slots||"").length>80)return res.status(400).json({ok:false,message:"Commission status details are too long."});
         }
         if(body.key==="studio_links"){for(const [name,item] of Object.entries(value||{})){if(!item)continue;if(name==="email"){if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(item)))return res.status(400).json({ok:false,message:"Enter a valid contact email address."});}else if(!/^https:\/\//i.test(String(item)))return res.status(400).json({ok:false,message:"Studio links must use HTTPS URLs."});}}
-        if(body.key==="catalog_products" && Array.isArray(value)){for(const item of value){if(item.preview&&!/^https:\/\//i.test(String(item.preview)))return res.status(400).json({ok:false,message:"Audio preview links must use HTTPS URLs."});}}
-        if(body.key==="portfolio_categories" && Array.isArray(value)){
-          if(value.length>30)return res.status(400).json({ok:false,message:"You can create up to 30 portfolio categories."});
-          const ids=new Set();
-          for(const item of value){const id=String(item?.id||"").trim(),name=String(item?.name||"").trim();if(!/^[a-z0-9][a-z0-9_-]{1,49}$/.test(id)||!name||name.length>60)return res.status(400).json({ok:false,message:"Each portfolio category needs a valid ID and a name up to 60 characters."});if(ids.has(id))return res.status(400).json({ok:false,message:"Portfolio category IDs must be unique."});ids.add(id);}
-        }
-        if(body.key==="studio_producers" && Array.isArray(value)){
-          if(value.length>40)return res.status(400).json({ok:false,message:"You can manage up to 40 producer profiles."});
-          const ids=new Set();
-          for(const item of value){const id=String(item?.id||"").trim(),name=String(item?.name||"").trim();if(!/^[a-z0-9][a-z0-9_-]{1,49}$/.test(id)||!name||name.length>60)return res.status(400).json({ok:false,message:"Each producer needs a valid ID and a name up to 60 characters."});if(ids.has(id))return res.status(400).json({ok:false,message:"Producer IDs must be unique."});ids.add(id);if(String(item.bio||"").length>500||String(item.role||"").length>80||String(item.photo||"").length>1000)return res.status(400).json({ok:false,message:"A producer profile field is too long."});if(item.photo&&!/^https:\/\//i.test(String(item.photo)))return res.status(400).json({ok:false,message:"Producer photos must use HTTPS URLs."});}
-        }
-        if(body.key==="catalog_products" && Array.isArray(value)){
-          if(value.length>200)return res.status(400).json({ok:false,message:"The Music catalog can contain up to 200 products."});
-          const ids=new Set();
-          for(const item of value){const id=String(item?.id||"").trim(),name=String(item?.name||"").trim();if(!/^[a-z0-9][a-z0-9_-]{1,79}$/.test(id)||!name||name.length>100)return res.status(400).json({ok:false,message:"Each product needs a valid ID and a name up to 100 characters."});if(ids.has(id))return res.status(400).json({ok:false,message:"Product IDs must be unique."});ids.add(id);if(!Number.isFinite(Number(item.price))||Number(item.price)<0||Number(item.price)>1000000000)return res.status(400).json({ok:false,message:"Product prices must be valid non-negative numbers."});for(const field of ["preview","cover"])if(item[field]&&!/^https:\/\//i.test(String(item[field])))return res.status(400).json({ok:false,message:"Product media links must use HTTPS URLs."});if(String(item.description||"").length>500)return res.status(400).json({ok:false,message:"Product descriptions may contain up to 500 characters."});}
-        }
         if(body.key==="portfolio_videos" && Array.isArray(value)){
           const allowed=["youtube.com","www.youtube.com","youtube-nocookie.com","www.youtube-nocookie.com","youtu.be","vimeo.com","www.vimeo.com","player.vimeo.com"];
           
@@ -211,7 +195,7 @@ export default async function handler(req,res) {
             if(path&&!nextPaths.has(path))removedPaths.add(path);
           }
         }
-        if(["studio_producers","catalog_products"].includes(body.key)){
+        if(body.key==="studio_producers"){
           const currentResponse=await db("studio_settings?select=setting_key,setting_value");
           if(!currentResponse.ok)throw new Error("Could not inspect existing studio image references.");
           const currentRows=await currentResponse.json();
