@@ -29,7 +29,7 @@
     var a=e.target.closest&&e.target.closest("a.service-request");
     if(!a)return;
     var select=document.getElementById("orderType");
-    if(select){select.value=a.dataset.service;select.dispatchEvent(new Event("input",{bubbles:true}))}
+    if(select){select.value=a.dataset.service;select.dispatchEvent(new Event("change",{bubbles:true}))}
   });
 
   /* 3. Form komisi: tanggal tidak boleh di masa lalu + draft otomatis.
@@ -67,15 +67,13 @@
   });
   document.body.insertBefore(skip,document.body.firstChild);
 
-  /* 5. Saat pindah halaman (router memakai pushState), fokus ke judul
-        halaman baru supaya pengguna pembaca layar tahu konteksnya. */
-  var root=document.documentElement,last=root.dataset.activeView;
+  /* 5. Router index.html memperbarui data-active-view pada <html>. */
+  var root=document.documentElement,last=root.dataset.activeView||"";
   new MutationObserver(function(){
-    var now=root.dataset.activeView;
-    if(now===last)return;
+    var now=root.dataset.activeView||"";
+    if(!now||now===last)return;
     last=now;
-    var view=document.querySelector(".page-view:not([hidden])");
+    var view=document.querySelector('.page-view[data-page="'+now+'"]:not([hidden])');
     var heading=view&&view.querySelector("h1,h2");
     if(heading){heading.setAttribute("tabindex","-1");heading.focus({preventScroll:true})}
   }).observe(root,{attributes:true,attributeFilter:["data-active-view"]});
-})();
