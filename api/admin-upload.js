@@ -72,7 +72,7 @@ export default async function handler(req, res) {
   const fileName = String(body.fileName || "").trim();
   const fileSize = Number(body.fileSize);
   const category = String(body.category || "");
-  if (!fileName || !/\\.mp3$/i.test(fileName)) return send(res, 400, { ok: false, message: "Choose an MP3 file (.mp3)." });
+  if (!fileName || !/\.mp3$/i.test(fileName)) return send(res, 400, { ok: false, message: "Choose an MP3 file (.mp3)." });
   if (!Number.isSafeInteger(fileSize) || fileSize <= 0 || fileSize > MAX_FILE_SIZE) {
     return send(res, 400, { ok: false, message: "MP3 files must be between 1 byte and 50 MB." });
   }
