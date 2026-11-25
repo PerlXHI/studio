@@ -86,11 +86,24 @@ export default async function handler(req,res) {
         if(body.key==="catalog_products" && Array.isArray(value)){for(const item of value){if(item.preview&&!/^https:\/\//i.test(String(item.preview)))return res.status(400).json({ok:false,message:"Audio preview links must use HTTPS URLs."});}}
         if(body.key==="portfolio_videos" && Array.isArray(value)){
           const allowed=["youtube.com","www.youtube.com","youtube-nocookie.com","www.youtube-nocookie.com","youtu.be","vimeo.com","www.vimeo.com","player.vimeo.com"];
+          const allowedCreators=["bybi","rei","yoz"];
           for(const item of value){
             const urls=Array.isArray(item.videos)?item.videos:(item.url?[item.url]:[]);
             if(urls.length>30)return res.status(400).json({ok:false,message:"A category can contain up to 30 video previews."});
             for(const rawUrl of urls){let parsed;try{parsed=new URL(String(rawUrl))}catch{return res.status(400).json({ok:false,message:"Enter a valid YouTube or Vimeo URL."})}if(parsed.protocol!=="https:"||!allowed.includes(parsed.hostname.toLowerCase()))return res.status(400).json({ok:false,message:"Portfolio previews must use HTTPS YouTube or Vimeo URLs."});}
             if(item.featured&&!urls.includes(item.featured))return res.status(400).json({ok:false,message:"Featured video must match one of the category preview URLs."});
+            if(item.video_assignments!==undefined&&!Array.isArray(item.video_assignments))return res.status(400).json({ok:false,message:"Producer credits must be a list of video assignments."});
+            const assignments=Array.isArray(item.video_assignments)?item.video_assignments:[];
+            if(assignments.length>30)return res.status(400).json({ok:false,message:"A category can contain up to 30 producer credits."});
+            const assignedUrls=new Set();
+            for(const assignment of assignments){
+              const assignedUrl=String(assignment&&assignment.url||"");
+              const creator=String(assignment&&assignment.creator||"");
+              if(!urls.includes(assignedUrl))return res.status(400).json({ok:false,message:"Each producer credit must match a video URL in the same category."});
+              if(!allowedCreators.includes(creator))return res.status(400).json({ok:false,message:"Choose a valid producer for each video credit."});
+              if(assignedUrls.has(assignedUrl))return res.status(400).json({ok:false,message:"Each video can only be credited once per category."});
+              assignedUrls.add(assignedUrl);
+            }
           }
         }
         if(body.key==="audio_player"){

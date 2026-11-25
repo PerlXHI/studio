@@ -84,11 +84,45 @@ const defaultServices=[{name:"Custom BGM Loop",price:""},{name:"Sound Alerts & S
 function renderServices(){const a=Array.isArray(settings.service_prices)?settings.service_prices:defaultServices;$("#servicePrices").innerHTML=a.map((x,i)=>'<div class="price-row"><label>'+esc(x.name)+'</label><input data-service-price="'+i+'" value="'+esc(x.price||"")+'" placeholder="e.g. $150"></div>').join("")}
 $("#saveServices").addEventListener("click",async()=>{const a=(Array.isArray(settings.service_prices)?settings.service_prices:defaultServices).map((x,i)=>({...x,price:document.querySelector('[data-service-price="'+i+'"]').value.trim()}));try{await saveSetting("service_prices",a)}catch(e){$("#globalMessage").textContent=e.message}});
 const defaultPortfolioVideos=[{id:"bgm",name:"BGM",videos:[]},{id:"sound-alerts",name:"Sound Alerts",videos:["https://www.youtube-nocookie.com/embed/iUBVMpHvyWg"]},{id:"stinger",name:"Stinger",videos:[]},{id:"og-song",name:"OG Song",videos:[]},{id:"lore-music",name:"Lore Music",videos:[]}];
-function renderPortfolioVideos(){const saved=Array.isArray(settings.portfolio_videos)?settings.portfolio_videos:defaultPortfolioVideos;$("#portfolioVideoRows").innerHTML=defaultPortfolioVideos.map(base=>{const item=saved.find(x=>x.id===base.id)||base;const urls=Array.isArray(item.videos)?item.videos:(item.url?[item.url]:base.videos);return '<div class="panel" style="box-shadow:none;margin:10px 0"><strong>'+esc(base.name)+'</strong><label>Featured video</label><select data-featured-video="'+base.id+'"><option value="">No featured video</option>'+urls.map(url=>'<option value="'+esc(url)+'" '+(item.featured===url?'selected':'')+'>'+esc(url)+'</option>').join("")+'</select><div data-portfolio-list="'+base.id+'">'+urls.map(url=>portfolioVideoRow(base.id,url)).join("")+'</div><button type="button" class="btn alt" data-add-portfolio-video="'+base.id+'">+ Add video preview</button></div>'}).join("")}
-function portfolioVideoRow(id,url){return '<div class="portfolio-video-entry" style="display:flex;gap:8px;align-items:center;margin:8px 0"><input data-portfolio-url="'+id+'" value="'+esc(url||"")+'" placeholder="https://www.youtube.com/watch?v=..." style="flex:1;min-width:0"><button type="button" class="btn alt" data-remove-portfolio-video aria-label="Remove video URL">Remove</button></div>'}
-$("#portfolioVideoRows").addEventListener("click",e=>{const add=e.target.closest("[data-add-portfolio-video]");if(add){const id=add.dataset.addPortfolioVideo;add.parentElement.querySelector('[data-portfolio-list="'+id+'"]').insertAdjacentHTML("beforeend",portfolioVideoRow(id,""));return}const remove=e.target.closest("[data-remove-portfolio-video]");if(remove)remove.closest(".portfolio-video-entry").remove()});
-$("#portfolioVideoRows").addEventListener("input",e=>{const input=e.target.closest("[data-portfolio-url]");if(!input)return;const id=input.dataset.portfolioUrl,select=document.querySelector('[data-featured-video="'+id+'"]');if(!select)return;const current=select.value,urls=[...document.querySelectorAll('[data-portfolio-url="'+id+'"]')].map(node=>node.value.trim()).filter(Boolean);select.innerHTML='<option value="">No featured video</option>'+urls.map(url=>'<option value="'+esc(url)+'">'+esc(url)+'</option>').join("");if(urls.includes(current))select.value=current;});
-$("#savePortfolioVideos").addEventListener("click",async()=>{const a=defaultPortfolioVideos.map(x=>{const videos=[...document.querySelectorAll('[data-portfolio-url="'+x.id+'"]')].map(input=>input.value.trim()).filter(Boolean);const featured=document.querySelector('[data-featured-video="'+x.id+'"]').value;return {...x,videos,featured:videos.includes(featured)?featured:""}});try{await saveSetting("portfolio_videos",a);renderPortfolioVideos()}catch(e){$("#globalMessage").textContent=e.message}});
+const portfolioCreators=[{id:"bybi",name:"bybi"},{id:"rei",name:"rei"},{id:"yoz",name:"yoz"}];
+function renderPortfolioVideos(){
+ const saved=Array.isArray(settings.portfolio_videos)?settings.portfolio_videos:defaultPortfolioVideos;
+ $("#portfolioVideoRows").innerHTML=defaultPortfolioVideos.map(base=>{
+  const item=saved.find(x=>x.id===base.id)||base;
+  const urls=Array.isArray(item.videos)?item.videos:(item.url?[item.url]:base.videos);
+  const assignments=Array.isArray(item.video_assignments)?item.video_assignments:[];
+  return '<div class="panel" style="box-shadow:none;margin:10px 0"><strong>'+esc(base.name)+'</strong><label>Featured video</label><select data-featured-video="'+base.id+'"><option value="">No featured video</option>'+urls.map(url=>'<option value="'+esc(url)+'" '+(item.featured===url?'selected':'')+'>'+esc(url)+'</option>').join("")+'</select><div data-portfolio-list="'+base.id+'">'+urls.map(url=>{const match=assignments.find(entry=>entry.url===url);return portfolioVideoRow(base.id,url,match?match.creator:"")}).join("")+'</div><button type="button" class="btn alt" data-add-portfolio-video="'+base.id+'">+ Add video preview</button></div>';
+ }).join("");
+}
+function portfolioVideoRow(id,url,creator){
+ const options=[{id:"",name:"Not assigned"},...portfolioCreators].map(person=>'<option value="'+person.id+'" '+(creator===person.id?'selected':'')+'>'+person.name+'</option>').join("");
+ return '<div class="portfolio-video-entry" style="display:flex;gap:8px;align-items:center;margin:8px 0;flex-wrap:wrap"><input data-portfolio-url="'+id+'" value="'+esc(url||"")+'" placeholder="https://www.youtube.com/watch?v=..." style="flex:1 1 240px;min-width:0"><select data-portfolio-owner aria-label="Producer who created this work" style="flex:0 0 142px;max-width:100%">'+options+'</select><button type="button" class="btn alt" data-remove-portfolio-video aria-label="Remove video URL">Remove</button></div>';
+}
+$("#portfolioVideoRows").addEventListener("click",e=>{
+ const add=e.target.closest("[data-add-portfolio-video]");
+ if(add){const id=add.dataset.addPortfolioVideo;add.parentElement.querySelector('[data-portfolio-list="'+id+'"]').insertAdjacentHTML("beforeend",portfolioVideoRow(id,"",""));return}
+ const remove=e.target.closest("[data-remove-portfolio-video]");
+ if(remove)remove.closest(".portfolio-video-entry").remove();
+});
+$("#portfolioVideoRows").addEventListener("input",e=>{
+ const input=e.target.closest("[data-portfolio-url]");if(!input)return;
+ const id=input.dataset.portfolioUrl,select=document.querySelector('[data-featured-video="'+id+'"]');if(!select)return;
+ const current=select.value,urls=[...document.querySelectorAll('[data-portfolio-url="'+id+'"]')].map(node=>node.value.trim()).filter(Boolean);
+ select.innerHTML='<option value="">No featured video</option>'+urls.map(url=>'<option value="'+esc(url)+'">'+esc(url)+'</option>').join("");
+ if(urls.includes(current))select.value=current;
+});
+$("#savePortfolioVideos").addEventListener("click",async()=>{
+ const a=defaultPortfolioVideos.map(base=>{
+  const rows=[...document.querySelectorAll('[data-portfolio-list="'+base.id+'"] .portfolio-video-entry')];
+  const entries=rows.map(row=>({url:row.querySelector("[data-portfolio-url]").value.trim(),creator:row.querySelector("[data-portfolio-owner]").value})).filter(entry=>entry.url);
+  const videos=entries.map(entry=>entry.url);
+  const video_assignments=entries.filter(entry=>entry.creator).map(entry=>({url:entry.url,creator:entry.creator}));
+  const featured=document.querySelector('[data-featured-video="'+base.id+'"]').value;
+  return {...base,videos,video_assignments,featured:videos.includes(featured)?featured:""};
+ });
+ try{await saveSetting("portfolio_videos",a);renderPortfolioVideos()}
+ catch(e){$("#globalMessage").textContent=e.message}
+});
 
 function readAudioTracks(){
  return [...document.querySelectorAll(".audio-track-row")].map(row=>({
