@@ -2754,7 +2754,7 @@ setLanguage("en");
   button.setAttribute("aria-label",dark?"Switch to light mode":"Switch to dark mode");
   button.title=dark?"Switch to light mode":"Switch to dark mode";
   button.setAttribute("aria-pressed",String(dark));
-  button.querySelector(".theme-icon").textContent=dark?"☀":"☾";
+  button.querySelector(".theme-icon").textContent="◐";
  }
  apply(saved==="dark"?"dark":"light");
  button.addEventListener("click",function(){
