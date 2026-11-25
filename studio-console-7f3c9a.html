@@ -485,10 +485,10 @@ $("#saveLinks").addEventListener("click",async()=>{try{await saveSetting("studio
 async function saveSetting(key,value){
  const result=await api("/api/admin-data",{method:"PATCH",body:JSON.stringify({kind:"setting",key,value})});
  settings[key]=value;
- const message=key==="freebies"&&result.removedStorageFiles
-  ?"Freebies saved. "+result.removedStorageFiles+" unused Storage file(s) deleted."
-  :key==="freebies"&&result.warning
-   ?"Freebies saved. "+result.warning
+ const message=result.warning
+  ?"Changes saved. "+result.warning
+  :result.removedStorageFiles
+   ?"Changes saved. "+result.removedStorageFiles+" unused Storage file(s) deleted."
    :"Changes saved successfully.";
  $("#globalMessage").textContent=message;showToast(message);
  return result;
