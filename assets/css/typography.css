@@ -1,0 +1,161 @@
+/* Perivelle Studio — shared public typography system
+   Font family, type scale and role exceptions live here.
+   Color, layout, component styling and theme skins remain page-specific. */
+
+:root{
+ --pv-type-page-title:clamp(2.55rem,5.1vw,4.25rem);
+ --pv-type-section-title:clamp(1.9rem,3.1vw,2.5rem);
+ --pv-type-card-title:clamp(1.05rem,1.45vw,1.2rem);
+ --pv-type-body:.9rem;
+ --pv-type-label:.72rem;
+ --pv-type-button:.875rem;
+ --pv-type-meta:.75rem;
+ --pv-type-tag:.72rem;
+}
+
+/* One font pairing throughout the public studio experience */
+body,button,input,select,textarea{
+ font-family:Inter,system-ui,sans-serif!important;
+}
+#main-content .page-view :is(h1,h2,h3,h4,h5,h6),
+body.pv-legacy :is(h1,h2,h3,h4,h5,h6){
+ font-family:Sora,Inter,system-ui,sans-serif!important;
+ font-weight:700;
+ font-synthesis:none;
+ text-wrap:balance;
+}
+
+/* Shared heading hierarchy */
+#main-content .page-view h1,
+body.pv-legacy h1{
+ font-size:var(--pv-type-page-title)!important;
+ line-height:1.04!important;
+ letter-spacing:-.065em!important;
+}
+#main-content .page-view h2,
+body.pv-legacy h2{
+ font-size:var(--pv-type-section-title)!important;
+ font-weight:800!important;
+ line-height:1.12!important;
+ letter-spacing:-.05em!important;
+}
+#main-content .page-view h3,
+#main-content .page-view .product-title,
+body.pv-legacy h3{
+ font-size:var(--pv-type-card-title)!important;
+ font-weight:700!important;
+ line-height:1.28!important;
+ letter-spacing:-.035em!important;
+}
+
+/* Larger banner titles share the same scale across Studio, Works,
+   Commission and Track Order. The homepage hero remains a display H1. */
+#main-content .page-view :is(.team-hero h2,.portfolio-intro-copy h2,.commission-hero h2,.track-hero h2){
+ margin-bottom:.3em;
+ font-size:var(--pv-type-page-title)!important;
+ line-height:1.04!important;
+ letter-spacing:-.065em!important;
+}
+#main-content .page-view[data-page="home"] .pv-hero h1{
+ font-family:Sora,Inter,system-ui,sans-serif!important;
+ font-size:clamp(2.9rem,6vw,5rem)!important;
+ line-height:1.02!important;
+ font-weight:800!important;
+ letter-spacing:-.07em!important;
+}
+
+/* Deliberate exceptions: utility identifiers, category labels and dialogs */
+#main-content .page-view .portfolio-category{
+ font-size:var(--pv-type-label)!important;
+ font-weight:750!important;
+ line-height:1.35!important;
+ letter-spacing:.1em!important;
+}
+#main-content .page-view .track-result-head h3{
+ font-size:clamp(1.15rem,2.4vw,1.65rem)!important;
+ line-height:1.25!important;
+ letter-spacing:-.025em!important;
+ overflow-wrap:anywhere;
+}
+#main-content .page-view :is(.modal-head h2,.success-dialog h2,.dialog-body h2),
+body.pv-legacy-gallery .dialog-body h2,
+body.pv-legacy-commission .result h2{
+ margin-bottom:.45em;
+ font-size:1.5rem!important;
+ line-height:1.2!important;
+ letter-spacing:-.04em!important;
+}
+body.pv-legacy-gallery .work h2{
+ font-size:var(--pv-type-card-title)!important;
+ line-height:1.28!important;
+}
+
+/* Paragraphs, labels and repeated interactive text */
+#main-content .page-view p,
+body.pv-legacy p{
+ font-size:var(--pv-type-body)!important;
+ line-height:1.65!important;
+}
+#main-content .page-view :is(.eyebrow,.mono,.pv-eyebrow,.portfolio-section-label,.result-count,.track-meta span,.starting,.portfolio-scroll-hint),
+body.pv-legacy :is(.eyebrow,.mono){
+ font-family:Inter,system-ui,sans-serif!important;
+ font-size:var(--pv-type-label)!important;
+ line-height:1.4!important;
+ font-weight:700!important;
+ letter-spacing:.11em!important;
+}
+#main-content .page-view label,
+body.pv-legacy label{
+ font-size:.875rem!important;
+ line-height:1.4!important;
+ font-weight:600!important;
+}
+#main-content .page-view .license-panel ul{
+ font-size:var(--pv-type-body)!important;
+ line-height:1.65!important;
+}
+#main-content .page-view summary{
+ font-size:1rem!important;
+ font-weight:650!important;
+ line-height:1.4!important;
+}
+
+/* Shared component typography: card previews mirror full-page cards */
+#main-content .page-view :is(.pv-service-card strong,.pv-work-meta strong){
+ font-family:Sora,Inter,system-ui,sans-serif!important;
+ font-size:var(--pv-type-card-title)!important;
+ font-weight:700!important;
+ line-height:1.28!important;
+ letter-spacing:-.035em!important;
+}
+#main-content .page-view .btn:not(.small-btn){
+ font-size:var(--pv-type-button)!important;
+ font-weight:700!important;
+ line-height:1.2!important;
+}
+#main-content .page-view .btn.small-btn{
+ font-size:.78rem!important;
+ line-height:1.2!important;
+}
+#main-content .page-view :is(.team-tags span,.pv-work-tag,.pv-trust-pill,.track-status-pill,.success-status strong,.pv-trusted-label){
+ font-size:var(--pv-type-tag)!important;
+ line-height:1.35!important;
+}
+#main-content .page-view :is(.product-meta,.track-meta strong,.pv-work-meta small){
+ font-size:var(--pv-type-meta)!important;
+ line-height:1.4!important;
+}
+
+/* Responsive scale: all pages step down together at the same breakpoint */
+@media(max-width:560px){
+ :root{
+  --pv-type-page-title:clamp(2rem,8vw,3rem);
+  --pv-type-section-title:clamp(1.55rem,6vw,1.95rem);
+  --pv-type-card-title:1.05rem;
+  --pv-type-body:.875rem;
+  --pv-type-label:.68rem;
+  --pv-type-tag:.68rem;
+ }
+ #main-content .page-view h2{margin-bottom:.6em}
+ #main-content .page-view :is(.team-hero h2,.portfolio-intro-copy h2,.commission-hero h2,.track-hero h2){line-height:1.08!important}
+}
