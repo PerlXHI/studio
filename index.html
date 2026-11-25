@@ -3171,8 +3171,7 @@ setLanguage("en");
   if(artistBox)artistBox.innerHTML='<a href="#portfolio" data-portfolio-filter="creator" data-filter-value="all" aria-current="page">All artists</a>'+(producers||[]).map(item=>'<a href="#portfolio" data-portfolio-filter="creator" data-filter-value="'+esc(item.id)+'">'+esc(item.name)+'</a>').join("");
   applyFilters();
  };
- if(window.perivellePortfolioCategories)window.perivelleUpdatePortfolioFilterOptions(window.perivellePortfolioCategories,window.perivelleProducerData||[{id:"bybi",name:"bybi"},{id:"rei",name:"rei"},{id:"yoz",name:"yoz"}]);
- function readFilters(){
+  function readFilters(){
   const hash=location.hash||"";
   const query=hash.includes("?")?hash.slice(hash.indexOf("?")+1):"";
   const params=new URLSearchParams(query);
@@ -3281,7 +3280,7 @@ setLanguage("en");
  });
  window.addEventListener("hashchange",applyFilters);
  window.addEventListener("popstate",applyFilters);
- window.perivelleApplyProducerFilter();
+ if(window.perivellePortfolioCategories)window.perivelleUpdatePortfolioFilterOptions(window.perivellePortfolioCategories,window.perivelleProducerData||[{id:"bybi",name:"bybi"},{id:"rei",name:"rei"},{id:"yoz",name:"yoz"}]);else window.perivelleApplyProducerFilter();
 })();
 </script>
 
