@@ -1,4 +1,4 @@
-const ALLOWED_STATUSES = ["Awaiting Review","Quotation Sent","Awaiting Payment","In Production","Revision","Completed","On Hold","Cancelled"];
+const ALLOWED_STATUSES = ["Awaiting Review","Quotation Sent","Awaiting Payment","In Production","Revision","Completed","On Hold","Cancelled","Waiting for client response","Demo ready — Awaiting feedback","Preparing final delivery"];
 const EDITABLE = ["status","status_note","price_amount","price_currency","quotation_note","preview_url","delivery_url","internal_note"];
 const clean = (v,max=2000) => String(v ?? "").replace(/[\\u0000-\\u0008\\u000B\\u000C\\u000E-\\u001F\\u007F]/g,"").trim().slice(0,max);
 function validUrl(value) {
