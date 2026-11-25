@@ -1612,6 +1612,98 @@ html[data-theme="dark"] footer p{color:#d6c7e1!important}
 /* Keep the hero mascot inside the source asset's useful pixel density. */
 .pv-mascot{width:min(100%,400px)!important;max-width:400px!important;height:auto!important;object-fit:contain!important;object-position:center!important}
 @media(max-width:760px){.pv-mascot{width:min(100%,360px)!important;max-width:360px!important}}
+
+/* FINAL UI REFINEMENT — consistent showcase cards, caption contrast, contact avatar */
+.pv-art-caption{
+ background:rgba(255,255,255,.96)!important;
+ color:#704d81!important;
+ border-color:#e6d5ee!important;
+ box-shadow:0 7px 20px rgba(53,31,71,.12);
+}
+html[data-theme="dark"] .pv-art-caption{
+ background:rgba(39,29,52,.97)!important;
+ color:#fff0fa!important;
+ border-color:#89679a!important;
+ box-shadow:0 8px 24px rgba(0,0,0,.38);
+ text-shadow:0 1px 5px rgba(0,0,0,.35);
+}
+html[data-theme="dark"] .pv-art-caption .pv-caption-dot{
+ background:#ff9bc7!important;
+ box-shadow:0 0 10px #ff82b8aa;
+}
+.pv-work-grid{
+ display:grid!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ grid-auto-rows:1fr;
+ align-items:stretch;
+ gap:17px;
+}
+.pv-work-card,.pv-work-card.pv-work-featured{
+ display:flex!important;
+ flex-direction:column!important;
+ grid-column:auto!important;
+ width:100%;
+ height:100%;
+ min-width:0;
+ min-height:0!important;
+}
+.pv-work-card>img,.pv-work-card.pv-work-featured>img{
+ display:block!important;
+ width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ aspect-ratio:16/10!important;
+ flex:0 0 auto;
+ object-fit:cover!important;
+ object-position:center;
+}
+.pv-work-meta{
+ display:grid;
+ grid-template-rows:auto auto;
+ align-content:center;
+ gap:4px;
+ flex:1 0 auto;
+ min-height:76px;
+ padding:13px 58px 14px 16px;
+}
+.pv-work-meta strong,.pv-work-meta small{
+ display:block;
+ min-width:0;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+}
+.pv-work-arrow{bottom:20px}
+.contact-trigger .contact-logo{
+ display:block!important;
+ width:30px!important;
+ height:30px!important;
+ min-width:30px!important;
+ max-width:30px!important;
+ min-height:30px!important;
+ max-height:30px!important;
+ aspect-ratio:1/1!important;
+ flex:0 0 30px!important;
+ box-sizing:border-box;
+ border-radius:50%!important;
+ object-fit:cover!important;
+ object-position:center;
+ overflow:hidden;
+}
+@media(max-width:1000px){
+ .pv-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .pv-work-card,.pv-work-card.pv-work-featured{grid-column:auto!important}
+}
+@media(max-width:760px){
+ .pv-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:13px}
+ .pv-work-card>img,.pv-work-card.pv-work-featured>img{aspect-ratio:16/10!important}
+}
+@media(max-width:460px){
+ .pv-work-grid{grid-template-columns:1fr!important}
+ .pv-work-card,.pv-work-card.pv-work-featured{min-height:0!important}
+ .pv-work-meta{min-height:70px}
+}
+
 </style>
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAAGFBMVEUAAAD9WaFRHDP18fabN2NfXV9wKEiin6Ph7EosAAAESUlEQVR42u2cT2sTQRjG350kbaGUJCCCB2ULHoUq0qM09eBRAwq9tl9AevHzNFdv+QD+CXgUoUcPgnuW1mStRdumiQfbprDTZOedZ+bF+j6XNttsnl9nJjPPbN4NkUqlUqlUKpVKpVKpVCqVSnVdNfdY2L/ZbJV6YhLIf5FoPCjzTBPMv6SMsH8QALNIogCmTqIAbv54ADMmWYBxQxZgvUGiAOu7JArg7o8FYPhDATj+SACWPxCA548D2OL5wwC2uiQKwPYHJaJlW/iJmIiWB/xzjbA/AiD18QcApLnX6RVvgKuH8e8yp1c97atLvglK2N8TwN/fDwDg7wWA8PcZhC4bsBAtYPd/GA3A7r/yxjWWV7D+Pfo57zYRMVvAXOUfaQzYN6Acfx4A0J8HsIbz50WypuVYvzA7hYtktnPYoQCUivORLEDC9scAJN9lU3HNwx8BUPsmm4r9/P0BPP29ASqe/r4AlT3ZVEze/p4A/vsqT4DJBNiOeYFiEgcsU2CM1dCmVeHVsGaEAcxQGGBIwgD8t4FB2aeyACn1ZAF6wmOgRjQvCvCUaLgtCPA8I6IPr6TWgo0v58vAra77WsBZUJOFi99+0cbCxYI0+nFn9bOJc31goqPWpQe7Il1Qe9nz6AJIHvg7Cm53xfLA6xYRPeoKJqL5e0SfJBPREf+FQGvBLp3IAmyzzwxTR/QfAmTU0i5QAAVg7pFgANnZz3XhFnAuJQEBnGcB91IObAswSkmgAMtd2XcBq5QDCMAr5YABdJmlHDCAF8xPjWAAb//VtaCKeZU6+1RIC9hLKQbRAOz+z6K1QHWJ6LTo34kFYOz/fyfaGBh7+SOK2SzHVjqy84BLKYER9g8B4FZKgQI4ZfrjW6DfI1EA50XZHyC7/MC9lALUAmcX2xilFNAu4JRyGGF/JACvlAQHwCylMML+OABuKQcIoFITDaU+pSRG2N8V4O6cJZJ5ldK4AaT7i5vF9W+PiH213g0gzYk6hJUTQE54OQBUm1P+2AoPAKml9wAI5F8aIJR/WYBg/iUBZvtn7L11mSdh7qWYmibL+/dnFLMF6IKQ/38ZgLD+swFMWP+ZAKZOogCuN/OjAYzrzfxgAJt/GhNgreifZxEBLDdzPxhF7AKL/8q7iFOx5ROgs/gbaSou+nuUroJCqZEGGEcFsHQB3YwJMG4Xj53cILpcUx+2C3buF4+dNlLwUJj2Yu8tBEm+iW2B6ZHM+sUWqx8JOA/MyIQzvlojfCa09ULkVJw0RFuAKBnIZkIaJcIANMqFAQITlJnVRofCAHR8KAxAxwfCADQ8EAYIR1B6aQ1FUH5tD0TgEC7CELikm2FfOhVTXRogqwsDUNYQBqCvbWEA2mkLA6AJOHlnEpXjXCkNG5VZ2ywkAW+fByRgbjRxBNydLoyAn/qThti7ALpl4gOMEvC1Egb8E1KpVCqVSqVSqVQqlUqlUqmugf4AirTYciVwT/UAAAAASUVORK5CYII=">
 <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAAGFBMVEUAAAD9WaFRHDP18fabN2NfXV9wKEiin6Ph7EosAAAESUlEQVR42u2cT2sTQRjG350kbaGUJCCCB2ULHoUq0qM09eBRAwq9tl9AevHzNFdv+QD+CXgUoUcPgnuW1mStRdumiQfbprDTZOedZ+bF+j6XNttsnl9nJjPPbN4NkUqlUqlUKpVKpVKpVCqVSnVdNfdY2L/ZbJV6YhLIf5FoPCjzTBPMv6SMsH8QALNIogCmTqIAbv54ADMmWYBxQxZgvUGiAOu7JArg7o8FYPhDATj+SACWPxCA548D2OL5wwC2uiQKwPYHJaJlW/iJmIiWB/xzjbA/AiD18QcApLnX6RVvgKuH8e8yp1c97atLvglK2N8TwN/fDwDg7wWA8PcZhC4bsBAtYPd/GA3A7r/yxjWWV7D+Pfo57zYRMVvAXOUfaQzYN6Acfx4A0J8HsIbz50WypuVYvzA7hYtktnPYoQCUivORLEDC9scAJN9lU3HNwx8BUPsmm4r9/P0BPP29ASqe/r4AlT3ZVEze/p4A/vsqT4DJBNiOeYFiEgcsU2CM1dCmVeHVsGaEAcxQGGBIwgD8t4FB2aeyACn1ZAF6wmOgRjQvCvCUaLgtCPA8I6IPr6TWgo0v58vAra77WsBZUJOFi99+0cbCxYI0+nFn9bOJc31goqPWpQe7Il1Qe9nz6AJIHvg7Cm53xfLA6xYRPeoKJqL5e0SfJBPREf+FQGvBLp3IAmyzzwxTR/QfAmTU0i5QAAVg7pFgANnZz3XhFnAuJQEBnGcB91IObAswSkmgAMtd2XcBq5QDCMAr5YABdJmlHDCAF8xPjWAAb//VtaCKeZU6+1RIC9hLKQbRAOz+z6K1QHWJ6LTo34kFYOz/fyfaGBh7+SOK2SzHVjqy84BLKYER9g8B4FZKgQI4ZfrjW6DfI1EA50XZHyC7/MC9lALUAmcX2xilFNAu4JRyGGF/JACvlAQHwCylMML+OABuKQcIoFITDaU+pSRG2N8V4O6cJZJ5ldK4AaT7i5vF9W+PiH213g0gzYk6hJUTQE54OQBUm1P+2AoPAKml9wAI5F8aIJR/WYBg/iUBZvtn7L11mSdh7qWYmibL+/dnFLMF6IKQ/38ZgLD+swFMWP+ZAKZOogCuN/OjAYzrzfxgAJt/GhNgreifZxEBLDdzPxhF7AKL/8q7iFOx5ROgs/gbaSou+nuUroJCqZEGGEcFsHQB3YwJMG4Xj53cILpcUx+2C3buF4+dNlLwUJj2Yu8tBEm+iW2B6ZHM+sUWqx8JOA/MyIQzvlojfCa09ULkVJw0RFuAKBnIZkIaJcIANMqFAQITlJnVRofCAHR8KAxAxwfCADQ8EAYIR1B6aQ1FUH5tD0TgEC7CELikm2FfOhVTXRogqwsDUNYQBqCvbWEA2mkLA6AJOHlnEpXjXCkNG5VZ2ywkAW+fByRgbjRxBNydLoyAn/qThti7ALpl4gOMEvC1Egb8E1KpVCqVSqVSqVQqlUqlUqmugf4AirTYciVwT/UAAAAASUVORK5CYII=">
@@ -1629,6 +1721,7 @@ html[data-theme="dark"] footer p{color:#d6c7e1!important}
       <a class="navlink" href="#portfolio" data-page-link="portfolio">Works</a>
       <a class="navlink" href="#services" data-page-link="services">Services</a>
       <a class="navlink" href="#custom" data-page-link="custom">Commission</a>
+      <a class="navlink pv-track-navlink" href="#track" data-page-link="track">Track Order</a>
       <a class="pv-nav-cta" href="#custom">Contact <span aria-hidden="true">↗</span></a>
     </nav>
   </div>
@@ -1863,7 +1956,7 @@ html[data-theme="dark"] footer p{color:#d6c7e1!important}
 <footer class="pv-footer">
   <div class="wrap pv-footer-grid">
     <div class="pv-footer-brand"><a class="brand" href="#home" data-page-link="home"><span class="pv-brand-mark"><img src="assets/brand/pfp.webp" alt="" aria-hidden="true"></span><span>perivelle<span class="pv-brand-star">✦</span></span></a><p>Original audio for creators, characters, and the worlds they bring to life.</p><small>© 2026 Perivelle Studio. All rights reserved.</small></div>
-    <div><strong>Explore</strong><a href="#home">Home</a><a href="#team">Studio</a><a href="#portfolio">Works</a></div>
+    <div><strong>Explore</strong><a href="#home">Home</a><a href="#team">Studio</a><a href="#portfolio">Works</a><a href="#track">Track Order</a></div>
     <div><strong>Services</strong><a href="#services">BGM &amp; Soundtrack</a><a href="#services">Original Song</a><a href="#services">Sound Alerts</a><a href="#services">Stingers &amp; Jingles</a></div>
     <div><strong>Company</strong><a href="#custom">Contact</a><a href="#license">Terms of Service</a><a href="#license">Privacy &amp; Licensing</a><a href="#faq">FAQ</a></div>
     <div><strong>Get in touch</strong><p>Have a project in mind? Reach out and let’s make something memorable.</p><a class="pv-footer-cta" href="#custom">Start a commission ↗</a></div>
@@ -2056,7 +2149,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
  });
  const params=new URLSearchParams(location.search);
  const initial=params.get("id");
- if(initial){input.value=initial.toUpperCase();form.requestSubmit()}
+ if(initial){input.value=initial.trim();form.requestSubmit()}
 })();
 
 /* FLOATING CONTACT MENU */
