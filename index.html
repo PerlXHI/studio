@@ -2512,17 +2512,31 @@ html:not([data-theme="dark"]) #contactWidget .contact-trigger[aria-expanded="tru
  <section class="section freebies-page" id="freebies">
   <div class="wrap">
    <header class="freebies-heading">
-    <p class="eyebrow">PERIVELLE FREE AUDIO</p>
-    <h2>Little sounds. <em>Free to use.</em></h2>
-    <p>A fresh sound drop, every week.</p>
+    <div class="freebies-heading-copy">
+     <p class="eyebrow"><span class="freebies-heading-dot" aria-hidden="true"></span> PERIVELLE / FREE AUDIO</p>
+     <h2>Little sounds. <em>Free to use.</em></h2>
+     <p>Press play, find your sound, and download the MP3 for your next stream or project.</p>
+    </div>
+    <aside class="freebies-weekly-note" aria-label="Weekly free audio releases">
+     <span class="freebies-note-label">THE FREE AUDIO LIBRARY</span>
+     <div class="freebies-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+     <strong>Fresh drops, every week.</strong>
+     <span class="freebies-note-meta">PREVIEW <b>·</b> DOWNLOAD <b>·</b> CREATE</span>
+    </aside>
    </header>
+   <div class="freebies-list-head" id="freebiesListHead">
+    <span class="freebies-list-index">THE COLLECTION</span>
+    <span class="freebies-list-col">RELEASE</span>
+    <span class="freebies-list-col">LISTEN</span>
+    <span class="freebies-list-count" id="freebiesCount">00 TRACKS</span>
+   </div>
    <div class="freebies-list" id="freebiesGrid" aria-live="polite"></div>
    <div class="freebies-empty" id="freebiesEmpty" hidden>
     <span aria-hidden="true">♫</span>
     <h3 id="freebiesEmptyTitle">The first free drop is on its way.</h3>
     <p id="freebiesEmptyText">Check back soon for free BGM, sound alerts, and more from Perivelle.</p>
    </div>
-   <p class="freebies-footnote">Please check the usage notes on each release before using the audio in your content.</p>
+   <p class="freebies-footnote"><span aria-hidden="true">✳</span> Please check the usage notes on each release before using the audio in your content.</p>
   </div>
  </section>
 </div>
@@ -3199,6 +3213,8 @@ setLanguage("en");
 (function(){
  const categories={bgm:"BGM","sound-alerts":"Sound Alerts",stinger:"Stinger"};
  const grid=document.getElementById("freebiesGrid");
+ const listHead=document.getElementById("freebiesListHead");
+ const count=document.getElementById("freebiesCount");
  const empty=document.getElementById("freebiesEmpty");
  const emptyTitle=document.getElementById("freebiesEmptyTitle");
  const emptyText=document.getElementById("freebiesEmptyText");
@@ -3248,7 +3264,7 @@ setLanguage("en");
   preview.className="freebie-preview";
   const previewLabel=document.createElement("span");
   previewLabel.className="freebie-preview-label";
-  previewLabel.textContent="PREVIEW MP3";
+  previewLabel.textContent="LISTEN TO THE PREVIEW";
   const audio=document.createElement("audio");
   audio.controls=true;
   audio.preload="none";
@@ -3264,6 +3280,7 @@ setLanguage("en");
   previewLink.target="_blank";
   previewLink.rel="noopener noreferrer";
   previewLink.textContent="Open MP3 ↗";
+  previewLink.setAttribute("aria-label","Open the MP3 preview for "+item.title);
   actions.appendChild(previewLink);
 
   if(released){
@@ -3271,7 +3288,8 @@ setLanguage("en");
    download.className="freebie-download";
    download.href=downloadUrl;
    download.setAttribute("download","");
-   download.textContent="Download ↓";
+   download.textContent="Download MP3 ↓";
+   download.setAttribute("aria-label","Download "+item.title);
    actions.appendChild(download);
   }else{
    const coming=document.createElement("span");
@@ -3297,26 +3315,28 @@ setLanguage("en");
  window.perivelleFreebiesData=Array.isArray(window.perivelleFreebiesData)?window.perivelleFreebiesData:[];
  window.perivelleRenderFreebies=function(entries){
   const items=(Array.isArray(entries)?entries:[])
-   .filter(item=>item&&item.published===true&&categories[item.category])
+   .filter(item=>item&&item.published===true&&categories[item.category]&&safeHttps(item.download_url))
    .slice()
    .sort((a,b)=>String(b.release_date||"").localeCompare(String(a.release_date||"")));
   const today=localDate();
   const visible=items.filter(item=>String(item.release_date||"")<=today);
   const latest=visible[0]||null;
   grid.replaceChildren();
+  let rendered=0;
   items.forEach(function(item){
    const row=makeRow(item,item===latest);
-   if(row)grid.appendChild(row);
+   if(row){grid.appendChild(row);rendered++;}
   });
-  empty.hidden=items.length>0;
-  if(!items.length){
+  if(count)count.textContent=String(rendered).padStart(2,"0")+" "+(rendered===1?"TRACK":"TRACKS");
+  if(listHead)listHead.hidden=rendered===0;
+  empty.hidden=rendered>0;
+  if(!rendered){
    emptyTitle.textContent="The first free drop is on its way.";
    emptyText.textContent="Check back soon for free BGM, sound alerts, and more from Perivelle.";
   }
  };
  window.perivelleRenderFreebies(window.perivelleFreebiesData);
-})();
-</script>
+})();</script>
 
 </body>
 </html>
