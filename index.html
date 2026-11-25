@@ -3036,7 +3036,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
      const category=defaults.find(function(item){return item.id===entry.category});
      const meta=document.createElement("p");meta.className="eyebrow";meta.textContent=category?category.name:"SELECTED WORK";
      const frame=document.createElement("div");frame.className="featured-portfolio-frame";
-     const imageUrl=safeUrl(entry.image);
+     let imageUrl="";try{const imageCandidate=new URL(String(entry.image||""));if(imageCandidate.protocol==="https:")imageUrl=imageCandidate.href}catch(error){}
      if(imageUrl){const img=document.createElement("img");img.src=imageUrl;img.alt=String(entry.title||"Featured work")+" cover";img.loading="lazy";img.style.cssText="display:block;width:100%;height:100%;min-height:190px;object-fit:cover";frame.appendChild(img)}
      const videoSrc=portfolioEmbed(entry.video_url);
      if(videoSrc){const iframe=document.createElement("iframe");iframe.src=videoSrc;iframe.title="Perivelle "+String(entry.title||"Featured work")+" preview";iframe.loading="lazy";iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";iframe.referrerPolicy="strict-origin-when-cross-origin";iframe.allowFullscreen=true;frame.appendChild(iframe)}
