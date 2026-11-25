@@ -34,7 +34,7 @@ button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent}
 #main-content .page-view:not([data-page="home"]) .wrap,
 .pv-header .wrap,
 .pv-footer .wrap{
-  width:min(var(--pv-ui-content),calc(100% - var(--pv-ui-gutter)*2))!important;
+  width:min(var(--pv-ui-content),calc(100% - var(--pv-ui-gutter) - var(--pv-ui-gutter)))!important;
   max-width:var(--pv-ui-content)!important;
   margin-inline:auto!important;
 }
@@ -205,7 +205,7 @@ button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent}
 body.pv-legacy{font-family:Inter,system-ui,sans-serif}
 body.pv-legacy :is(button,input,select,textarea){font-family:Inter,system-ui,sans-serif}
 body.pv-legacy-gallery .wrap{
-  width:min(1200px,calc(100% - var(--pv-ui-gutter)*2))!important;
+  width:min(1200px,calc(100% - var(--pv-ui-gutter) - var(--pv-ui-gutter)))!important;
   max-width:1200px!important;
 }
 body.pv-legacy-gallery .hero{
@@ -224,7 +224,7 @@ body.pv-legacy-gallery :is(input,select,textarea){
   border-radius:var(--pv-ui-radius-sm);
 }
 body.pv-legacy-commission .wrap{
-  width:min(820px,calc(100% - var(--pv-ui-gutter)*2))!important;
+  width:min(820px,calc(100% - var(--pv-ui-gutter) - var(--pv-ui-gutter)))!important;
   max-width:820px!important;
 }
 body.pv-legacy-commission .top{
@@ -255,15 +255,15 @@ body.pv-legacy-commission :is(.submit,.copy,.top button){
 body.pv-legacy-commission .result{border-radius:22px;padding:clamp(18px,3vw,28px)}
 body.pv-legacy-commission footer{padding-block:30px}
 body.pv-legacy-store .wrap{
-  width:min(1100px,calc(100% - var(--pv-ui-gutter)*2))!important;
+  width:min(1100px,calc(100% - var(--pv-ui-gutter) - var(--pv-ui-gutter)))!important;
   max-width:1100px!important;
 }
-body.pv-legacy-store header .wrap{width:min(1100px,calc(100% - var(--pv-ui-gutter)*2))!important}
-body.pv-legacy-store main > .v,
+body.pv-legacy-store header .wrap{width:min(1100px,calc(100% - var(--pv-ui-gutter) - var(--pv-ui-gutter)))!important}
+body.pv-legacy-store main > section.v,
 body.pv-legacy-store #v-home > section.v{
   padding-block:var(--pv-ui-section-tight);
 }
-body.pv-legacy-store :is(.card,details,.list li,.scene,.sbox,.ctl){
+body.pv-legacy-store :is(.card,details,.list li,.sbox,.ctl){
   border-radius:var(--pv-ui-radius-card);
 }
 body.pv-legacy-store :is(input,select,textarea){
@@ -327,7 +327,7 @@ body.pv-legacy-store :is(button,.btn){min-height:42px;border-radius:var(--pv-ui-
     width:calc(100% - 36px)!important;
   }
   body.pv-legacy-commission #briefForm{padding:18px}
-  body.pv-legacy-store main > .v,
+  body.pv-legacy-store main > section.v,
   body.pv-legacy-store #v-home > section.v{padding-block:38px}
 }
 @media(max-width:420px){
