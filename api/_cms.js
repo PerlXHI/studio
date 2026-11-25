@@ -39,12 +39,12 @@ const RESOURCES = {
   tos_versions: {
     table: "tos_versions",
     admin: "select=*&order=created_at.desc&limit=500",
-    public: "select=tos_version_id,service_id,version_number,title,agreement_text,effective_at,published_at&status=eq.published&order=published_at.desc&limit=100"
+    public: null
   },
   tos_sections: {
     table: "tos_sections",
     admin: "select=*&order=display_order.asc&limit=2000",
-    public: "select=tos_section_id,tos_version_id,section_key,heading,content_markdown,display_order,tos:tos_versions!inner(status)&tos.status=eq.published&order=display_order.asc&limit=2000"
+    public: null
   },
   commission_forms: {
     table: "commission_forms",
