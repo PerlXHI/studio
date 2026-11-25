@@ -1,4 +1,4 @@
-import { isAdmin, hasTrustedOrigin } from "./_admin.js";
+import { isAdmin } from "./_admin.js";
 import { getCmsResourceNames, readCmsResource } from "./_cms.js";
 
 function send(res, status, body) {
@@ -11,8 +11,6 @@ export default async function handler(req, res) {
     return send(res, 405, { ok: false, message: "Method not allowed." });
   }
   if (!isAdmin(req)) return send(res, 401, { ok: false, message: "Please sign in to the admin dashboard." });
-  if (!hasTrustedOrigin(req)) return send(res, 403, { ok: false, message: "Origin not allowed." });
-
   const resource = String(req.query?.resource || "all");
   const available = getCmsResourceNames("admin");
   if (resource !== "all" && !available.includes(resource)) {
