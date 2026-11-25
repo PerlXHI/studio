@@ -2949,7 +2949,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
    renderMood();renderProducts();renderCart();
   }
   {
-   const portfolioEntries=Array.isArray(settings.portfolio_videos)?settings.portfolio_videos:[];
+   const portfolioEntries=Array.isArray(settings.portfolio_videos)&&settings.portfolio_videos.length?settings.portfolio_videos:[{id:"sound-alerts",videos:["https://www.youtube-nocookie.com/embed/iUBVMpHvyWg"]}];
    function portfolioEmbed(value){
     try{
      const url=new URL(String(value||""));
