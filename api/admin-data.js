@@ -28,6 +28,16 @@ function storageObjectPath(rawUrl,projectUrl){
     return encodedPath.split("/").map(part=>decodeURIComponent(part)).join("/");
   }catch{return ""}
 }
+function studioAssetObjectPath(rawUrl,projectUrl){
+  if(!rawUrl)return "";
+  try{const parsed=new URL(String(rawUrl)),project=new URL(projectUrl),prefix="/storage/v1/object/public/studio-assets/";if(parsed.protocol!=="https:"||parsed.origin!==project.origin||!parsed.pathname.startsWith(prefix))return "";const encoded=parsed.pathname.slice(prefix.length);if(!encoded||encoded.split("/").some(part=>!part||part==="."||part===".."))return "";return encoded.split("/").map(part=>decodeURIComponent(part)).join("/")}catch{return ""}
+}
+function collectStudioAssetPaths(value,projectUrl,paths=new Set()){
+  if(typeof value==="string"){const path=studioAssetObjectPath(value,projectUrl);if(path)paths.add(path)}
+  else if(Array.isArray(value))value.forEach(item=>collectStudioAssetPaths(item,projectUrl,paths));
+  else if(value&&typeof value==="object")Object.values(value).forEach(item=>collectStudioAssetPaths(item,projectUrl,paths));
+  return paths;
+}
 async function db(path,options={}) {
   const {url,key}=supabaseConfig();
   return fetch(url+"/rest/v1/"+path,{...options,headers:supabaseHeaders(key,{"Content-Type":"application/json",...(options.headers||{})})});
@@ -185,6 +195,7 @@ export default async function handler(req,res) {
         let removedStorageFiles=0;
         let storageCleanupWarning="";
         let removedPaths=new Set();
+        let removedAssetPaths=new Set();
         if(body.key==="freebies" && Array.isArray(value)){
           const currentResponse=await db("studio_settings?setting_key=eq.freebies&select=setting_value");
           if(!currentResponse.ok)throw new Error("Could not read the current Freebies list.");
@@ -199,6 +210,17 @@ export default async function handler(req,res) {
             const path=storageObjectPath(item?.[field],url);
             if(path&&!nextPaths.has(path))removedPaths.add(path);
           }
+        }
+        if(["studio_producers","catalog_products"].includes(body.key)){
+          const currentResponse=await db("studio_settings?select=setting_key,setting_value");
+          if(!currentResponse.ok)throw new Error("Could not inspect existing studio image references.");
+          const currentRows=await currentResponse.json();
+          const previous=currentRows.find(row=>row.setting_key===body.key)?.setting_value;
+          const oldPaths=collectStudioAssetPaths(previous,url);
+          const nextSettings=currentRows.map(row=>row.setting_key===body.key?{...row,setting_value:value}:row);
+          if(!currentRows.some(row=>row.setting_key===body.key))nextSettings.push({setting_key:body.key,setting_value:value});
+          const retained=collectStudioAssetPaths(nextSettings,url);
+          for(const path of oldPaths)if(!retained.has(path))removedAssetPaths.add(path);
         }
         const payload={setting_key:body.key,setting_value:value};
         const response=await db("studio_settings?on_conflict=setting_key",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=representation"},body:JSON.stringify(payload)});
@@ -218,6 +240,13 @@ export default async function handler(req,res) {
           } catch {
             storageCleanupWarning="The Freebies list was saved, but Storage cleanup could not connect. Please check for unused files in the freebies bucket.";
           }
+        }
+        if(removedAssetPaths.size){
+          try{
+            const deleted=await fetch(url+"/storage/v1/object/studio-assets",{method:"DELETE",headers:supabaseHeaders(key,{"Content-Type":"application/json"}),body:JSON.stringify({prefixes:[...removedAssetPaths]})});
+            if(deleted.ok){const items=await deleted.json().catch(()=>null);removedStorageFiles+=Array.isArray(items)?items.length:0;if(!Array.isArray(items)||items.length<removedAssetPaths.size)storageCleanupWarning="Settings saved. Some old image files may remain in studio-assets Storage."}
+            else storageCleanupWarning="Settings saved, but some old images could not be deleted from studio-assets Storage.";
+          }catch{storageCleanupWarning="Settings saved, but image cleanup could not connect to Storage."}
         }
         return res.status(200).json({ok:true,removedStorageFiles,warning:storageCleanupWarning});
       }
