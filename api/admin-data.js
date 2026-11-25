@@ -195,8 +195,11 @@ export default async function handler(req,res) {
               headers:supabaseHeaders(key,{"Content-Type":"application/json"}),
               body:JSON.stringify({prefixes:[...removedPaths]})
             });
-            if(deleteResponse.ok)removedStorageFiles=removedPaths.size;
-            else storageCleanupWarning="The Freebies list was saved, but some old files could not be deleted from Storage.";
+            if(deleteResponse.ok){
+              const deletedItems=await deleteResponse.json().catch(()=>null);
+              removedStorageFiles=Array.isArray(deletedItems)?deletedItems.length:0;
+              if(removedStorageFiles<removedPaths.size)storageCleanupWarning="The Freebies list was saved. Storage accepted the cleanup request, but deletion of every old file could not be confirmed.";
+            } else storageCleanupWarning="The Freebies list was saved, but some old files could not be deleted from Storage.";
           } catch {
             storageCleanupWarning="The Freebies list was saved, but Storage cleanup could not connect. Please check for unused files in the freebies bucket.";
           }
