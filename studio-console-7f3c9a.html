@@ -164,6 +164,40 @@ a{color:#c6a9f3}
 .save-row .btn,.freebie-admin-actions .btn{min-height:40px}
 @media(max-width:900px){.admin-navigation{grid-template-columns:1fr;gap:6px}.admin-nav-group{padding:8px 6px}.admin-nav-label{margin-bottom:7px}}
 @media(max-width:560px){.admin-navigation{padding:9px;border-radius:16px}.admin-nav-group .tabs{gap:6px}.admin-nav-group .tab{flex:1 1 auto;text-align:center}.welcome{gap:12px}.stats{margin:16px 0 20px}}
+
+/* Structured Portfolio and Freebies editing areas */
+.admin-subsection{margin-top:22px;padding:19px;border:1px solid #40364f;border-radius:18px;background:linear-gradient(145deg,#1d1928,#211b2d)}
+.admin-subsection-heading{margin-bottom:15px}
+.admin-subsection-heading h3{margin:4px 0;font:650 1rem Sora,Inter,sans-serif}
+.admin-subsection-heading p{margin:0;font-size:.78rem;line-height:1.55}
+.admin-section-kicker{display:block;color:#a98adf;font:700 .59rem Inter,sans-serif;letter-spacing:.13em}
+.admin-action-bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:15px;padding-top:14px;border-top:1px solid #40364f}
+.admin-action-end{justify-content:flex-end}
+#featuredPortfolioRows,#portfolioCategoryRows,#portfolioVideoRows{display:grid;gap:12px}
+#featuredPortfolioRows>.panel,#portfolioCategoryRows>.panel,#portfolioVideoRows>.panel{margin:0!important;padding:16px!important;border-radius:15px;background:#191522!important;border-color:#463a56!important}
+#featuredPortfolioRows .save-row{justify-content:space-between;align-items:center}
+#featuredPortfolioRows .settings-grid{gap:12px 14px}
+#portfolioCategoryRows .settings-grid{align-items:end;gap:12px}
+#portfolioVideoRows .portfolio-video-entry{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(130px,180px) auto;gap:8px!important;padding:9px;border:1px solid #40364f;border-radius:12px;background:#211b2d}
+#portfolioVideoRows .portfolio-video-entry input,#portfolioVideoRows .portfolio-video-entry select{min-width:0;width:100%}
+#portfolioVideoRows>.panel>strong{font:650 .9rem Sora,Inter,sans-serif}
+#portfolioVideoRows>.panel>label{margin-top:12px}
+.freebie-workflow-note{display:grid;gap:3px;margin:18px 0;padding:13px 15px;border:1px solid #51445f;border-radius:14px;background:linear-gradient(110deg,#30243e,#252033);color:#f1eaf9;font:650 .77rem Sora,Inter,sans-serif}
+.freebie-workflow-note span{font:400 .7rem Inter,system-ui,sans-serif;color:#b9adc8}
+.freebie-entry{overflow:hidden;padding:0!important;background:#1d1928!important;border-color:#51445f!important}
+.freebie-entry-head{padding:15px 17px;margin:0!important;border-bottom:1px solid #40364f;background:#241e30}
+.freebie-entry-head strong{font:650 .9rem Sora,Inter,sans-serif}
+.freebie-entry:not(.is-collapsed) .freebie-admin-grid{padding:16px}
+.freebie-entry:not(.is-collapsed) .freebie-admin-grid>label:nth-child(1)::before{content:"01 · RELEASE DETAILS";display:block;grid-column:1/-1;color:#a98adf;font:700 .59rem Inter,sans-serif;letter-spacing:.13em;margin-bottom:0}
+.freebie-entry:not(.is-collapsed) .freebie-admin-grid>label:nth-child(6)::before{content:"02 · MP3 UPLOAD";display:block;color:#a98adf;font:700 .59rem Inter,sans-serif;letter-spacing:.13em;margin-bottom:8px}
+.freebie-entry:not(.is-collapsed) .freebie-admin-grid>label:nth-child(8)::before{content:"03 · FILE LINKS & ARTWORK";display:block;color:#a98adf;font:700 .59rem Inter,sans-serif;letter-spacing:.13em;margin-bottom:8px}
+.freebie-entry:not(.is-collapsed) .freebie-admin-grid>label:nth-child(11)::before{content:"04 · USAGE NOTES";display:block;color:#a98adf;font:700 .59rem Inter,sans-serif;letter-spacing:.13em;margin-bottom:8px}
+.freebie-entry:not(.is-collapsed) .freebie-admin-grid>label:nth-child(6),.freebie-entry:not(.is-collapsed) .freebie-admin-grid>label:nth-child(8),.freebie-entry:not(.is-collapsed) .freebie-admin-grid>label:nth-child(11){margin-top:9px;padding-top:14px;border-top:1px solid #40364f}
+.freebie-entry:not(.is-collapsed) .freebie-admin-grid>label{margin-top:8px}
+.freebie-entry:not(.is-collapsed) .freebie-publish{margin:0 16px 16px;padding:12px 14px;border:1px solid #51445f;border-radius:12px;background:#292235}
+.freebie-admin-actions{justify-content:space-between}
+@media(max-width:700px){.admin-subsection{padding:14px}#portfolioVideoRows .portfolio-video-entry{grid-template-columns:1fr}#portfolioVideoRows .portfolio-video-entry .btn{justify-self:start}.admin-subsection-heading{display:block}}
+@media(max-width:520px){.admin-action-bar .btn{flex:1 1 100%}.freebie-entry-head{padding:13px}}
 </style></head><body><div class="shell"><header class="top"><div><div class="brand">PERIVELLE <span>✦</span> ADMIN</div><small class="hint">Private studio workspace</small></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><a href="/#track" class="btn alt" target="_blank" rel="noopener noreferrer">Track Order ↗</a><a href="/" class="hint">← View website</a></div></header>
 <section id="loginView" class="login"><p class="eyebrow">SECURE ACCESS</p><h1>Welcome back.</h1><p>Sign in to manage commissions, pricing, previews, and studio information.</p><form id="loginForm"><label for="password">Admin password</label><input id="password" type="password" autocomplete="current-password" required><p class="message" id="loginMessage" role="status"></p><button class="btn" style="width:100%" id="loginButton">Sign in ↗</button></form></section>
 <main id="dashboard" class="dashboard hidden"><div class="welcome"><div><p class="eyebrow">STUDIO CONTROL CENTER</p><h1>Good to see you.</h1><p>Manage incoming requests and keep your public studio details up to date.</p></div><button class="btn alt" id="logout">Sign out</button></div>
@@ -176,19 +210,20 @@ a{color:#c6a9f3}
 <section id="ordersPanel" class="panel"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><div><h2>Commission requests</h2><p>Update order status, quotation, client notes, and preview or delivery links.</p></div><button class="btn alt" id="refresh">Refresh</button></div><div class="filters"><input id="searchOrders" placeholder="Search name, Request ID, Discord…"><select id="filterStatus"><option value="">All statuses</option><option>Awaiting Review</option><option>Quotation Sent</option><option>Awaiting Payment</option><option>In Production</option><option>Revision</option><option>Completed</option><option>On Hold</option><option>Cancelled</option><option>Waiting for client response</option><option>Demo ready — Awaiting feedback</option><option>Preparing final delivery</option></select><select id="filterArchive"><option value="active">Active requests</option><option value="archived">Archived requests</option><option value="all">All requests</option></select></div><div style="display:flex;justify-content:flex-end;margin:-4px 0 12px"><button class="btn alt" id="exportCsv">Export visible orders as CSV ↓</button></div><div id="orders" class="orders"><div class="empty">Loading requests…</div></div></section>
 <section id="servicesPanel" class="panel hidden"><h2>Service pricing</h2><p>Set the starting prices displayed on the public Services page. Leave blank to show “Contact for a quote”.</p><div id="servicePrices"></div><div class="save-row"><button class="btn" id="saveServices">Save service prices</button></div></section>
 
-<section id="portfolioPanel" class="panel hidden"><h2>Portfolio categories & previews</h2><p>Create, rename, reorder, or hide service categories on the public Works page. Existing video previews are kept. Add YouTube or Vimeo previews and assign each work to a producer.</p><h3>Featured Portfolio</h3><p>Manage individual works displayed in Featured Portfolio. Add a cover image, title, category, description, and optional video preview.</p><div id="featuredPortfolioRows"></div><div class="save-row"><button class="btn alt" type="button" id="addFeaturedPortfolio">+ Add featured work</button><button class="btn" type="button" id="saveFeaturedPortfolio">Save Featured Portfolio</button></div><hr><h3>Service categories</h3><div id="portfolioCategoryRows"></div><div class="save-row"><button class="btn alt" type="button" id="addPortfolioCategory">+ Add category</button><button class="btn" type="button" id="savePortfolioCategories">Save categories</button></div><hr><h3>Video previews</h3><div id="portfolioVideoRows"></div><div class="save-row"><button class="btn" id="savePortfolioVideos">Save portfolio previews</button></div></section>
-
-<section id="producersPanel" class="panel hidden"><h2>Our Producers</h2><p>Manage Studio members. Add, edit, upload portraits, reorder, or deactivate a profile without deleting it.</p><div id="producerRows"></div><div class="save-row"><button class="btn alt" type="button" id="addProducer">+ Add producer</button><button class="btn" type="button" id="saveProducers">Save producer profiles</button></div></section>
-<section id="freebiesPanel" class="panel hidden">
- <h2>Free audio drops</h2>
- <p>Manage the public Freebies library. Add one release each week. The download file URL also powers the MP3 player when no separate preview URL is provided. Publish when ready; future release dates appear as Coming Soon.</p>
- <div id="freebieRows"></div>
- <div class="freebie-admin-actions">
-  <button class="btn alt" type="button" id="addFreebie">+ Add freebie</button>
-  <button class="btn" type="button" id="saveFreebies">Save freebies</button>
- </div>
+<section id="portfolioPanel" class="panel hidden">
+ <h2>Portfolio management</h2><p>Atur karya unggulan, kategori layanan, dan video preview yang tampil di halaman Works.</p>
+ <section class="admin-subsection"><div class="admin-subsection-heading"><span class="admin-section-kicker">01 · SHOWCASE</span><h3>Featured Portfolio</h3><p>Pilih karya yang ingin ditonjolkan beserta cover, deskripsi, dan media preview.</p></div><div id="featuredPortfolioRows"></div><div class="admin-action-bar"><button class="btn alt" type="button" id="addFeaturedPortfolio">＋ Add featured work</button><button class="btn" type="button" id="saveFeaturedPortfolio">Save Featured Portfolio</button></div></section>
+ <section class="admin-subsection"><div class="admin-subsection-heading"><span class="admin-section-kicker">02 · ORGANIZATION</span><h3>Service categories</h3><p>Atur nama, urutan, dan visibilitas kategori di halaman Works.</p></div><div id="portfolioCategoryRows"></div><div class="admin-action-bar"><button class="btn alt" type="button" id="addPortfolioCategory">＋ Add category</button><button class="btn" type="button" id="savePortfolioCategories">Save categories</button></div></section>
+ <section class="admin-subsection"><div class="admin-subsection-heading"><span class="admin-section-kicker">03 · MEDIA LIBRARY</span><h3>Video previews</h3><p>Kelola video YouTube atau Vimeo untuk setiap kategori, pilih video utama, dan atur kredit produser.</p></div><div id="portfolioVideoRows"></div><div class="admin-action-bar admin-action-end"><button class="btn" id="savePortfolioVideos">Save portfolio previews</button></div></section>
 </section>
-<section id="audioPanel" class="panel hidden">
+ <section id="producersPanel" class="panel hidden"><h2>Our Producers</h2><p>Manage Studio members. Add, edit, upload portraits, reorder, or deactivate a profile without deleting it.</p><div id="producerRows"></div><div class="save-row"><button class="btn alt" type="button" id="addProducer">+ Add producer</button><button class="btn" type="button" id="saveProducers">Save producer profiles</button></div></section>
+<section id="freebiesPanel" class="panel hidden">
+  <h2>Freebies library</h2><p>Kelola rilisan audio gratis yang tampil di website. Lengkapi detail, upload MP3, periksa URL, lalu simpan sebelum dipublikasikan.</p>
+  <div class="freebie-workflow-note"><strong>♫ &nbsp; Release workflow</strong><span>Detail rilis → Upload MP3 → Periksa file & cover → Publish</span></div>
+  <div id="freebieRows"></div>
+  <div class="freebie-admin-actions admin-action-bar"><button class="btn alt" type="button" id="addFreebie">＋ Add freebie</button><button class="btn" type="button" id="saveFreebies">Save freebies</button></div>
+ </section>
+ <section id="audioPanel" class="panel hidden">
  <h2>Public mini audio player</h2>
  <p>Add the tracks visitors can play from the floating player beside the theme toggle. Use a direct HTTPS audio-file URL (MP3, WAV, OGG, or M4A), not a webpage or YouTube link. Host the file first, then paste its direct file URL here.</p>
  <label class="audio-enabled"><input id="audioPlayerEnabled" type="checkbox" checked> Show the audio player on the public website</label>
