@@ -3006,9 +3006,6 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     const item=portfolioEntries.find(function(entry){return entry.id===base.id})||base;
     const urls=Array.isArray(item.videos)?item.videos:(item.url?[item.url]:base.videos);
     const assignments=Array.isArray(item.video_assignments)?item.video_assignments:[];
-    const group=document.querySelector('.portfolio-category-group[data-portfolio-category="'+base.id+'"]');
-    if(!group)return;
-    const grid=group.querySelector(".portfolio-grid");if(!grid)return;
     grid.replaceChildren();
     const validVideos=urls.map(function(rawUrl){return {rawUrl:rawUrl,src:portfolioEmbed(rawUrl)}}).filter(function(entry){return Boolean(entry.src)});
     function makeVideoFrame(src,index,rawUrl){
