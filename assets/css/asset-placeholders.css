@@ -125,3 +125,149 @@ html[data-theme="dark"] .product-detail-preview-placeholder small{color:#cdbed8}
 html[data-theme="dark"] .team-avatar-slot-label,html[data-theme="dark"] .pv-avatar-slot{border-color:#685179;background:#31253edb;color:#d6bce0}
 html[data-theme="dark"] #pvAudioDock[data-cover-empty="true"]:not([data-empty="true"]) .pv-audio-track:before{border-color:#6d567a;background:linear-gradient(145deg,#44344f,#382b46);color:#e1b6e5}
 @media(max-width:560px){.team-avatar-slot-label{left:7px;bottom:7px;font-size:.44rem}.pv-avatar-slot{top:37px;font-size:.38rem}.product-detail-preview-placeholder{margin:13px 0;padding:17px 13px}}
+
+
+
+/* Freebies placeholder refinement — final component layer.
+   Loaded after the shared placeholder styles so layout and contrast stay intentional. */
+#main-content .page-view[data-page="freebies"] .freebie-row-placeholder{
+  border:1px solid #e5d7ec!important;
+  border-style:solid!important;
+  background:linear-gradient(112deg,rgba(255,255,255,.88),rgba(249,241,252,.86) 64%,rgba(255,242,247,.86))!important;
+  box-shadow:0 7px 22px rgba(88,55,108,.045),inset 0 1px 0 rgba(255,255,255,.76)!important;
+}
+#main-content .page-view[data-page="freebies"] .freebie-row-placeholder:hover{
+  transform:none!important;
+  border-color:#dfc4e7!important;
+  box-shadow:0 9px 24px rgba(88,55,108,.06)!important;
+}
+#main-content .page-view[data-page="freebies"] .freebie-row-placeholder:before{
+  border:1px solid #e8d9ef!important;
+  border-style:solid!important;
+  background:linear-gradient(145deg,#fff,#f5ebfa)!important;
+  color:#a16db5!important;
+}
+#main-content .page-view[data-page="freebies"] .freebie-placeholder-player{
+  min-height:42px;
+  padding:6px 10px;
+  border:1px solid #e5d9ec;
+  border-radius:12px;
+  background:rgba(255,255,255,.74);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+}
+#main-content .page-view[data-page="freebies"] .freebie-placeholder-play{
+  width:26px;height:26px;flex-basis:26px;
+  background:#f2e8f8;
+  color:#a16db5;
+}
+#main-content .page-view[data-page="freebies"] .freebie-placeholder-time{
+  font-size:.6rem;
+  color:#957fa0;
+}
+#main-content .page-view[data-page="freebies"] .freebie-placeholder-status,
+#main-content .page-view[data-page="freebies"] .freebie-placeholder-download{
+  min-height:36px;
+  padding:8px 11px;
+  border:1px solid #e5d8eb;
+  border-radius:999px;
+  color:#927ba0;
+  font-size:.58rem;
+  letter-spacing:.07em;
+}
+#main-content .page-view[data-page="freebies"] .freebie-placeholder-download{
+  background:#f7eff9;
+  color:#a182b0;
+}
+#main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note{
+  display:grid;
+  grid-template-columns:42px minmax(0,1fr);
+  grid-template-areas:"icon title" "icon copy";
+  justify-content:center;
+  justify-items:start;
+  align-items:center;
+  gap:5px 15px;
+  width:min(100%,760px);
+  margin:14px auto 0;
+  padding:22px 26px;
+  border:1px dashed #dfcbe6;
+  border-radius:20px!important;
+  background:linear-gradient(112deg,rgba(255,255,255,.66),rgba(249,241,252,.68) 65%,rgba(255,242,247,.65));
+  text-align:left;
+}
+#main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note>span{
+  grid-area:icon;
+  width:40px;height:40px;
+  margin:0;
+  border:1px solid #ead8ef;
+  border-radius:13px;
+  background:#f4e8f8;
+  color:#a46db9;
+  font-size:1.08rem;
+}
+#main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note h3{
+  grid-area:title;
+  justify-self:start;
+  font:800 1rem/1.3 Sora,Inter,system-ui,sans-serif!important;
+  letter-spacing:-.025em!important;
+  text-transform:none;
+}
+#main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note p{
+  grid-area:copy;
+  max-width:62ch!important;
+  justify-self:start;
+  font-size:.82rem!important;
+  line-height:1.6!important;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-row-placeholder{
+  border-color:#5b4668!important;
+  background:linear-gradient(112deg,rgba(48,36,61,.95),rgba(43,32,55,.92) 64%,rgba(53,36,57,.92))!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.18)!important;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-row-placeholder:before{
+  border-color:#624d72!important;
+  background:linear-gradient(145deg,#493354,#35263f)!important;
+  color:#e0b9eb!important;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-placeholder-player{
+  border-color:#5d496b;
+  background:rgba(255,255,255,.035);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-placeholder-play{
+  background:#4a3657;color:#d6b3e2;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-placeholder-time{
+  color:#bca8c7;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-placeholder-status,
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-placeholder-download{
+  border-color:#604a6f;color:#c9b4d2;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-placeholder-download{
+  background:#3a2b47;color:#d4b4df;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note{
+  border-color:#634a70;
+  background:linear-gradient(112deg,rgba(48,35,61,.82),rgba(43,32,55,.84) 65%,rgba(52,35,55,.82));
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note>span{
+  border-color:#624d72;background:#3d2c49;color:#e2a2d8;
+}
+@media(max-width:720px){
+  #main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note{
+    grid-template-columns:36px minmax(0,1fr);
+    gap:5px 12px;
+    padding:19px;
+  }
+  #main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note>span{
+    width:36px;height:36px;
+  }
+}
+@media(max-width:420px){
+  #main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note{
+    grid-template-columns:1fr;
+    grid-template-areas:"icon" "title" "copy";
+    justify-items:start;
+    text-align:left;
+  }
+}
