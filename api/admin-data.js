@@ -114,7 +114,7 @@ export default async function handler(req,res) {
         }
         if(body.key==="portfolio_videos" && Array.isArray(value)){
           const allowed=["youtube.com","www.youtube.com","youtube-nocookie.com","www.youtube-nocookie.com","youtu.be","vimeo.com","www.vimeo.com","player.vimeo.com"];
-          const allowedCreators=["bybi","rei","yoz"];
+          
           for(const item of value){
             const urls=Array.isArray(item.videos)?item.videos:(item.url?[item.url]:[]);
             if(urls.length>30)return res.status(400).json({ok:false,message:"A category can contain up to 30 video previews."});
@@ -128,7 +128,7 @@ export default async function handler(req,res) {
               const assignedUrl=String(assignment&&assignment.url||"");
               const creator=String(assignment&&assignment.creator||"");
               if(!urls.includes(assignedUrl))return res.status(400).json({ok:false,message:"Each producer credit must match a video URL in the same category."});
-              if(!allowedCreators.includes(creator))return res.status(400).json({ok:false,message:"Choose a valid producer for each video credit."});
+              if(!/^[a-z0-9][a-z0-9_-]{1,49}$/.test(creator))return res.status(400).json({ok:false,message:"Choose a valid producer for each video credit."});
               if(assignedUrls.has(assignedUrl))return res.status(400).json({ok:false,message:"Each video can only be credited once per category."});
               assignedUrls.add(assignedUrl);
             }
