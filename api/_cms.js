@@ -19,7 +19,7 @@ const RESOURCES = {
   work_producers: {
     table: "work_producers",
     admin: "select=*&order=display_order.asc&limit=2000",
-    public: "select=work_id,producer_id,credit_role,display_order&order=display_order.asc&limit=2000"
+    public: "select=work_id,producer_id,credit_role,display_order,work:works!inner(visibility)&work.visibility=eq.published&order=display_order.asc&limit=2000"
   },
   services: {
     table: "services",
@@ -49,12 +49,12 @@ const RESOURCES = {
   commission_forms: {
     table: "commission_forms",
     admin: "select=*&order=display_order.asc&limit=500",
-    public: "select=form_id,service_id,name,description,display_order&is_active=eq.true&order=display_order.asc&limit=500"
+    public: null
   },
   commission_form_versions: {
     table: "commission_form_versions",
     admin: "select=*&order=created_at.desc&limit=1000",
-    public: "select=form_version_id,form_id,version_number,schema,published_at,form:commission_forms!inner(is_active)&status=eq.published&form.is_active=eq.true&order=version_number.desc&limit=1000"
+    public: null
   }
 };
 
@@ -65,7 +65,7 @@ function createConfigError() {
 }
 
 export function getCmsResourceNames(mode = "admin") {
-  return Object.keys(RESOURCES).filter(name => mode === "admin" || Boolean(RESOURCES[name].public));
+  return Object.keys(RESOURCES).filter(name => mode === "admin" || typeof RESOURCES[name].public === "string");
 }
 
 export async function readCmsResource(resource, mode = "admin") {
