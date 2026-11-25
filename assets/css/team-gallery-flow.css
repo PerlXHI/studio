@@ -96,3 +96,34 @@ html[data-theme="dark"] .portfolio-producer-empty a{color:#e2b0e8}
  #main-content .page-view[data-page="team"] .team-grid>.team-card,.portfolio-producer-filter-links a{transition:none}
  #main-content .page-view[data-page="team"] .team-grid>.team-card:hover,.portfolio-producer-filter-links a:hover{transform:none}
 }
+
+
+/* Producer links: clear, accessible call-to-action on every talent card. */
+#main-content .page-view[data-page="team"] .team-profile-cta{
+ display:inline-flex;
+ align-items:center;
+ gap:8px;
+ margin-top:auto;
+ padding-top:18px;
+ color:#a05eae;
+ font:700 .78rem/1.35 Inter,system-ui,sans-serif;
+ letter-spacing:.015em;
+}
+#main-content .page-view[data-page="team"] .team-profile-cta>span{
+ display:inline-grid;
+ place-items:center;
+ width:23px;height:23px;
+ border:1px solid #dfc4e2;
+ border-radius:50%;
+ color:inherit;
+ transition:transform .2s ease,background .2s ease;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="team"] .team-profile-cta{
+ color:#e2b0e8;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="team"] .team-profile-cta>span{
+ border-color:#604772;
+}
+@media(max-width:650px){
+ #main-content .page-view[data-page="team"] .team-profile-cta{padding-top:12px}
+}
