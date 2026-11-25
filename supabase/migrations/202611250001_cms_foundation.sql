@@ -168,7 +168,7 @@ create table if not exists public.service_addons (
 -- Versioned Terms of Service: one global policy and optional service-specific policies.
 create table if not exists public.tos_versions (
   tos_version_id uuid primary key default gen_random_uuid(),
-  service_id text references public.services(service_id) on delete set null,
+  service_id text references public.services(service_id) on delete restrict,
   version_number integer not null check (version_number > 0),
   title text not null default 'Terms of Service',
   agreement_text text not null default 'I have read and agree to the Terms of Service.',
@@ -260,23 +260,61 @@ create table if not exists public.commission_form_versions (
 create or replace function public.perivelle_protect_published_form_version()
 returns trigger
 language plpgsql
-as $
+as $$
 begin
+  if tg_op = 'DELETE' then
+    if old.status = 'published' then
+      raise exception 'Published commission form versions cannot be deleted. Archive the version instead.';
+    end if;
+    return old;
+  end if;
+
   if old.status = 'published' and (
     new.form_id is distinct from old.form_id or
     new.version_number is distinct from old.version_number or
-    new.schema is distinct from old.schema
+    new.schema is distinct from old.schema or
+    new.published_at is distinct from old.published_at
   ) then
     raise exception 'Published commission form versions are immutable. Create a new version instead.';
   end if;
   return new;
 end;
-$;
+$$;
 
 drop trigger if exists commission_form_version_immutable_after_publish on public.commission_form_versions;
 create trigger commission_form_version_immutable_after_publish
-before update on public.commission_form_versions
+before update or delete on public.commission_form_versions
 for each row execute function public.perivelle_protect_published_form_version();
+
+create or replace function public.perivelle_protect_published_tos_version()
+returns trigger
+language plpgsql
+as $$
+begin
+  if tg_op = 'DELETE' then
+    if old.status = 'published' then
+      raise exception 'Published Terms of Service versions cannot be deleted. Archive the version instead.';
+    end if;
+    return old;
+  end if;
+
+  if old.status = 'published' and (
+    new.service_id is distinct from old.service_id or
+    new.version_number is distinct from old.version_number or
+    new.title is distinct from old.title or
+    new.agreement_text is distinct from old.agreement_text or
+    new.effective_at is distinct from old.effective_at
+  ) then
+    raise exception 'Published Terms of Service versions are immutable. Create a new version instead.';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists tos_version_immutable_after_publish on public.tos_versions;
+create trigger tos_version_immutable_after_publish
+before update or delete on public.tos_versions
+for each row execute function public.perivelle_protect_published_tos_version();
 
 create unique index if not exists commission_form_versions_one_published_idx
   on public.commission_form_versions (form_id)
@@ -507,6 +545,11 @@ cross join lateral jsonb_array_elements_text(
   end
 ) with ordinality as url_order(value, ordinality)
 where s.setting_key='portfolio_videos'
+  and not exists (
+    select 1 from public.works existing
+    where existing.category_id = category_order.item->>'id'
+      and existing.video_url = url_order.value
+  )
 on conflict (work_id) do nothing;
 
 -- Retain producer credits from the two legacy portfolio structures.
@@ -527,7 +570,17 @@ on conflict (work_id, producer_id) do nothing;
 
 insert into public.work_producers (work_id, producer_id, credit_role, display_order)
 select
-  'legacy-video-' || substr(md5(coalesce(category.item->>'id','') || '|' || (assignment.item->>'url')),1,24),
+  coalesce(
+    (
+      select existing.work_id
+      from public.works existing
+      where existing.category_id = category.item->>'id'
+        and existing.video_url = assignment.item->>'url'
+      order by existing.is_featured desc, existing.display_order asc
+      limit 1
+    ),
+    'legacy-video-' || substr(md5(coalesce(category.item->>'id','') || '|' || (assignment.item->>'url')),1,24)
+  ),
   assignment.item->>'creator',
   'Producer',
   assignment.ordinality::integer - 1
