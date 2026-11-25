@@ -69,7 +69,7 @@ create table if not exists public.producer_profiles (
 
 -- Portfolio categories are a first-class entity, rather than embedded labels.
 create table if not exists public.portfolio_categories (
-  category_id text primary key check (category_id ~ '^[a-z0-9][a-z0-9_-]{0,59}
+  category_id text primary key check (category_id ~ '^[a-z0-9][a-z0-9_-]{0,59}$'),
   name text not null,
   description text not null default '',
   is_visible boolean not null default true,
@@ -110,7 +110,7 @@ create table if not exists public.work_producers (
 
 -- Services: descriptive content and pricing are separated from package/add-on rows.
 create table if not exists public.services (
-  service_id text primary key check (service_id ~ '^[a-z0-9][a-z0-9_-]{0,79}
+  service_id text primary key check (service_id ~ '^[a-z0-9][a-z0-9_-]{0,79}$'),
   slug text not null unique,
   name text not null,
   short_description text not null default '',
