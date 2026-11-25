@@ -3065,8 +3065,9 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
    }).join("");
    const avatarBox=document.querySelector(".pv-team-avatars");
    if(avatarBox)avatarBox.innerHTML=activeProducers.slice(0,5).map(function(p){return '<a href="#team" class="pv-team-avatar" aria-label="Meet '+esc(p.name)+'">'+(p.photo?'<img src="'+esc(p.photo)+'" alt="" loading="lazy">':'<span>'+esc((p.name||"?").slice(0,1).toUpperCase())+'</span>')+'<small>'+esc(p.name)+'</small></a>'}).join("");
-   if(window.perivelleUpdatePortfolioFilterOptions)window.perivelleUpdatePortfolioFilterOptions(window.perivellePortfolioCategories||[],activeProducers);
   }
+  const producerFilters=window.perivelleProducerData||[{id:"bybi",name:"bybi"},{id:"rei",name:"rei"},{id:"yoz",name:"yoz"}];
+  if(window.perivelleUpdatePortfolioFilterOptions)window.perivelleUpdatePortfolioFilterOptions(window.perivellePortfolioCategories||[{id:"bgm",name:"BGM"},{id:"sound-alerts",name:"Sound Alerts"},{id:"stinger",name:"Stinger"},{id:"og-song",name:"Original Song"},{id:"lore-music",name:"Lore Music"}],producerFilters);
   if(settings.commission_status){
    const status=settings.commission_status;
    const card=document.getElementById("publicCommissionStatus");
