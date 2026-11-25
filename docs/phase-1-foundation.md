@@ -53,7 +53,7 @@ The migration provisions a private `commission-references` bucket for future cli
 
 - `api/_cms.js`: shared allowlisted PostgREST reads and public/admin resource projections.
 - `api/admin-cms.js`: authenticated, read-only CMS data endpoint for the admin.
-- `api/public-cms.js`: read-only endpoint exposing published/visible CMS data only.
+- `api/public-cms.js`: read-only endpoint exposing published/visible CMS data only (producers, categories, works, service catalogue, packages and add-ons). ToS and form schemas are intentionally admin-only until their public workflows are implemented in Phase 4.
 
 These endpoints are a foundation. They do not yet replace the existing Admin Dashboard forms or public frontend rendering; that integration belongs to Phase 2 and Phase 3.
 
