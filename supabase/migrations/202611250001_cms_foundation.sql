@@ -527,14 +527,14 @@ insert into public.works (
   visibility, is_featured, display_order, metadata, legacy_data
 )
 select
-  'legacy-video-' || substr(md5(coalesce(item->>'id','') || '|' || url.value),1,24),
-  'legacy-video-' || substr(md5(coalesce(item->>'id','') || '|' || url.value),1,16),
+  'legacy-video-' || substr(md5(coalesce(item->>'id','') || '|' || url_order.value),1,24),
+  'legacy-video-' || substr(md5(coalesce(item->>'id','') || '|' || url_order.value),1,16),
   coalesce(nullif(item->>'name',''), 'Legacy portfolio preview'),
   '',
   case when exists (select 1 from public.portfolio_categories c where c.category_id=item->>'id') then item->>'id' else null end,
-  url.value,
+  url_order.value,
   'published',
-  coalesce(item->>'featured'=url.value,false),
+  coalesce(item->>'featured'=url_order.value,false),
   (category_order.ordinality::integer - 1) * 100 + (url_order.ordinality::integer - 1),
   jsonb_build_object('legacy_source','portfolio_videos'),
   item
