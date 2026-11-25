@@ -2689,6 +2689,7 @@ function card(p){
   :isVideo?'<video src="'+esc(p.preview)+'" controls preload="metadata" playsinline></video>'
   :isAudio?'<div class="product-audio-preview"><span>♫ Audio preview</span><audio src="'+esc(p.preview)+'" controls preload="none"></audio></div>'
   :'<a class="product-preview-fallback" href="'+esc(p.preview)+'" target="_blank" rel="noopener noreferrer">Open preview ↗</a>')
+  :p.cover?'<img src="'+esc(p.cover)+'" alt="'+esc(p.name)+' cover" loading="lazy" style="width:100%;height:100%;object-fit:cover">'
   :'<div class="catalog-art-placeholder" aria-hidden="true"><span class="catalog-art-slot">COVER ART / 16:9</span><span class="catalog-art-mark">♫</span><span class="catalog-art-wave">'+bars+'</span><span class="catalog-art-caption">PRODUCT VISUAL SLOT</span></div><span class="art-type">'+esc(p.type)+' · '+esc(p.genre)+'</span><span class="art-id">PERIVELLE / '+esc(p.id.slice(0,4).toUpperCase())+'</span>';
  return '<article class="product"><div class="product-art '+(p.preview?'has-video-preview':'has-art-placeholder')+'" style="--art:'+esc(p.color)+'">'+art+'</div><div class="product-body"><p class="eyebrow" style="margin:0">'+esc(moodName(p.mood))+' · '+esc(p.duration)+'</p><h3 class="product-title">'+esc(p.name)+'</h3><p class="product-desc">'+esc(p.description)+'</p><div class="product-bottom"><span class="price">'+fmt(p.price)+'</span><div class="card-buttons"><button class="btn secondary small-btn" type="button" data-detail="'+esc(p.id)+'">'+esc(tr("details"))+'</button></div></div></div></article>'
 }
@@ -2937,11 +2938,15 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   if(window.perivelleRenderFreebies)window.perivelleRenderFreebies(window.perivelleFreebiesData);
   if(window.perivelleSetAudioPlayer)window.perivelleSetAudioPlayer(settings.audio_player||{});
   if(Array.isArray(settings.catalog_products)){
-   settings.catalog_products.forEach(function(item){
-    const product=products.find(function(p){return p.id===item.id});
-    if(product){if(Number.isFinite(Number(item.price)))product.price=Number(item.price);product.preview=String(item.preview||"");}
-   });
-   renderProducts();renderCart();
+   const managed=settings.catalog_products;
+   if(managed.some(function(item){return item&&item.name;})){
+    products=managed.filter(function(item){return item&&item.active!==false;}).map(function(item){return {...item,price:Number(item.price)||0,preview:String(item.preview||""),cover:String(item.cover||""),emoji:item.emoji||"♫",color:item.color||"#75658f"};});
+   }else{
+    managed.forEach(function(item){const product=products.find(function(p){return p.id===item.id});if(product){if(Number.isFinite(Number(item.price)))product.price=Number(item.price);product.preview=String(item.preview||"");product.cover=String(item.cover||"");}});
+   }
+   cart=cart.filter(function(id){return products.some(function(p){return p.id===id})});
+   favorites=favorites.filter(function(id){return products.some(function(p){return p.id===id})});
+   renderMood();renderProducts();renderCart();
   }
   {
    const portfolioEntries=Array.isArray(settings.portfolio_videos)?settings.portfolio_videos:[];
