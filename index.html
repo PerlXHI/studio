@@ -2973,6 +2973,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
    }
    const defaultPortfolioList=[{id:"bgm",name:"BGM"},{id:"sound-alerts",name:"Sound Alerts"},{id:"stinger",name:"Stinger"},{id:"og-song",name:"Original Song"},{id:"lore-music",name:"Lore Music"}];
    const defaults=(Array.isArray(settings.portfolio_categories)?settings.portfolio_categories:defaultPortfolioList).filter(function(item){return item&&item.active!==false;});
+   window.perivellePortfolioCategories=defaults;
    const categoryList=document.querySelector(".portfolio-category-list");if(categoryList)categoryList.replaceChildren();
    function makePlaceholderVisual(label){
     const visual=document.createElement("div");visual.className="asset-placeholder-visual";
@@ -3055,6 +3056,19 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     const node=card.querySelector(".starting");
     if(item&&node)node.textContent=item.price?"STARTING AT · "+item.price:"CONTACT FOR A QUOTE";
    });
+  }
+  if(Array.isArray(settings.studio_producers)){
+   const activeProducers=settings.studio_producers.filter(function(p){return p&&p.active!==false;});
+   window.perivelleProducerData=activeProducers;
+   const teamGrid=document.querySelector(".page-view[data-page=team] .team-grid");
+   if(teamGrid)teamGrid.innerHTML=activeProducers.map(function(p){
+    const photo=p.photo?'<img src="'+esc(p.photo)+'" alt="'+esc(p.name)+' portrait" loading="lazy">':'<span>'+esc((p.name||"?").slice(0,1).toUpperCase())+'</span><i>✧</i>';
+    const tags=Array.isArray(p.tags)?p.tags:[];
+    return '<a class="team-card" data-producer-id="'+esc(p.id)+'" href="#portfolio?creator='+encodeURIComponent(p.id)+'" aria-label="Explore works by '+esc(p.name)+'"><div class="team-avatar">'+photo+'</div><div class="team-info"><p class="eyebrow">'+esc(p.role||"MUSIC PRODUCER · PERIVELLE")+'</p><h3>'+esc(p.name)+'</h3><p class="team-bio">'+esc(p.bio||"")+'</p><div class="team-tags">'+tags.map(function(tag){return '<span>'+esc(tag)+'</span>'}).join("")+'</div><span class="team-profile-cta">Explore works <span aria-hidden="true">↗</span></span></div></a>';
+   }).join("");
+   const avatarBox=document.querySelector(".pv-team-avatars");
+   if(avatarBox)avatarBox.innerHTML=activeProducers.slice(0,5).map(function(p){return '<a href="#team" class="pv-team-avatar" aria-label="Meet '+esc(p.name)+'">'+(p.photo?'<img src="'+esc(p.photo)+'" alt="" loading="lazy">':'<span>'+esc((p.name||"?").slice(0,1).toUpperCase())+'</span>')+'<small>'+esc(p.name)+'</small></a>'}).join("");
+   if(window.perivelleUpdatePortfolioFilterOptions)window.perivelleUpdatePortfolioFilterOptions(window.perivellePortfolioCategories||[],activeProducers);
   }
   if(settings.commission_status){
    const status=settings.commission_status;
