@@ -118,6 +118,7 @@ export default async function handler(req,res) {
             if(String(item.description||"").length>400)return res.status(400).json({ok:false,message:"Featured work descriptions must be 400 characters or fewer."});
             if(item.image){let image;try{image=new URL(String(item.image))}catch{return res.status(400).json({ok:false,message:"Enter a valid HTTPS cover image URL."})}if(image.protocol!=="https:")return res.status(400).json({ok:false,message:"Cover image URLs must use HTTPS."});}
             if(item.video_url){let video;try{video=new URL(String(item.video_url))}catch{return res.status(400).json({ok:false,message:"Enter a valid YouTube or Vimeo preview URL."})}if(video.protocol!=="https:"||!allowedHosts.includes(video.hostname.toLowerCase()))return res.status(400).json({ok:false,message:"Featured video previews must use HTTPS YouTube or Vimeo URLs."});}
+            if(item.audio_url){let audio;try{audio=new URL(String(item.audio_url))}catch{return res.status(400).json({ok:false,message:"Enter a valid direct audio preview URL."})}if(audio.protocol!=="https:")return res.status(400).json({ok:false,message:"Audio preview URLs must use HTTPS."});}
             if(item.creator&&!/^[a-z0-9][a-z0-9_-]{1,49}$/.test(String(item.creator)))return res.status(400).json({ok:false,message:"Choose a valid producer credit."});
           }
         }
