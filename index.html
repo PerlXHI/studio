@@ -3031,7 +3031,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
    const featuredSection=document.getElementById("featuredPortfolio"),featuredGrid=document.getElementById("featuredPortfolioGrid");featuredGrid.replaceChildren();let featuredCount=0;
     function renderFeaturedWork(entry){
      if(!entry||entry.active===false)return;
-     const card=document.createElement("article");card.className="featured-portfolio-card";
+     const card=document.createElement("article");card.className="featured-portfolio-card";if(entry.creator)card.dataset.creatorId=entry.creator;if(entry.category)card.dataset.portfolioCategory=entry.category;
      const title=document.createElement("h3");title.textContent=String(entry.title||"Featured work");
      const category=defaults.find(function(item){return item.id===entry.category});
      const meta=document.createElement("p");meta.className="eyebrow";meta.textContent=category?category.name:"SELECTED WORK";
