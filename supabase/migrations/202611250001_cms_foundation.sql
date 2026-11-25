@@ -21,6 +21,8 @@ create table if not exists public.studio_settings (
   updated_at timestamptz not null default now()
 );
 
+alter table public.studio_settings enable row level security;
+
 create or replace function public.perivelle_slug(input_text text)
 returns text
 language sql
@@ -179,6 +181,10 @@ create table if not exists public.tos_versions (
   unique (service_id, version_number)
 );
 
+create unique index if not exists tos_versions_global_version_idx
+  on public.tos_versions (version_number)
+  where service_id is null;
+
 create unique index if not exists tos_versions_one_global_published_idx
   on public.tos_versions ((coalesce(service_id, '__global__')))
   where status = 'published';
@@ -194,6 +200,33 @@ create table if not exists public.tos_sections (
   updated_at timestamptz not null default now(),
   unique (tos_version_id, section_key)
 );
+
+create or replace function public.perivelle_protect_published_tos_section()
+returns trigger
+language plpgsql
+as $
+declare
+  version_status text;
+  target_version_id uuid;
+begin
+  target_version_id = case when tg_op = 'DELETE' then old.tos_version_id else new.tos_version_id end;
+  select status into version_status
+  from public.tos_versions
+  where tos_version_id = target_version_id;
+
+  if version_status = 'published' then
+    raise exception 'Published Terms of Service sections are immutable. Create a new version instead.';
+  end if;
+
+  if tg_op = 'DELETE' then return old; end if;
+  return new;
+end;
+$;
+
+drop trigger if exists tos_sections_immutable_after_publish on public.tos_sections;
+create trigger tos_sections_immutable_after_publish
+before update or delete on public.tos_sections
+for each row execute function public.perivelle_protect_published_tos_section();
 
 -- Commission form definitions and immutable published snapshots.
 create table if not exists public.commission_forms (
@@ -223,6 +256,27 @@ create table if not exists public.commission_form_versions (
   updated_at timestamptz not null default now(),
   unique (form_id, version_number)
 );
+
+create or replace function public.perivelle_protect_published_form_version()
+returns trigger
+language plpgsql
+as $
+begin
+  if old.status = 'published' and (
+    new.form_id is distinct from old.form_id or
+    new.version_number is distinct from old.version_number or
+    new.schema is distinct from old.schema
+  ) then
+    raise exception 'Published commission form versions are immutable. Create a new version instead.';
+  end if;
+  return new;
+end;
+$;
+
+drop trigger if exists commission_form_version_immutable_after_publish on public.commission_form_versions;
+create trigger commission_form_version_immutable_after_publish
+before update on public.commission_form_versions
+for each row execute function public.perivelle_protect_published_form_version();
 
 create unique index if not exists commission_form_versions_one_published_idx
   on public.commission_form_versions (form_id)
@@ -332,6 +386,21 @@ cross join lateral jsonb_array_elements(
   case when jsonb_typeof(s.setting_value)='array' then s.setting_value else '[]'::jsonb end
 ) with ordinality as source(item, ordinality)
 where s.setting_key='studio_producers'
+on conflict (producer_id) do nothing;
+
+insert into public.producer_profiles (
+  producer_id, display_name, role_title, biography, specializations,
+  genres, is_visible, display_order, legacy_data
+)
+select fallback.producer_id, fallback.display_name, 'MUSIC PRODUCER · PERIVELLE',
+       fallback.biography, array['Music Production','Original Music','Creative Audio']::text[],
+       array[]::text[], true, fallback.display_order, jsonb_build_object('source','site_defaults')
+from (values
+  ('bybi','bybi','Creating original sounds and musical atmospheres for virtual worlds, characters, and creators.',0),
+  ('rei','rei','Shaping musical ideas into expressive soundscapes for characters, streams, and stories.',1),
+  ('yoz','yoz','Bringing fresh musical ideas to life through original compositions and thoughtful production.',2)
+) as fallback(producer_id,display_name,biography,display_order)
+where not exists (select 1 from public.studio_settings where setting_key='studio_producers')
 on conflict (producer_id) do nothing;
 
 -- Backfill categories from the configured category list. If no category setting
@@ -458,7 +527,7 @@ on conflict (work_id, producer_id) do nothing;
 
 insert into public.work_producers (work_id, producer_id, credit_role, display_order)
 select
-  'legacy-video-' || substr(md5(coalesce(category.item->>'id','') || '|' || assignment.item->>'url'),1,24),
+  'legacy-video-' || substr(md5(coalesce(category.item->>'id','') || '|' || (assignment.item->>'url')),1,24),
   assignment.item->>'creator',
   'Producer',
   assignment.ordinality::integer - 1
@@ -496,6 +565,23 @@ cross join lateral jsonb_array_elements(
   case when jsonb_typeof(s.setting_value)='array' then s.setting_value else '[]'::jsonb end
 ) with ordinality as source(item, ordinality)
 where s.setting_key='service_prices'
+on conflict (service_id) do nothing;
+
+insert into public.services (
+  service_id, slug, name, pricing_model, legacy_price_label,
+  status, display_order, legacy_data
+)
+select public.perivelle_slug(fallback.name), public.perivelle_slug(fallback.name),
+       fallback.name, 'quote', '', 'published', fallback.display_order,
+       jsonb_build_object('source','site_defaults')
+from (values
+  ('Custom BGM Loop',0),
+  ('Sound Alerts & Stinger',1),
+  ('Lore / Cinematic Music',2),
+  ('OG Song / Instrumental Cover',3),
+  ('VTuber Debut Bundle',4)
+) as fallback(name,display_order)
+where not exists (select 1 from public.studio_settings where setting_key='service_prices')
 on conflict (service_id) do nothing;
 
 -- Preserve a compact immutable snapshot of historical commission information.
