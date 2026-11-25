@@ -2424,9 +2424,9 @@ html:not([data-theme="dark"]) #contactWidget .contact-trigger[aria-expanded="tru
     <div class="wrap pv-team-row">
       <div class="pv-team-heading"><p class="pv-eyebrow"><span></span> THE PEOPLE BEHIND THE SOUND</p><h2>Small team, <em>big imagination.</em></h2><p>Meet the people bringing every sound to life.</p></div>
       <div class="pv-team-avatars" aria-label="Perivelle team">
-        <a href="#team" class="pv-team-avatar pv-avatar-one" aria-label="Meet bybi"><span>B</span><small>bybi</small></a>
-        <a href="#team" class="pv-team-avatar pv-avatar-two" aria-label="Meet rei"><span>R</span><small>rei</small></a>
-        <a href="#team" class="pv-team-avatar pv-avatar-three" aria-label="Meet yoz"><span>Y</span><small>yoz</small></a>
+        <a href="#team" class="pv-team-avatar pv-avatar-one" aria-label="Meet bybi"><span>B</span><em class="pv-avatar-slot" aria-hidden="true">PHOTO</em><small>bybi</small></a>
+        <a href="#team" class="pv-team-avatar pv-avatar-two" aria-label="Meet rei"><span>R</span><em class="pv-avatar-slot" aria-hidden="true">PHOTO</em><small>rei</small></a>
+        <a href="#team" class="pv-team-avatar pv-avatar-three" aria-label="Meet yoz"><span>Y</span><em class="pv-avatar-slot" aria-hidden="true">PHOTO</em><small>yoz</small></a>
         <a href="#team" class="pv-team-avatar pv-avatar-four" aria-label="Meet the studio"><img src="assets/brand/pfp.webp" alt="" loading="lazy"><small>studio</small></a>
       </div>
       <a class="pv-text-link" href="#team">Meet the Team <span aria-hidden="true">↗</span></a>
@@ -2463,15 +2463,15 @@ html:not([data-theme="dark"]) #contactWidget .contact-trigger[aria-expanded="tru
   <div class="section-head team-heading"><div><p class="eyebrow">OUR PRODUCERS / PERIVELLE SOUND COLLECTIVE</p><h2>Meet the people behind the music.</h2></div><p class="sub">Choose a producer to explore their sound, selected projects, and musical work.</p></div>
   <div class="team-grid">
    <a class="team-card team-card-featured" data-producer-id="bybi" href="#portfolio?creator=bybi" aria-label="Explore works by bybi">
-    <div class="team-avatar team-avatar-bybi" aria-hidden="true"><span>B</span><i>✧</i></div>
+    <div class="team-avatar team-avatar-bybi" aria-hidden="true"><span>B</span><i>✧</i><small class="team-avatar-slot-label">PORTRAIT / PHOTO SLOT</small></div>
     <div class="team-info"><p class="eyebrow">MUSIC PRODUCER · PERIVELLE</p><h3>bybi</h3><p class="team-bio">Creating original sounds and musical atmospheres for virtual worlds, characters, and creators.</p><div class="team-tags"><span>Music Production</span><span>Original Music</span><span>Creative Audio</span></div><span class="team-profile-cta">Explore works <span aria-hidden="true">↗</span></span></div>
    </a>
    <a class="team-card" data-producer-id="rei" href="#portfolio?creator=rei" aria-label="Explore works by rei">
-    <div class="team-avatar team-avatar-rei" aria-hidden="true"><span>R</span><i>☾</i></div>
+    <div class="team-avatar team-avatar-rei" aria-hidden="true"><span>R</span><i>☾</i><small class="team-avatar-slot-label">PORTRAIT / PHOTO SLOT</small></div>
     <div class="team-info"><p class="eyebrow">MUSIC PRODUCER · PERIVELLE</p><h3>rei</h3><p class="team-bio">Shaping musical ideas into expressive soundscapes for characters, streams, and stories.</p><div class="team-tags"><span>Music Production</span><span>Original Music</span><span>Creative Audio</span></div><span class="team-profile-cta">Explore works <span aria-hidden="true">↗</span></span></div>
    </a>
    <a class="team-card" data-producer-id="yoz" href="#portfolio?creator=yoz" aria-label="Explore works by yoz">
-    <div class="team-avatar team-avatar-yoz" aria-hidden="true"><span>Y</span><i>✦</i></div>
+    <div class="team-avatar team-avatar-yoz" aria-hidden="true"><span>Y</span><i>✦</i><small class="team-avatar-slot-label">PORTRAIT / PHOTO SLOT</small></div>
     <div class="team-info"><p class="eyebrow">MUSIC PRODUCER · PERIVELLE</p><h3>yoz</h3><p class="team-bio">Bringing fresh musical ideas to life through original compositions and thoughtful production.</p><div class="team-tags"><span>Music Production</span><span>Original Music</span><span>Creative Audio</span></div><span class="team-profile-cta">Explore works <span aria-hidden="true">↗</span></span></div>
    </a>
   </div>
@@ -2643,7 +2643,7 @@ html:not([data-theme="dark"]) #contactWidget .contact-trigger[aria-expanded="tru
  </nav>
 </div>
 
-<div class="pv-audio-dock" id="pvAudioDock" data-empty="true" aria-label="Perivelle audio player">
+<div class="pv-audio-dock" id="pvAudioDock" data-empty="true" data-cover-empty="true" aria-label="Perivelle audio player">
  <div class="pv-audio-panel" aria-live="polite">
   <div class="pv-audio-track">
    <img id="pvAudioCover" src="assets/brand/pfp.webp" alt="" width="40" height="40">
@@ -2681,17 +2681,28 @@ function card(p){
  var embed=p.preview?previewFrame(p.preview):"";
  var isVideo=p.preview&&(/\.(mp4|webm|ogv)(?:$|\?)/i.test(p.preview));
  var isAudio=p.preview&&(/\.(mp3|wav|ogg|m4a|aac|flac)(?:$|\?)/i.test(p.preview));
+ var bars=Array.from({length:19},function(){return "<i></i>"}).join("");
  var art=p.preview?(embed
   ?'<iframe src="'+esc(embed)+'" title="'+esc(p.name)+' video preview" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
   :isVideo?'<video src="'+esc(p.preview)+'" controls preload="metadata" playsinline></video>'
   :isAudio?'<div class="product-audio-preview"><span>♫ Audio preview</span><audio src="'+esc(p.preview)+'" controls preload="none"></audio></div>'
   :'<a class="product-preview-fallback" href="'+esc(p.preview)+'" target="_blank" rel="noopener noreferrer">Open preview ↗</a>')
-  :'<span class="art-type">'+esc(p.type)+' · '+esc(p.genre)+'</span><span class="art-id">PERIVELLE / '+esc(p.id.slice(0,4).toUpperCase())+'</span>';
- return '<article class="product"><div class="product-art '+(p.preview?'has-video-preview':'')+'" style="--art:'+esc(p.color)+'">'+art+'</div><div class="product-body"><p class="eyebrow" style="margin:0">'+esc(moodName(p.mood))+' · '+esc(p.duration)+'</p><h3 class="product-title">'+esc(p.name)+'</h3><p class="product-desc">'+esc(p.description)+'</p><div class="product-bottom"><span class="price">'+fmt(p.price)+'</span><div class="card-buttons"><button class="btn secondary small-btn" type="button" data-detail="'+esc(p.id)+'">'+esc(tr("details"))+'</button></div></div></div></article>'
+  :'<div class="catalog-art-placeholder" aria-hidden="true"><span class="catalog-art-slot">COVER ART / 16:9</span><span class="catalog-art-mark">♫</span><span class="catalog-art-wave">'+bars+'</span><span class="catalog-art-caption">PRODUCT VISUAL SLOT</span></div><span class="art-type">'+esc(p.type)+' · '+esc(p.genre)+'</span><span class="art-id">PERIVELLE / '+esc(p.id.slice(0,4).toUpperCase())+'</span>';
+ return '<article class="product"><div class="product-art '+(p.preview?'has-video-preview':'has-art-placeholder')+'" style="--art:'+esc(p.color)+'">'+art+'</div><div class="product-body"><p class="eyebrow" style="margin:0">'+esc(moodName(p.mood))+' · '+esc(p.duration)+'</p><h3 class="product-title">'+esc(p.name)+'</h3><p class="product-desc">'+esc(p.description)+'</p><div class="product-bottom"><span class="price">'+fmt(p.price)+'</span><div class="card-buttons"><button class="btn secondary small-btn" type="button" data-detail="'+esc(p.id)+'">'+esc(tr("details"))+'</button></div></div></div></article>'
 }
 function renderProducts(){var q=$("#search").value.trim().toLowerCase(),m=$("#mood").value,sort=$("#sort").value,list=products.filter(function(p){return(!q||(p.name+" "+p.genre+" "+moodName(p.mood)+" "+p.type+" "+p.description).toLowerCase().indexOf(q)>-1)&&(!m||m===p.mood)&&(!showFavorites||favorites.indexOf(p.id)!==-1)});list.sort(function(a,b){if(sort==="price-low")return a.price-b.price;if(sort==="price-high")return b.price-a.price;if(sort==="newest")return b.date.localeCompare(a.date);return b.date.localeCompare(a.date)});$("#products").innerHTML=list.length?list.map(card).join(""):'<div class="empty">'+esc(tr("empty"))+'</div>';$("#resultCount").textContent=list.length+" "+("releases");$("#favoritesOnly").setAttribute("aria-pressed",showFavorites)}function cartMessage(items){var total=items.reduce(function(a,p){return a+p.price},0);return tr("cartBrief")+"\n\n"+items.map(function(p){return "• "+p.name+" — "+fmt(p.price)+" ("+p.type+", "+p.genre+")"}).join("\n")+"\n\n"+tr("price")+": "+fmt(total)+"\n\n"+("Please confirm availability, licensing, and payment details.")}
 function renderCart(){var items=cart.map(function(id){return products.find(function(p){return p.id===id})}).filter(Boolean);var countNode=$("#cartCount");if(countNode)countNode.textContent=items.length;var content=$("#cartContent"),summary=$("#cartSummary"),send=$("#sendCart");if(!items.length){content.innerHTML='<p class="empty">'+esc(tr("cartEmpty"))+'</p>';summary.hidden=true;send.hidden=true;return}var total=items.reduce(function(a,p){return a+p.price},0);content.innerHTML='<ul class="cart-list">'+items.map(function(p){return '<li><strong>'+esc(p.name)+'</strong> — '+fmt(p.price)+' <button type="button" class="quiet" data-remove="'+esc(p.id)+'">×</button></li>'}).join("")+'</ul><p><strong>'+esc(tr("price"))+': '+fmt(total)+'</strong></p>';summary.value=cartMessage(items);summary.hidden=true;send.hidden=false}
-function showProduct(id){var p=products.find(function(x){return x.id===id});if(!p)return;$("#productDialog").dataset.product=id;$("#productHeading").textContent=p.name;$("#productDetail").innerHTML='<p>'+esc(p.description)+'</p><p><strong>'+esc(tr("price"))+':</strong> '+fmt(p.price)+'</p><p><strong>'+esc(tr("type"))+':</strong> '+esc(p.type)+' · <strong>'+esc(tr("mood"))+':</strong> '+esc(moodName(p.mood))+' · <strong>'+esc(tr("genre"))+':</strong> '+esc(p.genre)+'</p><p><strong>'+esc(tr("duration"))+':</strong> '+esc(p.duration)+' · <strong>'+esc(tr("format"))+':</strong> '+esc(p.format)+'</p><p class="help">'+esc("Audio preview is not available yet. Please confirm licensing and availability through Discord.")+'</p>';$("#detailAdd").dataset.add=id;$("#productDialog").showModal()}function toast(msg){var t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(function(){t.hidden=true},2600)}function addCart(id){if(cart.indexOf(id)<0){cart.push(id);save();renderCart();renderProducts();toast(tr("added"))}else $("#cartDialog").showModal()}
+function showProduct(id){
+ var p=products.find(function(x){return x.id===id});if(!p)return;
+ $("#productDialog").dataset.product=id;$("#productHeading").textContent=p.name;
+ var hasAudio=p.preview&&/\.(mp3|wav|ogg|m4a|aac|flac)(?:$|\?)/i.test(p.preview);
+ var previewBlock=hasAudio
+  ?'<div class="product-detail-audio"><span>LISTEN TO THE PREVIEW</span><audio src="'+esc(p.preview)+'" controls preload="none"></audio></div>'
+  :'<div class="product-detail-preview-placeholder" aria-hidden="true"><span class="product-detail-preview-label">MP3 / AUDIO PREVIEW SLOT</span><span class="product-detail-preview-mark">♫</span><span class="product-detail-preview-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><small>Audio preview will appear here after upload</small></div>';
+ $("#productDetail").innerHTML='<p>'+esc(p.description)+'</p>'+previewBlock+'<p><strong>'+esc(tr("price"))+':</strong> '+fmt(p.price)+'</p><p><strong>'+esc(tr("type"))+':</strong> '+esc(p.type)+' · <strong>'+esc(tr("mood"))+':</strong> '+esc(moodName(p.mood))+' · <strong>'+esc(tr("genre"))+':</strong> '+esc(p.genre)+'</p><p><strong>'+esc(tr("duration"))+':</strong> '+esc(p.duration)+' · <strong>'+esc(tr("format"))+':</strong> '+esc(p.format)+'</p><p class="help">'+esc("Please confirm licensing and availability through Discord.")+'</p>';
+ $("#detailAdd").dataset.add=id;$("#productDialog").showModal();
+}
+function toast(msg){var t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(function(){t.hidden=true},2600)}function addCart(id){if(cart.indexOf(id)<0){cart.push(id);save();renderCart();renderProducts();toast(tr("added"))}else $("#cartDialog").showModal()}
 function sendToDiscord(text,status){window.open(DISCORD_URL,"_blank","noopener,noreferrer");function done(ok){status.textContent=ok?tr("copied"):tr("copyFallback")}if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(function(){done(true)}).catch(function(){done(false)})}else{var ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}ta.remove();done(ok)}}
 $("#search").addEventListener("input",renderProducts);$("#mood").addEventListener("change",renderProducts);$("#sort").addEventListener("change",renderProducts);$("#favoritesOnly").addEventListener("click",function(){showFavorites=!showFavorites;renderProducts()});var openCartButton=$("#openCart");if(openCartButton)openCartButton.addEventListener("click",function(){$("#cartDialog").showModal()});document.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;if(b.dataset.fav){var i=favorites.indexOf(b.dataset.fav);if(i<0)favorites.push(b.dataset.fav);else favorites.splice(i,1);save();renderProducts();toast(tr("saved"))}else if(b.dataset.add)addCart(b.dataset.add);else if(b.dataset.detail)showProduct(b.dataset.detail);else if(b.dataset.remove){cart=cart.filter(function(id){return id!==b.dataset.remove});save();renderCart();renderProducts()}else if(b.dataset.close)$("#"+b.dataset.close).close()});$("#copySuccessRequestId").addEventListener("click",async function(){var id=$("#successRequestId").textContent;try{await navigator.clipboard.writeText(id);this.textContent="Copied ✓"}catch(error){this.textContent="Select ID to copy";var range=document.createRange();range.selectNodeContents($("#successRequestId"));var selection=window.getSelection();selection.removeAllRanges();selection.addRange(range)}});$("#clearCart").addEventListener("click",function(){cart=[];save();renderCart();renderProducts();$("#cartStatus").textContent=tr("clearDone")});$("#sendCart").addEventListener("click",function(){var items=cart.map(function(id){return products.find(function(p){return p.id===id})}).filter(Boolean);if(!items.length)return;var text=cartMessage(items);$("#cartSummary").value=text;$("#cartSummary").hidden=false;sendToDiscord(text,$("#cartStatus"))});$("#customForm").addEventListener("submit",async function(e){
  e.preventDefault();
@@ -2881,8 +2892,9 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   const track=currentTrack();
   audio.pause();audio.src=track.src;audio.loop=track.loop!==false;audio.load();
   title.textContent=track.title;artist.textContent=track.artist||"Perivelle Studio";
+  dock.dataset.coverEmpty=String(!track.cover);
   cover.src=track.cover||"assets/brand/pfp.webp";
-  cover.onerror=()=>{cover.src="assets/brand/pfp.webp"};
+  cover.onerror=()=>{dock.dataset.coverEmpty="true";cover.src="assets/brand/pfp.webp"};
   dock.dataset.empty="false";play.disabled=false;previous.disabled=tracks.length<2;next.disabled=tracks.length<2;
   empty.hidden=true;sync();
   if(autoplay)audio.play().catch(()=>{artist.textContent="Tap play to start audio";sync()});
@@ -2893,7 +2905,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   current=0;
   if(!tracks.length){
    audio.pause();audio.removeAttribute("src");audio.load();
-   dock.dataset.empty="true";title.textContent="Your next audio release";artist.textContent="Cover art + MP3 preview slot";
+   dock.dataset.empty="true";dock.dataset.coverEmpty="true";title.textContent="Your next audio release";artist.textContent="Cover art + MP3 preview slot";
    cover.src="assets/brand/pfp.webp";play.disabled=true;previous.disabled=true;next.disabled=true;seek.disabled=true;empty.hidden=false;sync();return;
   }
   loadTrack(0,false);

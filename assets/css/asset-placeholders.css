@@ -74,3 +74,54 @@ html[data-theme="dark"] .freebies-empty.is-placeholder-note>span{background:#3d2
 @media(max-width:980px){.portfolio-asset-placeholder{padding:8px}.freebie-placeholder-status{display:none}}
 @media(max-width:680px){.portfolio-asset-placeholder{padding:7px;border-radius:16px}.freebie-row-placeholder .freebie-actions{justify-content:flex-start}.freebie-row-placeholder .freebie-placeholder-status{display:inline-flex}.freebies-empty.is-placeholder-note{align-items:start}.freebies-empty.is-placeholder-note>span{margin-top:2px}}
 @media(max-width:390px){.freebie-placeholder-status{display:none!important}.freebie-placeholder-download{flex:1}}
+
+
+/* Catalog artwork placeholder: consistent 16:9 cover slot for products without uploaded visuals. */
+.product-art.has-art-placeholder{min-height:195px;padding:0;background:#f3e9f6}
+.product-art.has-art-placeholder:before{display:none}
+.catalog-art-placeholder{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:10px;overflow:hidden;border:1px dashed #e6d3ed;background:radial-gradient(ellipse at 20% 20%,#ffffffd9,transparent 36%),radial-gradient(ellipse at 80% 75%,#e29dcf3b,transparent 42%),linear-gradient(135deg,#f7effa,#eee8f8 55%,#f9edf4)}
+.catalog-art-placeholder:before,.catalog-art-placeholder:after{content:"";position:absolute;aspect-ratio:1;border:1px solid #a66bc033;border-radius:50%;pointer-events:none}
+.catalog-art-placeholder:before{width:74%;left:-23%;top:-57%}
+.catalog-art-placeholder:after{width:78%;right:-33%;bottom:-60%;box-shadow:0 0 0 18px #ffffff33,0 0 0 38px #a66bc00e}
+.catalog-art-slot,.catalog-art-caption{position:absolute;z-index:1;color:#a18aa9;font:800 .54rem/1.3 Inter,system-ui,sans-serif;letter-spacing:.13em}
+.catalog-art-slot{top:14px;left:16px}.catalog-art-caption{right:16px;bottom:13px}
+.catalog-art-mark{position:relative;z-index:1;display:grid;place-items:center;width:49px;height:49px;border:1px solid #bc93cd66;border-radius:16px;background:#ffffffb3;color:#a46db9;font:750 1.5rem/1 Sora,Inter,sans-serif;box-shadow:0 8px 22px #7b529117}
+.catalog-art-wave,.product-detail-preview-wave{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:4px;height:25px}
+.catalog-art-wave i,.product-detail-preview-wave i{display:block;width:3px;height:var(--catalog-bar,10px);border-radius:9px;background:linear-gradient(180deg,#b27bcf,#e77eaf);opacity:.8}
+.catalog-art-wave i:nth-child(3n),.product-detail-preview-wave i:nth-child(3n){--catalog-bar:17px}
+.catalog-art-wave i:nth-child(4n),.product-detail-preview-wave i:nth-child(4n){--catalog-bar:6px}
+.catalog-art-wave i:nth-child(5n),.product-detail-preview-wave i:nth-child(5n){--catalog-bar:22px}
+.catalog-art-wave i:nth-child(7n){--catalog-bar:13px}
+
+/* Product detail audio preview slot. */
+.product-detail-preview-placeholder,.product-detail-audio{display:grid;justify-items:center;gap:10px;margin:17px 0;padding:20px 18px;border:1px dashed #dac8e5;border-radius:17px;background:linear-gradient(135deg,#faf4fc,#f1eaf8 62%,#f9edf4);text-align:center}
+.product-detail-preview-label,.product-detail-audio>span{color:#a18aa9;font:800 .62rem/1.3 Inter,system-ui,sans-serif;letter-spacing:.12em}
+.product-detail-preview-mark{display:grid;place-items:center;width:43px;height:43px;border:1px solid #e3d2eb;border-radius:14px;background:#ffffffb3;color:#a46db9;font:750 1.3rem Sora,Inter,sans-serif}
+.product-detail-preview-wave{height:22px}
+.product-detail-preview-wave i{height:var(--catalog-bar,9px)}
+.product-detail-preview-placeholder small{color:#9a839f;font-size:.68rem;line-height:1.4}
+.product-detail-audio audio{width:min(100%,360px)}
+
+/* Team portraits — monograms are explicitly marked as temporary image slots. */
+.team-avatar-slot-label{position:absolute;z-index:3;left:10px;bottom:10px;display:inline-flex;align-items:center;padding:5px 7px;border:1px solid #ffffffc7;border-radius:999px;background:#ffffffb8;color:#927aa0;font:800 .49rem/1.2 Inter,system-ui,sans-serif;letter-spacing:.08em}
+.pv-team-avatar{position:relative}
+.pv-avatar-slot{position:absolute;z-index:2;left:50%;top:43px;transform:translateX(-50%);padding:3px 5px;border:1px solid #ffffffc7;border-radius:999px;background:#ffffffc7;color:#977da5;font:800 .42rem/1 Inter,system-ui,sans-serif;letter-spacing:.06em;font-style:normal;pointer-events:none}
+
+/* Floating player: if a track is uploaded before its cover art, show an art slot instead of the studio logo. */
+#pvAudioDock[data-cover-empty="true"]:not([data-empty="true"]) .pv-audio-track{position:relative}
+#pvAudioDock[data-cover-empty="true"]:not([data-empty="true"]) .pv-audio-track img{opacity:0!important}
+#pvAudioDock[data-cover-empty="true"]:not([data-empty="true"]) .pv-audio-track:before{content:"♫";display:grid;place-items:center;width:39px;height:39px;flex:0 0 39px;border:1px dashed #d8c2e3;border-radius:12px;background:linear-gradient(145deg,#f7edfb,#fcebf3);color:#a16eb8;font:750 1.1rem/1 Sora,Inter,sans-serif}
+
+/* Dark mode */
+html[data-theme="dark"] .catalog-art-placeholder{border-color:#674e79;background:radial-gradient(ellipse at 20% 20%,#ffffff0b,transparent 36%),radial-gradient(ellipse at 80% 75%,#cd82ba20,transparent 42%),linear-gradient(135deg,#382a45,#2d253e 55%,#382638)}
+html[data-theme="dark"] .catalog-art-placeholder:before,html[data-theme="dark"] .catalog-art-placeholder:after{border-color:#d7a7e826}
+html[data-theme="dark"] .catalog-art-slot,html[data-theme="dark"] .catalog-art-caption{color:#c1aecb}
+html[data-theme="dark"] .catalog-art-mark{border-color:#6b5479;background:#483652;color:#e1b6e5}
+html[data-theme="dark"] .catalog-art-wave i,html[data-theme="dark"] .product-detail-preview-wave i{background:linear-gradient(180deg,#c39add,#e18bb8)}
+html[data-theme="dark"] .product-detail-preview-placeholder,html[data-theme="dark"] .product-detail-audio{border-color:#62506f;background:linear-gradient(135deg,#30243e,#2c2239 62%,#35253b)}
+html[data-theme="dark"] .product-detail-preview-label,html[data-theme="dark"] .product-detail-audio>span{color:#c1aecb}
+html[data-theme="dark"] .product-detail-preview-mark{border-color:#6b5479;background:#483652;color:#e1b6e5}
+html[data-theme="dark"] .product-detail-preview-placeholder small{color:#cdbed8}
+html[data-theme="dark"] .team-avatar-slot-label,html[data-theme="dark"] .pv-avatar-slot{border-color:#685179;background:#31253edb;color:#d6bce0}
+html[data-theme="dark"] #pvAudioDock[data-cover-empty="true"]:not([data-empty="true"]) .pv-audio-track:before{border-color:#6d567a;background:linear-gradient(145deg,#44344f,#382b46);color:#e1b6e5}
+@media(max-width:560px){.team-avatar-slot-label{left:7px;bottom:7px;font-size:.44rem}.pv-avatar-slot{top:37px;font-size:.38rem}.product-detail-preview-placeholder{margin:13px 0;padding:17px 13px}}
