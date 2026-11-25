@@ -2726,6 +2726,8 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
   status.textContent="";
   document.getElementById("successRequestId").textContent=requestId;
   document.getElementById("successRequestStatus").textContent=requestStatus;
+  var successCopy=document.querySelector("#commissionSuccessDialog .success-copy");
+  if(successCopy)successCopy.textContent=result.notificationPending?"Your brief has been saved successfully. Our team’s notification is delayed, but your Request ID is ready for tracking.":"Thank you for choosing Perivelle. We’ve received your brief and will contact you on Discord after reviewing it.";
   f.reset();
   var successDialog=document.getElementById("commissionSuccessDialog");
   if(successDialog&&typeof successDialog.showModal==="function")successDialog.showModal();
