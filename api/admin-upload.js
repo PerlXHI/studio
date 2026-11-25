@@ -113,6 +113,28 @@ export default async function handler(req, res) {
     }
   }
 
+  if (body.assetType === "image") {
+    const fileName=String(body.fileName||"").trim(),mimeType=String(body.mimeType||"").toLowerCase(),fileSize=Number(body.fileSize),category=String(body.category||"");
+    const allowedTypes=new Set(["image/jpeg","image/png","image/webp","image/avif"]);
+    if(!["producers","portfolio","catalog"].includes(category))return send(res,400,{ok:false,message:"Choose a valid image destination."});
+    if(!fileName||!allowedTypes.has(mimeType))return send(res,400,{ok:false,message:"Use a JPG, PNG, WebP, or AVIF image."});
+    if(!Number.isSafeInteger(fileSize)||fileSize<=0||fileSize>10*1024*1024)return send(res,400,{ok:false,message:"Images must be between 1 byte and 10 MB."});
+    try{
+      const bucket="studio-assets",bucketUrl=url+"/storage/v1/bucket/"+bucket;
+      let check=await fetch(bucketUrl,{headers:supabaseHeaders(key)});
+      if(!check.ok){
+        if(check.status!==404 && check.status!==400)throw new Error("Could not check the studio-assets bucket.");
+        const create=await fetch(url+"/storage/v1/bucket",{method:"POST",headers:supabaseHeaders(key,{"Content-Type":"application/json"}),body:JSON.stringify({id:bucket,name:bucket,public:true,file_size_limit:10*1024*1024,allowed_mime_types:[...allowedTypes]})});
+        if(!create.ok&&create.status!==409){const detail=await create.json().catch(()=>({}));throw new Error(detail.message||"Could not create the public studio-assets bucket.");}
+      }else{const bucketInfo=await check.json().catch(()=>({}));if(bucketInfo.public!==true)throw new Error("The studio-assets bucket exists but is private. Make it public in Supabase Storage.");}
+      const extension=mimeType==="image/jpeg"?"jpg":mimeType.split("/")[1],base=fileName.replace(/\\/g,"/").split("/").pop().replace(/\.[^.]+$/,"").normalize("NFKD").replace(/[^a-zA-Z0-9_-]+/g,"-").slice(0,55)||"image";
+      const now=new Date(),path=category+"/"+now.getUTCFullYear()+"/"+String(now.getUTCMonth()+1).padStart(2,"0")+"/"+base+"-"+randomUUID().slice(0,8)+"."+extension;
+      const encoded=encodePath(path),signedResponse=await fetch(url+"/storage/v1/object/upload/sign/"+bucket+"/"+encoded,{method:"POST",headers:supabaseHeaders(key,{"Content-Type":"application/json"}),body:JSON.stringify({upsert:false})});
+      const signed=await signedResponse.json().catch(()=>({}));if(!signedResponse.ok||!signed.token)return send(res,502,{ok:false,message:signed.message||"Could not prepare the image upload."});
+      const uploadUrl=url+"/storage/v1/object/upload/sign/"+bucket+"/"+encoded+"?token="+encodeURIComponent(signed.token);
+      return send(res,200,{ok:true,bucket,path,uploadUrl,publicUrl:url+"/storage/v1/object/public/"+bucket+"/"+encoded,maxFileSize:10*1024*1024});
+    }catch(error){console.error("[admin-upload] Image upload preparation failed",{name:error?.name||"Error"});return send(res,502,{ok:false,message:error.message||"Could not prepare the image upload."});}
+  }
   const fileName = String(body.fileName || "").trim();
   const fileSize = Number(body.fileSize);
   const category = String(body.category || "");
