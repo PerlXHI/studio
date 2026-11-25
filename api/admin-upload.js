@@ -13,9 +13,8 @@ function encodePath(path) {
 }
 function safeBaseName(name) {
   const raw = String(name || "").replace(/\\/g, "/").split("/").pop() || "free-audio";
-  const withoutExtension = raw.replace(/\\.mp3$/i, "");
+  const withoutExtension = raw.slice(0, -4);
   const clean = withoutExtension.normalize("NFKD")
-    .replace(/[\\u0300-\\u036f]/g, "")
     .replace(/[^a-zA-Z0-9_-]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 64);
