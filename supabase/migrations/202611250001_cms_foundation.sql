@@ -37,7 +37,7 @@ create or replace function public.perivelle_touch_updated_at()
 returns trigger
 language plpgsql
 set search_path = pg_catalog
-as $
+as $$
 begin
   new.updated_at = now();
   return new;
@@ -206,7 +206,8 @@ create table if not exists public.tos_sections (
 create or replace function public.perivelle_protect_published_tos_section()
 returns trigger
 language plpgsql
-as $
+set search_path = pg_catalog
+as $$
 declare
   version_status text;
   target_version_id uuid;
@@ -223,7 +224,7 @@ begin
   if tg_op = 'DELETE' then return old; end if;
   return new;
 end;
-$;
+$$;
 
 drop trigger if exists tos_sections_immutable_after_publish on public.tos_sections;
 create trigger tos_sections_immutable_after_publish
@@ -263,7 +264,7 @@ create or replace function public.perivelle_protect_published_form_version()
 returns trigger
 language plpgsql
 set search_path = pg_catalog
-as $
+as $$
 begin
   if tg_op = 'DELETE' then
     if old.status = 'published' then
@@ -293,7 +294,7 @@ create or replace function public.perivelle_protect_published_tos_version()
 returns trigger
 language plpgsql
 set search_path = pg_catalog
-as $
+as $$
 begin
   if tg_op = 'DELETE' then
     if old.status = 'published' then
