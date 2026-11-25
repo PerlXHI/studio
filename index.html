@@ -2971,7 +2971,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     }catch(error){}
     return "";
    }
-   const defaultPortfolioList=[{id:"bgm",name:"BGM"},{id:"sound-alerts",name:"Sound Alerts"},{id:"stinger",name:"Stinger"},{id:"og-song",name:"Original Song"},{id:"lore-music",name:"Lore Music"}];
+   const defaultPortfolioList=[{id:"bgm",name:"BGM"},{id:"sound-alerts",name:"Sound Alerts",videos:["https://www.youtube-nocookie.com/embed/iUBVMpHvyWg"]},{id:"stinger",name:"Stinger"},{id:"og-song",name:"Original Song"},{id:"lore-music",name:"Lore Music"}];
    const defaults=(Array.isArray(settings.portfolio_categories)?settings.portfolio_categories:defaultPortfolioList).filter(function(item){return item&&item.active!==false;});
    window.perivellePortfolioCategories=defaults;
    const categoryList=document.querySelector(".portfolio-category-list");if(categoryList)categoryList.replaceChildren();
