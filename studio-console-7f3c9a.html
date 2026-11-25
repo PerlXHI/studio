@@ -275,7 +275,12 @@ $("#freebieRows").addEventListener("click",event=>{
   return;
  }
  const remove=event.target.closest("[data-remove-freebie]");
- if(remove)remove.closest(".freebie-entry").remove();
+ if(remove){
+  const entry=remove.closest(".freebie-entry");
+  const title=entry.querySelector("[data-freebie-title]")?.value.trim()||"this release";
+  if(!window.confirm('Remove "'+title+'" from the Freebies list? Its Supabase files will be deleted only after you click Save freebies, and only if no other release uses them.'))return;
+  entry.remove();
+ }
 });
 
 function setFreebieUploadState(row,message,state="idle",progress=null){
@@ -454,7 +459,17 @@ function renderCommissionStatus(){const x=settings.commission_status||{};$("#com
 $("#saveCommissionStatus").addEventListener("click",async()=>{try{await saveSetting("commission_status",{status:$("#commissionAvailability").value,batch:$("#commissionBatch").value.trim(),slots:$("#commissionSlots").value.trim()})}catch(e){$("#globalMessage").textContent=e.message}});
 function renderLinks(){const x=settings.studio_links||{};$("#discordLink").value=x.discord||"";$("#portfolioLink").value=x.portfolio||"";$("#youtubeLink").value=x.youtube||"";$("#vgenLink").value=x.vgen||"";$("#emailLink").value=x.email||"";$("#twitterLink").value=x.twitter||""}
 $("#saveLinks").addEventListener("click",async()=>{try{await saveSetting("studio_links",{discord:$("#discordLink").value.trim(),portfolio:$("#portfolioLink").value.trim(),youtube:$("#youtubeLink").value.trim(),vgen:$("#vgenLink").value.trim(),email:$("#emailLink").value.trim(),twitter:$("#twitterLink").value.trim()})}catch(e){$("#globalMessage").textContent=e.message}});
-async function saveSetting(key,value){await api("/api/admin-data",{method:"PATCH",body:JSON.stringify({kind:"setting",key,value})});settings[key]=value;$("#globalMessage").textContent="Changes saved successfully.";showToast("Changes saved successfully.")}
+async function saveSetting(key,value){
+ const result=await api("/api/admin-data",{method:"PATCH",body:JSON.stringify({kind:"setting",key,value})});
+ settings[key]=value;
+ const message=key==="freebies"&&result.removedStorageFiles
+  ?"Freebies saved. "+result.removedStorageFiles+" unused Storage file(s) deleted."
+  :key==="freebies"&&result.warning
+   ?"Freebies saved. "+result.warning
+   :"Changes saved successfully.";
+ $("#globalMessage").textContent=message;showToast(message);
+ return result;
+}
 document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{const key=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(x=>x.setAttribute("aria-selected",String(x===b)));["orders","services","portfolio","freebies","audio","analytics","links","commissionStatus"].forEach(k=>{const panel=document.getElementById(k+"Panel");if(panel)panel.classList.toggle("hidden",k!==key)});}));
 init();
 </script></body></html>
