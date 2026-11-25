@@ -1,0 +1,136 @@
+/* Perivelle Studio — shared Studio / Works banner geometry
+   Both page headers share one fixed footprint and content rhythm.
+   Decorative art is aligned to the same right-side anchor. */
+
+:root{
+ --pv-banner-desktop-height:350px;
+ --pv-banner-tablet-height:320px;
+ --pv-banner-mobile-height:300px;
+ --pv-banner-content-max:650px;
+ --pv-banner-right-inset:52px;
+}
+
+#main-content .page-view[data-page="team"] .team-hero,
+#main-content .page-view[data-page="portfolio"] .portfolio-intro{
+ box-sizing:border-box!important;
+ width:100%;
+ height:var(--pv-banner-desktop-height)!important;
+ min-height:var(--pv-banner-desktop-height)!important;
+ max-height:var(--pv-banner-desktop-height)!important;
+ margin:0 0 var(--pv-page-stack)!important;
+ padding:40px 52px!important;
+ border-radius:var(--pv-banner-radius)!important;
+}
+
+/* The two text columns use the same width and vertical rhythm. */
+#main-content .page-view[data-page="team"] .team-hero{
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:flex-start!important;
+ justify-content:center!important;
+}
+#main-content .page-view[data-page="portfolio"] .portfolio-intro{
+ display:flex!important;
+ flex-direction:row!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ gap:36px!important;
+}
+#main-content .page-view[data-page="team"] .team-hero>.eyebrow,
+#main-content .page-view[data-page="portfolio"] .portfolio-intro-copy>.eyebrow{
+ margin:0 0 14px!important;
+}
+#main-content .page-view[data-page="team"] .team-hero>h2,
+#main-content .page-view[data-page="portfolio"] .portfolio-intro-copy>h2{
+ width:100%;
+ max-width:var(--pv-banner-content-max)!important;
+ margin:0 0 14px!important;
+}
+#main-content .page-view[data-page="team"] .team-hero>.team-lead,
+#main-content .page-view[data-page="portfolio"] .portfolio-intro-copy>p:last-child{
+ width:100%;
+ max-width:570px!important;
+ margin:0!important;
+ font-size:var(--pv-type-body)!important;
+ line-height:1.65!important;
+}
+#main-content .page-view[data-page="portfolio"] .portfolio-intro-copy{
+ flex:1 1 auto;
+ min-width:0;
+ max-width:var(--pv-banner-content-max)!important;
+}
+
+/* Decorative motifs share the same 190px anchor and center point. */
+#main-content .page-view[data-page="team"] .team-orbit{
+ top:50%!important;
+ right:var(--pv-banner-right-inset)!important;
+ width:190px!important;
+ height:190px!important;
+ transform:translateY(-50%)!important;
+}
+#main-content .page-view[data-page="portfolio"] .portfolio-intro-mark{
+ flex:0 0 190px!important;
+ width:190px!important;
+ height:190px!important;
+ margin:0!important;
+ transform:none!important;
+}
+
+/* Tablet: reduce the shared banner footprint without changing proportions. */
+@media(max-width:760px){
+ :root{
+  --pv-banner-right-inset:36px;
+ }
+ #main-content .page-view[data-page="team"] .team-hero,
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro{
+  height:var(--pv-banner-tablet-height)!important;
+  min-height:var(--pv-banner-tablet-height)!important;
+  max-height:var(--pv-banner-tablet-height)!important;
+  padding:32px 36px!important;
+ }
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro{
+  gap:24px!important;
+ }
+ #main-content .page-view[data-page="team"] .team-orbit,
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro-mark{
+  width:145px!important;
+  height:145px!important;
+ }
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro-mark{
+  flex-basis:145px!important;
+ }
+}
+
+/* Mobile: equal 300px banner height; remove ornaments from the text flow. */
+@media(max-width:560px){
+ #main-content .page-view[data-page="team"] .team-hero,
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:0!important;
+  height:var(--pv-banner-mobile-height)!important;
+  min-height:var(--pv-banner-mobile-height)!important;
+  max-height:var(--pv-banner-mobile-height)!important;
+  padding:26px 22px!important;
+  margin-bottom:var(--pv-page-stack)!important;
+  border-radius:var(--pv-banner-radius)!important;
+ }
+ #main-content .page-view[data-page="team"] .team-orbit,
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro-mark{
+  display:none!important;
+ }
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro-copy{
+  width:100%;
+  max-width:100%!important;
+ }
+ #main-content .page-view[data-page="team"] .team-hero>h2,
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro-copy>h2{
+  max-width:100%!important;
+ }
+ #main-content .page-view[data-page="team"] .team-hero>.team-lead,
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro-copy>p:last-child{
+  max-width:100%!important;
+ }
+}
