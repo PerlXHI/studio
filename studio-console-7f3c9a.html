@@ -55,6 +55,80 @@ a{color:#c6a9f3}
 .freebie-publish{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:.84rem;font-weight:650}
 .freebie-publish input{width:17px;height:17px;accent-color:var(--accent)}
 @media(max-width:620px){.freebie-admin-grid{grid-template-columns:1fr}.freebie-admin-wide{grid-column:auto}.freebie-admin-actions .btn{flex:1}}
+
+
+/* Direct MP3 upload — drag, drop, and auto-fill Freebies URLs. */
+.freebie-upload-box{
+  position:relative;
+  display:flex!important;
+  align-items:center;
+  gap:14px;
+  min-width:0;
+  margin:4px 0 2px!important;
+  padding:16px 18px;
+  border:1px dashed #725b86;
+  border-radius:16px;
+  background:linear-gradient(115deg,rgba(169,138,223,.105),rgba(220,146,190,.07));
+  cursor:pointer;
+  transition:border-color .18s ease,background .18s ease,box-shadow .18s ease;
+}
+.freebie-upload-box:hover,.freebie-upload-box:focus-within,.freebie-upload-box.is-dragover{
+  border-color:#c58bd6;
+  background:linear-gradient(115deg,rgba(169,138,223,.18),rgba(220,146,190,.13));
+  box-shadow:0 0 0 3px rgba(169,138,223,.1);
+}
+.freebie-upload-box.is-uploading{cursor:progress;opacity:.92}
+.freebie-upload-input{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;clip-path:inset(50%)!important}
+.freebie-upload-icon{
+  display:grid;place-items:center;
+  width:42px;height:42px;flex:0 0 42px;
+  border:1px solid #655276;border-radius:13px;
+  background:linear-gradient(145deg,#493653,#352b45);
+  color:#e5c8f1;font:700 1.15rem/1 Sora,Inter,sans-serif;
+}
+.freebie-upload-copy{display:grid;gap:3px;min-width:0;flex:1}
+.freebie-upload-copy strong{color:#f1eaf9;font:700 .84rem/1.35 Sora,Inter,sans-serif;letter-spacing:-.02em}
+.freebie-upload-copy span{color:#b9adc8;font:400 .73rem/1.45 Inter,system-ui,sans-serif}
+.freebie-upload-action{
+  display:inline-flex;align-items:center;justify-content:center;
+  flex:0 0 auto;min-height:36px;padding:8px 13px;
+  border:1px solid #78638d;border-radius:999px;
+  background:#382d48;color:#e8d9f3;
+  font:700 .7rem/1.2 Inter,system-ui,sans-serif;
+}
+.freebie-upload-status{
+  grid-column:1/-1;
+  display:flex;align-items:center;gap:9px;
+  min-height:19px;margin:0 1px;
+  color:#b9adc8;font:600 .7rem/1.4 Inter,system-ui,sans-serif;
+}
+.freebie-upload-status[data-state="success"]{color:#9fdfb9}
+.freebie-upload-status[data-state="error"]{color:#f0a7b7}
+.freebie-upload-progress{
+  display:none;grid-column:1/-1;
+  width:100%;height:5px;overflow:hidden;
+  border-radius:999px;background:#463850;
+}
+.freebie-upload-progress.is-visible{display:block}
+.freebie-upload-progress>span{
+  display:block;width:0;height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg,#a98adf,#e58bbd);
+  transition:width .12s linear;
+}
+.freebie-upload-feedback{display:grid;gap:7px;grid-column:1/-1;min-width:0}
+.freebie-entry[data-uploading="true"] .freebie-entry-head [data-remove-freebie]{opacity:.5;pointer-events:none}
+@media(max-width:620px){
+  .freebie-upload-box{align-items:flex-start;gap:10px;padding:13px}
+  .freebie-upload-icon{width:38px;height:38px;flex-basis:38px}
+  .freebie-upload-action{align-self:center;padding:8px 10px;font-size:.66rem}
+  .freebie-upload-copy span{font-size:.69rem}
+}
+@media(max-width:390px){
+  .freebie-upload-box{flex-wrap:wrap}
+  .freebie-upload-action{margin-left:48px}
+}
+
 </style><link rel="icon" type="image/jpeg" href="/assets/illustrations/perivellelogo.jpg">
 <link rel="apple-touch-icon" href="/assets/illustrations/perivellelogo.jpg">
 <link rel="stylesheet" href="assets/css/admin-design-system.css">
@@ -164,6 +238,8 @@ function freebieRow(item){
    '<label>Artist / producer<select data-freebie-artist required>'+artistOptions+'</select></label>'+
    '<label>Release date<input data-freebie-date type="date" required value="'+esc(data.release_date||localAdminDate())+'"></label>'+
    '<label class="freebie-admin-wide">Short description<textarea data-freebie-description rows="2" maxlength="420" placeholder="Describe the mood, use case, and sound...">'+esc(data.description||"")+'</textarea></label>'+
+   '<label class="freebie-upload-box freebie-admin-wide" data-freebie-dropzone><input class="freebie-upload-input" data-freebie-file type="file" accept=".mp3,audio/mpeg"><span class="freebie-upload-icon" aria-hidden="true">♫</span><span class="freebie-upload-copy"><strong>Drop your MP3 here</strong><span>Or click to browse · MP3 only · Up to 50 MB</span></span><span class="freebie-upload-action">Choose file</span></label>'+
+  '<div class="freebie-upload-feedback freebie-admin-wide" aria-live="polite"><div class="freebie-upload-status" data-freebie-upload-status data-state="idle">Upload your audio to auto-fill the preview and download links.</div><div class="freebie-upload-progress" data-freebie-upload-progress><span data-freebie-upload-bar></span></div></div>'+
    '<label class="freebie-admin-wide">Direct download file URL *<input data-freebie-download type="url" required value="'+esc(data.download_url||"")+'" placeholder="https://your-storage.com/freebies/track.wav"></label>'+
    '<label>Preview MP3 URL (optional — falls back to download file)<input data-freebie-preview type="url" value="'+esc(data.preview_url||"")+'" placeholder="https://.../preview.mp3"></label>'+
    '<label>Cover image URL (optional)<input data-freebie-cover type="url" value="'+esc(data.cover_url||"")+'" placeholder="https://.../cover.webp"></label>'+
@@ -184,8 +260,110 @@ $("#freebieRows").addEventListener("click",event=>{
  const remove=event.target.closest("[data-remove-freebie]");
  if(remove)remove.closest(".freebie-entry").remove();
 });
+
+function setFreebieUploadState(row,message,state="idle",progress=null){
+ const status=row.querySelector("[data-freebie-upload-status]");
+ const track=row.querySelector("[data-freebie-upload-progress]");
+ const bar=row.querySelector("[data-freebie-upload-bar]");
+ const drop=row.querySelector("[data-freebie-dropzone]");
+ if(status){status.textContent=message;status.dataset.state=state}
+ if(track)track.classList.toggle("is-visible",progress!==null);
+ if(bar&&progress!==null)bar.style.width=Math.max(0,Math.min(100,progress))+"%";
+ if(drop){drop.classList.toggle("is-uploading",state==="uploading");drop.classList.toggle("is-dragover",false)}
+}
+function putFreebieFile(uploadUrl,file,onProgress){
+ return new Promise((resolve,reject)=>{
+  const xhr=new XMLHttpRequest();
+  xhr.open("PUT",uploadUrl,true);
+  xhr.setRequestHeader("Content-Type","audio/mpeg");
+  xhr.upload.addEventListener("progress",event=>{
+   if(event.lengthComputable)onProgress(Math.round(event.loaded/event.total*100));
+  });
+  xhr.addEventListener("load",()=>{
+   if(xhr.status>=200&&xhr.status<300)resolve();
+   else reject(new Error("Storage upload failed ("+xhr.status+"). "+(xhr.responseText||"Please check the Storage bucket settings.")));
+  });
+  xhr.addEventListener("error",()=>reject(new Error("Network error while uploading. Please check your connection and try again.")));
+  xhr.addEventListener("abort",()=>reject(new Error("Upload cancelled.")));
+  xhr.send(file);
+ });
+}
+async function uploadFreebieFile(row,file){
+ if(!row||!file)return;
+ const maxBytes=50*1024*1024;
+ if(!/\.mp3$/i.test(file.name)){
+  setFreebieUploadState(row,"Please choose an MP3 file (.mp3).","error");return;
+ }
+ if(file.size<=0||file.size>maxBytes){
+  setFreebieUploadState(row,"This file is empty or larger than 50 MB.","error");return;
+ }
+ if(row.dataset.uploading==="true")return;
+ const category=row.querySelector("[data-freebie-category]")?.value||"bgm";
+ const remove=row.querySelector("[data-remove-freebie]");
+ row.dataset.uploading="true";
+ if(remove)remove.disabled=true;
+ setFreebieUploadState(row,"Preparing a secure upload…","uploading",0);
+ try{
+  const response=await fetch("/api/admin-upload",{
+   method:"POST",credentials:"same-origin",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({fileName:file.name,fileSize:file.size,category})
+  });
+  const signed=await response.json().catch(()=>({}));
+  if(!response.ok||signed.ok===false)throw new Error(signed.message||"Could not prepare the upload.");
+  if(!signed.uploadUrl||!signed.publicUrl)throw new Error("The upload server returned an incomplete response.");
+  setFreebieUploadState(row,"Uploading "+file.name+" · 0%","uploading",0);
+  await putFreebieFile(signed.uploadUrl,file,percent=>{
+   setFreebieUploadState(row,"Uploading "+file.name+" · "+percent+"%","uploading",percent);
+  });
+  const downloadUrl=new URL(signed.publicUrl);
+  downloadUrl.searchParams.set("download","");
+  const download=row.querySelector("[data-freebie-download]");
+  const preview=row.querySelector("[data-freebie-preview]");
+  const title=row.querySelector("[data-freebie-title]");
+  if(download)download.value=downloadUrl.href;
+  if(preview)preview.value=signed.publicUrl;
+  if(title&&!title.value.trim()){
+   title.value=file.name.replace(/\.mp3$/i,"").replace(/[_-]+/g," ").trim();
+   title.dispatchEvent(new Event("input",{bubbles:true}));
+  }
+  row.dataset.uploadPath=signed.path||"";
+  setFreebieUploadState(row,"Upload complete. Preview and download URLs are filled in—click “Save freebies” to keep this release.","success",100);
+  showToast("MP3 uploaded. Save Freebies to publish the release.");
+ }catch(error){
+  setFreebieUploadState(row,error.message||"Upload failed. Please try again.","error");
+ }finally{
+  delete row.dataset.uploading;
+  if(remove)remove.disabled=false;
+ }
+}
+$("#freebieRows").addEventListener("change",event=>{
+ const input=event.target.closest("[data-freebie-file]");
+ if(!input)return;
+ const row=input.closest(".freebie-entry"),file=input.files&&input.files[0];
+ if(file)uploadFreebieFile(row,file);
+ input.value="";
+});
+$("#freebieRows").addEventListener("dragover",event=>{
+ const drop=event.target.closest("[data-freebie-dropzone]");
+ if(!drop)return;
+ event.preventDefault();drop.classList.add("is-dragover");
+});
+$("#freebieRows").addEventListener("dragleave",event=>{
+ const drop=event.target.closest("[data-freebie-dropzone]");
+ if(drop&&!drop.contains(event.relatedTarget))drop.classList.remove("is-dragover");
+});
+$("#freebieRows").addEventListener("drop",event=>{
+ const drop=event.target.closest("[data-freebie-dropzone]");
+ if(!drop)return;
+ event.preventDefault();drop.classList.remove("is-dragover");
+ const file=event.dataTransfer&&event.dataTransfer.files&&event.dataTransfer.files[0];
+ if(file)uploadFreebieFile(drop.closest(".freebie-entry"),file);
+});
+
 $("#saveFreebies").addEventListener("click",async()=>{
  const rows=[...document.querySelectorAll(".freebie-entry")];
+ if(rows.some(row=>row.dataset.uploading==="true")){$("#globalMessage").textContent="Please wait for every MP3 upload to finish before saving.";return;}
  const items=[];
  for(const row of rows){
   const title=row.querySelector("[data-freebie-title]");
