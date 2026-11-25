@@ -2971,7 +2971,9 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     }catch(error){}
     return "";
    }
-   const defaults=[{id:"bgm",name:"BGM",videos:[]},{id:"sound-alerts",name:"Sound Alerts",videos:["https://www.youtube-nocookie.com/embed/iUBVMpHvyWg"]},{id:"stinger",name:"Stinger",videos:[]},{id:"og-song",name:"OG Song",videos:[]},{id:"lore-music",name:"Lore Music",videos:[]}];
+   const defaultPortfolioList=[{id:"bgm",name:"BGM"},{id:"sound-alerts",name:"Sound Alerts"},{id:"stinger",name:"Stinger"},{id:"og-song",name:"Original Song"},{id:"lore-music",name:"Lore Music"}];
+   const defaults=(Array.isArray(settings.portfolio_categories)?settings.portfolio_categories:defaultPortfolioList).filter(function(item){return item&&item.active!==false;});
+   const categoryList=document.querySelector(".portfolio-category-list");if(categoryList)categoryList.replaceChildren();
    function makePlaceholderVisual(label){
     const visual=document.createElement("div");visual.className="asset-placeholder-visual";
     const stamp=document.createElement("span");stamp.className="asset-placeholder-stamp";stamp.textContent="ARTWORK / PREVIEW SLOT";
@@ -2999,6 +3001,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     card.append(heading,frame,note);return card;
    }
    defaults.forEach(function(base){
+    const group=document.createElement("section");group.className="portfolio-category-group";group.dataset.portfolioCategory=base.id;const heading=document.createElement("h3");heading.className="portfolio-category";heading.textContent=base.name;const grid=document.createElement("div");grid.className="portfolio-grid";group.append(heading,grid);if(categoryList)categoryList.appendChild(group);
     const item=portfolioEntries.find(function(entry){return entry.id===base.id})||base;
     const urls=Array.isArray(item.videos)?item.videos:(item.url?[item.url]:base.videos);
     const assignments=Array.isArray(item.video_assignments)?item.video_assignments:[];
@@ -3010,7 +3013,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     function makeVideoFrame(src,index,rawUrl){
      const frame=document.createElement("div");frame.className="portfolio-video-frame";
      const assignment=assignments.find(function(entry){return entry.url===rawUrl});
-     if(assignment&&["bybi","rei","yoz"].includes(assignment.creator))frame.dataset.creatorId=assignment.creator;
+     if(assignment&&/^[a-z0-9][a-z0-9_-]{1,49}$/.test(assignment.creator||""))frame.dataset.creatorId=assignment.creator;
      frame.dataset.portfolioCategory=base.id;
      frame.dataset.portfolioCategoryName=base.name;
      const iframe=document.createElement("iframe");
@@ -3144,15 +3147,16 @@ setLanguage("en");
 <script>
 /* Service + artist filters — share state in the Works URL. */
 (function(){
- const services={
-  bgm:"BGM",
-  "sound-alerts":"Sound Alerts",
-  stinger:"Stinger",
-  "og-song":"Original Song",
-  "lore-music":"Lore Music"
- };
+ const services={bgm:"BGM","sound-alerts":"Sound Alerts",stinger:"Stinger","og-song":"Original Song","lore-music":"Lore Music"};
  const artists={bybi:"bybi",rei:"rei",yoz:"yoz"};
-
+ window.perivelleUpdatePortfolioFilterOptions=function(categories,producers){
+  Object.keys(services).forEach(key=>delete services[key]);(categories||[]).forEach(item=>{services[item.id]=item.name});
+  Object.keys(artists).forEach(key=>delete artists[key]);(producers||[]).forEach(item=>{artists[item.id]=item.name});
+  const serviceBox=document.querySelector("#portfolioServiceFilters .portfolio-filter-links"),artistBox=document.querySelector("#portfolioArtistFilters .portfolio-filter-links");
+  if(serviceBox)serviceBox.innerHTML='<a href="#portfolio" data-portfolio-filter="service" data-filter-value="all" aria-current="page">All services</a>'+(categories||[]).map(item=>'<a href="#portfolio" data-portfolio-filter="service" data-filter-value="'+esc(item.id)+'">'+esc(item.name)+'</a>').join("");
+  if(artistBox)artistBox.innerHTML='<a href="#portfolio" data-portfolio-filter="creator" data-filter-value="all" aria-current="page">All artists</a>'+(producers||[]).map(item=>'<a href="#portfolio" data-portfolio-filter="creator" data-filter-value="'+esc(item.id)+'">'+esc(item.name)+'</a>').join("");
+  applyFilters();
+ };
  function readFilters(){
   const hash=location.hash||"";
   const query=hash.includes("?")?hash.slice(hash.indexOf("?")+1):"";
