@@ -14,7 +14,7 @@ const STATUS_NOTES={
   "Demo ready — Awaiting feedback":"Demo ready — Awaiting feedback",
   "Preparing final delivery":"Preparing final delivery"
 };
-const KEYS=["service_prices","catalog_products","studio_links","portfolio_videos","commission_status"];
+const KEYS=["service_prices","catalog_products","studio_links","portfolio_videos","freebies","commission_status","audio_player"];
 async function db(path,options={}) {
   const {url,key}=supabaseConfig();
   return fetch(url+"/rest/v1/"+path,{...options,headers:supabaseHeaders(key,{"Content-Type":"application/json",...(options.headers||{})})});
@@ -86,12 +86,72 @@ export default async function handler(req,res) {
         if(body.key==="catalog_products" && Array.isArray(value)){for(const item of value){if(item.preview&&!/^https:\/\//i.test(String(item.preview)))return res.status(400).json({ok:false,message:"Audio preview links must use HTTPS URLs."});}}
         if(body.key==="portfolio_videos" && Array.isArray(value)){
           const allowed=["youtube.com","www.youtube.com","youtube-nocookie.com","www.youtube-nocookie.com","youtu.be","vimeo.com","www.vimeo.com","player.vimeo.com"];
+          const allowedCreators=["bybi","rei","yoz"];
           for(const item of value){
             const urls=Array.isArray(item.videos)?item.videos:(item.url?[item.url]:[]);
             if(urls.length>30)return res.status(400).json({ok:false,message:"A category can contain up to 30 video previews."});
             for(const rawUrl of urls){let parsed;try{parsed=new URL(String(rawUrl))}catch{return res.status(400).json({ok:false,message:"Enter a valid YouTube or Vimeo URL."})}if(parsed.protocol!=="https:"||!allowed.includes(parsed.hostname.toLowerCase()))return res.status(400).json({ok:false,message:"Portfolio previews must use HTTPS YouTube or Vimeo URLs."});}
             if(item.featured&&!urls.includes(item.featured))return res.status(400).json({ok:false,message:"Featured video must match one of the category preview URLs."});
+            if(item.video_assignments!==undefined&&!Array.isArray(item.video_assignments))return res.status(400).json({ok:false,message:"Producer credits must be a list of video assignments."});
+            const assignments=Array.isArray(item.video_assignments)?item.video_assignments:[];
+            if(assignments.length>30)return res.status(400).json({ok:false,message:"A category can contain up to 30 producer credits."});
+            const assignedUrls=new Set();
+            for(const assignment of assignments){
+              const assignedUrl=String(assignment&&assignment.url||"");
+              const creator=String(assignment&&assignment.creator||"");
+              if(!urls.includes(assignedUrl))return res.status(400).json({ok:false,message:"Each producer credit must match a video URL in the same category."});
+              if(!allowedCreators.includes(creator))return res.status(400).json({ok:false,message:"Choose a valid producer for each video credit."});
+              if(assignedUrls.has(assignedUrl))return res.status(400).json({ok:false,message:"Each video can only be credited once per category."});
+              assignedUrls.add(assignedUrl);
+            }
           }
+        }
+        if(body.key==="freebies" && Array.isArray(value)){
+          const allowedCategories=["bgm","sound-alerts","stinger"];
+          const allowedArtists=["Perivelle Studio","bybi","rei","yoz"];
+          if(value.length>100)return res.status(400).json({ok:false,message:"The Freebies library can contain up to 100 releases."});
+          const ids=new Set();
+          for(const item of value){
+            const id=String(item&&item.id||"").trim();
+            const title=String(item&&item.title||"").trim();
+            const category=String(item&&item.category||"");
+            const artist=String(item&&item.artist||"");
+            const date=String(item&&item.release_date||"");
+            const description=String(item&&item.description||"");
+            const downloadUrl=String(item&&item.download_url||"").trim();
+            const previewUrl=String(item&&item.preview_url||"").trim();
+            const coverUrl=String(item&&item.cover_url||"").trim();
+            const usageNote=String(item&&item.usage_note||"");
+            if(!id||id.length>120||!/^[a-zA-Z0-9_-]+$/.test(id))return res.status(400).json({ok:false,message:"Each freebie needs a valid unique release ID."});
+            if(ids.has(id))return res.status(400).json({ok:false,message:"Each freebie must have a unique release ID."});
+            ids.add(id);
+            if(!title||title.length>100)return res.status(400).json({ok:false,message:"Each freebie needs a title up to 100 characters."});
+            if(!allowedCategories.includes(category))return res.status(400).json({ok:false,message:"Choose BGM, Sound Alerts, or Stinger as the audio type."});
+            if(!allowedArtists.includes(artist))return res.status(400).json({ok:false,message:"Choose a valid artist or Perivelle Studio as the credit."});
+            if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||Number.isNaN(new Date(date+"T00:00:00Z").getTime())||new Date(date+"T00:00:00Z").toISOString().slice(0,10)!==date)return res.status(400).json({ok:false,message:"Each freebie needs a valid release date."});
+            if(description.length>420||usageNote.length>700)return res.status(400).json({ok:false,message:"The description or usage notes are too long."});
+            if(typeof item.published!=="boolean")return res.status(400).json({ok:false,message:"Set each release to published or draft."});
+            let parsedDownload;try{parsedDownload=new URL(downloadUrl)}catch{return res.status(400).json({ok:false,message:"Enter a direct download file URL."})}
+            if(parsedDownload.protocol!=="https:")return res.status(400).json({ok:false,message:"Freebie download links must use HTTPS."});
+            for(const [label,rawUrl] of [["preview",previewUrl],["cover",coverUrl]]){
+              if(!rawUrl)continue;
+              let parsed;try{parsed=new URL(rawUrl)}catch{return res.status(400).json({ok:false,message:"Enter a valid HTTPS "+label+" URL or leave it blank."})}
+              if(parsed.protocol!=="https:")return res.status(400).json({ok:false,message:"Freebie "+label+" links must use HTTPS."});
+            }
+          }
+        }
+        if(body.key==="audio_player"){
+          const audioSettings=value&&typeof value==="object"?value:{};
+          const tracks=Array.isArray(audioSettings.tracks)?audioSettings.tracks:[];
+          if(tracks.length>12)return res.status(400).json({ok:false,message:"The player supports up to 12 tracks."});
+          for(const track of tracks){
+            const title=String(track.title||"").trim(),artist=String(track.artist||"").trim(),src=String(track.src||"").trim(),cover=String(track.cover||"").trim();
+            if(!title||title.length>80||artist.length>80)return res.status(400).json({ok:false,message:"Each audio track needs a title (up to 80 characters) and an artist name up to 80 characters."});
+            let parsed;try{parsed=new URL(src)}catch{return res.status(400).json({ok:false,message:"Enter a valid direct audio file URL for every track."})}
+            if(parsed.protocol!=="https:")return res.status(400).json({ok:false,message:"Audio files must use HTTPS URLs."});
+            if(cover){let image;try{image=new URL(cover)}catch{return res.status(400).json({ok:false,message:"Enter a valid cover image URL or leave it blank."})}if(image.protocol!=="https:")return res.status(400).json({ok:false,message:"Cover images must use HTTPS URLs."});}
+          }
+          if(audioSettings.enabled!==undefined&&typeof audioSettings.enabled!=="boolean")return res.status(400).json({ok:false,message:"Player visibility must be enabled or disabled."});
         }
         if(!value||typeof value!=="object")return res.status(400).json({ok:false,message:"Setting value must be an object or array."});
         const payload={setting_key:body.key,setting_value:value};

@@ -1,0 +1,240 @@
+/* Perivelle Studio — producer directory and filtered Works flow */
+#main-content .page-view[data-page="team"] .team-heading{margin:0 0 var(--pv-page-heading-gap)!important}
+#main-content .page-view[data-page="team"] .team-grid{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:20px;
+}
+#main-content .page-view[data-page="team"] .team-grid>.team-card{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ min-width:0;height:100%;color:inherit;text-decoration:none!important;text-align:left;cursor:pointer;
+}
+#main-content .page-view[data-page="team"] .team-grid>.team-card:focus-visible{outline:3px solid #c477b8;outline-offset:4px}
+#main-content .page-view[data-page="team"] .team-grid>.team-card .team-info{flex:1}
+#main-content .page-view[data-page="team"] .team-grid>.team-card .team-profile-cta{display:inline-flex;margin-top:auto}
+#main-content .page-view[data-page="team"] .team-grid>.team-card:hover .team-profile-cta>span,
+#main-content .page-view[data-page="team"] .team-grid>.team-card:focus-visible .team-profile-cta>span{
+ transform:translate(2px,-2px);background:#f7eaf5;
+}
+#main-content .page-view[data-page="team"] .team-grid>.team-card:hover{
+ transform:translateY(-5px);border-color:#d5afd8;box-shadow:0 20px 42px rgba(117,78,133,.16);
+}
+html[data-theme="dark"] #main-content .page-view[data-page="team"] .team-grid>.team-card:hover{
+ border-color:#8a608f;box-shadow:0 20px 42px rgba(0,0,0,.32);
+}
+html[data-theme="dark"] #main-content .page-view[data-page="team"] .team-grid>.team-card:focus-visible{outline-color:#ee9ac9}
+
+/* Works page: a talent-style producer filter adapted to Perivelle's music portfolio. */
+#main-content .page-view[data-page="portfolio"] .portfolio-producer-filters{
+ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px 24px;
+ margin:0 0 var(--pv-page-stack);padding:18px 20px;
+ border:1px solid #dfc4e2;border-radius:20px;
+ background:linear-gradient(120deg,rgba(250,237,247,.9),rgba(240,229,248,.9) 62%,rgba(247,234,245,.9));
+ box-shadow:0 10px 28px rgba(104,63,117,.07);
+}
+.portfolio-producer-filters-copy{display:grid;gap:5px}
+.portfolio-producer-filters-copy .eyebrow{margin:0;color:#a66bc0;font-size:.66rem}
+.portfolio-producer-filters-copy>span{color:#392743;font:700 .95rem/1.3 Sora,Inter,sans-serif}
+.portfolio-producer-filter-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.portfolio-producer-filter-links a{
+ display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:8px 14px;
+ border:1px solid #dfc4e2;border-radius:999px;background:rgba(255,255,255,.66);
+ color:#806b88;font:700 .77rem/1.2 Inter,system-ui,sans-serif;text-decoration:none;
+ transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease;
+}
+.portfolio-producer-filter-links a:hover{transform:translateY(-1px);border-color:#c38ec9;color:#62406f}
+.portfolio-producer-filter-links a[aria-current="page"]{
+ border-color:#b87fc2;background:#ecd8ef;color:#512c61;box-shadow:0 4px 12px rgba(166,107,192,.13);
+}
+.portfolio-producer-empty{
+ display:grid;justify-items:center;gap:9px;margin:0 0 var(--pv-page-stack);padding:36px 20px;
+ border:1px dashed #d8b9dc;border-radius:22px;background:rgba(250,237,247,.56);text-align:center;
+}
+.portfolio-producer-empty[hidden]{display:none!important}
+.portfolio-producer-empty>span{color:#a66bc0;font-size:1.6rem}
+.portfolio-producer-empty strong{color:#392743;font:750 1.05rem/1.3 Sora,Inter,sans-serif}
+.portfolio-producer-empty p{max-width:56ch;margin:0;color:#806b88;font-size:.86rem;line-height:1.6}
+.portfolio-producer-empty a{color:#965da8;font-size:.82rem;font-weight:750;text-decoration:underline;text-underline-offset:3px}
+#main-content .page-view[data-page="portfolio"] .portfolio-category-group[hidden],
+#main-content .page-view[data-page="portfolio"] .portfolio-video-frame[hidden],
+#main-content .page-view[data-page="portfolio"] .portfolio-scroll-hint[hidden]{display:none!important}
+
+/* Dark palette */
+html[data-theme="dark"] #main-content .page-view[data-page="portfolio"] .portfolio-producer-filters{
+ border-color:#574363;background:linear-gradient(120deg,rgba(48,35,61,.94),rgba(42,32,55,.94) 62%,rgba(51,34,56,.94));
+ box-shadow:0 12px 30px rgba(0,0,0,.22);
+}
+html[data-theme="dark"] .portfolio-producer-filters-copy .eyebrow{color:#d7a7e8}
+html[data-theme="dark"] .portfolio-producer-filters-copy>span{color:#f5effb}
+html[data-theme="dark"] .portfolio-producer-filter-links a{border-color:#624d72;background:rgba(255,255,255,.045);color:#cdbed8}
+html[data-theme="dark"] .portfolio-producer-filter-links a:hover{border-color:#a67db0;color:#fff5ff}
+html[data-theme="dark"] .portfolio-producer-filter-links a[aria-current="page"]{
+ border-color:#b37bc2;background:#50345a;color:#fff5ff;box-shadow:0 4px 14px rgba(0,0,0,.24);
+}
+html[data-theme="dark"] .portfolio-producer-empty{border-color:#694d72;background:rgba(48,35,61,.55)}
+html[data-theme="dark"] .portfolio-producer-empty>span{color:#e2a2d8}
+html[data-theme="dark"] .portfolio-producer-empty strong{color:#f7efff}
+html[data-theme="dark"] .portfolio-producer-empty p{color:#cdbed8}
+html[data-theme="dark"] .portfolio-producer-empty a{color:#e2b0e8}
+
+@media(max-width:900px){
+ #main-content .page-view[data-page="team"] .team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+ #main-content .page-view[data-page="team"] .team-grid{grid-template-columns:1fr;gap:15px}
+ #main-content .page-view[data-page="team"] .team-grid>.team-card{
+  display:grid!important;grid-template-columns:112px minmax(0,1fr)!important;align-items:center!important;
+ }
+ #main-content .page-view[data-page="team"] .team-grid>.team-card .team-avatar{
+  width:112px;aspect-ratio:1;margin:0;
+ }
+ #main-content .page-view[data-page="team"] .team-grid>.team-card .team-info{min-width:0;padding:3px 0}
+ #main-content .page-view[data-page="team"] .team-grid>.team-card .team-profile-cta{padding-top:12px}
+ #main-content .page-view[data-page="portfolio"] .portfolio-producer-filters{align-items:flex-start;flex-direction:column;padding:16px}
+ .portfolio-producer-filter-links{gap:7px}
+ .portfolio-producer-filter-links a{min-height:34px;padding:7px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+ #main-content .page-view[data-page="team"] .team-grid>.team-card,.portfolio-producer-filter-links a{transition:none}
+ #main-content .page-view[data-page="team"] .team-grid>.team-card:hover,.portfolio-producer-filter-links a:hover{transform:none}
+}
+
+
+/* Producer links: clear, accessible call-to-action on every talent card. */
+#main-content .page-view[data-page="team"] .team-profile-cta{
+ display:inline-flex;
+ align-items:center;
+ gap:8px;
+ margin-top:auto;
+ padding-top:18px;
+ color:#a05eae;
+ font:700 .78rem/1.35 Inter,system-ui,sans-serif;
+ letter-spacing:.015em;
+}
+#main-content .page-view[data-page="team"] .team-profile-cta>span{
+ display:inline-grid;
+ place-items:center;
+ width:23px;height:23px;
+ border:1px solid #dfc4e2;
+ border-radius:50%;
+ color:inherit;
+ transition:transform .2s ease,background .2s ease;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="team"] .team-profile-cta{
+ color:#e2b0e8;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="team"] .team-profile-cta>span{
+ border-color:#604772;
+}
+@media(max-width:650px){
+ #main-content .page-view[data-page="team"] .team-profile-cta{padding-top:12px}
+}
+
+
+/* Two-axis Works browsing: service first, artist second. */
+#main-content .page-view[data-page="portfolio"] .portfolio-filter-stack{
+ display:grid;
+ gap:10px;
+ margin:0 0 var(--pv-page-stack);
+}
+#main-content .page-view[data-page="portfolio"] .portfolio-filter-bar{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ flex-wrap:wrap;
+ gap:14px 24px;
+ margin:0;
+ padding:15px 18px;
+ border:1px solid #dfc4e2;
+ border-radius:18px;
+ background:linear-gradient(120deg,rgba(250,237,247,.92),rgba(240,229,248,.92) 62%,rgba(247,234,245,.92));
+ box-shadow:0 8px 22px rgba(104,63,117,.055);
+}
+.portfolio-filter-copy{
+ display:grid;
+ flex:0 0 150px;
+ gap:4px;
+}
+.portfolio-filter-copy .eyebrow{
+ margin:0;
+ color:#a66bc0;
+ font-size:.64rem;
+}
+.portfolio-filter-copy>span{
+ color:#392743;
+ font:700 .9rem/1.3 Sora,Inter,sans-serif;
+}
+.portfolio-filter-links{
+ display:flex;
+ flex:1 1 480px;
+ flex-wrap:wrap;
+ align-items:center;
+ justify-content:flex-end;
+ gap:7px;
+}
+.portfolio-filter-links a{
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ min-height:34px;
+ padding:7px 12px;
+ border:1px solid #dfc4e2;
+ border-radius:999px;
+ background:rgba(255,255,255,.66);
+ color:#806b88;
+ font:700 .74rem/1.2 Inter,system-ui,sans-serif;
+ text-decoration:none;
+ transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease;
+}
+.portfolio-filter-links a:hover{
+ transform:translateY(-1px);
+ border-color:#c38ec9;
+ color:#62406f;
+}
+.portfolio-filter-links a[aria-current="page"]{
+ border-color:#b87fc2;
+ background:#ecd8ef;
+ color:#512c61;
+ box-shadow:0 4px 12px rgba(166,107,192,.12);
+}
+#main-content .page-view[data-page="portfolio"] .portfolio-producer-empty[hidden]{
+ display:none!important;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="portfolio"] .portfolio-filter-bar{
+ border-color:#574363;
+ background:linear-gradient(120deg,rgba(48,35,61,.95),rgba(42,32,55,.95) 62%,rgba(51,34,56,.95));
+ box-shadow:0 10px 26px rgba(0,0,0,.2);
+}
+html[data-theme="dark"] .portfolio-filter-copy .eyebrow{color:#d7a7e8}
+html[data-theme="dark"] .portfolio-filter-copy>span{color:#f5effb}
+html[data-theme="dark"] .portfolio-filter-links a{
+ border-color:#624d72;
+ background:rgba(255,255,255,.045);
+ color:#cdbed8;
+}
+html[data-theme="dark"] .portfolio-filter-links a:hover{
+ border-color:#a67db0;
+ color:#fff5ff;
+}
+html[data-theme="dark"] .portfolio-filter-links a[aria-current="page"]{
+ border-color:#b37bc2;
+ background:#50345a;
+ color:#fff5ff;
+ box-shadow:0 4px 14px rgba(0,0,0,.24);
+}
+@media(max-width:760px){
+ #main-content .page-view[data-page="portfolio"] .portfolio-filter-bar{
+  align-items:flex-start;
+  flex-direction:column;
+  gap:10px;
+  padding:14px 16px;
+ }
+ .portfolio-filter-copy{flex-basis:auto}
+ .portfolio-filter-links{flex-basis:auto;justify-content:flex-start}
+}
+@media(max-width:560px){
+ .portfolio-filter-links{gap:6px}
+ .portfolio-filter-links a{min-height:33px;padding:7px 10px;font-size:.71rem}
+}
+@media(prefers-reduced-motion:reduce){
+ .portfolio-filter-links a{transition:none}
+ .portfolio-filter-links a:hover{transform:none}
+}

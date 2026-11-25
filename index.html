@@ -4,10 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7f6ff">
-<title>Perivelle — Original BGM for Creators</title>
-<meta name="description" content="Original BGM, sound alerts, portfolio, and custom music for creators.">
+<title>Perivelle Studio — Sound that brings your world to life</title>
+<meta name="description" content="Perivelle Studio creates original music, sound design, and audio experiences for VTubers, streamers, and creators.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/webp" href="assets/brand/pfp.webp">
 <style>
 :root{--paper:#f4f0e7;--card:#fbf9f4;--ink:#202a23;--muted:#6d766d;--line:#d8d8ca;--green:#415b49;--rust:#b6563b;--r:5px;color-scheme:light}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:82px}body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 "DM Sans",system-ui,sans-serif}a{color:inherit}button,input,select,textarea{font:inherit}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--rust);outline-offset:3px}.wrap{width:min(1160px,calc(100% - 44px));margin:auto}.mono,.eyebrow{font:500 .72rem/1.4 "DM Mono",monospace;text-transform:uppercase;letter-spacing:.13em;color:var(--muted)}
 header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}nav{min-height:70px;display:flex;align-items:center;gap:22px}.brand{display:inline-flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.04em;text-decoration:none;margin-right:auto;white-space:nowrap}.brand img{display:block;width:34px;height:34px;object-fit:contain;border-radius:7px;background:#000;flex:0 0 34px}.brand span{color:var(--rust)}.navlink{font-size:.88rem;text-decoration:none;color:var(--muted);white-space:nowrap}.navlink:hover{color:var(--ink)}.nav-actions{display:flex;gap:8px;align-items:center}.quiet,.cart-button{border:1px solid var(--line);background:transparent;color:var(--ink);padding:8px 12px;border-radius:var(--r);font-size:.84rem;cursor:pointer;white-space:nowrap}
@@ -1106,53 +1107,1352 @@ html[data-theme="dark"] .contact-menu{background:rgba(35,30,52,.97)!important;bo
 html[data-theme="dark"] .contact-option{color:#f1eaff}
 html[data-theme="dark"] .contact-option .x-icon{color:#f4f1ff}
 @media(max-width:560px){.contact-menu{width:205px;padding:11px}.contact-option{padding:9px 10px}}
+
+/* PERIVELLE SOFT PINK / VIOLET REDESIGN */
+:root{
+ --pv-violet:#6e3acc;--pv-pink:#ff5093;--pv-deep:#d12d76;--pv-orchid:#c67ebf;--pv-lilac:#a7c1fc;
+ --pv-blush:#f1e3ee;--pv-paper:#fcf8fc;--pv-plum:#462e52;--pv-muted:#71627a;--pv-line:#eadfed;
+ --pv-card:rgba(255,255,255,.78);--pv-shadow:0 18px 54px rgba(85,48,115,.09);
+ color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px;background:var(--pv-paper)}
+body{margin:0;background:radial-gradient(ellipse at 8% 5%,#f1e2ff 0,transparent 34%),radial-gradient(ellipse at 92% 20%,#ffe4f0 0,transparent 27%),linear-gradient(180deg,#fcf8fc,#f8f3fb 65%,#fcf8fc);color:var(--pv-plum);font:400 16px/1.65 Inter,system-ui,sans-serif}
+h1,h2,h3,h4{font-family:Sora,Inter,sans-serif;color:var(--pv-plum);letter-spacing:-.045em}
+a{color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--pv-pink);outline-offset:4px}
+.page-view[hidden],.contact-menu[hidden],.toast[hidden]{display:none!important}
+.wrap{width:min(1240px,calc(100% - 48px));margin:0 auto}
+.pv-header{position:sticky;top:0;z-index:50;background:rgba(252,248,252,.84);backdrop-filter:blur(18px);border-bottom:1px solid rgba(234,223,237,.86);box-shadow:0 5px 24px rgba(70,46,82,.035)}
+.pv-header nav{min-height:76px;display:flex;align-items:center;gap:clamp(12px,2.2vw,28px);overflow:visible}
+.pv-brand{display:inline-flex;align-items:center;gap:10px;margin-right:auto;text-decoration:none;color:var(--pv-plum);font:800 1.45rem/1 Sora,sans-serif;letter-spacing:-.075em;white-space:nowrap}
+.pv-brand-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:linear-gradient(140deg,#8d57de,#ff7db4);overflow:hidden;box-shadow:0 7px 16px #9b6edb36}
+.pv-brand-mark img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.pv-brand-star{color:var(--pv-pink);margin-left:2px}
+.pv-header .navlink{font-size:.86rem;font-weight:650;text-decoration:none;color:#554463;padding:9px 15px;border-radius:999px;transition:background .2s,color .2s;white-space:nowrap}
+.pv-header .navlink:hover,.pv-header .navlink[aria-current=page]{background:#f0e4fc;color:#5425a9}
+.pv-nav-cta{display:inline-flex;align-items:center;gap:8px;margin-left:3px;padding:11px 21px;border-radius:999px;background:linear-gradient(105deg,var(--pv-pink),#ed3f91);color:white;text-decoration:none;font-size:.85rem;font-weight:750;box-shadow:0 9px 22px rgba(255,80,147,.22);white-space:nowrap}
+.pv-nav-cta:hover,.pv-primary:hover{transform:translateY(-2px);box-shadow:0 13px 25px rgba(255,80,147,.3)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 21px;border:1px solid transparent;border-radius:999px;background:linear-gradient(105deg,var(--pv-pink),#ee4597);color:#fff;text-decoration:none;font-size:.9rem;font-weight:750;line-height:1.2;box-shadow:0 9px 22px rgba(255,80,147,.2);transition:transform .2s,box-shadow .2s}
+.btn.secondary,.pv-secondary{background:rgba(255,255,255,.6);color:#5c348d;border-color:#c9a5ea;box-shadow:none}
+.btn.secondary:hover,.pv-secondary:hover{background:#f4e9fc;border-color:#a77ad6}
+.pv-hero{position:relative;isolation:isolate;overflow:hidden;padding:clamp(56px,7.3vw,98px) 0 32px;background:linear-gradient(112deg,rgba(255,255,255,.53),rgba(248,236,255,.4) 52%,rgba(255,232,242,.45))}
+.pv-hero:before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse at 69% 50%,#e8d9ff 0,transparent 38%),radial-gradient(ellipse at 100% 5%,#ffd7e9 0,transparent 26%)}
+.pv-hero:after{content:"";position:absolute;z-index:-1;left:-5%;right:-5%;bottom:-115px;height:180px;background:#fcf8fc;border-radius:50% 50% 0 0 / 28% 28% 0 0}
+.pv-hero-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(440px,1.08fr);align-items:center;gap:clamp(24px,4vw,56px);min-height:500px}
+.pv-hero-copy{position:relative;z-index:2;max-width:590px;padding-bottom:20px}
+.pv-eyebrow{display:flex;align-items:center;gap:9px;margin:0 0 18px;color:#9a5c9f;font-size:.68rem;font-weight:800;letter-spacing:.16em;line-height:1.3}
+.pv-eyebrow>span{width:8px;height:8px;border-radius:50%;background:var(--pv-pink);box-shadow:0 0 0 5px rgba(255,80,147,.12)}
+.pv-hero .pv-eyebrow{display:inline-flex;padding:8px 15px;border-radius:999px;background:linear-gradient(100deg,#b87bd8,#d77ab9);color:white}
+.pv-hero .pv-eyebrow>span{background:white;box-shadow:0 0 0 4px #ffffff2c}
+.pv-hero h1{max-width:10ch;margin:0 0 22px;font-size:clamp(3.2rem,6.25vw,5.65rem);font-weight:800;line-height:.99;letter-spacing:-.075em}
+.pv-hero h1 em,.pv-section-head h2 em,.pv-about-copy h2 em,.pv-team-heading h2 em,.pv-faq-copy h2 em,.pv-bottom-cta h2 em{font-style:normal;color:var(--pv-pink)}
+.pv-hero-lead{max-width:475px;margin:0 0 27px;color:#65556f;font-size:1rem;line-height:1.7}
+.pv-actions{display:flex;flex-wrap:wrap;gap:12px}
+.pv-play-icon{font-size:.78rem}
+.pv-hero-status{width:min(100%,390px);margin-top:32px;padding:13px 16px;border:1px solid #e6d7eb;border-radius:17px;background:rgba(255,255,255,.66);box-shadow:0 10px 28px rgba(83,50,106,.06)}
+.pv-hero-status .commission-status-top{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.pv-hero-status .commission-status-icon{color:var(--pv-pink)}
+.pv-hero-status .commission-status-label{font-size:.62rem;font-weight:800;letter-spacing:.13em;color:#856991}
+.pv-hero-status .commission-status-live{margin-left:auto;font-size:.61rem;color:#7c6b83}
+.pv-hero-status .commission-status-live i{display:inline-block;width:7px;height:7px;margin-right:5px;border-radius:50%;background:#71c58b}
+.pv-hero-status .commission-status-main{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.pv-hero-status .commission-status-main strong{font:750 1rem Sora,sans-serif;color:var(--pv-plum)}
+.pv-hero-status .commission-status-main span,.pv-hero-status .commission-status-bottom{font-size:.75rem;color:#796b80}
+.pv-hero-status .commission-status-bottom{display:none}
+.pv-hero-art{position:relative;display:grid;place-items:center;min-height:510px;isolation:isolate}
+.pv-hero-art:before{content:"";position:absolute;z-index:-2;width:min(90%,510px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 40%,#fff 0,#f4ddff 42%,#d6c5f4 68%,rgba(214,197,244,0) 72%);filter:blur(2px)}
+.pv-hero-art:after{content:"";position:absolute;z-index:-1;bottom:8%;left:10%;right:8%;height:58px;border-radius:50%;background:#a17ac455;filter:blur(20px)}
+.pv-mascot{position:relative;z-index:2;width:min(100%,690px);height:auto;object-fit:contain;filter:drop-shadow(0 17px 22px rgba(90,49,112,.13));animation:pv-float 6s ease-in-out infinite}
+.pv-orbit{position:absolute;z-index:0;border:1.5px solid rgba(175,128,220,.38);border-radius:50%;pointer-events:none}
+.pv-orbit-a{width:83%;height:42%;transform:rotate(-20deg)}
+.pv-orbit-b{width:72%;height:60%;transform:rotate(24deg);border-color:rgba(255,112,169,.28)}
+.pv-spark{position:absolute;color:var(--pv-pink);font-size:2.2rem;text-shadow:0 0 18px rgba(255,80,147,.35)}
+.pv-spark-a{top:8%;right:17%}.pv-spark-b{top:24%;left:3%;font-size:1.55rem;color:#a675e5}.pv-spark-c{bottom:12%;right:8%;font-size:1.55rem}
+.pv-wave-card{position:absolute;z-index:3;top:15%;right:0;display:flex;align-items:center;gap:4px;padding:13px 16px;border:1px solid #ffffffc9;border-radius:16px;background:rgba(255,255,255,.7);box-shadow:0 12px 28px rgba(84,48,115,.1);transform:rotate(5deg)}
+.pv-wave-card span,.pv-wave-card i{display:block;width:3px;border-radius:8px;background:linear-gradient(180deg,#bd86ec,#fa72b3)}
+.pv-wave-card span{height:13px}.pv-wave-card i{height:25px}.pv-wave-card i:nth-child(2n){height:18px}.pv-wave-card i:nth-child(3n){height:32px}.pv-wave-card i:nth-child(4n){height:11px}
+.pv-art-caption{position:absolute;bottom:5%;left:50%;transform:translateX(-50%);padding:7px 13px;border:1px solid #ffffffbd;border-radius:999px;background:#fff9;color:#9677ad;font-size:.58rem;font-weight:800;letter-spacing:.15em;white-space:nowrap}
+.pv-caption-dot{display:inline-block;width:6px;height:6px;margin-right:7px;border-radius:50%;background:var(--pv-pink)}
+@keyframes pv-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.pv-trusted{position:relative;z-index:2;padding:18px 0 26px;background:linear-gradient(90deg,#fbf6fc,#fffafd,#fbf4fc);border-bottom:1px solid #f0e6f0}
+.pv-trusted-inner{display:flex;align-items:center;justify-content:center;gap:10px 13px;flex-wrap:wrap}
+.pv-trusted-label{margin-right:10px;color:#76627f;font-size:.67rem;font-weight:800;letter-spacing:.08em}
+.pv-trust-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid #eadcf1;border-radius:999px;background:#fff9;color:#5a4666;font-size:.76rem;font-weight:650}
+.pv-trust-pill b{color:#9e72ce;font-size:1rem}
+.pv-trust-more{color:#74637b;font-size:.74rem}
+.pv-section{padding:clamp(56px,6vw,82px) 0}
+.pv-section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:26px}
+.pv-section-head h2,.pv-about-copy h2,.pv-team-heading h2,.pv-faq-copy h2{margin:0;color:var(--pv-plum);font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.08}
+.pv-section-head p:not(.pv-eyebrow){margin:8px 0 0;color:#74647b}
+.pv-section-head .pv-eyebrow{margin-bottom:9px}
+.pv-text-link{display:inline-flex;align-items:center;gap:7px;color:#8a43c4;font-size:.83rem;font-weight:750;text-decoration:none;white-space:nowrap}
+.pv-text-link:hover{text-decoration:underline;text-underline-offset:4px}
+.pv-work-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:17px}
+.pv-work-card{position:relative;display:flex;flex-direction:column;min-height:320px;overflow:hidden;border:1px solid #e8dced;border-radius:22px;background:white;text-decoration:none;box-shadow:0 12px 34px rgba(74,49,89,.06);transition:transform .25s,box-shadow .25s}
+.pv-work-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(74,49,89,.12)}
+.pv-work-card>img{width:100%;height:230px;object-fit:cover;display:block;background:#eadcf5;transition:transform .45s}
+.pv-work-card:hover>img{transform:scale(1.035)}
+.pv-work-featured>img{height:230px}
+.pv-work-tag{position:absolute;top:13px;left:13px;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.88);color:#8b4bb3;font-size:.6rem;font-weight:850;letter-spacing:.09em}
+.pv-work-meta{display:grid;gap:3px;padding:14px 17px 18px}
+.pv-work-meta strong{font:750 1.03rem Sora,sans-serif;color:#4b315a}
+.pv-work-meta small{color:#887991;font-size:.73rem}
+.pv-work-arrow{position:absolute;right:15px;bottom:17px;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#f5e8fc;color:#8d4dc0;font-weight:800}
+.pv-concept-note{margin:13px 0 0;color:#907e98;font-size:.68rem}
+.pv-services-preview{padding-top:24px}
+.pv-service-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:13px}
+.pv-service-card{min-height:190px;padding:18px 16px;border:1px solid #e8dced;border-radius:20px;background:linear-gradient(150deg,rgba(255,255,255,.95),rgba(248,238,252,.8));text-decoration:none;box-shadow:0 9px 24px rgba(74,49,89,.04);transition:transform .22s,border-color .22s}
+.pv-service-card:hover{transform:translateY(-4px);border-color:#d7b9e8}
+.pv-service-icon{display:grid;place-items:center;width:40px;height:40px;margin-bottom:15px;border-radius:13px;background:linear-gradient(140deg,#f5d7f1,#e6d8ff);color:#a64dc4;font-size:1.55rem;font-weight:800}
+.pv-service-card strong{display:block;margin-bottom:6px;color:#4b3159;font:700 .83rem Sora,sans-serif;letter-spacing:-.025em}
+.pv-service-card p{margin:0;color:#776780;font-size:.72rem;line-height:1.5}
+.pv-about-preview{padding:10px 0 28px}
+.pv-about-panel{display:grid;grid-template-columns:.85fr 1.15fr;align-items:center;gap:35px;min-height:300px;padding:28px 34px;border:1px solid #eadcf0;border-radius:28px;background:linear-gradient(110deg,#fff,#fbf4ff 55%,#f4e6fb);box-shadow:var(--pv-shadow);overflow:hidden}
+.pv-about-copy{padding:15px 0 15px 18px}
+.pv-about-copy .pv-eyebrow{margin-bottom:12px}
+.pv-about-copy h2{max-width:11ch;font-size:clamp(1.8rem,3.3vw,2.55rem)}
+.pv-about-copy>p:not(.pv-eyebrow){max-width:440px;margin:14px 0 20px;color:#74647b;font-size:.88rem}
+.pv-about-copy .btn{padding:10px 18px;font-size:.8rem}
+.pv-about-art{position:relative;height:270px;overflow:hidden;border-radius:22px;clip-path:ellipse(76% 88% at 60% 52%)}
+.pv-about-art img{width:100%;height:100%;object-fit:cover;object-position:center}
+.pv-about-sticker{position:absolute;right:14px;top:13px;padding:10px 13px;border:1px solid #fff;border-radius:13px;background:#fff9;color:#8e51bb;font-size:.62rem;font-weight:850;letter-spacing:.08em;transform:rotate(6deg)}
+.pv-team-preview{padding:30px 0 42px}
+.pv-team-row{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:20px 0;border-top:1px solid #eee2ef;border-bottom:1px solid #eee2ef}
+.pv-team-heading .pv-eyebrow{margin-bottom:7px}
+.pv-team-heading h2{font-size:clamp(1.55rem,2.6vw,2.1rem)}
+.pv-team-heading>p:last-child{margin:7px 0 0;color:#806f88;font-size:.82rem}
+.pv-team-avatars{display:flex;align-items:center;gap:13px}
+.pv-team-avatar{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none}
+.pv-team-avatar>span,.pv-team-avatar>img{display:grid;place-items:center;width:63px;height:63px;object-fit:cover;border:1px solid #e5d1f0;border-radius:17px;background:linear-gradient(145deg,#f5e5fb,#e2d8ff);color:#7148a1;font:800 1.5rem Sora,sans-serif}
+.pv-team-avatar small{color:#6b5876;font-size:.68rem;font-weight:700}
+.pv-avatar-two>span{background:linear-gradient(145deg,#ffe5ef,#f2daf2);color:#c45c91}
+.pv-avatar-three>span{background:linear-gradient(145deg,#eee0ff,#dce7ff);color:#7653b1}
+.pv-avatar-four>img{padding:2px;background:#fff}
+.pv-team-avatar:hover>span,.pv-team-avatar:hover>img{transform:translateY(-3px)}
+.pv-faq-preview{padding:35px 0 70px}
+.pv-faq-grid{display:grid;grid-template-columns:.65fr 1.35fr;gap:50px;align-items:start}
+.pv-faq-copy .pv-eyebrow{margin-bottom:10px}
+.pv-faq-copy h2{font-size:clamp(1.8rem,3.2vw,2.4rem)}
+.pv-faq-copy>p:not(.pv-eyebrow){margin:12px 0 17px;color:#7b6b83;font-size:.85rem}
+.pv-faq-list{display:grid;gap:9px}
+.pv-faq-list details{border:1px solid #e9ddef;border-radius:14px;background:rgba(255,255,255,.72);overflow:hidden}
+.pv-faq-list summary{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:14px 17px;cursor:pointer;list-style:none;color:#4f385b;font-size:.82rem;font-weight:750}
+.pv-faq-list summary::-webkit-details-marker{display:none}
+.pv-faq-list summary span{color:#8854b6;font-size:1.1rem;transition:transform .2s}
+.pv-faq-list details[open] summary span{transform:rotate(180deg)}
+.pv-faq-list details p{margin:0;padding:0 17px 16px;color:#7c6b83;font-size:.78rem}
+.pv-bottom-cta{padding:0 0 34px}
+.pv-bottom-cta-inner{position:relative;display:flex;align-items:center;gap:25px;min-height:150px;padding:24px 34px 24px 26px;border:1px solid #e9dcef;border-radius:27px;background:linear-gradient(105deg,#f2e5ff,#fff5fa 62%,#fce9f2);overflow:hidden;box-shadow:0 12px 35px rgba(77,49,100,.06)}
+.pv-bottom-cta-inner>img{align-self:flex-end;width:180px;height:142px;object-fit:contain;object-position:bottom;flex:0 0 auto;margin:-28px 0 -24px -8px;filter:drop-shadow(0 10px 10px #8b5a9a2a)}
+.pv-bottom-cta-inner>div{flex:1;min-width:0}
+.pv-bottom-cta .pv-eyebrow{margin-bottom:6px}
+.pv-bottom-cta h2{margin:0;font-size:clamp(1.45rem,2.8vw,2.1rem);font-weight:800}
+.pv-bottom-cta p:last-child{margin:4px 0 0;color:#75647e;font-size:.82rem}
+.pv-footer{padding:42px 0 32px;background:linear-gradient(120deg,#62409c,#7652b3 55%,#563783);color:#fff}
+.pv-footer-grid{display:grid;grid-template-columns:1.5fr .75fr .9fr .9fr 1.2fr;gap:30px}
+.pv-footer .brand{color:white;font-size:1.35rem}
+.pv-footer .pv-brand-mark{width:34px;height:34px;background:#ffffff22;box-shadow:none}
+.pv-footer .pv-brand-star{color:#ff8cbc}
+.pv-footer-brand>p,.pv-footer-grid>div:last-child>p{max-width:280px;color:#ede3fb;font-size:.75rem;line-height:1.6}
+.pv-footer-brand>small{display:block;margin-top:25px;color:#d7c8ea;font-size:.65rem}
+.pv-footer-grid>div:not(.pv-footer-brand){display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.pv-footer-grid>div>strong{margin-bottom:7px;color:#fff;font:750 .78rem Sora,sans-serif}
+.pv-footer-grid a:not(.brand){color:#ede3fb;font-size:.72rem;text-decoration:none}
+.pv-footer-grid a:not(.brand):hover{color:white;text-decoration:underline;text-underline-offset:3px}
+.pv-footer-grid .pv-footer-cta{padding:9px 13px;border:1px solid #ffffff70;border-radius:999px;background:#ffffff18}
+#contactWidget{z-index:60}
+.contact-trigger{display:flex;align-items:center;gap:8px;padding:11px 16px;border:0;border-radius:999px;background:linear-gradient(105deg,#ff5093,#d83b93);color:white;box-shadow:0 10px 28px #ab498c35;font-weight:750}
+.contact-trigger .contact-logo{width:25px;height:25px;object-fit:cover;border-radius:50%;background:#fff}
+.contact-menu{border-radius:18px!important;border-color:#eaddef!important;background:rgba(255,250,255,.97)!important}
+.theme-toggle{width:42px;height:42px;border:1px solid #eaddef;border-radius:50%;background:#fff;color:#79549b;box-shadow:0 8px 22px #563c7020}
+@media(max-width:1000px){
+ .pv-hero-grid{grid-template-columns:1fr 1fr;gap:18px}
+ .pv-hero h1{font-size:clamp(3rem,6vw,4.7rem)}
+ .pv-hero-art{min-height:430px}
+ .pv-service-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .pv-footer-grid{grid-template-columns:1.3fr 1fr 1fr;row-gap:28px}
+}
+@media(max-width:760px){
+ .wrap{width:min(100% - 36px,640px)}
+ .pv-header nav{min-height:66px;gap:5px;overflow-x:auto;scrollbar-width:none}
+ .pv-header nav::-webkit-scrollbar{display:none}
+ .pv-brand{font-size:1.2rem;gap:7px;margin-right:8px}
+ .pv-brand-mark{width:30px;height:30px;border-radius:10px}
+ .pv-header .navlink{padding:8px 10px;font-size:.75rem}
+ .pv-nav-cta{padding:9px 13px;font-size:.76rem}
+ .pv-hero{padding:46px 0 24px}
+ .pv-hero-grid{grid-template-columns:1fr;gap:0;min-height:0}
+ .pv-hero-copy{max-width:100%;padding-bottom:0}
+ .pv-hero h1{max-width:11ch;font-size:clamp(3.1rem,11.3vw,5rem)}
+ .pv-hero-lead{max-width:540px}
+ .pv-hero-art{min-height:340px;margin-top:8px}
+ .pv-mascot{width:min(100%,550px)}
+ .pv-wave-card{top:6%;right:5%}
+ .pv-trusted-inner{justify-content:flex-start}
+ .pv-trusted-label{width:100%;margin:0 0 4px;text-align:center}
+ .pv-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .pv-work-featured{grid-column:1/-1}
+ .pv-work-card,.pv-work-card>img{min-height:0}
+ .pv-work-card>img{height:190px}
+ .pv-work-featured>img{height:225px}
+ .pv-about-panel{grid-template-columns:1fr;padding:25px;gap:20px}
+ .pv-about-copy{padding:0}
+ .pv-about-art{height:245px;clip-path:none}
+ .pv-team-row{flex-wrap:wrap}
+ .pv-team-avatars{order:3;width:100%;justify-content:center}
+ .pv-faq-grid{grid-template-columns:1fr;gap:22px}
+ .pv-footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px}
+ .pv-footer-brand{grid-column:1/-1}
+}
+@media(max-width:520px){
+ .wrap{width:calc(100% - 30px)}
+ .pv-header nav{gap:2px}
+ .pv-brand{font-size:1.08rem;margin-right:4px}
+ .pv-brand-mark{width:27px;height:27px}
+ .pv-header .navlink{padding:7px 8px;font-size:.69rem}
+ .pv-header .navlink:nth-of-type(4){display:none}
+ .pv-nav-cta{padding:8px 10px;font-size:.68rem}
+ .pv-hero{padding-top:38px}
+ .pv-hero h1{font-size:clamp(2.8rem,12vw,4rem);max-width:10ch}
+ .pv-hero-lead{font-size:.9rem}
+ .pv-actions{gap:8px}
+ .pv-actions .btn{padding:11px 14px;font-size:.78rem}
+ .pv-hero-status{margin-top:23px}
+ .pv-hero-art{min-height:270px;margin-top:8px}
+ .pv-wave-card{transform:scale(.82) rotate(5deg);transform-origin:top right;right:0}
+ .pv-art-caption{bottom:2%;font-size:.5rem}
+ .pv-trusted{padding:14px 0 19px}
+ .pv-trust-pill{padding:7px 10px;font-size:.68rem}
+ .pv-section{padding:47px 0}
+ .pv-section-head{align-items:flex-start;flex-direction:column;gap:11px;margin-bottom:20px}
+ .pv-section-head h2{font-size:2.15rem}
+ .pv-work-grid{grid-template-columns:1fr;gap:12px}
+ .pv-work-featured{grid-column:auto}
+ .pv-work-card>img,.pv-work-featured>img{height:210px}
+ .pv-service-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .pv-service-card{min-height:168px;padding:15px 13px}
+ .pv-service-card strong{font-size:.76rem}
+ .pv-service-card p{font-size:.68rem}
+ .pv-about-panel{padding:20px;border-radius:22px}
+ .pv-about-art{height:205px}
+ .pv-team-row{gap:18px}
+ .pv-team-avatars{gap:9px}
+ .pv-team-avatar>span,.pv-team-avatar>img{width:54px;height:54px;border-radius:14px}
+ .pv-faq-preview{padding:24px 0 50px}
+ .pv-bottom-cta-inner{flex-wrap:wrap;gap:14px;padding:20px 19px}
+ .pv-bottom-cta-inner>img{width:90px;height:95px;margin:-5px 0 -20px -5px}
+ .pv-bottom-cta-inner>div{flex:1 1 calc(100% - 110px)}
+ .pv-bottom-cta-inner>.btn{width:100%;margin-top:5px}
+ .pv-footer{padding:34px 0 25px}
+ .pv-footer-grid{gap:22px 16px}
+ .pv-footer-grid>div>strong{font-size:.73rem}
+ .pv-footer-grid a:not(.brand),.pv-footer-brand>p{font-size:.68rem}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+
+/* FLOATING AUDIO PLAYER */
+.pv-audio-dock{position:fixed;right:88px;bottom:22px;z-index:49;width:54px;height:54px}
+.pv-audio-panel{position:absolute;right:0;bottom:0;width:54px;height:54px;overflow:hidden;opacity:0;pointer-events:none;display:grid;grid-template-columns:1fr;align-content:center;gap:7px;padding:12px 64px 12px 14px;border:1px solid #e5d6ef;border-radius:23px;background:rgba(255,252,255,.97);box-shadow:0 13px 34px rgba(66,40,85,.17);backdrop-filter:blur(18px);transform:translateY(5px);transition:width .28s ease,height .28s ease,opacity .2s ease,transform .28s ease}
+.pv-audio-dock:hover .pv-audio-panel,.pv-audio-dock:focus-within .pv-audio-panel,.pv-audio-dock.is-open .pv-audio-panel,.pv-audio-dock.is-playing .pv-audio-panel{width:306px;height:126px;opacity:1;pointer-events:auto;transform:translateY(0);padding:12px 60px 11px 14px}
+.pv-audio-compact{position:absolute;right:0;bottom:0;z-index:2;width:54px;height:54px;display:grid;place-items:center;border:1px solid #e5d6ef;border-radius:50%;background:linear-gradient(145deg,#fff,#f7eaff);color:#7744a8;box-shadow:0 9px 26px rgba(79,48,102,.16);cursor:pointer;transition:transform .2s ease,background .2s ease}
+.pv-audio-compact:hover{transform:translateY(-3px);background:#f9e6f5}
+.pv-audio-bars{display:flex;align-items:center;justify-content:center;gap:3px;height:23px}
+.pv-audio-bars i{display:block;width:3px;height:9px;border-radius:5px;background:linear-gradient(180deg,#a66de0,#ff5597)}
+.pv-audio-bars i:nth-child(2n){height:15px}.pv-audio-bars i:nth-child(3n){height:21px}.pv-audio-bars i:nth-child(4n){height:12px}
+.pv-audio-dock.is-playing .pv-audio-bars i{animation:pv-audio-wave .7s ease-in-out infinite alternate}
+.pv-audio-dock.is-playing .pv-audio-bars i:nth-child(2n){animation-delay:.17s}.pv-audio-dock.is-playing .pv-audio-bars i:nth-child(3n){animation-delay:.31s}
+@keyframes pv-audio-wave{from{transform:scaleY(.42)}to{transform:scaleY(1.25)}}
+.pv-audio-track{display:flex;align-items:center;gap:10px;min-width:0}
+.pv-audio-track img{width:39px;height:39px;flex:0 0 39px;object-fit:cover;aspect-ratio:1;border-radius:12px;background:#f1e4f7}
+.pv-audio-copy{display:grid;gap:2px;min-width:0}
+.pv-audio-copy strong{max-width:176px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#462e52;font:700 .77rem Sora,sans-serif}
+.pv-audio-copy span{max-width:176px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#846f8e;font-size:.65rem}
+.pv-audio-controls{display:flex;align-items:center;gap:6px;min-width:0}
+.pv-audio-controls button{width:24px;height:24px;display:grid;place-items:center;flex:0 0 24px;padding:0;border:0;border-radius:50%;background:transparent;color:#77538e;font-size:1.15rem;cursor:pointer}
+.pv-audio-controls .pv-audio-play{width:28px;height:28px;flex-basis:28px;background:linear-gradient(135deg,#ff5093,#d65ab5);color:white;font-size:.67rem}
+.pv-audio-controls button:disabled{opacity:.36;cursor:not-allowed}
+.pv-audio-time{margin-left:auto;color:#887a91;font-size:.59rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pv-audio-seek{width:100%;height:4px;min-height:4px;padding:0;margin:0;appearance:none;border:0;border-radius:10px;background:linear-gradient(90deg,#ff579b,#b07be3);cursor:pointer}
+.pv-audio-seek::-webkit-slider-thumb{appearance:none;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #a56acb;box-shadow:0 1px 4px #56326c33}
+.pv-audio-seek::-moz-range-thumb{width:8px;height:8px;border-radius:50%;background:#fff;border:2px solid #a56acb}
+.pv-audio-empty{display:none;margin:0;color:#87758f;font-size:.62rem}
+.pv-audio-dock[data-empty=true] .pv-audio-empty{display:block}
+.pv-audio-dock[data-empty=true] .pv-audio-controls,.pv-audio-dock[data-empty=true] .pv-audio-seek{opacity:.42}
+.pv-audio-dock[data-empty=true] .pv-audio-track img{opacity:.72}
+@media(max-width:560px){.pv-audio-dock{right:76px;bottom:15px}.pv-audio-dock:hover .pv-audio-panel,.pv-audio-dock:focus-within .pv-audio-panel,.pv-audio-dock.is-open .pv-audio-panel,.pv-audio-dock.is-playing .pv-audio-panel{width:min(292px,calc(100vw - 92px));height:126px}.pv-audio-copy strong,.pv-audio-copy span{max-width:155px}.pv-audio-compact{width:49px;height:49px}}
+@media(prefers-reduced-motion:reduce){.pv-audio-dock *,.pv-audio-compact{animation:none!important;transition:none!important}}
+/* LIGHT / NIGHT TOKENS: keep every section readable in either theme */
+html[data-theme="dark"]{
+ color-scheme:dark;
+ --paper:#171321;--card:#211b30;--ink:#f5effb;--muted:#c0b2cb;--line:#493858;--green:#c3a8f3;--rust:#ff83b6;
+ --pv-paper:#171321;--pv-plum:#f5effb;--pv-muted:#c4b5cf;--pv-line:#51405e;--pv-card:rgba(42,32,56,.88);
+ --pv-shadow:0 18px 54px rgba(0,0,0,.24);
+}
+html[data-theme="dark"] body{background:radial-gradient(ellipse at 7% 4%,#332342 0,transparent 34%),radial-gradient(ellipse at 93% 18%,#2c203c 0,transparent 30%),linear-gradient(180deg,#171321,#1b1625 64%,#171321)!important;color:#f5effb!important}
+html[data-theme="dark"] .pv-header{background:rgba(28,21,39,.88);border-color:#493858;box-shadow:0 5px 24px rgba(0,0,0,.18)}
+html[data-theme="dark"] .pv-brand{color:#f5effb}
+html[data-theme="dark"] .pv-header nav .navlink{color:#e5d9ee!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+html[data-theme="dark"] .pv-header nav .navlink:hover,html[data-theme="dark"] .pv-header nav .navlink[aria-current=page]{background:#3a2b4b!important;color:#fff!important;border-color:#604772!important}
+html[data-theme="dark"] .pv-nav-cta{color:#fff;background:linear-gradient(105deg,#ec478d,#c9449f);box-shadow:0 8px 22px #c43e8733}
+html[data-theme="dark"] .pv-hero{background:linear-gradient(115deg,#21172c,#25192f 52%,#2b1b32)}
+html[data-theme="dark"] .pv-hero:before{background:radial-gradient(ellipse at 68% 50%,#4a3264 0,transparent 43%),radial-gradient(ellipse at 100% 4%,#5b294a 0,transparent 28%)}
+html[data-theme="dark"] .pv-hero:after{background:#1b1625}
+html[data-theme="dark"] .pv-hero .pv-eyebrow{background:linear-gradient(100deg,#8051a5,#a84c80);color:#fff}
+html[data-theme="dark"] .pv-hero h1,html[data-theme="dark"] .pv-section-head h2,html[data-theme="dark"] .pv-about-copy h2,html[data-theme="dark"] .pv-team-heading h2,html[data-theme="dark"] .pv-faq-copy h2,html[data-theme="dark"] .pv-bottom-cta h2{color:#f8f1ff}
+html[data-theme="dark"] .pv-hero h1 em,html[data-theme="dark"] .pv-section-head h2 em,html[data-theme="dark"] .pv-about-copy h2 em,html[data-theme="dark"] .pv-team-heading h2 em,html[data-theme="dark"] .pv-faq-copy h2 em,html[data-theme="dark"] .pv-bottom-cta h2 em{color:#ff82b9}
+html[data-theme="dark"] .pv-hero-lead,html[data-theme="dark"] .pv-section-head p:not(.pv-eyebrow),html[data-theme="dark"] .pv-about-copy>p:not(.pv-eyebrow),html[data-theme="dark"] .pv-team-heading>p:last-child,html[data-theme="dark"] .pv-faq-copy>p:not(.pv-eyebrow),html[data-theme="dark"] .pv-bottom-cta p:last-child{color:#d0c1db}
+html[data-theme="dark"] .pv-hero-status{background:#2b2036;border-color:#574265;box-shadow:0 10px 28px #09060f55}
+html[data-theme="dark"] .pv-hero-status .commission-status-label,html[data-theme="dark"] .pv-hero-status .commission-status-main span,html[data-theme="dark"] .pv-hero-status .commission-status-bottom{color:#c9b8d5}
+html[data-theme="dark"] .pv-hero-status .commission-status-main strong{color:#fff}
+html[data-theme="dark"] .pv-hero-art:before{background:radial-gradient(circle at 50% 40%,#4d3d65 0,#443253 42%,#392941 68%,transparent 72%)}
+html[data-theme="dark"] .pv-orbit{border-color:#9670b65e}
+html[data-theme="dark"] .pv-trusted{background:linear-gradient(90deg,#1c1726,#24182b,#1c1726);border-color:#46334e}
+html[data-theme="dark"] .pv-trusted-label,html[data-theme="dark"] .pv-trust-more{color:#cabbd5}
+html[data-theme="dark"] .pv-trust-pill{background:#2b2036;border-color:#574265;color:#e9dff1}
+html[data-theme="dark"] .pv-trust-pill b{color:#ff8bbb}
+html[data-theme="dark"] .pv-text-link{color:#d5a8ff}
+html[data-theme="dark"] .pv-work-card,html[data-theme="dark"] .pv-service-card,html[data-theme="dark"] .pv-faq-list details{background:linear-gradient(145deg,#2b2036,#251d32);border-color:#503c5c;box-shadow:0 12px 34px #08051055}
+html[data-theme="dark"] .pv-work-meta strong,html[data-theme="dark"] .pv-service-card strong,html[data-theme="dark"] .pv-faq-list summary{color:#f4eafa}
+html[data-theme="dark"] .pv-work-meta small,html[data-theme="dark"] .pv-service-card p,html[data-theme="dark"] .pv-faq-list details p{color:#c5b5d0}
+html[data-theme="dark"] .pv-work-tag{background:#281e35ed;color:#e8c8ff}
+html[data-theme="dark"] .pv-work-arrow{background:#443052;color:#f1d8ff}
+html[data-theme="dark"] .pv-concept-note{color:#bdadc9}
+html[data-theme="dark"] .pv-service-icon{background:linear-gradient(140deg,#50325b,#41365e);color:#f5a6d0}
+html[data-theme="dark"] .pv-about-panel{background:linear-gradient(110deg,#2b2036,#2b203d 55%,#34233d);border-color:#584363;box-shadow:0 16px 45px #08051055}
+html[data-theme="dark"] .pv-about-sticker{background:#241a30eF;border-color:#765b82;color:#f1b5dc}
+html[data-theme="dark"] .pv-team-row{border-color:#493858}
+html[data-theme="dark"] .pv-team-avatar>span,html[data-theme="dark"] .pv-team-avatar>img{border-color:#624c71}
+html[data-theme="dark"] .pv-team-avatar small{color:#d7c8e2}
+html[data-theme="dark"] .pv-avatar-two>span{background:linear-gradient(145deg,#63364f,#49334c);color:#ffc1dd}
+html[data-theme="dark"] .pv-avatar-three>span{background:linear-gradient(145deg,#473960,#343a5c);color:#d5c3ff}
+html[data-theme="dark"] .pv-avatar-four>img{background:#fff}
+html[data-theme="dark"] .pv-faq-list details{background:#2b2036;border-color:#564162}
+html[data-theme="dark"] .pv-faq-list summary span{color:#e6a5d1}
+html[data-theme="dark"] .pv-bottom-cta-inner{background:linear-gradient(105deg,#342543,#392438 62%,#3b2639);border-color:#604360;box-shadow:0 12px 35px #08051055}
+html[data-theme="dark"] .pv-footer{background:linear-gradient(120deg,#211833,#30204a 55%,#241631);color:#fff}
+html[data-theme="dark"] .pv-footer-grid a:not(.brand),html[data-theme="dark"] .pv-footer-brand>p,html[data-theme="dark"] .pv-footer-grid>div:last-child>p{color:#eee2f7}
+html[data-theme="dark"] .pv-footer-brand>small{color:#cfc0df}
+html[data-theme="dark"] .pv-primary{background:linear-gradient(105deg,#f34b93,#dc449d);color:#fff}
+html[data-theme="dark"] .pv-secondary{background:#2d233b;color:#efdfff;border-color:#8d70a8}
+html[data-theme="dark"] .pv-audio-panel{background:rgba(35,26,47,.98);border-color:#5a456b;box-shadow:0 13px 34px rgba(0,0,0,.45)}
+html[data-theme="dark"] .pv-audio-copy strong{color:#f6edff}
+html[data-theme="dark"] .pv-audio-copy span,html[data-theme="dark"] .pv-audio-time,html[data-theme="dark"] .pv-audio-empty{color:#c6b5d2}
+html[data-theme="dark"] .pv-audio-controls button{color:#ead9fa}
+html[data-theme="dark"] .pv-audio-controls .pv-audio-play{color:#fff;background:linear-gradient(135deg,#ef5598,#b763d3)}
+html[data-theme="dark"] .pv-audio-compact{background:linear-gradient(145deg,#3b2b4e,#2d253f);border-color:#68517c;color:#f1dfff;box-shadow:0 10px 28px #0007}
+html[data-theme="dark"] .pv-audio-track img{background:#30243d}
+html[data-theme="dark"] .pv-audio-seek{background:linear-gradient(90deg,#f15b9b,#a77bea)}
+/* Existing non-home views: make shared text, forms, cards and media consistent. */
+html[data-theme="dark"] .page-view:not([data-page="home"]){color:#f0eafa}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .eyebrow,html[data-theme="dark"] .page-view:not([data-page="home"]) .mono{color:#c6b6d7}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .section-head h2,html[data-theme="dark"] .page-view:not([data-page="home"]) h2,html[data-theme="dark"] .page-view:not([data-page="home"]) h3{color:#f5edff}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .sub,html[data-theme="dark"] .page-view:not([data-page="home"]) p{color:#c9bdd4}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .product,html[data-theme="dark"] .page-view:not([data-page="home"]) .service-card,html[data-theme="dark"] .page-view:not([data-page="home"]) .step-card,html[data-theme="dark"] .page-view:not([data-page="home"]) .credit-card,html[data-theme="dark"] .page-view:not([data-page="home"]) .license-panel,html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-card,html[data-theme="dark"] .page-view:not([data-page="home"]) .team-card,html[data-theme="dark"] .page-view:not([data-page="home"]) .faq details{background:linear-gradient(145deg,#2a2036,#251e32)!important;border-color:#534060!important;color:#f4eafa!important}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .product-title,html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-copy h3,html[data-theme="dark"] .page-view:not([data-page="home"]) .service-card h3,html[data-theme="dark"] .page-view:not([data-page="home"]) .team-info h3{color:#f7efff}
+html[data-theme="dark"] .page-view:not([data-page="home"]) input,html[data-theme="dark"] .page-view:not([data-page="home"]) select,html[data-theme="dark"] .page-view:not([data-page="home"]) textarea{background:#1e1929!important;border-color:#59466a!important;color:#f5edff!important;color-scheme:dark}
+html[data-theme="dark"] .page-view:not([data-page="home"]) input::placeholder,html[data-theme="dark"] .page-view:not([data-page="home"]) textarea::placeholder{color:#9587a5!important}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .empty{background:#251e32;border-color:#62506f;color:#c8bbd5}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-placeholder,html[data-theme="dark"] .page-view:not([data-page="home"]) .product-preview-fallback{background:#30253d;color:#eee3f8}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-strip{background:linear-gradient(180deg,#1b1625,#211a2b)!important}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq details{background:#2a2036!important}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq summary{color:#f0eafa}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq details p{color:#c9bdd4}
+html[data-theme="dark"] .pv-header .navlink:focus-visible,html[data-theme="dark"] .pv-audio-controls button:focus-visible{outline-color:#ff91c2}
+@media(max-width:560px){.pv-audio-dock{right:74px}.pv-audio-dock:hover .pv-audio-panel,.pv-audio-dock:focus-within .pv-audio-panel,.pv-audio-dock.is-open .pv-audio-panel,.pv-audio-dock.is-playing .pv-audio-panel{width:min(286px,calc(100vw - 90px))}}
+
+
+/* IMAGE / ICON DIMENSIONS — retain native proportions and crisp source pixels */
+img,video,svg{max-width:100%}
+img{height:auto}
+.pv-brand-mark{overflow:hidden}
+.pv-brand-mark img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;padding:1px;image-rendering:auto}
+.pv-mascot{display:block;width:min(100%,720px);height:auto;aspect-ratio:1500/941;object-fit:contain;object-position:center}
+.pv-work-card>img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
+.pv-about-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.pv-team-avatar>img{display:block;width:63px;height:63px;aspect-ratio:1;object-fit:contain;object-position:center}
+.pv-bottom-cta-inner>img{display:block;object-fit:contain;object-position:center bottom}
+.contact-trigger .contact-logo{width:25px;height:25px;aspect-ratio:1;object-fit:contain}
+@media(max-width:760px){.pv-team-avatar>img{width:54px;height:54px}}
+
+
+/* FINAL CONTRAST + LEGACY VIEW NIGHT-MODE PASS */
+html[data-theme="dark"]{
+ --bg:#171321;--surface:#251e32;--ink:#f5effb;--muted:#c7b8d2;--line:#51415f;
+ --night:#1a1424;--on-night:#f8f1ff;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) {
+ color:#f4edf9!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) section,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .section,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-strip,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .catalog,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .custom,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .license,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track{
+ background-color:transparent!important;
+ color:#f4edf9!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .custom-band,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-hero,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-bottom,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-hero,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-note,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-cta,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-hero,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-help,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-search,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-result,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-policy,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-steps article,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .form,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-form{
+ background:linear-gradient(145deg,#2b2038,#241c31)!important;
+ border-color:#574363!important;
+ color:#f3eafa!important;
+ box-shadow:0 12px 34px rgba(0,0,0,.2)!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .custom-band h2,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-hero h2,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-hero h2,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-hero h2,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-cta h3,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-result-head h3{
+ color:#fff5ff!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .custom-band p,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-note,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-form-foot,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-steps p,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .commission-bottom .sub,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-lead,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-search small,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-note,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-message,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-help p,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-lead,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .team-bio{
+ color:#cdbed8!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-input-row input,
+html[data-theme="dark"] .page-view:not([data-page="home"]) input,
+html[data-theme="dark"] .page-view:not([data-page="home"]) select,
+html[data-theme="dark"] .page-view:not([data-page="home"]) textarea,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .control{
+ color:#f7efff!important;background:#1d1828!important;border-color:#624d72!important;
+ color-scheme:dark;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) input::placeholder,
+html[data-theme="dark"] .page-view:not([data-page="home"]) textarea::placeholder{
+ color:#a99ab5!important;opacity:1;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) label,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .field label,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-search label{
+ color:#f0e6f7!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .small-btn,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .quiet,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .favorite{
+ color:#f2e6ff!important;background:#3c2e4b!important;border-color:#6a5579!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .price,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .starting,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .step-no{
+ color:#ffabd0!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-status-pill,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-step{
+ background:#30243e!important;border-color:#5e4a70!important;color:#f3e8fc!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-step small,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-meta span{
+ color:#bfafcc!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .track-resource-link{
+ background:#3b2d4b!important;border-color:#685178!important;color:#f0dfff!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .mini-player,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .mini-player audio{
+ background:#241c31!important;border-color:#5a466b!important;color:#fff!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-art,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .product-art,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .service-art{
+ border-color:#5c496b!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq summary,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq summary::after{
+ color:#f3eafa!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq details,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .faq details p{
+ background:#2b2038!important;border-color:#574363!important;color:#d9cbe3!important;
+}
+html[data-theme="dark"] .page-view:not([data-page="home"]) .empty,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .portfolio-placeholder,
+html[data-theme="dark"] .page-view:not([data-page="home"]) .product-preview-fallback{
+ background:#2d233b!important;border-color:#5d496d!important;color:#e4d8ed!important;
+}
+html[data-theme="dark"] .modal,
+html[data-theme="dark"] dialog{
+ background:#251d32!important;color:#f4eafa!important;border-color:#5c496d!important;
+}
+html[data-theme="dark"] .modal p,
+html[data-theme="dark"] dialog p{color:#d1c2dc!important}
+html[data-theme="dark"] .close{background:#3a2a49!important;color:#f7edff!important;border-color:#664e77!important}
+html[data-theme="dark"] .toast{background:#2b2038!important;color:#f6effb!important;border-color:#654f75!important}
+html[data-theme="dark"] footer{background:linear-gradient(120deg,#211833,#30204a 55%,#241631)!important;color:#f7efff!important}
+html[data-theme="dark"] footer p{color:#d6c7e1!important}
+/* Keep the hero mascot inside the source asset's useful pixel density. */
+.pv-mascot{width:min(100%,400px)!important;max-width:400px!important;height:auto!important;object-fit:contain!important;object-position:center!important}
+@media(max-width:760px){.pv-mascot{width:min(100%,360px)!important;max-width:360px!important}}
+
+/* FINAL UI REFINEMENT — consistent showcase cards, caption contrast, contact avatar */
+.pv-art-caption{
+ background:rgba(255,255,255,.96)!important;
+ color:#704d81!important;
+ border-color:#e6d5ee!important;
+ box-shadow:0 7px 20px rgba(53,31,71,.12);
+}
+html[data-theme="dark"] .pv-art-caption{
+ background:rgba(39,29,52,.97)!important;
+ color:#fff0fa!important;
+ border-color:#89679a!important;
+ box-shadow:0 8px 24px rgba(0,0,0,.38);
+ text-shadow:0 1px 5px rgba(0,0,0,.35);
+}
+html[data-theme="dark"] .pv-art-caption .pv-caption-dot{
+ background:#ff9bc7!important;
+ box-shadow:0 0 10px #ff82b8aa;
+}
+.pv-work-grid{
+ display:grid!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ grid-auto-rows:1fr;
+ align-items:stretch;
+ gap:17px;
+}
+.pv-work-card,.pv-work-card.pv-work-featured{
+ display:flex!important;
+ flex-direction:column!important;
+ grid-column:auto!important;
+ width:100%;
+ height:100%;
+ min-width:0;
+ min-height:0!important;
+}
+.pv-work-card>img,.pv-work-card.pv-work-featured>img{
+ display:block!important;
+ width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ aspect-ratio:16/10!important;
+ flex:0 0 auto;
+ object-fit:cover!important;
+ object-position:center;
+}
+.pv-work-meta{
+ display:grid;
+ grid-template-rows:auto auto;
+ align-content:center;
+ gap:4px;
+ flex:1 0 auto;
+ min-height:76px;
+ padding:13px 58px 14px 16px;
+}
+.pv-work-meta strong,.pv-work-meta small{
+ display:block;
+ min-width:0;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+}
+.pv-work-arrow{bottom:20px}
+.contact-trigger .contact-logo{
+ display:block!important;
+ width:30px!important;
+ height:30px!important;
+ min-width:30px!important;
+ max-width:30px!important;
+ min-height:30px!important;
+ max-height:30px!important;
+ aspect-ratio:1/1!important;
+ flex:0 0 30px!important;
+ box-sizing:border-box;
+ border-radius:50%!important;
+ object-fit:cover!important;
+ object-position:center;
+ overflow:hidden;
+}
+@media(max-width:1000px){
+ .pv-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .pv-work-card,.pv-work-card.pv-work-featured{grid-column:auto!important}
+}
+@media(max-width:760px){
+ .pv-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:13px}
+ .pv-work-card>img,.pv-work-card.pv-work-featured>img{aspect-ratio:16/10!important}
+}
+@media(max-width:460px){
+ .pv-work-grid{grid-template-columns:1fr!important}
+ .pv-work-card,.pv-work-card.pv-work-featured{min-height:0!important}
+ .pv-work-meta{min-height:70px}
+}
+
+
+/* NIGHT MODE POLISH — waveform card + floating player */
+.pv-wave-card{
+ min-height:58px;
+ backdrop-filter:blur(14px);
+ -webkit-backdrop-filter:blur(14px);
+ transition:background .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+.pv-wave-card span,.pv-wave-card i{
+ box-shadow:0 0 7px rgba(189,134,236,.12);
+}
+html[data-theme="dark"] .pv-wave-card{
+ background:linear-gradient(145deg,rgba(35,25,49,.97),rgba(48,31,61,.95))!important;
+ border-color:#775b8d!important;
+ box-shadow:0 12px 30px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.08);
+}
+html[data-theme="dark"] .pv-wave-card span,
+html[data-theme="dark"] .pv-wave-card i{
+ background:linear-gradient(180deg,#e1b7ff 0%,#ff91c2 100%)!important;
+ box-shadow:0 0 9px rgba(220,154,255,.28);
+}
+html[data-theme="dark"] .pv-spark-a,
+html[data-theme="dark"] .pv-spark-c{
+ color:#ff9bc7;
+ text-shadow:0 0 16px rgba(255,126,185,.42);
+}
+html[data-theme="dark"] .pv-spark-b{
+ color:#d2adff;
+ text-shadow:0 0 16px rgba(188,145,255,.42);
+}
+html[data-theme="dark"] .pv-audio-panel{
+ background:linear-gradient(145deg,rgba(31,23,44,.99),rgba(42,29,57,.99))!important;
+ border-color:#725783!important;
+ box-shadow:0 15px 38px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06);
+}
+html[data-theme="dark"] .pv-audio-copy strong{
+ color:#fff5ff!important;
+}
+html[data-theme="dark"] .pv-audio-copy span,
+html[data-theme="dark"] .pv-audio-time,
+html[data-theme="dark"] .pv-audio-empty{
+ color:#d4c4e2!important;
+}
+html[data-theme="dark"] .pv-audio-bars i{
+ background:linear-gradient(180deg,#ddb4ff,#ff91c2)!important;
+ box-shadow:0 0 7px rgba(220,154,255,.2);
+}
+html[data-theme="dark"] .pv-audio-controls button{
+ color:#f0e2ff!important;
+}
+html[data-theme="dark"] .pv-audio-controls button:focus-visible,
+html[data-theme="dark"] .pv-audio-compact:focus-visible{
+ outline:2px solid #ff9bc7;
+ outline-offset:3px;
+}
+html[data-theme="dark"] .pv-audio-seek{
+ background:linear-gradient(90deg,#ff78ad,#c49aff)!important;
+}
+@media(max-width:760px){
+ .pv-wave-card{right:clamp(8px,4vw,22px)}
+}
+@media(max-width:520px){
+ .pv-wave-card{top:6%;right:0;padding:11px 13px;gap:3px}
+}
+@media(prefers-reduced-motion:reduce){
+ .pv-wave-card{transition:none}
+}
+
+
+/* LIGHT MODE FOOTER — richer brand surface with readable type */
+html:not([data-theme="dark"]) .pv-footer{
+ background:linear-gradient(118deg,#3d2b54 0%,#5a3b79 54%,#452f60 100%)!important;
+ color:#fff9ff!important;
+ border-top:1px solid #76558f!important;
+ box-shadow:0 -12px 36px rgba(63,42,83,.08);
+}
+html:not([data-theme="dark"]) .pv-footer .brand{color:#fff!important}
+html:not([data-theme="dark"]) .pv-footer .pv-brand-mark{
+ background:rgba(255,255,255,.16)!important;
+}
+html:not([data-theme="dark"]) .pv-footer .pv-brand-star{color:#ff9bc8!important}
+html:not([data-theme="dark"]) .pv-footer-brand>p,html:not([data-theme="dark"]) .pv-footer-grid>div:last-child>p{color:#eee3f7!important}
+html:not([data-theme="dark"]) .pv-footer-brand>small{color:#d8c8e7!important}
+html:not([data-theme="dark"]) .pv-footer-grid>div>strong{color:#fff!important}
+html:not([data-theme="dark"]) .pv-footer-grid a:not(.brand){color:#f1e7fa!important}
+html:not([data-theme="dark"]) .pv-footer-grid a:not(.brand):hover{
+ color:#fff!important;
+ opacity:1;
+}
+html:not([data-theme="dark"]) .pv-footer-grid .pv-footer-cta{
+ border-color:rgba(255,255,255,.58)!important;
+ background:rgba(255,255,255,.12)!important;
+ color:#fff!important;
+}
+html:not([data-theme="dark"]) .pv-footer-grid .pv-footer-cta:hover{
+ background:rgba(255,255,255,.2)!important;
+}
+
+/* ONE TYPOGRAPHY SYSTEM — Sora headings + Inter body/UI on every studio page */
+body,button,input,select,textarea{
+ font-family:Inter,system-ui,sans-serif;
+}
+#main-content .page-view:not([data-page="home"]) *,
+#main-content .page-view:not([data-page="home"]) *::before,
+#main-content .page-view:not([data-page="home"]) *::after{
+ font-family:Inter,system-ui,sans-serif!important;
+}
+#main-content .page-view:not([data-page="home"]) :is(h1,h2,h3,h4,h5,h6),
+#main-content .page-view:not([data-page="home"]) :is(.product-title,.portfolio-copy h3,.featured-portfolio-heading h2,.service-card h3,.step-card h3,.credit-card h3,.license-panel h3,.team-info h3,.track-result-head h3,.success-dialog h2,.modal-head h2){
+ font-family:Sora,Inter,sans-serif!important;
+ letter-spacing:-.045em;
+}
+#main-content .page-view:not([data-page="home"]) :is(.eyebrow,.mono,.result-count,.starting,.art-type,.art-id,.track-meta span,.portfolio-category,.portfolio-section-label,.portfolio-scroll-hint){
+ font-family:Inter,system-ui,sans-serif!important;
+ font-weight:700;
+ letter-spacing:.11em;
+}
+#main-content .page-view:not([data-page="home"]) :is(button,input,select,textarea){
+ font-family:Inter,system-ui,sans-serif!important;
+}
+.pv-footer,
+.pv-footer :is(p,a,small,strong,span,div){
+ font-family:Inter,system-ui,sans-serif;
+}
+.pv-footer :is(.brand,strong){
+ font-family:Sora,Inter,sans-serif;
+}
+
+/* LIGHT CONTACT BUTTON — same quiet glass treatment as dark mode, light palette */
+html:not([data-theme="dark"]) #contactWidget .contact-trigger{
+ border-color:#e1d2e9!important;
+ background:linear-gradient(135deg,rgba(255,255,255,.98) 0%,rgba(249,242,255,.97) 58%,rgba(255,241,248,.98) 100%)!important;
+ color:#493653!important;
+ box-shadow:0 9px 26px rgba(82,53,105,.16),inset 0 1px 0 rgba(255,255,255,.95)!important;
+ text-shadow:none!important;
+}
+html:not([data-theme="dark"]) #contactWidget .contact-trigger>span{color:#493653!important}
+html:not([data-theme="dark"]) #contactWidget .contact-trigger .contact-logo{
+ border-color:#ead9ef!important;
+ background:#fff!important;
+ box-shadow:0 2px 8px rgba(91,59,112,.14)!important;
+}
+html:not([data-theme="dark"]) #contactWidget .contact-trigger:hover{
+ border-color:#d1b5e2!important;
+ background:linear-gradient(135deg,#fff 0%,#f5eafe 58%,#ffedf5 100%)!important;
+ box-shadow:0 13px 30px rgba(82,53,105,.22),inset 0 1px 0 #fff!important;
+}
+html:not([data-theme="dark"]) #contactWidget .contact-trigger:focus-visible{outline-color:#a66bc0!important}
+html:not([data-theme="dark"]) #contactWidget .contact-trigger[aria-expanded="true"]{
+ border-color:#c9a6dc!important;
+ background:linear-gradient(135deg,#fdf8ff,#f3e8fb 58%,#ffedf5)!important;
+ box-shadow:0 12px 28px rgba(82,53,105,.2),inset 0 1px 0 #fff!important;
+}
+
+
+/* THEME PARITY LOCK — layout, typography and icon metrics never vary by theme */
+#contactWidget .contact-trigger{
+ box-sizing:border-box!important;
+ min-height:54px!important;
+ padding:11px 16px!important;
+ gap:9px!important;
+ border-width:1px!important;
+ border-style:solid!important;
+ border-radius:999px!important;
+ font-family:Sora,Inter,sans-serif!important;
+ font-size:.82rem!important;
+ font-weight:750!important;
+ line-height:1!important;
+ letter-spacing:-.015em!important;
+}
+#contactWidget .contact-trigger>span{
+ display:inline-block!important;
+ font-family:Sora,Inter,sans-serif!important;
+ font-size:.82rem!important;
+ font-weight:750!important;
+ line-height:1!important;
+ letter-spacing:-.015em!important;
+}
+#contactWidget .contact-trigger .contact-logo{
+ display:block!important;
+ box-sizing:border-box!important;
+ width:30px!important;
+ height:30px!important;
+ min-width:30px!important;
+ max-width:30px!important;
+ min-height:30px!important;
+ max-height:30px!important;
+ flex:0 0 30px!important;
+ aspect-ratio:1/1!important;
+ object-fit:cover!important;
+ object-position:center!important;
+ border-width:1.5px!important;
+ border-style:solid!important;
+ border-radius:50%!important;
+}
+#contactWidget .contact-trigger:hover{
+ transform:translateY(-2px)!important;
+}
+#contactWidget .contact-trigger:focus-visible{
+ outline-width:3px!important;
+ outline-style:solid!important;
+ outline-offset:4px!important;
+}
+#contactWidget .contact-menu{
+ box-sizing:border-box;
+ border-width:1px!important;
+ border-style:solid!important;
+ border-radius:18px!important;
+}
+#contactWidget .contact-option{
+ min-height:46px;
+ padding:11px 12px;
+ gap:11px;
+ font-family:Inter,system-ui,sans-serif!important;
+ font-size:.92rem!important;
+ font-weight:600!important;
+ line-height:1.35!important;
+}
+#contactWidget .contact-option .contact-option-icon{
+ display:inline-flex!important;
+ box-sizing:border-box!important;
+ width:25px!important;
+ height:25px!important;
+ min-width:25px!important;
+ min-height:25px!important;
+ flex:0 0 25px!important;
+ align-items:center!important;
+ justify-content:center!important;
+}
+#contactWidget .contact-option .contact-option-icon svg{
+ display:block!important;
+ width:20px!important;
+ height:20px!important;
+ min-width:20px!important;
+ min-height:20px!important;
+ flex:0 0 20px!important;
+}
+
+/* Footer type scale is shared by both palettes; only color tokens may change. */
+.pv-footer .brand{
+ font-family:Sora,Inter,sans-serif!important;
+ font-size:1.35rem!important;
+ font-weight:800!important;
+ line-height:1!important;
+ letter-spacing:-.075em!important;
+}
+.pv-footer-brand>p,
+.pv-footer-grid>div:last-child>p{
+ font-family:Inter,system-ui,sans-serif!important;
+ font-size:.78rem!important;
+ font-weight:400!important;
+ line-height:1.65!important;
+}
+.pv-footer-brand>small{
+ font-family:Inter,system-ui,sans-serif!important;
+ font-size:.68rem!important;
+ font-weight:500!important;
+ line-height:1.5!important;
+}
+.pv-footer-grid>div>strong{
+ font-family:Sora,Inter,sans-serif!important;
+ font-size:.78rem!important;
+ font-weight:750!important;
+ line-height:1.35!important;
+}
+.pv-footer-grid a:not(.brand){
+ font-family:Inter,system-ui,sans-serif!important;
+ font-size:.75rem!important;
+ font-weight:600!important;
+ line-height:1.45!important;
+}
+.pv-footer-grid .pv-footer-cta{
+ font-family:Inter,system-ui,sans-serif!important;
+ font-size:.75rem!important;
+ font-weight:700!important;
+ line-height:1.4!important;
+}
+@media(max-width:760px){
+ .pv-footer-brand>p,
+ .pv-footer-grid>div:last-child>p{font-size:.75rem!important}
+ .pv-footer-brand>small{font-size:.66rem!important}
+ .pv-footer-grid>div>strong{font-size:.75rem!important}
+ .pv-footer-grid a:not(.brand),
+ .pv-footer-grid .pv-footer-cta{font-size:.72rem!important}
+}
+@media(max-width:520px){
+ .pv-footer-brand>p,
+ .pv-footer-grid>div:last-child>p{font-size:.73rem!important}
+ .pv-footer-brand>small{font-size:.65rem!important}
+ .pv-footer-grid>div>strong{font-size:.73rem!important}
+ .pv-footer-grid a:not(.brand),
+ .pv-footer-grid .pv-footer-cta{font-size:.70rem!important}
+}
+
+/* FOOTER BRAND — identical geometry and typography in both themes */
+.pv-footer .pv-footer-brand>.brand{
+ display:inline-flex!important;
+ align-items:center!important;
+ gap:10px!important;
+ min-height:34px!important;
+ margin:0!important;
+ font-family:Sora,Inter,sans-serif!important;
+ font-size:1.35rem!important;
+ font-weight:800!important;
+ line-height:1!important;
+ letter-spacing:-.075em!important;
+}
+.pv-footer .pv-footer-brand>.brand>span:last-child{
+ display:inline-block!important;
+ font-family:Sora,Inter,sans-serif!important;
+ font-size:inherit!important;
+ font-weight:inherit!important;
+ line-height:1!important;
+ letter-spacing:inherit!important;
+}
+.pv-footer .pv-footer-brand>.brand .pv-brand-mark{
+ display:grid!important;
+ place-items:center!important;
+ box-sizing:border-box!important;
+ width:34px!important;
+ height:34px!important;
+ min-width:34px!important;
+ min-height:34px!important;
+ max-width:34px!important;
+ max-height:34px!important;
+ flex:0 0 34px!important;
+ aspect-ratio:1/1!important;
+ padding:0!important;
+ border:0!important;
+ border-radius:12px!important;
+ overflow:hidden!important;
+ box-shadow:none!important;
+}
+.pv-footer .pv-footer-brand>.brand .pv-brand-mark img{
+ display:block!important;
+ width:100%!important;
+ height:100%!important;
+ min-width:100%!important;
+ min-height:100%!important;
+ object-fit:contain!important;
+ object-position:center!important;
+ padding:1px!important;
+}
+.pv-footer-brand>p,
+.pv-footer-grid>div:last-child>p{
+ font-family:Inter,system-ui,sans-serif!important;
+ font-size:.78rem!important;
+ font-weight:400!important;
+ line-height:1.65!important;
+}
+.pv-footer-brand>small{
+ display:block!important;
+ margin-top:25px!important;
+ font-family:Inter,system-ui,sans-serif!important;
+ font-size:.68rem!important;
+ font-weight:500!important;
+ line-height:1.5!important;
+}
+.pv-footer-grid>div>strong{
+ font-family:Sora,Inter,sans-serif!important;
+ font-size:.78rem!important;
+ font-weight:750!important;
+ line-height:1.35!important;
+}
+.pv-footer-grid a:not(.brand){
+ font-family:Inter,system-ui,sans-serif!important;
+ font-size:.75rem!important;
+ font-weight:600!important;
+ line-height:1.45!important;
+}
+.pv-footer-grid .pv-footer-cta{
+ font-family:Inter,system-ui,sans-serif!important;
+ font-size:.75rem!important;
+ font-weight:700!important;
+ line-height:1.4!important;
+}
+@media(max-width:760px){
+ .pv-footer .pv-footer-brand>.brand{min-height:30px!important}
+ .pv-footer .pv-footer-brand>.brand .pv-brand-mark{
+  width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important;
+  max-width:30px!important;max-height:30px!important;flex-basis:30px!important;
+ }
+ .pv-footer-brand>p,.pv-footer-grid>div:last-child>p{font-size:.75rem!important}
+ .pv-footer-brand>small{font-size:.66rem!important}
+ .pv-footer-grid>div>strong{font-size:.75rem!important}
+ .pv-footer-grid a:not(.brand),.pv-footer-grid .pv-footer-cta{font-size:.72rem!important}
+}
+@media(max-width:520px){
+ .pv-footer .pv-footer-brand>.brand{min-height:27px!important}
+ .pv-footer .pv-footer-brand>.brand .pv-brand-mark{
+  width:27px!important;height:27px!important;min-width:27px!important;min-height:27px!important;
+  max-width:27px!important;max-height:27px!important;flex-basis:27px!important;
+  border-radius:10px!important;
+ }
+ .pv-footer-brand>p,.pv-footer-grid>div:last-child>p{font-size:.73rem!important}
+ .pv-footer-brand>small{font-size:.65rem!important}
+ .pv-footer-grid>div>strong{font-size:.73rem!important}
+ .pv-footer-grid a:not(.brand),.pv-footer-grid .pv-footer-cta{font-size:.70rem!important}
+}
+
+
+/* GLOBAL PAGE RHYTHM — aligned content widths, section spacing and banner placement */
+:root{
+ --pv-page-section-y:clamp(48px,5.2vw,68px);
+ --pv-page-stack:clamp(28px,3.5vw,40px);
+ --pv-page-heading-gap:clamp(22px,2.8vw,30px);
+ --pv-banner-radius:30px;
+ --pv-banner-padding:clamp(30px,4.2vw,52px);
+}
+#main-content .page-view:not([data-page="home"]) .wrap{
+ width:min(1240px,calc(100% - 48px));
+ margin-inline:auto;
+}
+#main-content .page-view:not([data-page="home"]) section.section{
+ padding-top:var(--pv-page-section-y)!important;
+ padding-bottom:var(--pv-page-section-y)!important;
+}
+#main-content .page-view:not([data-page="home"]) .section-head{
+ margin:0 0 var(--pv-page-heading-gap)!important;
+}
+#main-content .page-view:not([data-page="home"]) .section-head .sub{
+ margin-top:0;
+}
+
+/* Studio and Works: matching banner footprint, padding, corners and following gap */
+#main-content .page-view[data-page="team"] .team-hero,
+#main-content .page-view[data-page="portfolio"] .portfolio-intro{
+ box-sizing:border-box;
+ min-height:260px;
+ margin:0 0 var(--pv-page-stack)!important;
+ padding:var(--pv-banner-padding)!important;
+ border-radius:var(--pv-banner-radius)!important;
+}
+#main-content .page-view[data-page="team"] .team-hero{
+ display:flex;
+ flex-direction:column;
+ align-items:flex-start;
+ justify-content:center;
+}
+#main-content .page-view[data-page="team"] .team-hero>.eyebrow{
+ margin:0 0 14px;
+}
+#main-content .page-view[data-page="team"] .team-hero h2{
+ margin:0 0 14px;
+}
+#main-content .page-view[data-page="team"] .team-hero .team-lead{
+ margin:0;
+}
+#main-content .page-view[data-page="team"] .team-heading{
+ margin:0 0 var(--pv-page-heading-gap)!important;
+}
+#main-content .page-view[data-page="portfolio"] .portfolio-intro{
+ align-items:center;
+}
+#main-content .page-view[data-page="portfolio"] .portfolio-section-label{
+ margin:0 2px var(--pv-page-heading-gap)!important;
+}
+#main-content .page-view[data-page="portfolio"] .featured-portfolio{
+ margin-bottom:var(--pv-page-stack);
+}
+
+/* Consistent vertical rhythm for each page's internal content groups */
+#main-content .page-view:not([data-page="home"]) .commission-section-head{
+ margin:var(--pv-page-stack) 0 var(--pv-page-heading-gap)!important;
+}
+#main-content .page-view:not([data-page="home"]) .commission-form-layout{
+ margin-top:var(--pv-page-stack)!important;
+}
+#main-content .page-view:not([data-page="home"]) .commission-bottom{
+ margin:var(--pv-page-stack) 0 0!important;
+}
+#main-content .page-view:not([data-page="home"]) .team-note{
+ margin:var(--pv-page-stack) 0!important;
+}
+#main-content .page-view:not([data-page="home"]) .team-cta{
+ margin-top:var(--pv-page-stack)!important;
+}
+#main-content .page-view:not([data-page="home"]) .track-search{
+ margin-top:var(--pv-page-heading-gap);
+}
+#main-content .page-view:not([data-page="home"]) .track-result{
+ margin-top:var(--pv-page-heading-gap);
+}
+#main-content .page-view:not([data-page="home"]) .track-help{
+ margin-top:var(--pv-page-stack);
+}
+#main-content .page-view:not([data-page="home"]) .license-columns{
+ margin:var(--pv-page-heading-gap) 0;
+}
+
+/* Homepage sections use the same vertical rhythm as the other studio pages */
+.page-view[data-page="home"] .pv-section,
+.page-view[data-page="home"] .pv-services-preview,
+.page-view[data-page="home"] .pv-about-preview,
+.page-view[data-page="home"] .pv-team-preview,
+.page-view[data-page="home"] .pv-faq-preview{
+ padding-top:var(--pv-page-section-y)!important;
+ padding-bottom:var(--pv-page-section-y)!important;
+}
+.page-view[data-page="home"] .pv-section-head{
+ margin-bottom:var(--pv-page-heading-gap);
+}
+.page-view[data-page="home"] .pv-bottom-cta{
+ padding-top:0;
+ padding-bottom:var(--pv-page-section-y);
+}
+
+/* Tablet: preserve shared banner and page spacing without crowding */
+@media(max-width:760px){
+ :root{
+  --pv-page-section-y:48px;
+  --pv-page-stack:30px;
+  --pv-page-heading-gap:22px;
+  --pv-banner-padding:28px;
+ }
+ #main-content .page-view:not([data-page="home"]) .wrap{
+  width:min(calc(100% - 36px),640px);
+ }
+ #main-content .page-view[data-page="team"] .team-hero,
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro{
+  min-height:220px;
+ }
+ #main-content .page-view[data-page="team"] .team-heading{
+  margin-top:0!important;
+ }
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro{
+  gap:24px;
+ }
+}
+
+/* Mobile: identical banner edge, padding and following rhythm on Studio and Works */
+@media(max-width:560px){
+ :root{
+  --pv-page-section-y:42px;
+  --pv-page-stack:26px;
+  --pv-page-heading-gap:20px;
+  --pv-banner-padding:24px 22px;
+  --pv-banner-radius:24px;
+ }
+ #main-content .page-view:not([data-page="home"]) .wrap{
+  width:calc(100% - 30px);
+ }
+ #main-content .page-view[data-page="team"] .team-hero,
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro{
+  min-height:0;
+  margin-bottom:var(--pv-page-stack)!important;
+  padding:var(--pv-banner-padding)!important;
+  border-radius:var(--pv-banner-radius)!important;
+ }
+ #main-content .page-view[data-page="team"] .team-hero{
+  display:flex;
+  justify-content:center;
+ }
+ #main-content .page-view[data-page="team"] .team-heading{
+  margin:0 0 var(--pv-page-heading-gap)!important;
+ }
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro{
+  display:block;
+ }
+ #main-content .page-view[data-page="portfolio"] .portfolio-intro-mark{
+  width:118px;
+  height:118px;
+  margin:24px auto 4px;
+ }
+ #main-content .page-view[data-page="portfolio"] .portfolio-section-label{
+  margin:0 2px var(--pv-page-heading-gap)!important;
+ }
+ #main-content .page-view:not([data-page="home"]) .commission-section-head{
+  margin-top:var(--pv-page-stack)!important;
+ }
+ #main-content .page-view:not([data-page="home"]) .commission-form-layout{
+  margin-top:var(--pv-page-stack)!important;
+ }
+ .page-view[data-page="home"] .pv-section,
+ .page-view[data-page="home"] .pv-services-preview,
+ .page-view[data-page="home"] .pv-about-preview,
+ .page-view[data-page="home"] .pv-team-preview,
+ .page-view[data-page="home"] .pv-faq-preview{
+  padding-top:42px!important;
+  padding-bottom:42px!important;
+ }
+}
+
+
 </style>
+<link rel="stylesheet" href="assets/css/typography.css">
+<link rel="stylesheet" href="assets/css/page-palettes.css">
+<link rel="stylesheet" href="assets/css/banner-alignment.css">
+<link rel="stylesheet" href="assets/css/team-gallery-flow.css">
+<link rel="stylesheet" href="assets/css/freebies.css">
+<link rel="stylesheet" href="assets/css/asset-placeholders.css">
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAAGFBMVEUAAAD9WaFRHDP18fabN2NfXV9wKEiin6Ph7EosAAAESUlEQVR42u2cT2sTQRjG350kbaGUJCCCB2ULHoUq0qM09eBRAwq9tl9AevHzNFdv+QD+CXgUoUcPgnuW1mStRdumiQfbprDTZOedZ+bF+j6XNttsnl9nJjPPbN4NkUqlUqlUKpVKpVKpVCqVSnVdNfdY2L/ZbJV6YhLIf5FoPCjzTBPMv6SMsH8QALNIogCmTqIAbv54ADMmWYBxQxZgvUGiAOu7JArg7o8FYPhDATj+SACWPxCA548D2OL5wwC2uiQKwPYHJaJlW/iJmIiWB/xzjbA/AiD18QcApLnX6RVvgKuH8e8yp1c97atLvglK2N8TwN/fDwDg7wWA8PcZhC4bsBAtYPd/GA3A7r/yxjWWV7D+Pfo57zYRMVvAXOUfaQzYN6Acfx4A0J8HsIbz50WypuVYvzA7hYtktnPYoQCUivORLEDC9scAJN9lU3HNwx8BUPsmm4r9/P0BPP29ASqe/r4AlT3ZVEze/p4A/vsqT4DJBNiOeYFiEgcsU2CM1dCmVeHVsGaEAcxQGGBIwgD8t4FB2aeyACn1ZAF6wmOgRjQvCvCUaLgtCPA8I6IPr6TWgo0v58vAra77WsBZUJOFi99+0cbCxYI0+nFn9bOJc31goqPWpQe7Il1Qe9nz6AJIHvg7Cm53xfLA6xYRPeoKJqL5e0SfJBPREf+FQGvBLp3IAmyzzwxTR/QfAmTU0i5QAAVg7pFgANnZz3XhFnAuJQEBnGcB91IObAswSkmgAMtd2XcBq5QDCMAr5YABdJmlHDCAF8xPjWAAb//VtaCKeZU6+1RIC9hLKQbRAOz+z6K1QHWJ6LTo34kFYOz/fyfaGBh7+SOK2SzHVjqy84BLKYER9g8B4FZKgQI4ZfrjW6DfI1EA50XZHyC7/MC9lALUAmcX2xilFNAu4JRyGGF/JACvlAQHwCylMML+OABuKQcIoFITDaU+pSRG2N8V4O6cJZJ5ldK4AaT7i5vF9W+PiH213g0gzYk6hJUTQE54OQBUm1P+2AoPAKml9wAI5F8aIJR/WYBg/iUBZvtn7L11mSdh7qWYmibL+/dnFLMF6IKQ/38ZgLD+swFMWP+ZAKZOogCuN/OjAYzrzfxgAJt/GhNgreifZxEBLDdzPxhF7AKL/8q7iFOx5ROgs/gbaSou+nuUroJCqZEGGEcFsHQB3YwJMG4Xj53cILpcUx+2C3buF4+dNlLwUJj2Yu8tBEm+iW2B6ZHM+sUWqx8JOA/MyIQzvlojfCa09ULkVJw0RFuAKBnIZkIaJcIANMqFAQITlJnVRofCAHR8KAxAxwfCADQ8EAYIR1B6aQ1FUH5tD0TgEC7CELikm2FfOhVTXRogqwsDUNYQBqCvbWEA2mkLA6AJOHlnEpXjXCkNG5VZ2ywkAW+fByRgbjRxBNydLoyAn/qThti7ALpl4gOMEvC1Egb8E1KpVCqVSqVSqVQqlUqlUqmugf4AirTYciVwT/UAAAAASUVORK5CYII=">
 <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAAGFBMVEUAAAD9WaFRHDP18fabN2NfXV9wKEiin6Ph7EosAAAESUlEQVR42u2cT2sTQRjG350kbaGUJCCCB2ULHoUq0qM09eBRAwq9tl9AevHzNFdv+QD+CXgUoUcPgnuW1mStRdumiQfbprDTZOedZ+bF+j6XNttsnl9nJjPPbN4NkUqlUqlUKpVKpVKpVCqVSnVdNfdY2L/ZbJV6YhLIf5FoPCjzTBPMv6SMsH8QALNIogCmTqIAbv54ADMmWYBxQxZgvUGiAOu7JArg7o8FYPhDATj+SACWPxCA548D2OL5wwC2uiQKwPYHJaJlW/iJmIiWB/xzjbA/AiD18QcApLnX6RVvgKuH8e8yp1c97atLvglK2N8TwN/fDwDg7wWA8PcZhC4bsBAtYPd/GA3A7r/yxjWWV7D+Pfo57zYRMVvAXOUfaQzYN6Acfx4A0J8HsIbz50WypuVYvzA7hYtktnPYoQCUivORLEDC9scAJN9lU3HNwx8BUPsmm4r9/P0BPP29ASqe/r4AlT3ZVEze/p4A/vsqT4DJBNiOeYFiEgcsU2CM1dCmVeHVsGaEAcxQGGBIwgD8t4FB2aeyACn1ZAF6wmOgRjQvCvCUaLgtCPA8I6IPr6TWgo0v58vAra77WsBZUJOFi99+0cbCxYI0+nFn9bOJc31goqPWpQe7Il1Qe9nz6AJIHvg7Cm53xfLA6xYRPeoKJqL5e0SfJBPREf+FQGvBLp3IAmyzzwxTR/QfAmTU0i5QAAVg7pFgANnZz3XhFnAuJQEBnGcB91IObAswSkmgAMtd2XcBq5QDCMAr5YABdJmlHDCAF8xPjWAAb//VtaCKeZU6+1RIC9hLKQbRAOz+z6K1QHWJ6LTo34kFYOz/fyfaGBh7+SOK2SzHVjqy84BLKYER9g8B4FZKgQI4ZfrjW6DfI1EA50XZHyC7/MC9lALUAmcX2xilFNAu4JRyGGF/JACvlAQHwCylMML+OABuKQcIoFITDaU+pSRG2N8V4O6cJZJ5ldK4AaT7i5vF9W+PiH213g0gzYk6hJUTQE54OQBUm1P+2AoPAKml9wAI5F8aIJR/WYBg/iUBZvtn7L11mSdh7qWYmibL+/dnFLMF6IKQ/38ZgLD+swFMWP+ZAKZOogCuN/OjAYzrzfxgAJt/GhNgreifZxEBLDdzPxhF7AKL/8q7iFOx5ROgs/gbaSou+nuUroJCqZEGGEcFsHQB3YwJMG4Xj53cILpcUx+2C3buF4+dNlLwUJj2Yu8tBEm+iW2B6ZHM+sUWqx8JOA/MyIQzvlojfCa09ULkVJw0RFuAKBnIZkIaJcIANMqFAQITlJnVRofCAHR8KAxAxwfCADQ8EAYIR1B6aQ1FUH5tD0TgEC7CELikm2FfOhVTXRogqwsDUNYQBqCvbWEA2mkLA6AJOHlnEpXjXCkNG5VZ2ywkAW+fByRgbjRxBNydLoyAn/qThti7ALpl4gOMEvC1Egb8E1KpVCqVSqVSqVQqlUqlUqmugf4AirTYciVwT/UAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="assets/css/design-system.css">
 </head>
 <body>
-<header><div class="wrap"><nav aria-label="Main navigation"><a class="brand" href="#home" data-page-link="home"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAAGFBMVEUAAAD9WaFRHDP18fabN2NfXV9wKEiin6Ph7EosAAAESUlEQVR42u2cT2sTQRjG350kbaGUJCCCB2ULHoUq0qM09eBRAwq9tl9AevHzNFdv+QD+CXgUoUcPgnuW1mStRdumiQfbprDTZOedZ+bF+j6XNttsnl9nJjPPbN4NkUqlUqlUKpVKpVKpVCqVSnVdNfdY2L/ZbJV6YhLIf5FoPCjzTBPMv6SMsH8QALNIogCmTqIAbv54ADMmWYBxQxZgvUGiAOu7JArg7o8FYPhDATj+SACWPxCA548D2OL5wwC2uiQKwPYHJaJlW/iJmIiWB/xzjbA/AiD18QcApLnX6RVvgKuH8e8yp1c97atLvglK2N8TwN/fDwDg7wWA8PcZhC4bsBAtYPd/GA3A7r/yxjWWV7D+Pfo57zYRMVvAXOUfaQzYN6Acfx4A0J8HsIbz50WypuVYvzA7hYtktnPYoQCUivORLEDC9scAJN9lU3HNwx8BUPsmm4r9/P0BPP29ASqe/r4AlT3ZVEze/p4A/vsqT4DJBNiOeYFiEgcsU2CM1dCmVeHVsGaEAcxQGGBIwgD8t4FB2aeyACn1ZAF6wmOgRjQvCvCUaLgtCPA8I6IPr6TWgo0v58vAra77WsBZUJOFi99+0cbCxYI0+nFn9bOJc31goqPWpQe7Il1Qe9nz6AJIHvg7Cm53xfLA6xYRPeoKJqL5e0SfJBPREf+FQGvBLp3IAmyzzwxTR/QfAmTU0i5QAAVg7pFgANnZz3XhFnAuJQEBnGcB91IObAswSkmgAMtd2XcBq5QDCMAr5YABdJmlHDCAF8xPjWAAb//VtaCKeZU6+1RIC9hLKQbRAOz+z6K1QHWJ6LTo34kFYOz/fyfaGBh7+SOK2SzHVjqy84BLKYER9g8B4FZKgQI4ZfrjW6DfI1EA50XZHyC7/MC9lALUAmcX2xilFNAu4JRyGGF/JACvlAQHwCylMML+OABuKQcIoFITDaU+pSRG2N8V4O6cJZJ5ldK4AaT7i5vF9W+PiH213g0gzYk6hJUTQE54OQBUm1P+2AoPAKml9wAI5F8aIJR/WYBg/iUBZvtn7L11mSdh7qWYmibL+/dnFLMF6IKQ/38ZgLD+swFMWP+ZAKZOogCuN/OjAYzrzfxgAJt/GhNgreifZxEBLDdzPxhF7AKL/8q7iFOx5ROgs/gbaSou+nuUroJCqZEGGEcFsHQB3YwJMG4Xj53cILpcUx+2C3buF4+dNlLwUJj2Yu8tBEm+iW2B6ZHM+sUWqx8JOA/MyIQzvlojfCa09ULkVJw0RFuAKBnIZkIaJcIANMqFAQITlJnVRofCAHR8KAxAxwfCADQ8EAYIR1B6aQ1FUH5tD0TgEC7CELikm2FfOhVTXRogqwsDUNYQBqCvbWEA2mkLA6AJOHlnEpXjXCkNG5VZ2ywkAW+fByRgbjRxBNydLoyAn/qThti7ALpl4gOMEvC1Egb8E1KpVCqVSqVSqVQqlUqlUqmugf4AirTYciVwT/UAAAAASUVORK5CYII=" alt="" aria-hidden="true"> PERIVELLE</a><a class="navlink" href="#home" data-page-link="home" aria-current="page">Home</a><a class="navlink" href="#portfolio" data-page-link="portfolio">Portfolio</a><a class="navlink" href="#services" data-page-link="services">Services</a><a class="navlink" href="#team" data-page-link="team">Our Team</a><a class="navlink" href="#custom" data-page-link="custom">Commission</a><a class="navlink" href="#track" data-page-link="track">Track</a><a class="navlink" href="#license" data-page-link="license">Licensing</a><a class="navlink" href="#faq" data-page-link="faq">FAQ</a></nav></div></header>
+<header class="pv-header">
+  <div class="wrap">
+    <nav aria-label="Main navigation">
+      <a class="brand pv-brand" href="#home" data-page-link="home" aria-label="Perivelle Studio home">
+        <span class="pv-brand-mark"><img src="assets/brand/pfp.webp" alt="" aria-hidden="true"></span>
+        <span>perivelle<span class="pv-brand-star">✦</span></span>
+      </a>
+      <a class="navlink" href="#home" data-page-link="home" aria-current="page">Home</a>
+      <a class="navlink" href="#team" data-page-link="team">Studio</a>
+      <a class="navlink" href="#portfolio" data-page-link="portfolio">Works</a>
+      
+      <a class="navlink" href="#services" data-page-link="services">Services</a>
+      <a class="navlink" href="#custom" data-page-link="custom">Commission</a>
+      <a class="navlink pv-track-navlink" href="#track" data-page-link="track">Track Order</a>
+      <a class="pv-nav-cta" href="#custom">Contact <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
 <main id="main-content">
-<div class="page-view" data-page="home"><section class="hero" id="home"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">AUDIO IDENTITY FOR VTUBERS & CREATORS</p><h1>More than BGM. <em>Build your world’s audio identity.</em></h1><p>Original BGM, lore music, original songs, instrumental covers, sound alerts, and stingers—crafted to bring your VTuber character, stream, and story to life.</p><div class="actions"><a class="btn" href="#portfolio">Explore the portfolio ↘</a><a class="btn secondary" href="#custom">Start a commission</a></div><div class="commission-status-card hero-kicker" id="publicCommissionStatus" aria-label="Commission availability">
- <div class="commission-status-top"><span class="commission-status-icon" aria-hidden="true">✦</span><span class="commission-status-label">COMMISSIONS</span><span class="commission-status-live"><i></i> LIVE UPDATE</span></div>
- <div class="commission-status-main"><strong id="publicCommissionAvailability">Status update soon</strong><span id="publicCommissionBatch">Batch details will appear here</span></div>
- <div class="commission-status-bottom"><strong id="publicCommissionSlots">3 Available Slots</strong></div>
-</div></div><div class="hero-art" aria-hidden="true">
-<svg class="hero-visual" viewBox="0 0 520 520" focusable="false" xmlns="http://www.w3.org/2000/svg">
-<defs>
- <radialGradient id="dream-sky" cx="48%" cy="38%" r="72%"><stop stop-color="#fff"/><stop offset=".5" stop-color="#e9e4ff"/><stop offset="1" stop-color="#d9eaff"/></radialGradient>
- <radialGradient id="dream-orb" cx="32%" cy="25%" r="75%"><stop stop-color="#fff"/><stop offset=".27" stop-color="#e9e4ff"/><stop offset=".68" stop-color="#b9b1ec"/><stop offset="1" stop-color="#8faedc"/></radialGradient>
- <linearGradient id="dream-wave" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#9e91d8"/><stop offset=".5" stop-color="#829fce"/><stop offset="1" stop-color="#b39adf"/></linearGradient>
- <filter id="dream-shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="15"/></filter>
- <filter id="dream-glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
- <clipPath id="orb-clip"><circle cx="258" cy="252" r="112"/></clipPath>
-</defs>
-<rect width="520" height="520" rx="34" fill="url(#dream-sky)"/>
-<circle cx="256" cy="278" r="170" fill="#b9b0e6" opacity=".2" filter="url(#dream-shadow)"/>
-<g fill="none" stroke="#a69bd5" stroke-width="1.2" opacity=".58"><ellipse cx="258" cy="252" rx="205" ry="91" transform="rotate(-27 258 252)"/><ellipse cx="258" cy="252" rx="174" ry="126" transform="rotate(42 258 252)"/><path d="M65 318C112 392 212 425 318 396s120-65 139-117" stroke-dasharray="3 8"/></g>
-<g fill="#fff"><path d="m96 111 4 12 12 4-12 4-4 12-4-12-12-4 12-4z"/><path d="m400 108 3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><path d="m117 377 3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/><circle cx="373" cy="357" r="3"/><circle cx="164" cy="165" r="2.5"/><circle cx="435" cy="246" r="2.5"/></g>
-<g fill="#b9a9e7"><circle cx="83" cy="239" r="5"/><circle cx="413" cy="169" r="4"/><circle cx="349" cy="430" r="5"/></g>
-<path d="M377 74a43 43 0 1 0 45 61 38 38 0 0 1-45-61z" fill="#fff" filter="url(#dream-glow)"/>
-<circle cx="258" cy="252" r="126" fill="#a99cdb" opacity=".3" filter="url(#dream-shadow)"/>
-<circle cx="258" cy="252" r="112" fill="url(#dream-orb)" stroke="#fff" stroke-opacity=".9" stroke-width="2"/>
-<g clip-path="url(#orb-clip)">
- <path d="M142 277c47-70 92 68 138-4s83-60 133 1" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="39"/>
- <path d="M145 214c45-52 89-37 117-2s68 48 111-13" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>
- <g fill="none" stroke="url(#dream-wave)" stroke-width="5" stroke-linecap="round"><path d="M174 255v-10m14 24v-38m14 47v-56m14 65v-75m14 82v-91m14 88v-70m14 57v-45m14 35v-29m14 21v-14"/></g>
- <ellipse cx="218" cy="194" rx="42" ry="20" fill="#fff" opacity=".34" transform="rotate(-32 218 194)"/>
-</g>
-<circle cx="258" cy="252" r="112" fill="none" stroke="#fff" stroke-opacity=".76" stroke-width="2"/>
-<path d="M174 163c29-23 65-33 101-29" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".76"/>
-<g transform="translate(385 300)"><circle r="28" fill="#fff" fill-opacity=".5" stroke="#fff" stroke-width="1.5"/><circle r="16" fill="#d6e7ff" fill-opacity=".8"/><path d="M-10-3c5-9 15-9 20 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></g>
-<g transform="translate(128 182)"><circle r="17" fill="#fff" fill-opacity=".55" stroke="#fff" stroke-width="1.4"/><path d="M-7 2c4-8 10-8 14 0" fill="none" stroke="#a69bd5" stroke-width="2" stroke-linecap="round"/></g>
-<g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="m308 135 5 9 9 5-9 5-5 9-5-9-9-5 9-5z"/><path d="m111 292 3 6 6 3-6 3-3 6-3-6-6-3 6-3z"/></g>
-<path d="M51 451c80 26 154 24 214-1s120-23 205 5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2"/>
-</svg>
-<div class="hero-float hero-float-top"><span class="float-symbol">✧</span><span><b>Dreamlike sound</b><small>Music for imagined worlds</small></span></div>
-<div class="hero-float hero-float-bottom"><span class="float-wave">∿</span><span><b>Made for your lore</b><small>BGM · songs · sound design</small></span></div>
-<span class="hero-art-caption mono">PERIVELLE · AUDIO MAGIC</span>
-</div></section><section class="home-intro"><div class="wrap home-intro-inner"><div><p class="eyebrow">A STUDIO FOR YOUR VIRTUAL WORLD</p><h2>One character. One world. A sound that feels like yours.</h2><p>From stream-ready background music to lore themes and signature alerts, Perivelle helps creators build a recognizable audio identity.</p></div><div class="home-pillars"><span>Original compositions</span><span>Seamless stream loops</span><span>Key-matched sound design</span></div><a class="text-link" href="#portfolio">Discover what we create ↗</a></div></section></div>
-<div class="page-view" data-page="team" hidden>
+<div class="page-view" data-page="home">
+  <section class="pv-hero" id="home">
+    <div class="pv-hero-decor pv-hero-decor-one" aria-hidden="true"></div>
+    <div class="pv-hero-decor pv-hero-decor-two" aria-hidden="true"></div>
+    <div class="wrap pv-hero-grid">
+      <div class="pv-hero-copy">
+        <p class="pv-eyebrow"><span></span> PERIVELLE STUDIO</p>
+        <h1>Sound that brings your <em>world to life.</em></h1>
+        <p class="pv-hero-lead">Creative audio studio for VTubers, streamers, and creators. We craft music, sound design, and audio experiences with character.</p>
+        <div class="pv-actions">
+          <a class="btn pv-primary" href="#custom">Commission Now <span aria-hidden="true">↗</span></a>
+          <a class="btn pv-secondary" href="#portfolio"><span class="pv-play-icon" aria-hidden="true">▶</span> Our Showreel</a>
+        </div>
+        <div class="pv-hero-status commission-status-card" id="publicCommissionStatus" aria-label="Commission availability">
+          <div class="commission-status-top"><span class="commission-status-icon" aria-hidden="true">✦</span><span class="commission-status-label">COMMISSION STATUS</span><span class="commission-status-live"><i></i> LIVE</span></div>
+          <div class="commission-status-main"><strong id="publicCommissionAvailability">Status update soon</strong><span id="publicCommissionBatch">New projects and custom requests welcome</span></div>
+          <div class="commission-status-bottom"><strong id="publicCommissionSlots">Check availability</strong></div>
+        </div>
+      </div>
+      <div class="pv-hero-art" aria-label="Perivelle Studio mascot">
+        <div class="pv-orbit pv-orbit-a" aria-hidden="true"></div>
+        <div class="pv-orbit pv-orbit-b" aria-hidden="true"></div>
+        <span class="pv-spark pv-spark-a" aria-hidden="true">✦</span>
+        <span class="pv-spark pv-spark-b" aria-hidden="true">✧</span>
+        <span class="pv-spark pv-spark-c" aria-hidden="true">✦</span>
+        <div class="pv-wave-card" aria-hidden="true"><span></span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <img class="pv-mascot" src="assets/brand/hero-mascot.webp" alt="Perivelle's sleepy white fox mascot wearing pink and purple headphones" width="640" height="397" fetchpriority="high">
+        <div class="pv-art-caption"><span class="pv-caption-dot"></span> A LITTLE MAGIC IN EVERY NOTE</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pv-trusted" aria-label="Who we create for">
+    <div class="wrap pv-trusted-inner">
+      <span class="pv-trusted-label">TRUSTED BY CREATORS & PROJECTS</span>
+      <span class="pv-trust-pill"><b>✧</b> VTubers</span>
+      <span class="pv-trust-pill"><b>◌</b> Streamers</span>
+      <span class="pv-trust-pill"><b>♧</b> Indie Games</span>
+      <span class="pv-trust-pill"><b>✳</b> Content Creators</span>
+      <span class="pv-trust-more">and more...</span>
+    </div>
+  </section>
+
+  <section class="pv-section pv-works-preview">
+    <div class="wrap">
+      <div class="pv-section-head">
+        <div><p class="pv-eyebrow"><span></span> A GLIMPSE OF OUR WORLD</p><h2>Selected <em>Works</em></h2><p>A glimpse of what we’ve been crafting.</p></div>
+        <a class="pv-text-link" href="#portfolio">View All Works <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="pv-work-grid">
+        <a class="pv-work-card pv-work-featured" href="#portfolio">
+          <img src="assets/illustrations/portfolio-origin-starlight.svg" alt="Celestial fantasy artwork for an original music concept" loading="lazy">
+          <span class="pv-work-tag">ORIGINAL BGM</span>
+          <span class="pv-work-meta"><strong>Twilight Frequency</strong><small>Atmospheric · Dreamlike · 02:18</small></span>
+          <span class="pv-work-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="pv-work-card" href="#portfolio">
+          <img src="assets/illustrations/portfolio-cozy-room.svg" alt="Cozy moonlit room artwork" loading="lazy">
+          <span class="pv-work-tag">STREAM BGM</span>
+          <span class="pv-work-meta"><strong>Moonlit Story</strong><small>Warm ambience · Loop</small></span>
+          <span class="pv-work-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="pv-work-card" href="#portfolio">
+          <img src="assets/illustrations/portfolio-signature-alert.svg" alt="Cute celestial mascot holding a glowing star" loading="lazy">
+          <span class="pv-work-tag">SOUND IDENTITY</span>
+          <span class="pv-work-meta"><strong>Starlight Signal</strong><small>Alerts · Stingers · SFX</small></span>
+          <span class="pv-work-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <p class="pv-concept-note">Selected visual previews · Explore the portfolio for current audio samples and project details.</p>
+    </div>
+  </section>
+
+  <section class="pv-section pv-services-preview">
+    <div class="wrap">
+      <div class="pv-section-head">
+        <div><p class="pv-eyebrow"><span></span> MADE FOR YOUR WORLD</p><h2>Our <em>Services</em></h2><p>Audio production tailored to your creative needs.</p></div>
+        <a class="pv-text-link" href="#services">Explore Services <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="pv-service-grid">
+        <a class="pv-service-card" href="#services"><span class="pv-service-icon">〰</span><strong>BGM &amp; Soundtrack</strong><p>Background music for streams, videos, games, and more.</p></a>
+        <a class="pv-service-card" href="#services"><span class="pv-service-icon">♫</span><strong>Original Song</strong><p>Complete music production from composition to mix.</p></a>
+        <a class="pv-service-card" href="#services"><span class="pv-service-icon">♬</span><strong>Sound Alerts</strong><p>Custom alerts, notifications, and interaction sounds.</p></a>
+        <a class="pv-service-card" href="#services"><span class="pv-service-icon">✦</span><strong>Stingers &amp; Jingles</strong><p>Short, memorable audio for transitions and branding.</p></a>
+        <a class="pv-service-card" href="#services"><span class="pv-service-icon">☷</span><strong>Audio Editing</strong><p>Mixing, mastering, and vocal editing for your projects.</p></a>
+        <a class="pv-service-card" href="#services"><span class="pv-service-icon">◇</span><strong>Other Ideas</strong><p>Have a special idea? Let’s discuss it together.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="pv-about-preview">
+    <div class="wrap pv-about-panel">
+      <div class="pv-about-copy">
+        <p class="pv-eyebrow"><span></span> ABOUT US</p>
+        <h2>A creative studio for <em>creator’s worlds.</em></h2>
+        <p>Perivelle Studio is a creative audio studio focused on music and sound production for VTubers, streamers, games, and original projects. We turn ideas into sound, with character, story, and care.</p>
+        <a class="btn pv-secondary" href="#team">Meet the Studio <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="pv-about-art"><img src="assets/illustrations/portfolio-cozy-room.svg" alt="Dreamy illustrated music room with a moonlit window" loading="lazy"><span class="pv-about-sticker">MADE WITH<br>IMAGINATION ✦</span></div>
+    </div>
+  </section>
+
+  <section class="pv-section pv-team-preview">
+    <div class="wrap pv-team-row">
+      <div class="pv-team-heading"><p class="pv-eyebrow"><span></span> THE PEOPLE BEHIND THE SOUND</p><h2>Small team, <em>big imagination.</em></h2><p>Meet the people bringing every sound to life.</p></div>
+      <div class="pv-team-avatars" aria-label="Perivelle team">
+        <a href="#team" class="pv-team-avatar pv-avatar-one" aria-label="Meet bybi"><span>B</span><em class="pv-avatar-slot" aria-hidden="true">PHOTO</em><small>bybi</small></a>
+        <a href="#team" class="pv-team-avatar pv-avatar-two" aria-label="Meet rei"><span>R</span><em class="pv-avatar-slot" aria-hidden="true">PHOTO</em><small>rei</small></a>
+        <a href="#team" class="pv-team-avatar pv-avatar-three" aria-label="Meet yoz"><span>Y</span><em class="pv-avatar-slot" aria-hidden="true">PHOTO</em><small>yoz</small></a>
+        <a href="#team" class="pv-team-avatar pv-avatar-four" aria-label="Meet the studio"><img src="assets/brand/pfp.webp" alt="" loading="lazy"><small>studio</small></a>
+      </div>
+      <a class="pv-text-link" href="#team">Meet the Team <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <section class="pv-section pv-faq-preview">
+    <div class="wrap pv-faq-grid">
+      <div class="pv-faq-copy"><p class="pv-eyebrow"><span></span> FAQ</p><h2>A few things you might <em>wonder.</em></h2><p>Have questions before starting a project? Here are a few quick answers.</p><a class="pv-text-link" href="#faq">Read All FAQs <span aria-hidden="true">↗</span></a></div>
+      <div class="pv-faq-list">
+        <details><summary>What kind of projects do you accept?<span aria-hidden="true">⌄</span></summary><p>We create BGM, original songs, sound alerts, stingers, jingles, audio editing, and other custom audio for VTubers, streamers, and creators.</p></details>
+        <details><summary>How does the commission process work?<span aria-hidden="true">⌄</span></summary><p>Send us your brief and references. We’ll review the details, share a quotation, and begin production after confirmation.</p></details>
+        <details><summary>Can I request a custom package?<span aria-hidden="true">⌄</span></summary><p>Absolutely. Tell us what you have in mind and we’ll discuss a package that fits your project.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="pv-bottom-cta">
+    <div class="wrap pv-bottom-cta-inner">
+      <img src="assets/brand/hero-mascot.webp" alt="" loading="lazy">
+      <div><p class="pv-eyebrow"><span></span> COMMISSION · OPEN FOR IDEAS</p><h2>Let’s create something <em>together!</em></h2><p>Open for commission — music, sound design, and more.</p></div>
+      <a class="btn pv-primary" href="#custom">Make a Request <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+</div><div class="page-view" data-page="team" hidden>
 <section class="section team-page" id="team">
  <div class="wrap">
   <div class="team-hero">
@@ -1161,27 +2461,88 @@ html[data-theme="dark"] .contact-option .x-icon{color:#f4f1ff}
    <p class="team-lead">A small creative collective shaping original soundtracks, stream identities, and musical worlds for VTubers and creators.</p>
    <span class="team-orbit" aria-hidden="true">✧</span>
   </div>
-  <div class="section-head team-heading"><div><p class="eyebrow">OUR TEAM / MUSIC PRODUCERS</p><h2>Every world begins with a sound.</h2></div><p class="sub">Get to know the producers who bring each brief to life.</p></div>
+  <div class="section-head team-heading"><div><p class="eyebrow">OUR PRODUCERS / PERIVELLE SOUND COLLECTIVE</p><h2>Meet the people behind the music.</h2></div><p class="sub">Choose a producer to explore their sound, selected projects, and musical work.</p></div>
   <div class="team-grid">
-   <article class="team-card team-card-featured">
-    <div class="team-avatar team-avatar-bybi" aria-hidden="true"><span>B</span><i>✧</i></div>
-    <div class="team-info"><p class="eyebrow">MUSIC PRODUCER · PERIVELLE</p><h3>bybi</h3><p class="team-bio">Creating original sounds and musical atmospheres for virtual worlds, characters, and creators.</p><div class="team-tags"><span>Music Production</span><span>Original Music</span><span>Creative Audio</span></div></div>
-   </article>
-   <article class="team-card">
-    <div class="team-avatar team-avatar-rei" aria-hidden="true"><span>R</span><i>☾</i></div>
-    <div class="team-info"><p class="eyebrow">MUSIC PRODUCER · PERIVELLE</p><h3>rei</h3><p class="team-bio">Shaping musical ideas into expressive soundscapes for characters, streams, and stories.</p><div class="team-tags"><span>Music Production</span><span>Original Music</span><span>Creative Audio</span></div></div>
-   </article>
-   <article class="team-card">
-    <div class="team-avatar team-avatar-yoz" aria-hidden="true"><span>Y</span><i>✦</i></div>
-    <div class="team-info"><p class="eyebrow">MUSIC PRODUCER · PERIVELLE</p><h3>yoz</h3><p class="team-bio">Bringing fresh musical ideas to life through original compositions and thoughtful production.</p><div class="team-tags"><span>Music Production</span><span>Original Music</span><span>Creative Audio</span></div></div>
-   </article>
+   <a class="team-card team-card-featured" data-producer-id="bybi" href="#portfolio?creator=bybi" aria-label="Explore works by bybi">
+    <div class="team-avatar team-avatar-bybi" aria-hidden="true"><span>B</span><i>✧</i><small class="team-avatar-slot-label">PORTRAIT / PHOTO SLOT</small></div>
+    <div class="team-info"><p class="eyebrow">MUSIC PRODUCER · PERIVELLE</p><h3>bybi</h3><p class="team-bio">Creating original sounds and musical atmospheres for virtual worlds, characters, and creators.</p><div class="team-tags"><span>Music Production</span><span>Original Music</span><span>Creative Audio</span></div><span class="team-profile-cta">Explore works <span aria-hidden="true">↗</span></span></div>
+   </a>
+   <a class="team-card" data-producer-id="rei" href="#portfolio?creator=rei" aria-label="Explore works by rei">
+    <div class="team-avatar team-avatar-rei" aria-hidden="true"><span>R</span><i>☾</i><small class="team-avatar-slot-label">PORTRAIT / PHOTO SLOT</small></div>
+    <div class="team-info"><p class="eyebrow">MUSIC PRODUCER · PERIVELLE</p><h3>rei</h3><p class="team-bio">Shaping musical ideas into expressive soundscapes for characters, streams, and stories.</p><div class="team-tags"><span>Music Production</span><span>Original Music</span><span>Creative Audio</span></div><span class="team-profile-cta">Explore works <span aria-hidden="true">↗</span></span></div>
+   </a>
+   <a class="team-card" data-producer-id="yoz" href="#portfolio?creator=yoz" aria-label="Explore works by yoz">
+    <div class="team-avatar team-avatar-yoz" aria-hidden="true"><span>Y</span><i>✦</i><small class="team-avatar-slot-label">PORTRAIT / PHOTO SLOT</small></div>
+    <div class="team-info"><p class="eyebrow">MUSIC PRODUCER · PERIVELLE</p><h3>yoz</h3><p class="team-bio">Bringing fresh musical ideas to life through original compositions and thoughtful production.</p><div class="team-tags"><span>Music Production</span><span>Original Music</span><span>Creative Audio</span></div><span class="team-profile-cta">Explore works <span aria-hidden="true">↗</span></span></div>
+   </a>
   </div>
   <div class="team-note"><span>✦</span><p><strong>Every creator has a signature sound.</strong><br>Explore the people behind Perivelle and discover the sounds they create together.</p></div>
   <div class="team-cta"><div><p class="eyebrow">LET’S CREATE SOMETHING PERSONAL</p><h3>Have a world in mind?</h3><p>Tell us about your character, story, or stream concept.</p></div><a class="btn" href="#custom">Work with Perivelle ↗</a></div>
  </div>
 </section>
 </div>
-<div class="page-view" data-page="portfolio" hidden><section class="section portfolio-strip" id="portfolio"><div class="wrap"><div class="portfolio-intro"><div class="portfolio-intro-copy"><p class="eyebrow">THE PERIVELLE SHOWCASE · AUDIO MADE PERSONAL</p><h2>Every world has a <em>soundtrack.</em></h2><p>Explore original music and custom audio crafted to bring each creator’s identity, atmosphere, and story to life.</p></div><div class="portfolio-intro-mark" aria-hidden="true"><span>✳</span><i></i><i></i><i></i><i></i><i></i><small>LISTEN · FEEL · IMAGINE</small></div></div><div class="portfolio-section-label"><span>SELECTED WORKS</span><span>01 — 05 / COLLECTIONS</span></div><section class="featured-portfolio" id="featuredPortfolio" hidden><div class="featured-portfolio-heading"><p class="eyebrow">SELECTED WORKS</p><h2>Featured Portfolio</h2><p>A closer look at selected Perivelle productions.</p></div><div class="featured-portfolio-grid" id="featuredPortfolioGrid"></div></section><div class="portfolio-category-list"><section class="portfolio-category-group" data-portfolio-category="bgm"><h3 class="portfolio-category">BGM</h3><div class="portfolio-grid"></div></section><section class="portfolio-category-group" data-portfolio-category="sound-alerts"><h3 class="portfolio-category">SOUND ALERTS</h3><div class="portfolio-grid"><article class="product portfolio-video-card"><div class="portfolio-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/iUBVMpHvyWg" title="Perivelle Sound Alerts video preview" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></article></div></section><section class="portfolio-category-group" data-portfolio-category="stinger"><h3 class="portfolio-category">STINGER</h3><div class="portfolio-grid"></div></section><section class="portfolio-category-group" data-portfolio-category="og-song"><h3 class="portfolio-category">OG SONG</h3><div class="portfolio-grid"></div></section><section class="portfolio-category-group" data-portfolio-category="lore-music"><h3 class="portfolio-category">LORE MUSIC</h3><div class="portfolio-grid"></div></section></div></div></section></div><div class="page-view" data-page="catalog" hidden><section class="section" id="catalog"><div class="wrap"><div class="section-head"><div><p class="eyebrow" data-t="catalogEyebrow">THE SOUND COLLECTION</p><h2 data-t="catalogTitle">Find the right sound.</h2></div><p class="sub" data-t="catalogText">Browse releases by title, genre, and mood. The prices and details shown are sample content and should be replaced with your official catalog information.</p></div><div class="toolbar"><input class="control" id="search" type="search" data-ph="searchPlaceholder" placeholder="Search by title, genre, or mood" aria-label="Search music"><select class="control" id="mood" aria-label="Filter by mood"></select><select class="control" id="sort" aria-label="Sort catalog"><option value="featured" data-t="featured">Featured</option><option value="price-low" data-t="priceLow">Lowest price</option><option value="price-high" data-t="priceHigh">Highest price</option><option value="newest" data-t="newest">Newest</option></select><button id="favoritesOnly" type="button" aria-pressed="false" data-t="favoritesOnly">♡ Favorites</button></div><p id="resultCount" class="result-count" aria-live="polite"></p><div class="products" id="products"></div></div></section></div>
+<div class="page-view" data-page="portfolio" hidden><section class="section portfolio-strip" id="portfolio"><div class="wrap"><div class="portfolio-intro"><div class="portfolio-intro-copy"><p class="eyebrow">THE PERIVELLE SHOWCASE · AUDIO MADE PERSONAL</p><h2>Every world has a <em>soundtrack.</em></h2><p>Explore original music and custom audio crafted to bring each creator’s identity, atmosphere, and story to life.</p></div><div class="portfolio-intro-mark" aria-hidden="true"><span>✳</span><i></i><i></i><i></i><i></i><i></i><small>LISTEN · FEEL · IMAGINE</small></div></div><div class="portfolio-filter-stack" id="portfolioFilters">
+ <nav class="portfolio-filter-bar" id="portfolioServiceFilters" aria-label="Filter works by service">
+  <div class="portfolio-filter-copy"><p class="eyebrow">01 / SERVICE</p><span>Explore by service</span></div>
+  <div class="portfolio-filter-links">
+   <a href="#portfolio" data-portfolio-filter="service" data-filter-value="all" aria-current="page">All services</a>
+   <a href="#portfolio" data-portfolio-filter="service" data-filter-value="bgm">BGM</a>
+   <a href="#portfolio" data-portfolio-filter="service" data-filter-value="sound-alerts">Sound Alerts</a>
+   <a href="#portfolio" data-portfolio-filter="service" data-filter-value="stinger">Stinger</a>
+   <a href="#portfolio" data-portfolio-filter="service" data-filter-value="og-song">Original Song</a>
+   <a href="#portfolio" data-portfolio-filter="service" data-filter-value="lore-music">Lore Music</a>
+  </div>
+ </nav>
+ <nav class="portfolio-filter-bar" id="portfolioArtistFilters" aria-label="Filter works by artist">
+  <div class="portfolio-filter-copy"><p class="eyebrow">02 / ARTIST</p><span>Find a producer</span></div>
+  <div class="portfolio-filter-links">
+   <a href="#portfolio" data-portfolio-filter="creator" data-filter-value="all" aria-current="page">All artists</a>
+   <a href="#portfolio" data-portfolio-filter="creator" data-filter-value="bybi">bybi</a>
+   <a href="#portfolio" data-portfolio-filter="creator" data-filter-value="rei">rei</a>
+   <a href="#portfolio" data-portfolio-filter="creator" data-filter-value="yoz">yoz</a>
+  </div>
+ </nav>
+</div>
+<div class="portfolio-producer-empty" id="portfolioProducerEmpty" hidden aria-live="polite">
+ <span aria-hidden="true">✧</span>
+ <strong id="portfolioProducerEmptyTitle">No works listed yet</strong>
+ <p id="portfolioProducerEmptyText">Selected works will appear here once they are credited in the studio dashboard.</p>
+ <a href="#portfolio">Clear filters</a>
+</div>
+<div class="portfolio-section-label"><span>SELECTED WORKS</span><span>01 — 05 / COLLECTIONS</span></div><section class="featured-portfolio" id="featuredPortfolio" hidden><div class="featured-portfolio-heading"><p class="eyebrow">SELECTED WORKS</p><h2>Featured Portfolio</h2><p>A closer look at selected Perivelle productions.</p></div><div class="featured-portfolio-grid" id="featuredPortfolioGrid"></div></section><div class="portfolio-category-list"><section class="portfolio-category-group" data-portfolio-category="bgm"><h3 class="portfolio-category">BGM</h3><div class="portfolio-grid"></div></section><section class="portfolio-category-group" data-portfolio-category="sound-alerts"><h3 class="portfolio-category">SOUND ALERTS</h3><div class="portfolio-grid"><article class="product portfolio-video-card"><div class="portfolio-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/iUBVMpHvyWg" title="Perivelle Sound Alerts video preview" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></article></div></section><section class="portfolio-category-group" data-portfolio-category="stinger"><h3 class="portfolio-category">STINGER</h3><div class="portfolio-grid"></div></section><section class="portfolio-category-group" data-portfolio-category="og-song"><h3 class="portfolio-category">OG SONG</h3><div class="portfolio-grid"></div></section><section class="portfolio-category-group" data-portfolio-category="lore-music"><h3 class="portfolio-category">LORE MUSIC</h3><div class="portfolio-grid"></div></section></div></div></section></div><div class="page-view" data-page="catalog" hidden><section class="section" id="catalog"><div class="wrap"><div class="section-head"><div><p class="eyebrow" data-t="catalogEyebrow">THE SOUND COLLECTION</p><h2 data-t="catalogTitle">Find the right sound.</h2></div><p class="sub" data-t="catalogText">Browse releases by title, genre, and mood. The prices and details shown are sample content and should be replaced with your official catalog information.</p></div><div class="toolbar"><input class="control" id="search" type="search" data-ph="searchPlaceholder" placeholder="Search by title, genre, or mood" aria-label="Search music"><select class="control" id="mood" aria-label="Filter by mood"></select><select class="control" id="sort" aria-label="Sort catalog"><option value="featured" data-t="featured">Featured</option><option value="price-low" data-t="priceLow">Lowest price</option><option value="price-high" data-t="priceHigh">Highest price</option><option value="newest" data-t="newest">Newest</option></select><button id="favoritesOnly" type="button" aria-pressed="false" data-t="favoritesOnly">♡ Favorites</button></div><p id="resultCount" class="result-count" aria-live="polite"></p><div class="products" id="products"></div></div></section></div>
+<div class="page-view" data-page="freebies" hidden>
+ <section class="section freebies-page" id="freebies">
+  <div class="wrap">
+   <header class="freebies-heading">
+    <div class="freebies-heading-copy">
+     <p class="eyebrow"><span class="freebies-heading-dot" aria-hidden="true"></span> PERIVELLE / FREE AUDIO</p>
+     <h2>Little sounds. <em>Free to use.</em></h2>
+     <p>Press play, find your sound, and download the MP3 for your next stream or project.</p>
+    </div>
+    <aside class="freebies-weekly-note" aria-label="Weekly free audio releases">
+     <span class="freebies-note-label">THE FREE AUDIO LIBRARY</span>
+     <div class="freebies-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+     <strong>Fresh drops, every week.</strong>
+     <span class="freebies-note-meta">PREVIEW <b>·</b> DOWNLOAD <b>·</b> CREATE</span>
+    </aside>
+   </header>
+   <div class="freebies-list-head" id="freebiesListHead">
+    <div class="freebies-list-heading">
+     <span class="freebies-list-kicker">THE COLLECTION</span>
+     <span class="freebies-list-caption">A little something for your next stream</span>
+    </div>
+    <span class="freebies-list-count" id="freebiesCount">00 TRACKS</span>
+   </div>
+   <div class="freebies-list" id="freebiesGrid" aria-live="polite"></div>
+   <div class="freebies-empty" id="freebiesEmpty" hidden>
+    <span aria-hidden="true">♫</span>
+    <h3 id="freebiesEmptyTitle">The first free drop is on its way.</h3>
+    <p id="freebiesEmptyText">Check back soon for free BGM, sound alerts, and more from Perivelle.</p>
+   </div>
+   <p class="freebies-footnote"><span aria-hidden="true">✳</span> Please check the usage notes on each release before using the audio in your content.</p>
+  </div>
+ </section>
+</div>
 <div class="page-view" data-page="services" hidden><section class="section" id="services"><div class="wrap"><div class="section-head"><div><p class="eyebrow">SERVICES / STARTING AT</p><h2>Perivelle audio services.</h2></div><p class="sub">Starting prices should reflect your official rates. Final quotes depend on complexity, duration, licensing, and deadline.</p></div><div class="service-grid">
 <article class="service-card"><div class="service-art service-art-bgm" role="img" aria-label="Enchanted headphones surrounded by flowing musical notes"></div><p class="eyebrow">01 / STREAMING</p><h3>Custom BGM Loop</h3><p>A 1:00–1:30 seamless loop for Just Chatting, Loading, BRB, and everyday streams.</p><span class="starting">STARTING AT · [ADD PRICE]</span></article>
 <article class="service-card"><div class="service-art service-art-alerts" role="img" aria-label="Magical bell surrounded by sound waves"></div><p class="eyebrow">02 / INTERACTION</p><h3>Sound Alerts & Stinger</h3><p>A set of 5–7 SFX matched to your BGM key, plus a 1–3 second transition stinger.</p><span class="starting">STARTING AT · [ADD PRICE]</span></article>
@@ -1244,8 +2605,23 @@ html[data-theme="dark"] .contact-option .x-icon{color:#f4f1ff}
 </div>
 
 <div class="page-view" data-page="faq" hidden><section class="section" id="faq" style="padding-top:0"><div class="wrap faq"><p class="eyebrow" data-t="faqEyebrow">ORDER INFORMATION</p><h2 data-t="faqTitle">Before you choose.</h2><details><summary data-t="faqQ1">How do I order?</summary><p data-t="faqA1">Submit the commission form to generate your brief, then copy it and send it to Perivelle on Discord. We will review your request and send a quotation. Full payment is required after you approve the quotation and before production begins.</p></details><details><summary data-t="faqQ2">Are audio previews available?</summary><p data-t="faqA2">Audio preview files have not yet been added to this sample catalog. Add an official preview link for each product before launch.</p></details><details><summary data-t="faqQ3">Is my custom brief sent automatically?</summary><p data-t="faqA3">No. Your brief is generated in your browser, copied, and Discord opens so you can send it manually. No data is stored on a server.</p></details></div></section></div>
+<a class="freebies-edge-tab" href="#freebies" data-page-link="freebies" aria-label="Discover free audio downloads">
+ <span class="freebies-edge-label">FREE AUDIO DROPS</span>
+ <span class="freebies-edge-icon" aria-hidden="true">✧</span>
+</a>
 </main>
-<footer><div class="wrap foot"><strong>PERIVELLE <span style="color:#b6563b">✳</span></strong><p data-t="footerText">Original music for creators. Contact us on Discord for commissions and inquiries.</p></div></footer>
+
+
+
+<footer class="pv-footer">
+  <div class="wrap pv-footer-grid">
+    <div class="pv-footer-brand"><a class="brand" href="#home" data-page-link="home"><span class="pv-brand-mark"><img src="assets/brand/pfp.webp" alt="" aria-hidden="true"></span><span>perivelle<span class="pv-brand-star">✦</span></span></a><p>Original audio for creators, characters, and the worlds they bring to life.</p><small>© 2026 Perivelle Studio. All rights reserved.</small></div>
+    <div><strong>Explore</strong><a href="#home">Home</a><a href="#team">Studio</a><a href="#portfolio">Works</a><a href="#track">Track Order</a></div>
+    <div><strong>Services</strong><a href="#services">BGM &amp; Soundtrack</a><a href="#services">Original Song</a><a href="#services">Sound Alerts</a><a href="#services">Stingers &amp; Jingles</a></div>
+    <div><strong>Company</strong><a href="#custom">Contact</a><a href="#license">Terms of Service</a><a href="#license">Privacy &amp; Licensing</a><a href="#faq">FAQ</a></div>
+    <div><strong>Get in touch</strong><p>Have a project in mind? Reach out and let’s make something memorable.</p><a class="pv-footer-cta" href="#custom">Start a commission ↗</a></div>
+  </div>
+</footer>
 <dialog class="modal" id="cartDialog" aria-labelledby="cartHeading"><div class="modal-head"><h2 id="cartHeading" data-t="cartTitle">Your selection</h2><button class="close" type="button" data-close="cartDialog" aria-label="Close">×</button></div><p class="help" data-t="cartInfo">Checkout is not connected yet. Copy your selection and send it through Discord for confirmation.</p><div id="cartContent"></div><textarea class="summary" id="cartSummary" readonly hidden aria-label="Selection summary"></textarea><div class="modal-actions"><button class="btn" id="sendCart" type="button" hidden data-t="sendDiscord">Copy & Open Discord ↗</button><button class="quiet" id="clearCart" type="button" data-t="clearCart">Clear selection</button></div><p class="status" id="cartStatus" role="status" aria-live="polite"></p></dialog>
 <dialog class="modal success-dialog" id="commissionSuccessDialog" aria-labelledby="commissionSuccessTitle">
  <div class="success-mark" aria-hidden="true">✦</div>
@@ -1268,6 +2644,28 @@ html[data-theme="dark"] .contact-option .x-icon{color:#f4f1ff}
   <a class="contact-option" id="contactEmail" href="#" hidden><span class="contact-option-icon email-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 5h18v14H3V5Zm2 2v.4l7 5.1 7-5.1V7l-7 5-7-5Zm14 10V9.9l-7 5-7-5V17h14Z"/></svg></span><span>Email</span></a>
  </nav>
 </div>
+
+<div class="pv-audio-dock" id="pvAudioDock" data-empty="true" data-cover-empty="true" aria-label="Perivelle audio player">
+ <div class="pv-audio-panel" aria-live="polite">
+  <div class="pv-audio-track">
+   <img id="pvAudioCover" src="assets/brand/pfp.webp" alt="" width="40" height="40">
+   <div class="pv-audio-copy"><strong id="pvAudioTitle">Your next audio release</strong><span id="pvAudioArtist">Cover art + MP3 preview slot</span></div>
+  </div>
+  <div class="pv-audio-controls">
+   <button type="button" id="pvAudioPrevious" aria-label="Previous track" disabled>‹</button>
+   <button type="button" class="pv-audio-play" id="pvAudioPlay" aria-label="Play audio" disabled>▶</button>
+   <button type="button" id="pvAudioNext" aria-label="Next track" disabled>›</button>
+   <span class="pv-audio-time" id="pvAudioTime">0:00 / 0:00</span>
+  </div>
+  <input class="pv-audio-seek" id="pvAudioSeek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Audio progress" disabled>
+  <p class="pv-audio-empty" id="pvAudioEmpty">AUDIO SLOT · Add a track in Admin → Audio Player</p>
+ </div>
+ <button class="pv-audio-compact" id="pvAudioCompact" type="button" aria-label="Open audio player" aria-expanded="false">
+  <span class="pv-audio-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+ </button>
+ <audio id="pvAudioElement" preload="none"></audio>
+</div>
+
 <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><span class="theme-icon" aria-hidden="true">☾</span></button>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script>
@@ -1285,17 +2683,28 @@ function card(p){
  var embed=p.preview?previewFrame(p.preview):"";
  var isVideo=p.preview&&(/\.(mp4|webm|ogv)(?:$|\?)/i.test(p.preview));
  var isAudio=p.preview&&(/\.(mp3|wav|ogg|m4a|aac|flac)(?:$|\?)/i.test(p.preview));
+ var bars=Array.from({length:19},function(){return "<i></i>"}).join("");
  var art=p.preview?(embed
   ?'<iframe src="'+esc(embed)+'" title="'+esc(p.name)+' video preview" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
   :isVideo?'<video src="'+esc(p.preview)+'" controls preload="metadata" playsinline></video>'
   :isAudio?'<div class="product-audio-preview"><span>♫ Audio preview</span><audio src="'+esc(p.preview)+'" controls preload="none"></audio></div>'
   :'<a class="product-preview-fallback" href="'+esc(p.preview)+'" target="_blank" rel="noopener noreferrer">Open preview ↗</a>')
-  :'<span class="art-type">'+esc(p.type)+' · '+esc(p.genre)+'</span><span class="art-id">PERIVELLE / '+esc(p.id.slice(0,4).toUpperCase())+'</span>';
- return '<article class="product"><div class="product-art '+(p.preview?'has-video-preview':'')+'" style="--art:'+esc(p.color)+'">'+art+'</div><div class="product-body"><p class="eyebrow" style="margin:0">'+esc(moodName(p.mood))+' · '+esc(p.duration)+'</p><h3 class="product-title">'+esc(p.name)+'</h3><p class="product-desc">'+esc(p.description)+'</p><div class="product-bottom"><span class="price">'+fmt(p.price)+'</span><div class="card-buttons"><button class="btn secondary small-btn" type="button" data-detail="'+esc(p.id)+'">'+esc(tr("details"))+'</button></div></div></div></article>'
+  :'<div class="catalog-art-placeholder" aria-hidden="true"><span class="catalog-art-slot">COVER ART / 16:9</span><span class="catalog-art-mark">♫</span><span class="catalog-art-wave">'+bars+'</span><span class="catalog-art-caption">PRODUCT VISUAL SLOT</span></div><span class="art-type">'+esc(p.type)+' · '+esc(p.genre)+'</span><span class="art-id">PERIVELLE / '+esc(p.id.slice(0,4).toUpperCase())+'</span>';
+ return '<article class="product"><div class="product-art '+(p.preview?'has-video-preview':'has-art-placeholder')+'" style="--art:'+esc(p.color)+'">'+art+'</div><div class="product-body"><p class="eyebrow" style="margin:0">'+esc(moodName(p.mood))+' · '+esc(p.duration)+'</p><h3 class="product-title">'+esc(p.name)+'</h3><p class="product-desc">'+esc(p.description)+'</p><div class="product-bottom"><span class="price">'+fmt(p.price)+'</span><div class="card-buttons"><button class="btn secondary small-btn" type="button" data-detail="'+esc(p.id)+'">'+esc(tr("details"))+'</button></div></div></div></article>'
 }
 function renderProducts(){var q=$("#search").value.trim().toLowerCase(),m=$("#mood").value,sort=$("#sort").value,list=products.filter(function(p){return(!q||(p.name+" "+p.genre+" "+moodName(p.mood)+" "+p.type+" "+p.description).toLowerCase().indexOf(q)>-1)&&(!m||m===p.mood)&&(!showFavorites||favorites.indexOf(p.id)!==-1)});list.sort(function(a,b){if(sort==="price-low")return a.price-b.price;if(sort==="price-high")return b.price-a.price;if(sort==="newest")return b.date.localeCompare(a.date);return b.date.localeCompare(a.date)});$("#products").innerHTML=list.length?list.map(card).join(""):'<div class="empty">'+esc(tr("empty"))+'</div>';$("#resultCount").textContent=list.length+" "+("releases");$("#favoritesOnly").setAttribute("aria-pressed",showFavorites)}function cartMessage(items){var total=items.reduce(function(a,p){return a+p.price},0);return tr("cartBrief")+"\n\n"+items.map(function(p){return "• "+p.name+" — "+fmt(p.price)+" ("+p.type+", "+p.genre+")"}).join("\n")+"\n\n"+tr("price")+": "+fmt(total)+"\n\n"+("Please confirm availability, licensing, and payment details.")}
 function renderCart(){var items=cart.map(function(id){return products.find(function(p){return p.id===id})}).filter(Boolean);var countNode=$("#cartCount");if(countNode)countNode.textContent=items.length;var content=$("#cartContent"),summary=$("#cartSummary"),send=$("#sendCart");if(!items.length){content.innerHTML='<p class="empty">'+esc(tr("cartEmpty"))+'</p>';summary.hidden=true;send.hidden=true;return}var total=items.reduce(function(a,p){return a+p.price},0);content.innerHTML='<ul class="cart-list">'+items.map(function(p){return '<li><strong>'+esc(p.name)+'</strong> — '+fmt(p.price)+' <button type="button" class="quiet" data-remove="'+esc(p.id)+'">×</button></li>'}).join("")+'</ul><p><strong>'+esc(tr("price"))+': '+fmt(total)+'</strong></p>';summary.value=cartMessage(items);summary.hidden=true;send.hidden=false}
-function showProduct(id){var p=products.find(function(x){return x.id===id});if(!p)return;$("#productDialog").dataset.product=id;$("#productHeading").textContent=p.name;$("#productDetail").innerHTML='<p>'+esc(p.description)+'</p><p><strong>'+esc(tr("price"))+':</strong> '+fmt(p.price)+'</p><p><strong>'+esc(tr("type"))+':</strong> '+esc(p.type)+' · <strong>'+esc(tr("mood"))+':</strong> '+esc(moodName(p.mood))+' · <strong>'+esc(tr("genre"))+':</strong> '+esc(p.genre)+'</p><p><strong>'+esc(tr("duration"))+':</strong> '+esc(p.duration)+' · <strong>'+esc(tr("format"))+':</strong> '+esc(p.format)+'</p><p class="help">'+esc("Audio preview is not available yet. Please confirm licensing and availability through Discord.")+'</p>';$("#detailAdd").dataset.add=id;$("#productDialog").showModal()}function toast(msg){var t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(function(){t.hidden=true},2600)}function addCart(id){if(cart.indexOf(id)<0){cart.push(id);save();renderCart();renderProducts();toast(tr("added"))}else $("#cartDialog").showModal()}
+function showProduct(id){
+ var p=products.find(function(x){return x.id===id});if(!p)return;
+ $("#productDialog").dataset.product=id;$("#productHeading").textContent=p.name;
+ var hasAudio=p.preview&&/\.(mp3|wav|ogg|m4a|aac|flac)(?:$|\?)/i.test(p.preview);
+ var previewBlock=hasAudio
+  ?'<div class="product-detail-audio"><span>LISTEN TO THE PREVIEW</span><audio src="'+esc(p.preview)+'" controls preload="none"></audio></div>'
+  :'<div class="product-detail-preview-placeholder" aria-hidden="true"><span class="product-detail-preview-label">MP3 / AUDIO PREVIEW SLOT</span><span class="product-detail-preview-mark">♫</span><span class="product-detail-preview-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><small>Audio preview will appear here after upload</small></div>';
+ $("#productDetail").innerHTML='<p>'+esc(p.description)+'</p>'+previewBlock+'<p><strong>'+esc(tr("price"))+':</strong> '+fmt(p.price)+'</p><p><strong>'+esc(tr("type"))+':</strong> '+esc(p.type)+' · <strong>'+esc(tr("mood"))+':</strong> '+esc(moodName(p.mood))+' · <strong>'+esc(tr("genre"))+':</strong> '+esc(p.genre)+'</p><p><strong>'+esc(tr("duration"))+':</strong> '+esc(p.duration)+' · <strong>'+esc(tr("format"))+':</strong> '+esc(p.format)+'</p><p class="help">'+esc("Please confirm licensing and availability through Discord.")+'</p>';
+ $("#detailAdd").dataset.add=id;$("#productDialog").showModal();
+}
+function toast(msg){var t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(function(){t.hidden=true},2600)}function addCart(id){if(cart.indexOf(id)<0){cart.push(id);save();renderCart();renderProducts();toast(tr("added"))}else $("#cartDialog").showModal()}
 function sendToDiscord(text,status){window.open(DISCORD_URL,"_blank","noopener,noreferrer");function done(ok){status.textContent=ok?tr("copied"):tr("copyFallback")}if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(function(){done(true)}).catch(function(){done(false)})}else{var ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}ta.remove();done(ok)}}
 $("#search").addEventListener("input",renderProducts);$("#mood").addEventListener("change",renderProducts);$("#sort").addEventListener("change",renderProducts);$("#favoritesOnly").addEventListener("click",function(){showFavorites=!showFavorites;renderProducts()});var openCartButton=$("#openCart");if(openCartButton)openCartButton.addEventListener("click",function(){$("#cartDialog").showModal()});document.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;if(b.dataset.fav){var i=favorites.indexOf(b.dataset.fav);if(i<0)favorites.push(b.dataset.fav);else favorites.splice(i,1);save();renderProducts();toast(tr("saved"))}else if(b.dataset.add)addCart(b.dataset.add);else if(b.dataset.detail)showProduct(b.dataset.detail);else if(b.dataset.remove){cart=cart.filter(function(id){return id!==b.dataset.remove});save();renderCart();renderProducts()}else if(b.dataset.close)$("#"+b.dataset.close).close()});$("#copySuccessRequestId").addEventListener("click",async function(){var id=$("#successRequestId").textContent;try{await navigator.clipboard.writeText(id);this.textContent="Copied ✓"}catch(error){this.textContent="Select ID to copy";var range=document.createRange();range.selectNodeContents($("#successRequestId"));var selection=window.getSelection();selection.removeAllRanges();selection.addRange(range)}});$("#clearCart").addEventListener("click",function(){cart=[];save();renderCart();renderProducts();$("#cartStatus").textContent=tr("clearDone")});$("#sendCart").addEventListener("click",function(){var items=cart.map(function(id){return products.find(function(p){return p.id===id})}).filter(Boolean);if(!items.length)return;var text=cartMessage(items);$("#cartSummary").value=text;$("#cartSummary").hidden=false;sendToDiscord(text,$("#cartStatus"))});$("#customForm").addEventListener("submit",async function(e){
  e.preventDefault();
@@ -1411,7 +2820,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
  });
  const params=new URLSearchParams(location.search);
  const initial=params.get("id");
- if(initial){input.value=initial.toUpperCase();form.requestSubmit()}
+ if(initial){input.value=initial.trim();form.requestSubmit()}
 })();
 
 /* FLOATING CONTACT MENU */
@@ -1458,12 +2867,73 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
  window.perivelleWatchPortfolioFrame=watchFrame;
 })();
  
+
+/* ADMIN-MANAGED FLOATING AUDIO PLAYER */
+(function(){
+ const dock=document.getElementById("pvAudioDock");if(!dock)return;
+ const audio=document.getElementById("pvAudioElement"),compact=document.getElementById("pvAudioCompact");
+ const cover=document.getElementById("pvAudioCover"),title=document.getElementById("pvAudioTitle"),artist=document.getElementById("pvAudioArtist");
+ const play=document.getElementById("pvAudioPlay"),previous=document.getElementById("pvAudioPrevious"),next=document.getElementById("pvAudioNext");
+ const seek=document.getElementById("pvAudioSeek"),time=document.getElementById("pvAudioTime"),empty=document.getElementById("pvAudioEmpty");
+ let tracks=[],current=0;
+ function safeUrl(value){try{const url=new URL(String(value||""));return url.protocol==="https:"?url.href:""}catch{return""}}
+ function formatTime(value){if(!Number.isFinite(value)||value<0)return"0:00";const m=Math.floor(value/60),s=Math.floor(value%60);return m+":"+String(s).padStart(2,"0")}
+ function currentTrack(){return tracks[current]||null}
+ function sync(){
+  const active=!!currentTrack(),playing=active&&!audio.paused&&!audio.ended;
+  dock.classList.toggle("is-playing",playing);
+  play.textContent=playing?"Ⅱ":"▶";play.setAttribute("aria-label",playing?"Pause audio":"Play audio");
+  compact.setAttribute("aria-label",active?"Open audio player":"Open audio player — no track added yet");
+  time.textContent=formatTime(audio.currentTime)+" / "+formatTime(audio.duration);
+  seek.value=Number.isFinite(audio.duration)&&audio.duration>0?String(audio.currentTime/audio.duration*100):"0";
+  seek.disabled=!active||!Number.isFinite(audio.duration);
+ }
+ function loadTrack(index,autoplay){
+  if(!tracks.length)return;
+  current=(index+tracks.length)%tracks.length;
+  const track=currentTrack();
+  audio.pause();audio.src=track.src;audio.loop=track.loop!==false;audio.load();
+  title.textContent=track.title;artist.textContent=track.artist||"Perivelle Studio";
+  dock.dataset.coverEmpty=String(!track.cover);
+  cover.src=track.cover||"assets/brand/pfp.webp";
+  cover.onerror=()=>{dock.dataset.coverEmpty="true";cover.src="assets/brand/pfp.webp"};
+  dock.dataset.empty="false";play.disabled=false;previous.disabled=tracks.length<2;next.disabled=tracks.length<2;
+  empty.hidden=true;sync();
+  if(autoplay)audio.play().catch(()=>{artist.textContent="Tap play to start audio";sync()});
+ }
+ window.perivelleSetAudioPlayer=function(config){
+  const source=Array.isArray(config?.tracks)?config.tracks:[];
+  tracks=(config?.enabled===false?[]:source).map(item=>({title:String(item.title||"").trim(),artist:String(item.artist||"").trim(),src:safeUrl(item.src),cover:safeUrl(item.cover),loop:item.loop!==false})).filter(item=>item.title&&item.src);
+  current=0;
+  if(!tracks.length){
+   audio.pause();audio.removeAttribute("src");audio.load();
+   dock.dataset.empty="true";dock.dataset.coverEmpty="true";title.textContent="Your next audio release";artist.textContent="Cover art + MP3 preview slot";
+   cover.src="assets/brand/pfp.webp";play.disabled=true;previous.disabled=true;next.disabled=true;seek.disabled=true;empty.hidden=false;sync();return;
+  }
+  loadTrack(0,false);
+ };
+ compact.addEventListener("click",function(){const opened=dock.classList.toggle("is-open");compact.setAttribute("aria-expanded",String(opened))});
+ play.addEventListener("click",function(){if(!currentTrack())return;if(audio.paused)audio.play().catch(()=>{artist.textContent="Audio could not be played. Check the file URL.";});else audio.pause()});
+ previous.addEventListener("click",function(){loadTrack(current-1,true)});
+ next.addEventListener("click",function(){loadTrack(current+1,true)});
+ audio.addEventListener("play",sync);audio.addEventListener("pause",sync);audio.addEventListener("timeupdate",sync);audio.addEventListener("loadedmetadata",sync);
+ audio.addEventListener("ended",function(){if(tracks.length>1&&!audio.loop)loadTrack(current+1,true);sync()});
+ audio.addEventListener("error",function(){if(currentTrack())artist.textContent="Audio file could not be loaded";sync()});
+ seek.addEventListener("input",function(){if(Number.isFinite(audio.duration)&&audio.duration>0)audio.currentTime=audio.duration*(Number(seek.value)/100)});
+ dock.addEventListener("mouseenter",()=>{dock.classList.add("is-open");compact.setAttribute("aria-expanded","true")});
+ dock.addEventListener("mouseleave",()=>{if(!dock.classList.contains("is-playing")){dock.classList.remove("is-open");compact.setAttribute("aria-expanded","false")}});
+ document.addEventListener("keydown",event=>{if(event.key==="Escape"&&dock.classList.contains("is-open")){dock.classList.remove("is-open");compact.setAttribute("aria-expanded","false")}});
+})();
+
 /* LOAD ADMIN-MANAGED PUBLIC STUDIO SETTINGS */
 (async function(){
  try{
   const response=await fetch("/api/site-config",{headers:{"Accept":"application/json"}});
   if(!response.ok)return;
   const payload=await response.json(),settings=payload.settings||{};
+  window.perivelleFreebiesData=Array.isArray(settings.freebies)?settings.freebies:[];
+  if(window.perivelleRenderFreebies)window.perivelleRenderFreebies(window.perivelleFreebiesData);
+  if(window.perivelleSetAudioPlayer)window.perivelleSetAudioPlayer(settings.audio_player||{});
   if(Array.isArray(settings.catalog_products)){
    settings.catalog_products.forEach(function(item){
     const product=products.find(function(p){return p.id===item.id});
@@ -1471,7 +2941,8 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
    });
    renderProducts();renderCart();
   }
-  if(Array.isArray(settings.portfolio_videos)){
+  {
+   const portfolioEntries=Array.isArray(settings.portfolio_videos)?settings.portfolio_videos:[];
    function portfolioEmbed(value){
     try{
      const url=new URL(String(value||""));
@@ -1494,16 +2965,47 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     return "";
    }
    const defaults=[{id:"bgm",name:"BGM",videos:[]},{id:"sound-alerts",name:"Sound Alerts",videos:["https://www.youtube-nocookie.com/embed/iUBVMpHvyWg"]},{id:"stinger",name:"Stinger",videos:[]},{id:"og-song",name:"OG Song",videos:[]},{id:"lore-music",name:"Lore Music",videos:[]}];
+   function makePlaceholderVisual(label){
+    const visual=document.createElement("div");visual.className="asset-placeholder-visual";
+    const stamp=document.createElement("span");stamp.className="asset-placeholder-stamp";stamp.textContent="ARTWORK / PREVIEW SLOT";
+    const mark=document.createElement("span");mark.className="asset-placeholder-mark";mark.textContent="♫";
+    const wave=document.createElement("div");wave.className="asset-placeholder-wave";wave.setAttribute("aria-hidden","true");
+    for(let i=0;i<19;i++)wave.appendChild(document.createElement("i"));
+    const caption=document.createElement("span");caption.className="asset-placeholder-caption";caption.textContent=label.toUpperCase()+" · 16:9";
+    visual.append(stamp,mark,wave,caption);return visual;
+   }
+   function makePortfolioPlaceholder(base){
+    const card=document.createElement("article");card.className="portfolio-asset-placeholder";
+    card.appendChild(makePlaceholderVisual(base.name));
+    const copy=document.createElement("div");copy.className="portfolio-asset-placeholder-copy";
+    const title=document.createElement("strong");title.textContent="Your "+base.name+" showcase";
+    const desc=document.createElement("span");desc.textContent="Cover artwork and an audio / video preview will appear here.";
+    const state=document.createElement("small");state.textContent="WAITING FOR UPLOAD";
+    copy.append(title,desc,state);card.appendChild(copy);return card;
+   }
+   function makeFeaturedPlaceholder(base,index){
+    const card=document.createElement("article");card.className="featured-portfolio-card featured-portfolio-placeholder";
+    const heading=document.createElement("h3");heading.textContent="Featured slot 0"+index+" · "+base.name;
+    const frame=document.createElement("div");frame.className="featured-portfolio-frame";
+    frame.appendChild(makePlaceholderVisual("Featured "+base.name));
+    const note=document.createElement("p");note.className="featured-placeholder-note";note.textContent="Project cover + preview video";
+    card.append(heading,frame,note);return card;
+   }
    defaults.forEach(function(base){
-    const item=settings.portfolio_videos.find(function(entry){return entry.id===base.id})||base;
+    const item=portfolioEntries.find(function(entry){return entry.id===base.id})||base;
     const urls=Array.isArray(item.videos)?item.videos:(item.url?[item.url]:base.videos);
+    const assignments=Array.isArray(item.video_assignments)?item.video_assignments:[];
     const group=document.querySelector('.portfolio-category-group[data-portfolio-category="'+base.id+'"]');
     if(!group)return;
     const grid=group.querySelector(".portfolio-grid");if(!grid)return;
     grid.replaceChildren();
-    const validVideos=urls.map(function(rawUrl){return portfolioEmbed(rawUrl)}).filter(Boolean);
-    function makeVideoFrame(src,index){
+    const validVideos=urls.map(function(rawUrl){return {rawUrl:rawUrl,src:portfolioEmbed(rawUrl)}}).filter(function(entry){return Boolean(entry.src)});
+    function makeVideoFrame(src,index,rawUrl){
      const frame=document.createElement("div");frame.className="portfolio-video-frame";
+     const assignment=assignments.find(function(entry){return entry.url===rawUrl});
+     if(assignment&&["bybi","rei","yoz"].includes(assignment.creator))frame.dataset.creatorId=assignment.creator;
+     frame.dataset.portfolioCategory=base.id;
+     frame.dataset.portfolioCategoryName=base.name;
      const iframe=document.createElement("iframe");
      iframe.title="Perivelle "+base.name+" video preview "+(index+1);
      iframe.loading="lazy";iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
@@ -1515,7 +3017,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     }
     if(validVideos.length){
      const rail=document.createElement("div");rail.className="portfolio-video-rail";
-     validVideos.forEach(function(src,index){rail.appendChild(makeVideoFrame(src,index+1))});
+     validVideos.forEach(function(entry,index){rail.appendChild(makeVideoFrame(entry.src,index+1,entry.rawUrl))});
      grid.appendChild(rail);
      if(validVideos.length>1){
       const hint=document.createElement("div");hint.className="portfolio-scroll-hint";hint.setAttribute("aria-label","More video previews available below");
@@ -1524,10 +3026,18 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
       rail.addEventListener("scroll",function(){if(rail.scrollTop>24)hint.classList.add("is-hidden");else hint.classList.remove("is-hidden")},{passive:true});
      }
     }
-    group.hidden=validVideos.length===0;
+    if(validVideos.length){group.dataset.assetState="ready";}else{group.dataset.assetState="placeholder";grid.appendChild(makePortfolioPlaceholder(base));}
+    group.hidden=false;
    });
    const featuredSection=document.getElementById("featuredPortfolio"),featuredGrid=document.getElementById("featuredPortfolioGrid");featuredGrid.replaceChildren();let featuredCount=0;
-   defaults.forEach(function(base){const item=settings.portfolio_videos.find(function(entry){return entry.id===base.id})||base;const urls=Array.isArray(item.videos)?item.videos:(item.url?[item.url]:base.videos);if(!item.featured||!urls.includes(item.featured))return;const src=portfolioEmbed(item.featured);if(!src)return;const card=document.createElement("article");card.className="featured-portfolio-card";const heading=document.createElement("h3");heading.textContent=base.name;const frame=document.createElement("div");frame.className="featured-portfolio-frame";const iframe=document.createElement("iframe");iframe.src=src;iframe.title="Featured Perivelle "+base.name+" preview";iframe.loading="lazy";iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";iframe.referrerPolicy="strict-origin-when-cross-origin";iframe.allowFullscreen=true;frame.appendChild(iframe);card.append(heading,frame);featuredGrid.appendChild(card);featuredCount++});featuredSection.hidden=featuredCount===0;
+   defaults.forEach(function(base){const item=portfolioEntries.find(function(entry){return entry.id===base.id})||base;const urls=Array.isArray(item.videos)?item.videos:(item.url?[item.url]:base.videos);if(!item.featured||!urls.includes(item.featured))return;const src=portfolioEmbed(item.featured);if(!src)return;const card=document.createElement("article");card.className="featured-portfolio-card";const heading=document.createElement("h3");heading.textContent=base.name;const frame=document.createElement("div");frame.className="featured-portfolio-frame";const iframe=document.createElement("iframe");iframe.src=src;iframe.title="Featured Perivelle "+base.name+" preview";iframe.loading="lazy";iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";iframe.referrerPolicy="strict-origin-when-cross-origin";iframe.allowFullscreen=true;frame.appendChild(iframe);card.append(heading,frame);featuredGrid.appendChild(card);featuredCount++});
+   if(featuredCount){featuredSection.dataset.hasFeatured="true";}
+   else{
+    [{id:"bgm",name:"BGM"},{id:"og-song",name:"Original Song"},{id:"lore-music",name:"Lore Music"}].forEach(function(base,index){featuredGrid.appendChild(makeFeaturedPlaceholder(base,index+1))});
+    featuredSection.dataset.hasFeatured="placeholder";
+   }
+   featuredSection.hidden=false;
+   if(window.perivelleApplyProducerFilter)window.perivelleApplyProducerFilter();
   }
   if(Array.isArray(settings.service_prices)){
    document.querySelectorAll(".service-card").forEach(function(card,index){
@@ -1561,9 +3071,9 @@ setLanguage("en");
 
 /* NAVBAR VIEW ROUTING: each top-level section opens as its own studio view */
 (function(){
- const PAGE_BY_HASH={home:"home",portfolio:"portfolio",services:"services",workflow:"services",credits:"services",team:"team",custom:"custom","commission-request":"custom",track:"track",license:"license",faq:"faq"};
- const PAGE_TITLES={home:"Perivelle — Original BGM for Creators",portfolio:"Portfolio — Perivelle",services:"Audio Services — Perivelle",team:"Our Team — Perivelle",custom:"Custom Commission — Perivelle",track:"Track Commission — Perivelle",license:"Licensing — Perivelle",faq:"FAQ — Perivelle"};
- function currentKey(){const key=(location.hash||"#home").slice(1).toLowerCase();return PAGE_BY_HASH[key]||"home"}
+ const PAGE_BY_HASH={home:"home",portfolio:"portfolio",freebies:"freebies",services:"services",workflow:"services",credits:"services",team:"team",custom:"custom","commission-request":"custom",track:"track",license:"license",faq:"faq"};
+ const PAGE_TITLES={home:"Perivelle — Original BGM for Creators",portfolio:"Portfolio — Perivelle",freebies:"Free Audio Downloads — Perivelle",services:"Audio Services — Perivelle",team:"Our Team — Perivelle",custom:"Custom Commission — Perivelle",track:"Track Commission — Perivelle",license:"Licensing — Perivelle",faq:"FAQ — Perivelle"};
+ function currentKey(){const key=(location.hash||"#home").slice(1).split("?")[0].split("/")[0].toLowerCase();return PAGE_BY_HASH[key]||"home"}
  function renderView(scroll){
   const key=currentKey();
   document.querySelectorAll(".page-view[data-page]").forEach(function(view){view.hidden=view.dataset.page!==key});
@@ -1573,17 +3083,20 @@ setLanguage("en");
   });
   document.documentElement.dataset.activeView=key;
   document.title=PAGE_TITLES[key]||PAGE_TITLES.home;
+  if(key==="portfolio"&&window.perivelleApplyProducerFilter)window.perivelleApplyProducerFilter();
   if(scroll)window.scrollTo({top:0,left:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
  }
  document.addEventListener("click",function(event){
   const link=event.target.closest('a[href^="#"]');
   if(!link)return;
-  const raw=link.getAttribute("href").slice(1).toLowerCase();
-  if(!PAGE_BY_HASH[raw])return;
+  if(link.matches("[data-portfolio-filter]"))return;
+  const raw=link.getAttribute("href").slice(1);
+  const pageKey=raw.split("?")[0].split("/")[0].toLowerCase();
+  if(!PAGE_BY_HASH[pageKey])return;
   event.preventDefault();
   const next="#"+raw;
-  if(location.hash!==next)history.pushState({view:PAGE_BY_HASH[raw]},"",next);
-  if(raw==="commission-request"){
+  if(location.hash!==next)history.pushState({view:PAGE_BY_HASH[pageKey]},"",next);
+  if(pageKey==="commission-request"){
    renderView(false);
    const target=document.getElementById("commission-request");
    if(target)target.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
@@ -1606,7 +3119,8 @@ setLanguage("en");
   const dark=theme==="dark";root.dataset.theme=dark?"dark":"light";
   button.setAttribute("aria-label",dark?"Switch to light mode":"Switch to dark mode");
   button.title=dark?"Switch to light mode":"Switch to dark mode";
-  button.querySelector(".theme-icon").textContent=dark?"☀":"☾";
+  button.setAttribute("aria-pressed",String(dark));
+  button.querySelector(".theme-icon").textContent="◐";
  }
  apply(saved==="dark"?"dark":"light");
  button.addEventListener("click",function(){
@@ -1616,6 +3130,291 @@ setLanguage("en");
 })();
 
 </script>
+
+
+
+
+<script>
+/* Service + artist filters — share state in the Works URL. */
+(function(){
+ const services={
+  bgm:"BGM",
+  "sound-alerts":"Sound Alerts",
+  stinger:"Stinger",
+  "og-song":"Original Song",
+  "lore-music":"Lore Music"
+ };
+ const artists={bybi:"bybi",rei:"rei",yoz:"yoz"};
+
+ function readFilters(){
+  const hash=location.hash||"";
+  const query=hash.includes("?")?hash.slice(hash.indexOf("?")+1):"";
+  const params=new URLSearchParams(query);
+  const rawService=params.get("service")||"";
+  const rawCreator=params.get("creator")||"";
+  return {
+   service:Object.prototype.hasOwnProperty.call(services,rawService)?rawService:"",
+   creator:Object.prototype.hasOwnProperty.call(artists,rawCreator)?rawCreator:""
+  };
+ }
+
+ function setFilter(type,value){
+  const params=new URLSearchParams(location.hash.includes("?")?location.hash.slice(location.hash.indexOf("?")+1):"");
+  const key=type==="service"?"service":"creator";
+  if(value==="all")params.delete(key);else params.set(key,value);
+  const query=params.toString();
+  const next="#portfolio"+(query?"?"+query:"");
+  if(location.hash!==next)history.pushState({view:"portfolio"},"",next);
+  applyFilters();
+ }
+
+ window.perivelleApplyProducerFilter=function(){
+  const filters=readFilters();
+  let visibleTotal=0;
+  let visibleCategories=0;
+
+  document.querySelectorAll(".portfolio-category-group").forEach(function(group){
+   const serviceId=group.dataset.portfolioCategory||"";
+   const matchesService=!filters.service||serviceId===filters.service;
+   const frames=[...group.querySelectorAll(".portfolio-video-frame")];
+   const placeholder=group.querySelector(".portfolio-asset-placeholder");
+   if(placeholder)placeholder.hidden=Boolean(filters.creator)||!matchesService;
+   let visibleCount=0;
+
+   frames.forEach(function(frame){
+    const matchesCreator=!filters.creator||frame.dataset.creatorId===filters.creator;
+    const visible=matchesService&&matchesCreator;
+    frame.hidden=!visible;
+    frame.style.display=visible?"":"none";
+    if(visible)visibleCount++;
+   });
+
+   const hasServicePlaceholder=Boolean(placeholder&&!filters.creator);
+   const visibleGroup=matchesService&&(visibleCount>0||hasServicePlaceholder);
+   group.hidden=!visibleGroup;
+   if(visibleGroup)visibleCategories++;
+   visibleTotal+=visibleCount;
+
+   const rail=group.querySelector(".portfolio-video-rail");
+   if(rail)rail.scrollTop=0;
+   const hint=group.querySelector(".portfolio-scroll-hint");
+   if(hint)hint.hidden=visibleCount<2;
+  });
+
+  document.querySelectorAll("[data-portfolio-filter]").forEach(function(link){
+   const type=link.dataset.portfolioFilter;
+   const value=link.dataset.filterValue;
+   const selected=type==="service"?filters.service:filters.creator;
+   const active=value===(selected||"all");
+   if(active)link.setAttribute("aria-current","page");
+   else link.removeAttribute("aria-current");
+  });
+
+  const featured=document.getElementById("featuredPortfolio");
+  if(featured)featured.hidden=Boolean(filters.creator||filters.service)||featured.dataset.hasFeatured==="false";
+
+  const label=document.querySelector(".portfolio-section-label span:first-child");
+  const count=document.querySelector(".portfolio-section-label span:last-child");
+  const serviceName=filters.service?services[filters.service]:"All services";
+  const artistName=filters.creator?artists[filters.creator]:"All artists";
+  if(label){
+   if(filters.service&&filters.creator)label.textContent=serviceName.toUpperCase()+" · "+artistName.toUpperCase();
+   else if(filters.service)label.textContent=serviceName.toUpperCase()+" · SELECTED WORKS";
+   else if(filters.creator)label.textContent="WORKS BY "+artistName.toUpperCase();
+   else label.textContent="SELECTED WORKS";
+  }
+  if(count)count.textContent=String(visibleTotal).padStart(2,"0")+" PROJECTS · "+visibleCategories+" SERVICES";
+
+  const empty=document.getElementById("portfolioProducerEmpty");
+  if(empty){
+   const hasFilter=Boolean(filters.creator||filters.service);
+   empty.hidden=!(hasFilter&&visibleTotal===0&&(Boolean(filters.creator)||!filters.service));
+   const heading=document.getElementById("portfolioProducerEmptyTitle");
+   const copy=document.getElementById("portfolioProducerEmptyText");
+   const serviceLabel=filters.service?services[filters.service]:"";
+   const artistLabel=filters.creator?artists[filters.creator]:"";
+   if(heading){
+    if(serviceLabel&&artistLabel)heading.textContent="No "+serviceLabel+" works by "+artistLabel+" yet";
+    else if(serviceLabel)heading.textContent="No "+serviceLabel+" previews yet";
+    else heading.textContent="No works credited to "+artistLabel+" yet";
+   }
+   if(copy){
+    if(serviceLabel&&artistLabel)copy.textContent="Once a "+serviceLabel+" preview is assigned to "+artistLabel+" in Admin → Portfolio video previews, it will appear here.";
+    else if(serviceLabel)copy.textContent="New "+serviceLabel+" previews will appear here once added to the portfolio in the studio dashboard.";
+    else copy.textContent="Assign a preview to "+artistLabel+" in Admin → Portfolio video previews to show it in this artist's collection.";
+   }
+  }
+ };
+
+ function applyFilters(){window.perivelleApplyProducerFilter()}
+ document.addEventListener("click",function(event){
+  const link=event.target.closest&&event.target.closest("[data-portfolio-filter]");
+  if(!link)return;
+  event.preventDefault();
+  setFilter(link.dataset.portfolioFilter,link.dataset.filterValue);
+ });
+ window.addEventListener("hashchange",applyFilters);
+ window.addEventListener("popstate",applyFilters);
+ window.perivelleApplyProducerFilter();
+})();
+</script>
+
+<script>
+/* Public Freebies list — direct MP3 preview and download. */
+(function(){
+ const categories={bgm:"BGM","sound-alerts":"Sound Alerts",stinger:"Stinger"};
+ const grid=document.getElementById("freebiesGrid");
+ const listHead=document.getElementById("freebiesListHead");
+ const count=document.getElementById("freebiesCount");
+ const empty=document.getElementById("freebiesEmpty");
+ const emptyTitle=document.getElementById("freebiesEmptyTitle");
+ const emptyText=document.getElementById("freebiesEmptyText");
+ if(!grid||!empty)return;
+
+ function safeHttps(value){
+  try{const url=new URL(String(value||""));return url.protocol==="https:"?url.href:""}catch{return""}
+ }
+ function localDate(){
+  const now=new Date();
+  return new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10);
+ }
+ function formatDate(value){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(String(value||"")))return "Release date to be announced";
+  const date=new Date(value+"T00:00:00");
+  return Number.isNaN(date.getTime())?"Release date to be announced":date.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
+ }
+ function makeRow(item,isLatest){
+  const downloadUrl=safeHttps(item.download_url);
+  const previewUrl=safeHttps(item.preview_url)||downloadUrl;
+  if(!downloadUrl)return null;
+  const released=String(item.release_date||"")<=localDate();
+
+  const row=document.createElement("article");
+  row.className="freebie-row"+(isLatest?" is-latest":"");
+
+  const info=document.createElement("div");
+  info.className="freebie-info";
+  const meta=document.createElement("div");
+  meta.className="freebie-meta";
+  const category=document.createElement("span");
+  category.className="freebie-category";
+  category.textContent=categories[item.category]||"Free Audio";
+  const date=document.createElement("span");
+  date.className="freebie-date";
+  date.textContent=formatDate(item.release_date);
+  meta.append(category,date);
+
+  const title=document.createElement("h3");
+  title.textContent=item.title;
+  const artist=document.createElement("p");
+  artist.className="freebie-artist";
+  artist.textContent="By "+(item.artist||"Perivelle Studio");
+  info.append(meta,title,artist);
+
+  const preview=document.createElement("div");
+  preview.className="freebie-preview";
+  const previewLabel=document.createElement("span");
+  previewLabel.className="freebie-preview-label";
+  previewLabel.textContent="LISTEN TO THE PREVIEW";
+  const audio=document.createElement("audio");
+  audio.controls=true;
+  audio.preload="none";
+  audio.src=previewUrl;
+  audio.setAttribute("aria-label","Preview "+item.title);
+  preview.append(previewLabel,audio);
+
+  const actions=document.createElement("div");
+  actions.className="freebie-actions";
+  const previewLink=document.createElement("a");
+  previewLink.className="freebie-preview-link";
+  previewLink.href=previewUrl;
+  previewLink.target="_blank";
+  previewLink.rel="noopener noreferrer";
+  previewLink.textContent="Open MP3 ↗";
+  previewLink.setAttribute("aria-label","Open the MP3 preview for "+item.title);
+  actions.appendChild(previewLink);
+
+  if(released){
+   const download=document.createElement("a");
+   download.className="freebie-download";
+   download.href=downloadUrl;
+   download.setAttribute("download","");
+   download.textContent="Download MP3 ↓";
+   download.setAttribute("aria-label","Download "+item.title);
+   actions.appendChild(download);
+  }else{
+   const coming=document.createElement("span");
+   coming.className="freebie-coming";
+   coming.textContent="Available "+formatDate(item.release_date);
+   actions.appendChild(coming);
+  }
+
+  row.append(info,preview,actions);
+  if(item.usage_note){
+   const details=document.createElement("details");
+   details.className="freebie-usage";
+   const summary=document.createElement("summary");
+   summary.textContent="Usage notes";
+   const note=document.createElement("p");
+   note.textContent=item.usage_note;
+   details.append(summary,note);
+   row.appendChild(details);
+  }
+  return row;
+ }
+
+ function makeFreebiePlaceholder(item){
+   const row=document.createElement("article");row.className="freebie-row freebie-row-placeholder";
+   const info=document.createElement("div");info.className="freebie-info";
+   const meta=document.createElement("div");meta.className="freebie-meta";
+   const category=document.createElement("span");category.className="freebie-category";category.textContent=item.category;
+   const date=document.createElement("span");date.className="freebie-date";date.textContent="AWAITING UPLOAD";meta.append(category,date);
+   const title=document.createElement("h3");title.textContent=item.title;
+   const artist=document.createElement("p");artist.className="freebie-artist";artist.textContent="Perivelle Studio · placeholder";info.append(meta,title,artist);
+   const preview=document.createElement("div");preview.className="freebie-preview";
+   const label=document.createElement("span");label.className="freebie-preview-label";label.textContent="MP3 PREVIEW";
+   const mock=document.createElement("div");mock.className="freebie-placeholder-player";mock.setAttribute("aria-hidden","true");
+   const play=document.createElement("span");play.className="freebie-placeholder-play";play.textContent="▶";
+   const wave=document.createElement("span");wave.className="freebie-placeholder-wave";
+   for(let i=0;i<25;i++)wave.appendChild(document.createElement("i"));
+   const duration=document.createElement("span");duration.className="freebie-placeholder-time";duration.textContent="0:00";
+   mock.append(play,wave,duration);preview.append(label,mock);
+   const actions=document.createElement("div");actions.className="freebie-actions";
+   const status=document.createElement("span");status.className="freebie-placeholder-status";status.textContent="MP3 NOT UPLOADED";
+   const download=document.createElement("span");download.className="freebie-placeholder-download";download.textContent="DOWNLOAD";
+   actions.append(status,download);row.append(info,preview,actions);return row;
+  }
+  window.perivelleFreebiesData=Array.isArray(window.perivelleFreebiesData)?window.perivelleFreebiesData:[];
+ window.perivelleRenderFreebies=function(entries){
+  const items=(Array.isArray(entries)?entries:[])
+   .filter(item=>item&&item.published===true&&categories[item.category]&&safeHttps(item.download_url))
+   .slice()
+   .sort((a,b)=>String(b.release_date||"").localeCompare(String(a.release_date||"")));
+  const today=localDate();
+  const visible=items.filter(item=>String(item.release_date||"")<=today);
+  const latest=visible[0]||null;
+  grid.replaceChildren();
+  let rendered=0;
+  items.forEach(function(item){
+   const row=makeRow(item,item===latest);
+   if(row){grid.appendChild(row);rendered++;}
+  });
+  if(rendered){
+   if(count)count.textContent=String(rendered).padStart(2,"0")+" "+(rendered===1?"TRACK":"TRACKS");
+   if(listHead)listHead.hidden=false;
+   empty.hidden=true;empty.classList.remove("is-placeholder-note");
+  }else{
+   const samples=[{category:"BGM",title:"Your next free BGM"},{category:"SOUND ALERTS",title:"Your sound alert pack"},{category:"STINGER",title:"Your next transition stinger"}];
+   samples.forEach(function(item){grid.appendChild(makeFreebiePlaceholder(item))});
+   if(count)count.textContent="03 PREVIEW SLOTS";
+   if(listHead)listHead.hidden=false;
+   empty.hidden=false;empty.classList.add("is-placeholder-note");
+   emptyTitle.textContent="Your first free drop is waiting.";
+   emptyText.textContent="These are layout placeholders, not playable files. Add an MP3 release in Admin → Freebies to activate the preview and download controls.";
+  }
+ };
+ window.perivelleRenderFreebies(window.perivelleFreebiesData);
+})();</script>
 
 </body>
 </html>

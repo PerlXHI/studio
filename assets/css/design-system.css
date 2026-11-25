@@ -1,0 +1,347 @@
+/* Perivelle Studio — shared design system
+   A single spacing, type, radius and control scale for every public page. */
+
+:root{
+  --pv-ui-content:1200px;
+  --pv-ui-gutter:clamp(18px,3.2vw,30px);
+  --pv-ui-section:clamp(54px,6vw,76px);
+  --pv-ui-section-tight:clamp(40px,4.6vw,60px);
+  --pv-ui-stack:clamp(24px,3vw,36px);
+  --pv-ui-heading-gap:clamp(18px,2.2vw,27px);
+  --pv-ui-grid-gap:clamp(14px,1.8vw,20px);
+  --pv-ui-radius-sm:12px;
+  --pv-ui-radius-card:18px;
+  --pv-ui-radius-panel:22px;
+  --pv-ui-radius-hero:26px;
+  --pv-ui-radius-pill:999px;
+  --pv-ui-control-height:46px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:88px}
+body,button,input,select,textarea{font-family:Inter,system-ui,sans-serif}
+img,video,canvas,svg{max-width:100%}
+button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent}
+:where(a,button,input,select,textarea,summary):focus-visible{
+  outline:3px solid color-mix(in srgb,#b879ca 62%,transparent);
+  outline-offset:3px;
+}
+::selection{background:rgba(203,145,211,.28);color:inherit}
+
+/* Public single-page application: one container width and one page rhythm. */
+#main-content .page-view{width:100%;min-width:0}
+#main-content .page-view .wrap,
+#main-content .page-view:not([data-page="home"]) .wrap,
+.pv-header .wrap,
+.pv-footer .wrap{
+  width:min(var(--pv-ui-content),calc(100% - var(--pv-ui-gutter) - var(--pv-ui-gutter)))!important;
+  max-width:var(--pv-ui-content)!important;
+  margin-inline:auto!important;
+}
+#main-content .page-view:not([data-page="home"]) section.section:not(#faq){
+  padding-block:var(--pv-ui-section)!important;
+}
+#main-content .page-view:not([data-page="home"]) #faq{
+  padding-top:0!important;
+  padding-bottom:var(--pv-ui-section)!important;
+}
+#main-content .page-view[data-page="home"] :is(.pv-section,.pv-services-preview,.pv-about-preview,.pv-team-preview,.pv-faq-preview){
+  padding-block:var(--pv-ui-section)!important;
+}
+#main-content .page-view[data-page="home"] .pv-bottom-cta{
+  padding-top:0!important;
+  padding-bottom:var(--pv-ui-section)!important;
+}
+#main-content .page-view[data-page="home"] .pv-hero{
+  padding-top:clamp(54px,6.5vw,86px);
+  padding-bottom:clamp(28px,3.2vw,42px);
+}
+#main-content .page-view[data-page="home"] .pv-hero-grid{
+  gap:clamp(28px,4.4vw,58px);
+}
+#main-content .page-view[data-page="home"] .pv-hero-copy{
+  max-width:600px;
+}
+#main-content .page-view .section-head,
+#main-content .page-view .pv-section-head{
+  gap:clamp(16px,2.4vw,26px);
+  margin-bottom:var(--pv-ui-heading-gap)!important;
+}
+#main-content .page-view .section-head .sub{
+  max-width:48ch;
+  line-height:1.65;
+}
+#main-content .page-view .pv-section-head p:not(.pv-eyebrow){
+  max-width:52ch;
+}
+#main-content .page-view .commission-section-head{
+  margin:var(--pv-ui-stack) 0 var(--pv-ui-heading-gap)!important;
+}
+#main-content .page-view :is(.team-grid,.service-grid,.workflow-grid,.credit-grid,.products,.featured-portfolio-grid,.pv-work-grid,.pv-service-grid){
+  gap:var(--pv-ui-grid-gap)!important;
+}
+#main-content .page-view :is(.portfolio-filter-stack,.portfolio-filter-bar){
+  margin-bottom:var(--pv-ui-grid-gap);
+}
+
+/* Repeated cards and large panels use a small, predictable radius scale. */
+#main-content .page-view :is(.team-card,.service-card,.step-card,.credit-card,.license-panel,.product,.portfolio-preview,.pv-work-card,.pv-service-card,.featured-portfolio-card,.freebie-row,.faq details,.track-step){
+  border-radius:var(--pv-ui-radius-card)!important;
+}
+#main-content .page-view :is(.team-hero,.portfolio-intro,.commission-hero,.track-hero,.pv-about-panel,.pv-bottom-cta-inner,.featured-portfolio){
+  border-radius:var(--pv-ui-radius-hero)!important;
+}
+#main-content .page-view :is(.track-search,.track-result,.track-help,.commission-form,.commission-policy,.commission-bottom,.team-note,.team-cta,.freebies-weekly-note,.freebies-empty){
+  border-radius:var(--pv-ui-radius-panel)!important;
+}
+#main-content .page-view .portfolio-category-group{
+  padding:12px!important;
+  border-radius:var(--pv-ui-radius-card)!important;
+}
+#main-content .page-view :is(.portfolio-video-rail,.portfolio-video-frame,.portfolio-art,.product-art,.service-art,.team-avatar,.featured-portfolio-frame,.asset-placeholder-visual,.catalog-art-placeholder){
+  border-radius:14px;
+}
+#main-content .page-view :is(.team-card,.service-card,.step-card,.credit-card,.license-panel,.pv-service-card){
+  padding:clamp(18px,2vw,23px);
+}
+#main-content .page-view .pv-about-panel{
+  padding:clamp(22px,3vw,32px);
+  gap:clamp(20px,3vw,34px);
+}
+#main-content .page-view .pv-bottom-cta-inner{
+  padding:clamp(20px,2.6vw,30px);
+  gap:clamp(16px,2.5vw,26px);
+}
+#main-content .page-view .featured-portfolio{
+  padding:clamp(18px,2.5vw,26px);
+}
+
+/* Consistent hero banners across Studio, Works, Commission and Tracking. */
+#main-content .page-view :is(.team-hero,.portfolio-intro,.commission-hero,.track-hero){
+  padding:clamp(24px,3.2vw,40px)!important;
+  margin-bottom:var(--pv-ui-stack)!important;
+}
+#main-content .page-view :is(.team-hero h2,.portfolio-intro h2,.commission-hero h2,.track-hero h2){
+  margin-top:0;
+}
+#main-content .page-view :is(.team-lead,.track-lead,.commission-hero .sub){
+  max-width:68ch;
+}
+#main-content .page-view .portfolio-intro{
+  gap:clamp(20px,3vw,32px);
+}
+
+/* Shared controls: consistent target size, shape and alignment. */
+#main-content .page-view :is(.btn,.pv-nav-cta,.navlink,.portfolio-filter-links a,.freebie-preview-link,.freebie-download,.track-resource-link,.contact-trigger,.small-btn,.quiet,.cart-button,.toolbar button){
+  min-height:42px;
+  border-radius:var(--pv-ui-radius-pill);
+}
+#main-content .page-view .btn{
+  min-height:46px;
+  padding:12px 19px;
+  line-height:1.2;
+}
+#main-content .page-view .btn.small-btn,
+#main-content .page-view .small-btn{
+  min-height:36px;
+  padding:8px 12px;
+}
+#main-content .page-view :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),select,textarea,.control){
+  min-height:var(--pv-ui-control-height);
+  border-radius:var(--pv-ui-radius-sm)!important;
+  padding-inline:13px;
+}
+#main-content .page-view textarea{min-height:116px;padding-block:12px}
+#main-content .page-view input[type="checkbox"],
+#main-content .page-view input[type="radio"],
+#main-content .page-view input[type="range"]{min-height:0}
+#main-content .page-view :is(.form,.commission-form,.track-search){
+  padding:clamp(18px,2.4vw,26px);
+}
+#main-content .page-view :is(.field,.form-field){
+  gap:8px;
+}
+#main-content .page-view label{
+  margin-bottom:6px;
+}
+#main-content .page-view .toolbar{
+  gap:10px;
+}
+#main-content .page-view .toolbar .control{
+  min-width:0;
+}
+#main-content .page-view :is(.modal,.success-dialog,.cart-dialog,#productDialog){
+  border-radius:24px;
+}
+#main-content .page-view .modal{
+  padding:clamp(18px,2.6vw,26px);
+}
+#main-content .page-view .modal-head{
+  gap:16px;
+  margin-bottom:16px;
+}
+
+/* Header, footer and audio utility details. */
+.pv-header nav{
+  min-height:74px;
+  gap:clamp(5px,1vw,12px);
+}
+.pv-header .navlink{
+  min-height:40px;
+  padding:9px 13px;
+}
+.pv-header .pv-nav-cta{
+  min-height:42px;
+  padding:10px 17px;
+  border-radius:var(--pv-ui-radius-pill);
+}
+.pv-footer{padding-block:clamp(36px,4.5vw,52px) 30px}
+.pv-footer-grid{gap:clamp(18px,2.4vw,30px)}
+#pvAudioDock .pv-audio-panel{border-radius:22px}
+#pvAudioDock .pv-audio-track img{border-radius:12px}
+.freebies-edge-tab{border-radius:15px 0 0 15px}
+
+/* Legacy public pages use the same content widths and component rhythm. */
+body.pv-legacy{font-family:Inter,system-ui,sans-serif}
+body.pv-legacy :is(button,input,select,textarea){font-family:Inter,system-ui,sans-serif}
+body.pv-legacy-gallery .wrap{
+  width:min(1200px,calc(100% - var(--pv-ui-gutter) - var(--pv-ui-gutter)))!important;
+  max-width:1200px!important;
+}
+body.pv-legacy-gallery .hero{
+  padding-block:clamp(58px,7vw,88px) clamp(38px,4.5vw,58px);
+}
+body.pv-legacy-gallery .section{
+  padding-block:var(--pv-ui-section)!important;
+}
+body.pv-legacy-gallery :is(.work,.note,.dialog,.hero-side){
+  border-radius:var(--pv-ui-radius-card);
+}
+body.pv-legacy-gallery .work{overflow:hidden}
+body.pv-legacy-gallery .dialog{border-radius:24px}
+body.pv-legacy-gallery :is(input,select,textarea){
+  min-height:var(--pv-ui-control-height);
+  border-radius:var(--pv-ui-radius-sm);
+}
+body.pv-legacy-commission .wrap{
+  width:min(820px,calc(100% - var(--pv-ui-gutter) - var(--pv-ui-gutter)))!important;
+  max-width:820px!important;
+}
+body.pv-legacy-commission .top{
+  gap:16px;
+  padding-block:20px;
+}
+body.pv-legacy-commission .intro{
+  margin-block:clamp(34px,5vw,54px) 28px;
+}
+body.pv-legacy-commission #briefForm{
+  padding:clamp(18px,3vw,28px);
+  border-radius:24px;
+}
+body.pv-legacy-commission #briefForm .grid{gap:18px}
+body.pv-legacy-commission .field{min-width:0}
+body.pv-legacy-commission :is(input,select,textarea){
+  width:100%;
+  min-height:var(--pv-ui-control-height);
+  border-radius:var(--pv-ui-radius-sm);
+  padding:12px 14px;
+}
+body.pv-legacy-commission textarea{min-height:130px}
+body.pv-legacy-commission :is(.submit,.copy,.top button){
+  min-height:44px;
+  border-radius:var(--pv-ui-radius-pill);
+  padding:11px 18px;
+}
+body.pv-legacy-commission .result{border-radius:22px;padding:clamp(18px,3vw,28px)}
+body.pv-legacy-commission footer{padding-block:30px}
+body.pv-legacy-store .wrap{
+  width:min(1100px,calc(100% - var(--pv-ui-gutter) - var(--pv-ui-gutter)))!important;
+  max-width:1100px!important;
+}
+body.pv-legacy-store header .wrap{width:min(1100px,calc(100% - var(--pv-ui-gutter) - var(--pv-ui-gutter)))!important}
+body.pv-legacy-store main > section.v,
+body.pv-legacy-store #v-home > section.v{
+  padding-block:var(--pv-ui-section-tight);
+}
+body.pv-legacy-store :is(.card,details,.list li,.sbox,.ctl){
+  border-radius:var(--pv-ui-radius-card);
+}
+body.pv-legacy-store :is(input,select,textarea){
+  min-height:var(--pv-ui-control-height);
+  border-radius:var(--pv-ui-radius-sm);
+}
+body.pv-legacy-store :is(button,.btn){min-height:42px;border-radius:var(--pv-ui-radius-pill)}
+
+/* Keep spacing deliberate on smaller screens without compressing the content. */
+@media(max-width:900px){
+  :root{
+    --pv-ui-section:clamp(46px,6vw,60px);
+    --pv-ui-section-tight:42px;
+    --pv-ui-gutter:22px;
+  }
+  #main-content .page-view .section-head{align-items:flex-start}
+  .pv-header nav{gap:4px}
+  .pv-header .navlink{padding-inline:10px}
+}
+@media(max-width:680px){
+  :root{
+    --pv-ui-section:46px;
+    --pv-ui-section-tight:38px;
+    --pv-ui-gutter:18px;
+    --pv-ui-heading-gap:18px;
+    --pv-ui-grid-gap:14px;
+  }
+  html{scroll-padding-top:72px}
+  #main-content .page-view .wrap,
+  #main-content .page-view:not([data-page="home"]) .wrap,
+  .pv-header .wrap,
+  .pv-footer .wrap{
+    width:calc(100% - 36px)!important;
+  }
+  #main-content .page-view .section-head{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
+  }
+  #main-content .page-view .section-head .sub{max-width:60ch}
+  #main-content .page-view :is(.team-card,.service-card,.step-card,.credit-card,.license-panel,.pv-service-card){
+    padding:18px;
+  }
+  #main-content .page-view :is(.team-hero,.portfolio-intro,.commission-hero,.track-hero){
+    padding:22px!important;
+    border-radius:20px!important;
+  }
+  #main-content .page-view .portfolio-category-group{padding:9px!important}
+  #main-content .page-view :is(.track-search,.track-result,.track-help,.commission-form,.commission-policy,.commission-bottom,.team-note,.team-cta,.freebies-weekly-note,.freebies-empty){
+    border-radius:18px!important;
+  }
+  #main-content .page-view :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),select,textarea,.control){
+    min-height:44px;
+  }
+  .pv-header nav{min-height:64px}
+  body.pv-legacy-gallery .wrap,
+  body.pv-legacy-commission .wrap,
+  body.pv-legacy-store .wrap,
+  body.pv-legacy-store header .wrap{
+    width:calc(100% - 36px)!important;
+  }
+  body.pv-legacy-commission #briefForm{padding:18px}
+  body.pv-legacy-store main > section.v,
+  body.pv-legacy-store #v-home > section.v{padding-block:38px}
+}
+@media(max-width:420px){
+  :root{--pv-ui-gutter:16px;--pv-ui-grid-gap:12px}
+  #main-content .page-view .wrap,
+  #main-content .page-view:not([data-page="home"]) .wrap,
+  .pv-header .wrap,
+  .pv-footer .wrap{width:calc(100% - 32px)!important}
+  #main-content .page-view .btn{padding-inline:15px}
+  body.pv-legacy-gallery .wrap,
+  body.pv-legacy-commission .wrap,
+  body.pv-legacy-store .wrap,
+  body.pv-legacy-store header .wrap{width:calc(100% - 32px)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+}

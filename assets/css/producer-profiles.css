@@ -1,0 +1,175 @@
+/* Individual producer portfolio interactions */
+#main-content .page-view[data-page="team"] .team-card[data-producer-id]{
+ cursor:pointer;
+ text-align:left;
+ outline-offset:4px;
+}
+#main-content .page-view[data-page="team"] .team-card[data-producer-id]:focus-visible{
+ outline:3px solid #c477b8;
+}
+#main-content .page-view[data-page="team"] .team-card[data-producer-id]:hover{
+ border-color:#d5afd8;
+ box-shadow:0 20px 42px rgba(117,78,133,.18);
+}
+.team-profile-cta{
+ display:inline-flex;
+ align-items:center;
+ gap:8px;
+ margin-top:auto;
+ padding-top:18px;
+ color:#a05eae;
+ font:700 .78rem/1.35 Inter,system-ui,sans-serif;
+ letter-spacing:.015em;
+}
+.team-profile-cta>span{
+ display:inline-grid;
+ place-items:center;
+ width:23px;height:23px;
+ border:1px solid #dfc4e2;
+ border-radius:50%;
+ transition:transform .2s ease,background .2s ease;
+}
+.team-card[data-producer-id]:hover .team-profile-cta>span,
+.team-card[data-producer-id]:focus-visible .team-profile-cta>span{
+ transform:translate(2px,-2px);
+ background:#f7eaf5;
+}
+.producer-dialog{
+ width:min(940px,calc(100vw - 32px));
+ max-width:none;
+ max-height:min(88dvh,860px);
+ margin:auto;
+ padding:0;
+ overflow:hidden;
+ border:1px solid #dfc4e2;
+ border-radius:26px;
+ background:linear-gradient(145deg,#fbf2f8,#f3e8f5 68%,#f8eaf2);
+ color:#392743;
+ box-shadow:0 28px 90px rgba(49,25,56,.28);
+}
+.producer-dialog::backdrop{
+ background:rgba(35,20,40,.58);
+ backdrop-filter:blur(5px);
+}
+.producer-dialog-inner{
+ position:relative;
+ max-height:min(88dvh,860px);
+ overflow:auto;
+ padding:clamp(22px,4vw,38px);
+}
+.producer-dialog-inner>.eyebrow{
+ margin:0 48px 10px 0;
+ color:#9a709f;
+}
+.producer-dialog-inner h2{
+ margin:0 52px 8px 0;
+ color:#392743;
+ font:800 clamp(1.8rem,4vw,2.45rem)/1.12 Sora,Inter,sans-serif;
+ letter-spacing:-.05em;
+}
+.producer-dialog-description{
+ max-width:64ch;
+ margin:0 0 24px;
+ color:#806b88;
+ font:400 .9rem/1.6 Inter,system-ui,sans-serif;
+}
+.producer-dialog-close{
+ position:absolute;
+ top:22px;right:22px;
+ display:grid;
+ place-items:center;
+ width:40px;height:40px;
+ border:1px solid #dfc4e2;
+ border-radius:50%;
+ background:rgba(255,255,255,.7);
+ color:#624468;
+ font-size:1.45rem;
+ line-height:1;
+ cursor:pointer;
+}
+.producer-dialog-close:hover{background:#fff;border-color:#c68bc5}
+.producer-work-grid{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:16px;
+}
+.producer-work-card{
+ min-width:0;
+ overflow:hidden;
+ padding:10px;
+ border:1px solid #dfc4e2;
+ border-radius:18px;
+ background:rgba(255,255,255,.68);
+ box-shadow:0 10px 28px rgba(104,63,117,.08);
+}
+.producer-work-label{
+ margin:2px 3px 10px;
+ color:#965d9e;
+ font:750 .68rem/1.35 Inter,system-ui,sans-serif;
+ letter-spacing:.09em;
+}
+.producer-work-media{
+ position:relative;
+ overflow:hidden;
+ aspect-ratio:16/9;
+ border-radius:12px;
+ background:#241a2d;
+}
+.producer-work-media iframe{
+ display:block;
+ width:100%;height:100%;
+ border:0;
+}
+.producer-portfolio-empty[hidden]{display:none!important}
+.producer-portfolio-empty{
+ display:grid;
+ justify-items:center;
+ gap:8px;
+ padding:34px 18px;
+ border:1px dashed #d4b7d7;
+ border-radius:18px;
+ background:rgba(255,255,255,.42);
+ text-align:center;
+}
+.producer-portfolio-empty>span{color:#b06bb6;font-size:1.5rem}
+.producer-portfolio-empty strong{color:#624468;font:700 1rem Sora,Inter,sans-serif}
+.producer-portfolio-empty p{margin:0;color:#806b88;font-size:.85rem;line-height:1.55}
+html[data-theme="dark"] .team-profile-cta{color:#e2b0e8}
+html[data-theme="dark"] .team-profile-cta>span{border-color:#604772}
+html[data-theme="dark"] .team-card[data-producer-id]:hover{border-color:#8a608f}
+html[data-theme="dark"] .team-card[data-producer-id]:focus-visible{outline-color:#ee9ac9}
+html[data-theme="dark"] .producer-dialog{
+ border-color:#604772;
+ background:linear-gradient(145deg,#30233d,#281d33 68%,#352239);
+ color:#f5effb;
+ box-shadow:0 28px 90px rgba(0,0,0,.55);
+}
+html[data-theme="dark"] .producer-dialog-inner>.eyebrow{color:#cda5d8}
+html[data-theme="dark"] .producer-dialog-inner h2{color:#fff5ff}
+html[data-theme="dark"] .producer-dialog-description{color:#cdbed8}
+html[data-theme="dark"] .producer-dialog-close{
+ border-color:#604772;background:#3b2b45;color:#f7efff;
+}
+html[data-theme="dark"] .producer-dialog-close:hover{background:#4b3554}
+html[data-theme="dark"] .producer-work-card{
+ border-color:#604772;background:rgba(255,255,255,.055);
+ box-shadow:0 12px 30px rgba(0,0,0,.25);
+}
+html[data-theme="dark"] .producer-work-label{color:#e2b0e8}
+html[data-theme="dark"] .producer-work-media{background:#1a1424}
+html[data-theme="dark"] .producer-portfolio-empty{
+ border-color:#694d72;background:rgba(255,255,255,.035);
+}
+html[data-theme="dark"] .producer-portfolio-empty>span{color:#e2a2d8}
+html[data-theme="dark"] .producer-portfolio-empty strong{color:#f7efff}
+html[data-theme="dark"] .producer-portfolio-empty p{color:#cdbed8}
+@media(max-width:620px){
+ .producer-work-grid{grid-template-columns:1fr}
+ .producer-dialog-inner{padding:22px}
+ .producer-dialog-close{top:14px;right:14px}
+ .producer-dialog-inner h2{margin-right:42px}
+}
+@media(prefers-reduced-motion:reduce){
+ .team-profile-cta>span{transition:none}
+ .team-card[data-producer-id]:hover .team-profile-cta>span{transform:none}
+}

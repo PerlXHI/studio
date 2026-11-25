@@ -1,0 +1,273 @@
+/* Perivelle Studio — visual placeholders for future uploads */
+/* Shared artwork tile used by empty Works and Featured Portfolio slots. */
+.asset-placeholder-visual{position:relative;display:grid;place-items:center;gap:7px;width:100%;aspect-ratio:16/9;min-height:135px;overflow:hidden;border:1px dashed #d5c1e1;border-radius:15px;background:radial-gradient(ellipse at 23% 22%,rgba(255,255,255,.95),transparent 35%),radial-gradient(ellipse at 80% 75%,rgba(231,167,211,.28),transparent 42%),linear-gradient(135deg,#f7f0fc 0%,#eee9fb 52%,#faedf4 100%)}
+.asset-placeholder-visual:before,.asset-placeholder-visual:after{content:"";position:absolute;aspect-ratio:1;border:1px solid rgba(173,132,195,.22);border-radius:50%;pointer-events:none}
+.asset-placeholder-visual:before{width:68%;left:-17%;top:-52%}
+.asset-placeholder-visual:after{width:74%;right:-29%;bottom:-57%;box-shadow:0 0 0 18px rgba(255,255,255,.16),0 0 0 38px rgba(173,132,195,.06)}
+.asset-placeholder-stamp,.asset-placeholder-caption{position:absolute;z-index:1;color:#a18aa9;font:800 .52rem/1.3 Inter,system-ui,sans-serif;letter-spacing:.13em}
+.asset-placeholder-stamp{top:13px;left:14px}.asset-placeholder-caption{right:14px;bottom:12px}
+.asset-placeholder-mark{position:relative;z-index:1;display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(188,147,205,.38);border-radius:15px;background:rgba(255,255,255,.62);color:#a46db9;font:700 1.35rem/1 Sora,Inter,sans-serif;box-shadow:0 8px 22px rgba(123,82,145,.08)}
+.asset-placeholder-wave{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:4px;height:27px}
+.asset-placeholder-wave i{display:block;width:3px;height:var(--asset-bar,12px);border-radius:10px;background:linear-gradient(180deg,#b27bcf,#e77eaf);opacity:.82}
+.asset-placeholder-wave i:nth-child(4n){--asset-bar:7px}.asset-placeholder-wave i:nth-child(5n){--asset-bar:21px}.asset-placeholder-wave i:nth-child(3n){--asset-bar:17px}.asset-placeholder-wave i:nth-child(7n){--asset-bar:24px}
+.portfolio-asset-placeholder{display:grid;gap:11px;width:100%;min-width:0;padding:8px 9px 11px;border:1px solid rgba(224,208,233,.88);border-radius:19px;background:rgba(255,255,255,.5)}
+.portfolio-asset-placeholder-copy{display:grid;gap:4px;padding:0 4px}
+.portfolio-asset-placeholder-copy strong{color:#563c65;font:750 .82rem/1.3 Sora,Inter,sans-serif;letter-spacing:-.02em}
+.portfolio-asset-placeholder-copy>span{color:#927f9b;font-size:.68rem;line-height:1.45}
+.portfolio-asset-placeholder-copy small{justify-self:start;margin-top:3px;padding:4px 7px;border:1px solid #e8d9ee;border-radius:999px;color:#a27bb0;font:800 .52rem/1.2 Inter,system-ui,sans-serif;letter-spacing:.1em}
+.featured-portfolio-placeholder{border-style:dashed!important;background:rgba(255,255,255,.62)!important}
+.featured-portfolio-placeholder .featured-portfolio-frame{height:auto;aspect-ratio:16/9;padding:0;background:transparent!important}
+.featured-portfolio-placeholder .asset-placeholder-visual{height:100%;min-height:0;border-radius:14px}
+.featured-placeholder-note{margin:9px 5px 3px;color:#9a86a3;font-size:.68rem;line-height:1.4;text-align:center}
+.featured-portfolio-placeholder h3{color:#9673a5!important}
+
+/* Empty floating player: show the future cover-art slot until a real track is configured. */
+#pvAudioDock[data-empty="true"] .pv-audio-track{position:relative}
+#pvAudioDock[data-empty="true"] .pv-audio-track img{opacity:0!important}
+#pvAudioDock[data-empty="true"] .pv-audio-track:before{content:"♫";display:grid;place-items:center;width:39px;height:39px;flex:0 0 39px;border:1px dashed #d8c2e3;border-radius:12px;background:linear-gradient(145deg,#f7edfb,#fcebf3);color:#a16eb8;font:750 1.1rem/1 Sora,Inter,sans-serif}
+#pvAudioDock[data-empty="true"] .pv-audio-copy strong{color:#60466f}
+#pvAudioDock[data-empty="true"] .pv-audio-copy span{color:#9a83a3}
+#pvAudioDock[data-empty="true"] .pv-audio-empty{max-width:220px;color:#9b83a5;font:800 .53rem/1.4 Inter,system-ui,sans-serif;letter-spacing:.06em}
+
+/* Freebies placeholders do not contain MP3 files or working controls. */
+.freebie-row-placeholder{border-style:dashed!important;background:linear-gradient(112deg,rgba(255,255,255,.62),rgba(248,240,251,.58) 65%,rgba(255,243,248,.62))!important;box-shadow:none!important}
+.freebie-row-placeholder:hover{transform:none!important;box-shadow:none!important}
+.freebie-row-placeholder:before{border-style:dashed;background:linear-gradient(145deg,#fff,#f6edf9);color:#a783b6}
+.freebie-placeholder-player{display:flex;align-items:center;gap:10px;min-width:0;min-height:40px;padding:5px 9px;border:1px dashed #dfd0e7;border-radius:11px;background:rgba(255,255,255,.5)}
+.freebie-placeholder-play{display:grid;place-items:center;width:24px;height:24px;flex:0 0 24px;border-radius:50%;background:#f1e5f7;color:#ac84bd;font-size:.56rem}
+.freebie-placeholder-wave{display:flex;align-items:center;justify-content:space-between;gap:3px;flex:1;min-width:0;height:23px}
+.freebie-placeholder-wave i{display:block;width:3px;height:var(--freebie-bar,9px);border-radius:9px;background:#c7abd5;opacity:.7}
+.freebie-placeholder-wave i:nth-child(3n){--freebie-bar:16px}.freebie-placeholder-wave i:nth-child(4n){--freebie-bar:6px}.freebie-placeholder-wave i:nth-child(5n){--freebie-bar:20px}.freebie-placeholder-wave i:nth-child(7n){--freebie-bar:13px}
+.freebie-placeholder-time{flex:0 0 auto;color:#a18da7;font:650 .57rem/1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.freebie-placeholder-status,.freebie-placeholder-download{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:7px 10px;border:1px solid #e5d8eb;border-radius:999px;color:#a188ad;font:800 .55rem/1.2 Inter,system-ui,sans-serif;letter-spacing:.06em;white-space:nowrap}
+.freebie-placeholder-download{background:#f7eff9;color:#ab91b8}
+.freebies-empty.is-placeholder-note{display:grid;grid-template-columns:30px minmax(0,1fr);grid-template-areas:"icon title" "icon copy";align-items:center;gap:3px 10px;margin-top:2px;padding:12px 15px;border-style:dashed;border-radius:14px;background:rgba(255,255,255,.42);text-align:left}
+.freebies-empty.is-placeholder-note>span{grid-area:icon;width:29px;height:29px;display:grid;place-items:center;flex:0 0 29px;border:0;border-radius:9px;background:#f4e8f8;font-size:1rem}
+.freebies-empty.is-placeholder-note h3{grid-area:title;font:800 .64rem/1.3 Inter,system-ui,sans-serif!important;letter-spacing:.09em;text-transform:uppercase}
+.freebies-empty.is-placeholder-note p{grid-area:copy;max-width:70ch;font-size:.7rem!important;line-height:1.5!important}
+
+/* Night mode */
+html[data-theme="dark"] .asset-placeholder-visual{border-color:#685474;background:radial-gradient(ellipse at 23% 22%,rgba(255,255,255,.05),transparent 35%),radial-gradient(ellipse at 80% 75%,rgba(206,130,186,.13),transparent 42%),linear-gradient(135deg,#35283f 0%,#2a233c 52%,#382538 100%)}
+html[data-theme="dark"] .asset-placeholder-visual:before,html[data-theme="dark"] .asset-placeholder-visual:after{border-color:rgba(208,166,220,.16)}
+html[data-theme="dark"] .asset-placeholder-stamp,html[data-theme="dark"] .asset-placeholder-caption{color:#bca5c7}
+html[data-theme="dark"] .asset-placeholder-mark{border-color:#725a80;background:#44344f;color:#e1b6e5;box-shadow:0 8px 22px rgba(0,0,0,.16)}
+html[data-theme="dark"] .asset-placeholder-wave i{background:linear-gradient(180deg,#c39add,#e18bb8)}
+html[data-theme="dark"] .portfolio-asset-placeholder{border-color:#594664;background:rgba(42,32,56,.48)}
+html[data-theme="dark"] .portfolio-asset-placeholder-copy strong{color:#f0e5f7}
+html[data-theme="dark"] .portfolio-asset-placeholder-copy>span{color:#c1b0cc}
+html[data-theme="dark"] .portfolio-asset-placeholder-copy small{border-color:#654e72;color:#d4b3dd}
+html[data-theme="dark"] .featured-portfolio-placeholder{background:rgba(43,32,55,.72)!important;border-color:#5d476b!important}
+html[data-theme="dark"] .featured-placeholder-note{color:#c1b0cc}
+html[data-theme="dark"] .featured-portfolio-placeholder h3{color:#d8b6e2!important}
+html[data-theme="dark"] #pvAudioDock[data-empty="true"] .pv-audio-track:before{border-color:#6d567a;background:linear-gradient(145deg,#44344f,#382b46);color:#e1b6e5}
+html[data-theme="dark"] #pvAudioDock[data-empty="true"] .pv-audio-copy strong{color:#f0e5f7}
+html[data-theme="dark"] #pvAudioDock[data-empty="true"] .pv-audio-copy span,html[data-theme="dark"] #pvAudioDock[data-empty="true"] .pv-audio-empty{color:#c6b5d2}
+html[data-theme="dark"] .freebie-row-placeholder{border-color:#5a4668!important;background:linear-gradient(112deg,rgba(43,32,55,.78),rgba(47,35,61,.72) 65%,rgba(52,35,55,.72))!important}
+html[data-theme="dark"] .freebie-placeholder-player{border-color:#5c496a;background:rgba(255,255,255,.025)}
+html[data-theme="dark"] .freebie-placeholder-play{background:#4a3657;color:#d6b3e2}
+html[data-theme="dark"] .freebie-placeholder-wave i{background:#b99aca}
+html[data-theme="dark"] .freebie-placeholder-time{color:#bca8c7}
+html[data-theme="dark"] .freebie-placeholder-status,html[data-theme="dark"] .freebie-placeholder-download{border-color:#604a6f;color:#c2a9cd}
+html[data-theme="dark"] .freebie-placeholder-download{background:#3a2b47}
+html[data-theme="dark"] .freebies-empty.is-placeholder-note{border-color:#614a6e;background:rgba(48,35,61,.35)}
+html[data-theme="dark"] .freebies-empty.is-placeholder-note>span{background:#3d2c49;color:#e2a2d8}
+@media(max-width:980px){.portfolio-asset-placeholder{padding:8px}.freebie-placeholder-status{display:none}}
+@media(max-width:680px){.portfolio-asset-placeholder{padding:7px;border-radius:16px}.freebie-row-placeholder .freebie-actions{justify-content:flex-start}.freebie-row-placeholder .freebie-placeholder-status{display:inline-flex}.freebies-empty.is-placeholder-note{align-items:start}.freebies-empty.is-placeholder-note>span{margin-top:2px}}
+@media(max-width:390px){.freebie-placeholder-status{display:none!important}.freebie-placeholder-download{flex:1}}
+
+
+/* Catalog artwork placeholder: consistent 16:9 cover slot for products without uploaded visuals. */
+.product-art.has-art-placeholder{min-height:195px;padding:0;background:#f3e9f6}
+.product-art.has-art-placeholder:before{display:none}
+.catalog-art-placeholder{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:10px;overflow:hidden;border:1px dashed #e6d3ed;background:radial-gradient(ellipse at 20% 20%,#ffffffd9,transparent 36%),radial-gradient(ellipse at 80% 75%,#e29dcf3b,transparent 42%),linear-gradient(135deg,#f7effa,#eee8f8 55%,#f9edf4)}
+.catalog-art-placeholder:before,.catalog-art-placeholder:after{content:"";position:absolute;aspect-ratio:1;border:1px solid #a66bc033;border-radius:50%;pointer-events:none}
+.catalog-art-placeholder:before{width:74%;left:-23%;top:-57%}
+.catalog-art-placeholder:after{width:78%;right:-33%;bottom:-60%;box-shadow:0 0 0 18px #ffffff33,0 0 0 38px #a66bc00e}
+.catalog-art-slot,.catalog-art-caption{position:absolute;z-index:1;color:#a18aa9;font:800 .54rem/1.3 Inter,system-ui,sans-serif;letter-spacing:.13em}
+.catalog-art-slot{top:14px;left:16px}.catalog-art-caption{right:16px;bottom:13px}
+.catalog-art-mark{position:relative;z-index:1;display:grid;place-items:center;width:49px;height:49px;border:1px solid #bc93cd66;border-radius:16px;background:#ffffffb3;color:#a46db9;font:750 1.5rem/1 Sora,Inter,sans-serif;box-shadow:0 8px 22px #7b529117}
+.catalog-art-wave,.product-detail-preview-wave{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:4px;height:25px}
+.catalog-art-wave i,.product-detail-preview-wave i{display:block;width:3px;height:var(--catalog-bar,10px);border-radius:9px;background:linear-gradient(180deg,#b27bcf,#e77eaf);opacity:.8}
+.catalog-art-wave i:nth-child(3n),.product-detail-preview-wave i:nth-child(3n){--catalog-bar:17px}
+.catalog-art-wave i:nth-child(4n),.product-detail-preview-wave i:nth-child(4n){--catalog-bar:6px}
+.catalog-art-wave i:nth-child(5n),.product-detail-preview-wave i:nth-child(5n){--catalog-bar:22px}
+.catalog-art-wave i:nth-child(7n){--catalog-bar:13px}
+
+/* Product detail audio preview slot. */
+.product-detail-preview-placeholder,.product-detail-audio{display:grid;justify-items:center;gap:10px;margin:17px 0;padding:20px 18px;border:1px dashed #dac8e5;border-radius:17px;background:linear-gradient(135deg,#faf4fc,#f1eaf8 62%,#f9edf4);text-align:center}
+.product-detail-preview-label,.product-detail-audio>span{color:#a18aa9;font:800 .62rem/1.3 Inter,system-ui,sans-serif;letter-spacing:.12em}
+.product-detail-preview-mark{display:grid;place-items:center;width:43px;height:43px;border:1px solid #e3d2eb;border-radius:14px;background:#ffffffb3;color:#a46db9;font:750 1.3rem Sora,Inter,sans-serif}
+.product-detail-preview-wave{height:22px}
+.product-detail-preview-wave i{height:var(--catalog-bar,9px)}
+.product-detail-preview-placeholder small{color:#9a839f;font-size:.68rem;line-height:1.4}
+.product-detail-audio audio{width:min(100%,360px)}
+
+/* Team portraits — monograms are explicitly marked as temporary image slots. */
+.team-avatar-slot-label{position:absolute;z-index:3;left:10px;bottom:10px;display:inline-flex;align-items:center;padding:5px 7px;border:1px solid #ffffffc7;border-radius:999px;background:#ffffffb8;color:#927aa0;font:800 .49rem/1.2 Inter,system-ui,sans-serif;letter-spacing:.08em}
+.pv-team-avatar{position:relative}
+.pv-avatar-slot{position:absolute;z-index:2;left:50%;top:43px;transform:translateX(-50%);padding:3px 5px;border:1px solid #ffffffc7;border-radius:999px;background:#ffffffc7;color:#977da5;font:800 .42rem/1 Inter,system-ui,sans-serif;letter-spacing:.06em;font-style:normal;pointer-events:none}
+
+/* Floating player: if a track is uploaded before its cover art, show an art slot instead of the studio logo. */
+#pvAudioDock[data-cover-empty="true"]:not([data-empty="true"]) .pv-audio-track{position:relative}
+#pvAudioDock[data-cover-empty="true"]:not([data-empty="true"]) .pv-audio-track img{opacity:0!important}
+#pvAudioDock[data-cover-empty="true"]:not([data-empty="true"]) .pv-audio-track:before{content:"♫";display:grid;place-items:center;width:39px;height:39px;flex:0 0 39px;border:1px dashed #d8c2e3;border-radius:12px;background:linear-gradient(145deg,#f7edfb,#fcebf3);color:#a16eb8;font:750 1.1rem/1 Sora,Inter,sans-serif}
+
+/* Dark mode */
+html[data-theme="dark"] .catalog-art-placeholder{border-color:#674e79;background:radial-gradient(ellipse at 20% 20%,#ffffff0b,transparent 36%),radial-gradient(ellipse at 80% 75%,#cd82ba20,transparent 42%),linear-gradient(135deg,#382a45,#2d253e 55%,#382638)}
+html[data-theme="dark"] .catalog-art-placeholder:before,html[data-theme="dark"] .catalog-art-placeholder:after{border-color:#d7a7e826}
+html[data-theme="dark"] .catalog-art-slot,html[data-theme="dark"] .catalog-art-caption{color:#c1aecb}
+html[data-theme="dark"] .catalog-art-mark{border-color:#6b5479;background:#483652;color:#e1b6e5}
+html[data-theme="dark"] .catalog-art-wave i,html[data-theme="dark"] .product-detail-preview-wave i{background:linear-gradient(180deg,#c39add,#e18bb8)}
+html[data-theme="dark"] .product-detail-preview-placeholder,html[data-theme="dark"] .product-detail-audio{border-color:#62506f;background:linear-gradient(135deg,#30243e,#2c2239 62%,#35253b)}
+html[data-theme="dark"] .product-detail-preview-label,html[data-theme="dark"] .product-detail-audio>span{color:#c1aecb}
+html[data-theme="dark"] .product-detail-preview-mark{border-color:#6b5479;background:#483652;color:#e1b6e5}
+html[data-theme="dark"] .product-detail-preview-placeholder small{color:#cdbed8}
+html[data-theme="dark"] .team-avatar-slot-label,html[data-theme="dark"] .pv-avatar-slot{border-color:#685179;background:#31253edb;color:#d6bce0}
+html[data-theme="dark"] #pvAudioDock[data-cover-empty="true"]:not([data-empty="true"]) .pv-audio-track:before{border-color:#6d567a;background:linear-gradient(145deg,#44344f,#382b46);color:#e1b6e5}
+@media(max-width:560px){.team-avatar-slot-label{left:7px;bottom:7px;font-size:.44rem}.pv-avatar-slot{top:37px;font-size:.38rem}.product-detail-preview-placeholder{margin:13px 0;padding:17px 13px}}
+
+
+
+/* Freebies placeholder refinement — final component layer.
+   Loaded after the shared placeholder styles so layout and contrast stay intentional. */
+#main-content .page-view[data-page="freebies"] .freebie-row-placeholder{
+  border:1px solid #e5d7ec!important;
+  border-style:solid!important;
+  background:linear-gradient(112deg,rgba(255,255,255,.88),rgba(249,241,252,.86) 64%,rgba(255,242,247,.86))!important;
+  box-shadow:0 7px 22px rgba(88,55,108,.045),inset 0 1px 0 rgba(255,255,255,.76)!important;
+}
+#main-content .page-view[data-page="freebies"] .freebie-row-placeholder:hover{
+  transform:none!important;
+  border-color:#dfc4e7!important;
+  box-shadow:0 9px 24px rgba(88,55,108,.06)!important;
+}
+#main-content .page-view[data-page="freebies"] .freebie-row-placeholder:before{
+  border:1px solid #e8d9ef!important;
+  border-style:solid!important;
+  background:linear-gradient(145deg,#fff,#f5ebfa)!important;
+  color:#a16db5!important;
+}
+#main-content .page-view[data-page="freebies"] .freebie-placeholder-player{
+  min-height:42px;
+  padding:6px 10px;
+  border:1px solid #e5d9ec;
+  border-radius:12px;
+  background:rgba(255,255,255,.74);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+}
+#main-content .page-view[data-page="freebies"] .freebie-placeholder-play{
+  width:26px;height:26px;flex-basis:26px;
+  background:#f2e8f8;
+  color:#a16db5;
+}
+#main-content .page-view[data-page="freebies"] .freebie-placeholder-time{
+  font-size:.6rem;
+  color:#957fa0;
+}
+#main-content .page-view[data-page="freebies"] .freebie-placeholder-status,
+#main-content .page-view[data-page="freebies"] .freebie-placeholder-download{
+  min-height:36px;
+  padding:8px 11px;
+  border:1px solid #e5d8eb;
+  border-radius:999px;
+  color:#927ba0;
+  font-size:.58rem;
+  letter-spacing:.07em;
+}
+#main-content .page-view[data-page="freebies"] .freebie-placeholder-download{
+  background:#f7eff9;
+  color:#a182b0;
+}
+#main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note{
+  display:grid;
+  grid-template-columns:42px minmax(0,1fr);
+  grid-template-areas:"icon title" "icon copy";
+  justify-content:center;
+  justify-items:start;
+  align-items:center;
+  gap:5px 15px;
+  width:min(100%,760px);
+  margin:14px auto 0;
+  padding:22px 26px;
+  border:1px dashed #dfcbe6;
+  border-radius:20px!important;
+  background:linear-gradient(112deg,rgba(255,255,255,.66),rgba(249,241,252,.68) 65%,rgba(255,242,247,.65));
+  text-align:left;
+}
+#main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note>span{
+  grid-area:icon;
+  width:40px;height:40px;
+  margin:0;
+  border:1px solid #ead8ef;
+  border-radius:13px;
+  background:#f4e8f8;
+  color:#a46db9;
+  font-size:1.08rem;
+}
+#main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note h3{
+  grid-area:title;
+  justify-self:start;
+  font:800 1rem/1.3 Sora,Inter,system-ui,sans-serif!important;
+  letter-spacing:-.025em!important;
+  text-transform:none;
+}
+#main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note p{
+  grid-area:copy;
+  max-width:62ch!important;
+  justify-self:start;
+  font-size:.82rem!important;
+  line-height:1.6!important;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-row-placeholder{
+  border-color:#5b4668!important;
+  background:linear-gradient(112deg,rgba(48,36,61,.95),rgba(43,32,55,.92) 64%,rgba(53,36,57,.92))!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.18)!important;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-row-placeholder:before{
+  border-color:#624d72!important;
+  background:linear-gradient(145deg,#493354,#35263f)!important;
+  color:#e0b9eb!important;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-placeholder-player{
+  border-color:#5d496b;
+  background:rgba(255,255,255,.035);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-placeholder-play{
+  background:#4a3657;color:#d6b3e2;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-placeholder-time{
+  color:#bca8c7;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-placeholder-status,
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-placeholder-download{
+  border-color:#604a6f;color:#c9b4d2;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebie-placeholder-download{
+  background:#3a2b47;color:#d4b4df;
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note{
+  border-color:#634a70;
+  background:linear-gradient(112deg,rgba(48,35,61,.82),rgba(43,32,55,.84) 65%,rgba(52,35,55,.82));
+}
+html[data-theme="dark"] #main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note>span{
+  border-color:#624d72;background:#3d2c49;color:#e2a2d8;
+}
+@media(max-width:720px){
+  #main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note{
+    grid-template-columns:36px minmax(0,1fr);
+    gap:5px 12px;
+    padding:19px;
+  }
+  #main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note>span{
+    width:36px;height:36px;
+  }
+}
+@media(max-width:420px){
+  #main-content .page-view[data-page="freebies"] .freebies-empty.is-placeholder-note{
+    grid-template-columns:1fr;
+    grid-template-areas:"icon" "title" "copy";
+    justify-items:start;
+    text-align:left;
+  }
+}
