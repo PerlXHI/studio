@@ -1,0 +1,131 @@
+/* Perivelle Studio — Freebies page */
+#main-content .page-view[data-page="freebies"] .freebies-page{padding-top:var(--pv-page-section-y);padding-bottom:var(--pv-page-section-y)}
+.freebies-hero{
+ position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) 250px;
+ align-items:center;gap:28px;min-height:310px;margin:0 0 var(--pv-page-stack);
+ padding:clamp(30px,4.2vw,52px);border:1px solid #dfc4e2;border-radius:var(--pv-banner-radius);
+ background:linear-gradient(116deg,#fbf0f8 0%,#f2e5f7 58%,#f7e8f0 100%);
+ box-shadow:0 18px 48px rgba(104,63,117,.1),inset 0 1px 0 rgba(255,255,255,.78);
+}
+.freebies-hero:before{content:"";position:absolute;z-index:-1;width:390px;height:390px;right:90px;top:-230px;border:1px solid rgba(166,107,192,.17);border-radius:50%;box-shadow:0 0 0 22px rgba(166,107,192,.045),0 0 0 48px rgba(216,137,183,.04),0 0 0 78px rgba(166,107,192,.03)}
+.freebies-hero-copy{max-width:690px;min-width:0}
+.freebies-hero-copy>.eyebrow{margin:0 0 13px;color:#96749f;font-size:.7rem;font-weight:750;letter-spacing:.14em}
+.freebies-hero-copy h2{margin:0 0 14px;color:#392743;font:800 clamp(2.4rem,5.3vw,4.3rem)/1.03 Sora,Inter,sans-serif;letter-spacing:-.065em;text-wrap:balance}
+.freebies-hero-copy h2 em{color:#a66bc0;font-style:normal}
+.freebies-hero-copy>p:not(.eyebrow){max-width:580px;margin:0;color:#806b88;font-size:.96rem;line-height:1.7}
+.freebies-hero-note{display:inline-flex;align-items:center;gap:9px;margin-top:24px;padding:9px 13px;border:1px solid #dfc4e2;border-radius:999px;background:rgba(255,255,255,.58);color:#8e5c9e;font-size:.68rem;font-weight:800;letter-spacing:.09em}
+.freebies-hero-note span{font-size:1rem;color:#d889b7}
+.freebies-hero-art{position:relative;display:grid;place-items:center;min-height:220px}
+.freebies-disc{position:relative;display:grid;place-items:center;width:190px;height:190px;border:1px solid #d8b9dc;border-radius:50%;background:radial-gradient(circle at 35% 28%,#fff 0,#f7e9f5 56%,#eddaf0 100%);box-shadow:0 18px 42px rgba(104,63,117,.13),inset 0 0 0 10px rgba(255,255,255,.7),0 0 0 20px rgba(166,107,192,.075)}
+.freebies-disc:before,.freebies-disc:after{content:"";position:absolute;border:1px solid rgba(166,107,192,.19);border-radius:50%}
+.freebies-disc:before{inset:22px}.freebies-disc:after{inset:43px}
+.freebies-disc>span{position:relative;z-index:1;color:#ab70c1;font-size:4.2rem;text-shadow:0 7px 20px rgba(166,107,192,.18)}
+.freebies-disc i{position:absolute;z-index:1;bottom:52px;width:3px;border-radius:9px;background:linear-gradient(180deg,#a66bc0,#d889b7)}
+.freebies-disc i:nth-of-type(1){height:21px;transform:translateX(-17px)}
+.freebies-disc i:nth-of-type(2){height:36px;transform:translateX(-7px)}
+.freebies-disc i:nth-of-type(3){height:27px;transform:translateX(4px)}
+.freebies-disc small{position:absolute;bottom:24px;color:#a27ba9;font:700 .43rem Inter,system-ui,sans-serif;letter-spacing:.13em}
+.freebies-orbit-star{position:absolute;right:4px;top:8px;color:#bf83c9;font-size:2rem}
+.freebies-library-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin:0 0 24px}
+.freebies-library-head .eyebrow{margin:0 0 8px;color:#a66bc0;font-size:.68rem;font-weight:750;letter-spacing:.13em}
+.freebies-library-head h2{margin:0;color:#392743;font:800 clamp(1.65rem,3vw,2.35rem)/1.13 Sora,Inter,sans-serif;letter-spacing:-.05em}
+.freebies-library-head>p{max-width:390px;margin:0;color:#806b88;font-size:.87rem;line-height:1.6}
+.freebies-filter{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:0 0 22px;padding:14px 16px;border:1px solid #dfc4e2;border-radius:18px;background:linear-gradient(120deg,rgba(250,237,247,.86),rgba(240,229,248,.86) 62%,rgba(247,234,245,.86))}
+.freebies-filter-label{color:#96749f;font-size:.65rem;font-weight:800;letter-spacing:.12em}
+.freebies-filter-options{display:flex;align-items:center;flex-wrap:wrap;gap:7px}
+.freebies-filter-options button,.freebies-empty button{min-height:34px;padding:7px 13px;border:1px solid #dfc4e2;border-radius:999px;background:rgba(255,255,255,.72);color:#806b88;font:700 .75rem/1.2 Inter,system-ui,sans-serif;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.freebies-filter-options button:hover,.freebies-empty button:hover{border-color:#c38ec9;color:#62406f}
+.freebies-filter-options button[aria-pressed="true"]{border-color:#b87fc2;background:#ecd8ef;color:#512c61;box-shadow:0 4px 12px rgba(166,107,192,.12)}
+.freebies-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.freebie-card{display:flex;flex-direction:column;min-width:0;overflow:hidden;padding:12px;border:1px solid #dfc4e2;border-radius:22px;background:linear-gradient(150deg,#fff9fd 0%,#f8eef8 62%,#f4e9f2 100%);box-shadow:0 12px 32px rgba(104,63,117,.075);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.freebie-card:hover{transform:translateY(-4px);border-color:#c99bcf;box-shadow:0 20px 40px rgba(104,63,117,.14)}
+.freebie-card.is-latest{border-color:#bd86c6;box-shadow:0 14px 34px rgba(166,107,192,.13)}
+.freebie-cover{position:relative;display:grid;place-items:center;overflow:hidden;aspect-ratio:16/9;margin-bottom:13px;border-radius:15px;background:linear-gradient(135deg,#f4e5f3,#e8d9f2 60%,#f7e5ef)}
+.freebie-cover img{display:block;width:100%;height:100%;object-fit:cover}
+.freebie-cover.has-fallback span{color:#a66bc0;font-size:3.7rem;text-shadow:0 8px 20px rgba(166,107,192,.16)}
+.freebie-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 1px 9px}
+.freebie-type{color:#93649e;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.freebie-stamp{padding:5px 8px;border:1px solid #e1c5e4;border-radius:999px;background:#f8edf7;color:#945da0;font-size:.59rem;font-weight:800;letter-spacing:.07em;white-space:nowrap}
+.freebie-card h3{margin:0 2px 5px;color:#392743;font:750 1.12rem/1.28 Sora,Inter,sans-serif;letter-spacing:-.035em}
+.freebie-artist{margin:0 2px 9px;color:#9a789f;font-size:.77rem;font-weight:650}
+.freebie-description{min-height:48px;margin:0 2px 11px;color:#806b88;font-size:.83rem;line-height:1.55}
+.freebie-date{margin:0 2px 12px;color:#a183a6;font-size:.61rem;font-weight:800;letter-spacing:.09em}
+.freebie-card-details{display:grid;gap:10px;margin-top:auto}
+.freebie-card-details audio{display:block;width:100%;height:36px}
+.freebie-usage{margin:0;padding:10px 11px;border-left:2px solid #c38ec9;border-radius:0 9px 9px 0;background:rgba(255,255,255,.58);color:#806b88;font-size:.74rem;line-height:1.5}
+.freebie-card-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:13px;padding-top:12px;border-top:1px solid #e8d4e7}
+.freebie-file-note{color:#a183a6;font-size:.6rem;font-weight:800;letter-spacing:.09em}
+.freebie-download{display:inline-flex;align-items:center;justify-content:center;min-height:37px;padding:9px 13px;border-radius:999px;background:linear-gradient(105deg,#c276bc,#e36ca7);color:#fff;text-decoration:none;font-size:.77rem;font-weight:800;box-shadow:0 7px 16px rgba(185,91,155,.2)}
+.freebie-download:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.freebie-coming{color:#945da0;font-size:.72rem;font-weight:750}
+.freebies-empty{display:grid;justify-items:center;gap:10px;margin:0;padding:45px 20px;border:1px dashed #d8b9dc;border-radius:22px;background:rgba(250,237,247,.48);text-align:center}
+.freebies-empty[hidden]{display:none!important}
+.freebies-empty>span{color:#a66bc0;font-size:2rem}
+.freebies-empty h3{margin:0;color:#392743;font:750 1.1rem Sora,Inter,sans-serif}
+.freebies-empty p{max-width:54ch;margin:0;color:#806b88;font-size:.85rem;line-height:1.6}
+.freebies-empty button{margin-top:7px}
+.freebies-footnote{margin:22px 2px 0;color:#9a839f;font-size:.73rem;line-height:1.55}
+
+/* Dark mode */
+html[data-theme="dark"] .freebies-hero{border-color:#574363;background:linear-gradient(116deg,#30233d 0%,#2a2037 58%,#332238 100%);box-shadow:0 20px 55px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.04)}
+html[data-theme="dark"] .freebies-hero:before{border-color:rgba(215,167,232,.16);box-shadow:0 0 0 22px rgba(215,167,232,.04),0 0 0 48px rgba(255,145,194,.035),0 0 0 78px rgba(215,167,232,.025)}
+html[data-theme="dark"] .freebies-hero-copy>.eyebrow{color:#cdb0d8}
+html[data-theme="dark"] .freebies-hero-copy h2{color:#fff5ff}
+html[data-theme="dark"] .freebies-hero-copy h2 em{color:#d7a7e8}
+html[data-theme="dark"] .freebies-hero-copy>p:not(.eyebrow){color:#cdbed8}
+html[data-theme="dark"] .freebies-hero-note{border-color:#624d72;background:rgba(255,255,255,.04);color:#e2b0e8}
+html[data-theme="dark"] .freebies-hero-note span{color:#ff91c2}
+html[data-theme="dark"] .freebies-disc{border-color:#624d72;background:radial-gradient(circle at 35% 28%,#49344f,#30243e 65%,#241c31);box-shadow:0 18px 42px rgba(0,0,0,.25),inset 0 0 0 10px rgba(255,255,255,.045),0 0 0 20px rgba(215,167,232,.065)}
+html[data-theme="dark"] .freebies-disc:before,html[data-theme="dark"] .freebies-disc:after{border-color:rgba(215,167,232,.16)}
+html[data-theme="dark"] .freebies-disc>span{color:#e1a8e8}
+html[data-theme="dark"] .freebies-disc i{background:linear-gradient(180deg,#d7a7e8,#ff91c2)}
+html[data-theme="dark"] .freebies-disc small,html[data-theme="dark"] .freebies-orbit-star{color:#d7a7e8}
+html[data-theme="dark"] .freebies-library-head .eyebrow{color:#d7a7e8}
+html[data-theme="dark"] .freebies-library-head h2{color:#f5effb}
+html[data-theme="dark"] .freebies-library-head>p{color:#cdbed8}
+html[data-theme="dark"] .freebies-filter{border-color:#574363;background:linear-gradient(120deg,rgba(48,35,61,.92),rgba(42,32,55,.92) 62%,rgba(51,34,56,.92))}
+html[data-theme="dark"] .freebies-filter-label{color:#cdb0d8}
+html[data-theme="dark"] .freebies-filter-options button,html[data-theme="dark"] .freebies-empty button{border-color:#624d72;background:rgba(255,255,255,.045);color:#cdbed8}
+html[data-theme="dark"] .freebies-filter-options button:hover,html[data-theme="dark"] .freebies-empty button:hover{border-color:#a67db0;color:#fff5ff}
+html[data-theme="dark"] .freebies-filter-options button[aria-pressed="true"]{border-color:#b37bc2;background:#50345a;color:#fff5ff}
+html[data-theme="dark"] .freebie-card{border-color:#574363;background:linear-gradient(150deg,#30243e 0%,#2b2038 62%,#241c31 100%);box-shadow:0 14px 36px rgba(0,0,0,.22)}
+html[data-theme="dark"] .freebie-card:hover{border-color:#8f6899;box-shadow:0 20px 42px rgba(0,0,0,.32)}
+html[data-theme="dark"] .freebie-card.is-latest{border-color:#9f6cae}
+html[data-theme="dark"] .freebie-cover{background:linear-gradient(135deg,#49344f,#35243f 60%,#302039)}
+html[data-theme="dark"] .freebie-cover.has-fallback span{color:#e0a7e8}
+html[data-theme="dark"] .freebie-type{color:#d7a7e8}
+html[data-theme="dark"] .freebie-stamp{border-color:#694d72;background:#3c2b47;color:#e4b4ea}
+html[data-theme="dark"] .freebie-card h3{color:#f5effb}
+html[data-theme="dark"] .freebie-artist{color:#c5a6d0}
+html[data-theme="dark"] .freebie-description{color:#cdbed8}
+html[data-theme="dark"] .freebie-date{color:#bca4c6}
+html[data-theme="dark"] .freebie-usage{border-color:#a678b4;background:rgba(255,255,255,.045);color:#cdbed8}
+html[data-theme="dark"] .freebie-card-footer{border-color:#574363}
+html[data-theme="dark"] .freebie-file-note{color:#bca4c6}
+html[data-theme="dark"] .freebie-coming{color:#e2b0e8}
+html[data-theme="dark"] .freebies-empty{border-color:#694d72;background:rgba(48,35,61,.45)}
+html[data-theme="dark"] .freebies-empty>span{color:#e2a2d8}
+html[data-theme="dark"] .freebies-empty h3{color:#f7efff}
+html[data-theme="dark"] .freebies-empty p,html[data-theme="dark"] .freebies-footnote{color:#cdbed8}
+
+@media(max-width:900px){
+ .freebies-hero{grid-template-columns:minmax(0,1fr) 180px}
+ .freebies-disc{width:150px;height:150px}
+ .freebies-disc>span{font-size:3.4rem}
+ .freebies-disc i{bottom:39px}
+ .freebies-disc small{bottom:19px;font-size:.38rem}
+ .freebies-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:620px){
+ .freebies-hero{grid-template-columns:1fr;gap:10px;min-height:0;padding:26px 22px}
+ .freebies-hero-art{min-height:165px}
+ .freebies-disc{width:140px;height:140px}
+ .freebies-library-head{display:block}
+ .freebies-library-head>p{margin-top:10px}
+ .freebies-filter{align-items:flex-start;flex-direction:column}
+ .freebies-grid{grid-template-columns:1fr;gap:14px}
+}
+@media(prefers-reduced-motion:reduce){
+ .freebie-card,.freebies-filter-options button,.freebie-download{transition:none}
+ .freebie-card:hover,.freebie-download:hover{transform:none}
+}

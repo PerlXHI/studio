@@ -10,6 +10,7 @@ export default async function handler(req,res) {
     if(!response.ok)return res.status(200).json({ok:true,settings:{}});
     const rows=await response.json(),settings={};
     for(const row of rows)settings[row.setting_key]=row.setting_value;
+    if(Array.isArray(settings.freebies))settings.freebies=settings.freebies.filter(item=>item&&item.published===true);
     res.setHeader("Cache-Control","public, s-maxage=30, stale-while-revalidate=120");
     return res.status(200).json({ok:true,settings});
   } catch { return res.status(200).json({ok:true,settings:{}}); }

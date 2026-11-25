@@ -41,17 +41,40 @@ a{color:#c6a9f3}
 .audio-track-row .settings-grid .wide{grid-column:1/-1}
 .audio-track-row .settings-grid input{width:100%;min-width:0}
 @media(max-width:620px){.audio-track-row .settings-grid{grid-template-columns:1fr}.audio-track-row .settings-grid .wide{grid-column:auto}}
+
+/* Freebies administration */
+.freebie-admin-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px;margin-top:18px}
+.freebie-entry{margin:14px 0;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+.freebie-entry-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.freebie-entry-head strong{font-size:1rem}
+.freebie-admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.freebie-admin-grid label{display:grid;gap:6px;min-width:0;font-size:.82rem;font-weight:650}
+.freebie-admin-grid input,.freebie-admin-grid select,.freebie-admin-grid textarea{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;padding:10px;background:var(--paper);color:var(--ink);font:inherit;font-size:.86rem}
+.freebie-admin-grid textarea{resize:vertical}
+.freebie-admin-wide{grid-column:1/-1}
+.freebie-publish{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:.84rem;font-weight:650}
+.freebie-publish input{width:17px;height:17px;accent-color:var(--accent)}
+@media(max-width:620px){.freebie-admin-grid{grid-template-columns:1fr}.freebie-admin-wide{grid-column:auto}.freebie-admin-actions .btn{flex:1}}
 </style><link rel="icon" type="image/jpeg" href="/assets/illustrations/perivellelogo.jpg">
 <link rel="apple-touch-icon" href="/assets/illustrations/perivellelogo.jpg">
 </head><body><div class="shell"><header class="top"><div><div class="brand">PERIVELLE <span>✦</span> ADMIN</div><small class="hint">Private studio workspace</small></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><a href="/#track" class="btn alt" target="_blank" rel="noopener noreferrer">Track Order ↗</a><a href="/" class="hint">← View website</a></div></header>
 <section id="loginView" class="login"><p class="eyebrow">SECURE ACCESS</p><h1>Welcome back.</h1><p>Sign in to manage commissions, pricing, previews, and studio information.</p><form id="loginForm"><label for="password">Admin password</label><input id="password" type="password" autocomplete="current-password" required><p class="message" id="loginMessage" role="status"></p><button class="btn" style="width:100%" id="loginButton">Sign in ↗</button></form></section>
 <main id="dashboard" class="dashboard hidden"><div class="welcome"><div><p class="eyebrow">STUDIO CONTROL CENTER</p><h1>Good to see you.</h1><p>Manage incoming requests and keep your public studio details up to date.</p></div><button class="btn alt" id="logout">Sign out</button></div>
 <div class="stats"><div class="stat"><b id="statTotal">0</b><span>Total requests</span></div><div class="stat"><b id="statReview">0</b><span>Awaiting review</span></div><div class="stat"><b id="statProduction">0</b><span>In production</span></div><div class="stat"><b id="statDone">0</b><span>Completed</span></div></div>
-<div class="tabs" role="tablist"><button class="tab" data-tab="orders" aria-selected="true">Commissions</button><button class="tab" data-tab="services" aria-selected="false">Service pricing</button><button class="tab" data-tab="portfolio" aria-selected="false">Portfolio previews</button><button class="tab" data-tab="audio" aria-selected="false">Audio player</button><button class="tab" data-tab="analytics" aria-selected="false">Analytics</button><button class="tab" data-tab="links" aria-selected="false">Studio links</button><button class="tab" data-tab="commissionStatus" aria-selected="false">Commission status</button></div>
+<div class="tabs" role="tablist"><button class="tab" data-tab="orders" aria-selected="true">Commissions</button><button class="tab" data-tab="services" aria-selected="false">Service pricing</button><button class="tab" data-tab="portfolio" aria-selected="false">Portfolio previews</button><button class="tab" data-tab="freebies" aria-selected="false">Freebies</button><button class="tab" data-tab="audio" aria-selected="false">Audio player</button><button class="tab" data-tab="analytics" aria-selected="false">Analytics</button><button class="tab" data-tab="links" aria-selected="false">Studio links</button><button class="tab" data-tab="commissionStatus" aria-selected="false">Commission status</button></div>
 <section id="ordersPanel" class="panel"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><div><h2>Commission requests</h2><p>Update order status, quotation, client notes, and preview or delivery links.</p></div><button class="btn alt" id="refresh">Refresh</button></div><div class="filters"><input id="searchOrders" placeholder="Search name, Request ID, Discord…"><select id="filterStatus"><option value="">All statuses</option><option>Awaiting Review</option><option>Quotation Sent</option><option>Awaiting Payment</option><option>In Production</option><option>Revision</option><option>Completed</option><option>On Hold</option><option>Cancelled</option></select><select id="filterArchive"><option value="active">Active requests</option><option value="archived">Archived requests</option><option value="all">All requests</option></select></div><div style="display:flex;justify-content:flex-end;margin:-4px 0 12px"><button class="btn alt" id="exportCsv">Export visible orders as CSV ↓</button></div><div id="orders" class="orders"><div class="empty">Loading requests…</div></div></section>
 <section id="servicesPanel" class="panel hidden"><h2>Service pricing</h2><p>Set the starting prices displayed on the public Services page. Leave blank to show “Contact for a quote”.</p><div id="servicePrices"></div><div class="save-row"><button class="btn" id="saveServices">Save service prices</button></div></section>
 
 <section id="portfolioPanel" class="panel hidden"><h2>Portfolio video previews</h2><p>Add or replace each category video preview. Choose a producer from the selector beside each URL to credit that work to bybi, rei, or yoz. Visitors can select a producer on the Studio page to open the Works page filtered to their credited projects. You can also choose one featured video per category for the public Works page.</p><div id="portfolioVideoRows"></div><div class="save-row"><button class="btn" id="savePortfolioVideos">Save portfolio previews</button></div></section>
+<section id="freebiesPanel" class="panel hidden">
+ <h2>Free audio drops</h2>
+ <p>Manage the public Freebies library. Add one release each week, paste a direct HTTPS file URL, and publish it when the download is ready. Future release dates appear as Coming Soon.</p>
+ <div id="freebieRows"></div>
+ <div class="freebie-admin-actions">
+  <button class="btn alt" type="button" id="addFreebie">+ Add freebie</button>
+  <button class="btn" type="button" id="saveFreebies">Save freebies</button>
+ </div>
+</section>
 <section id="audioPanel" class="panel hidden">
  <h2>Public mini audio player</h2>
  <p>Add the tracks visitors can play from the floating player beside the theme toggle. Use a direct HTTPS audio-file URL (MP3, WAV, OGG, or M4A), not a webpage or YouTube link. Host the file first, then paste its direct file URL here.</p>
@@ -73,7 +96,7 @@ function showAuth(on){$("#loginView").classList.toggle("hidden",!on);$("#dashboa
 async function init(){try{const a=await api("/api/admin-auth");if(a.authenticated){showAuth(false);await load()}else showAuth(true)}catch{showAuth(true)}}
 $("#loginForm").addEventListener("submit",async e=>{e.preventDefault();$("#loginButton").disabled=true;$("#loginMessage").textContent="Signing in…";try{await api("/api/admin-auth",{method:"POST",body:JSON.stringify({password:$("#password").value})});$("#password").value="";showAuth(false);await load()}catch(err){$("#loginMessage").textContent=err.message}finally{$("#loginButton").disabled=false}});
 $("#logout").addEventListener("click",async()=>{try{await api("/api/admin-auth?action=logout",{method:"POST",body:JSON.stringify({action:"logout"})})}finally{showAuth(true)}});
-async function load(){const d=await api("/api/admin-data");orders=d.orders||[];orders.forEach(o=>{if(!knownOrderIds.has(o.request_id)){collapsedOrders.add(o.request_id);knownOrderIds.add(o.request_id)}});settings=d.settings||{};renderStats();renderOrders();renderServices();renderPortfolioVideos();renderLinks();renderCommissionStatus();renderAudioTracks()}
+async function load(){const d=await api("/api/admin-data");orders=d.orders||[];orders.forEach(o=>{if(!knownOrderIds.has(o.request_id)){collapsedOrders.add(o.request_id);knownOrderIds.add(o.request_id)}});settings=d.settings||{};renderStats();renderOrders();renderServices();renderPortfolioVideos();renderFreebies();renderLinks();renderCommissionStatus();renderAudioTracks()}
 function renderStats(){$("#statTotal").textContent=orders.length;$("#statReview").textContent=orders.filter(o=>o.status==="Awaiting Review").length;$("#statProduction").textContent=orders.filter(o=>o.status==="In Production").length;$("#statDone").textContent=orders.filter(o=>o.status==="Completed").length;renderAnalytics()}
 function renderAnalytics(){const total=orders.length,completed=orders.filter(o=>o.status==="Completed").length,active=orders.filter(o=>!["Completed","Cancelled"].includes(o.status)).length,rate=total?Math.round(completed/total*100):0;const serviceMap={};orders.forEach(o=>{const name=o.brief?.type||"Unspecified";serviceMap[name]=(serviceMap[name]||0)+1});const services=Object.entries(serviceMap).sort((a,b)=>b[1]-a[1]).slice(0,6);const now=new Date(),months=Array.from({length:6},(_,i)=>{const d=new Date(now.getFullYear(),now.getMonth()-5+i,1);return {label:d.toLocaleDateString("en",{month:"short"}),count:orders.filter(o=>{const x=new Date(o.created_at);return x.getFullYear()===d.getFullYear()&&x.getMonth()===d.getMonth()}).length}});const max=Math.max(1,...months.map(m=>m.count));$("#analyticsContent").innerHTML='<div class="stats"><div class="stat"><b>'+total+'</b><span>Total requests</span></div><div class="stat"><b>'+active+'</b><span>Active requests</span></div><div class="stat"><b>'+completed+'</b><span>Completed</span></div><div class="stat"><b>'+rate+'%</b><span>Completion rate</span></div></div><div class="settings-grid"><div class="panel" style="box-shadow:none"><h3>Requests · last 6 months</h3>'+months.map(m=>'<div style="display:grid;grid-template-columns:42px 1fr 28px;gap:9px;align-items:center;margin:12px 0"><span class="hint">'+m.label+'</span><div style="height:10px;border-radius:99px;background:#40364f;overflow:hidden"><div style="height:100%;width:'+(m.count/max*100)+'%;background:linear-gradient(90deg,#9875cf,#8eb9e5);border-radius:99px"></div></div><strong>'+m.count+'</strong></div>').join("")+'</div><div class="panel" style="box-shadow:none"><h3>Popular services</h3>'+(services.length?services.map(([name,count])=>'<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)"><span>'+esc(name)+'</span><strong>'+count+'</strong></div>').join(""):'<p class="hint">No commission data yet.</p>')+'</div></div>'}
 function field(label,value){return '<div class="field-value"><b>'+esc(label)+'</b>'+esc(value||"—")+'</div>'}
@@ -124,6 +147,73 @@ $("#savePortfolioVideos").addEventListener("click",async()=>{
  catch(e){$("#globalMessage").textContent=e.message}
 });
 
+const defaultFreebies=[];
+const freebieCategories=[{id:"bgm",name:"BGM"},{id:"sound-alerts",name:"Sound Alerts"},{id:"stinger",name:"Stinger"}];
+const freebieArtists=[{id:"Perivelle Studio",name:"Perivelle Studio"},{id:"bybi",name:"bybi"},{id:"rei",name:"rei"},{id:"yoz",name:"yoz"}];
+function localAdminDate(){const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
+function freebieRow(item){
+ const data=item||{},categoryOptions=freebieCategories.map(x=>'<option value="'+x.id+'" '+(data.category===x.id?'selected':'')+'>'+x.name+'</option>').join("");
+ const artistOptions=freebieArtists.map(x=>'<option value="'+esc(x.id)+'" '+((data.artist||"Perivelle Studio")===x.id?'selected':'')+'>'+esc(x.name)+'</option>').join("");
+ const id=esc(data.id||("freebie_"+Date.now()+"_"+Math.random().toString(36).slice(2,7)));
+ return '<article class="freebie-entry" data-freebie-id="'+id+'">'+
+  '<div class="freebie-entry-head"><strong>'+esc(data.title||"New free audio")+'</strong><button type="button" class="btn alt" data-remove-freebie>Remove</button></div>'+
+  '<div class="freebie-admin-grid">'+
+   '<label>Release title<input data-freebie-title maxlength="100" required value="'+esc(data.title||"")+'" placeholder="e.g. Starlit Café — Cozy BGM"></label>'+
+   '<label>Audio type<select data-freebie-category required>'+categoryOptions+'</select></label>'+
+   '<label>Artist / producer<select data-freebie-artist required>'+artistOptions+'</select></label>'+
+   '<label>Release date<input data-freebie-date type="date" required value="'+esc(data.release_date||localAdminDate())+'"></label>'+
+   '<label class="freebie-admin-wide">Short description<textarea data-freebie-description rows="2" maxlength="420" placeholder="Describe the mood, use case, and sound...">'+esc(data.description||"")+'</textarea></label>'+
+   '<label class="freebie-admin-wide">Direct download file URL *<input data-freebie-download type="url" required value="'+esc(data.download_url||"")+'" placeholder="https://your-storage.com/freebies/track.wav"></label>'+
+   '<label>Audio preview URL (optional)<input data-freebie-preview type="url" value="'+esc(data.preview_url||"")+'" placeholder="https://.../preview.mp3"></label>'+
+   '<label>Cover image URL (optional)<input data-freebie-cover type="url" value="'+esc(data.cover_url||"")+'" placeholder="https://.../cover.webp"></label>'+
+   '<label class="freebie-admin-wide">Usage notes (optional)<textarea data-freebie-usage rows="2" maxlength="700" placeholder="Set the usage terms you want clients to see before using this audio.">'+esc(data.usage_note||"")+'</textarea></label>'+
+  '</div>'+
+  '<label class="freebie-publish"><input type="checkbox" data-freebie-published '+(data.published===true?"checked":"")+'> Publish this release on the public Freebies page</label>'+
+ '</article>';
+}
+function renderFreebies(){
+ const saved=Array.isArray(settings.freebies)?settings.freebies:defaultFreebies;
+ $("#freebieRows").innerHTML=saved.length?saved.map(freebieRow).join(""):'<div class="empty">No free audio releases yet. Add your first weekly drop.</div>';
+}
+$("#addFreebie").addEventListener("click",()=>{
+ const empty=$("#freebieRows .empty");if(empty)empty.remove();
+ $("#freebieRows").insertAdjacentHTML("beforeend",freebieRow({release_date:localAdminDate(),published:false}));
+});
+$("#freebieRows").addEventListener("click",event=>{
+ const remove=event.target.closest("[data-remove-freebie]");
+ if(remove)remove.closest(".freebie-entry").remove();
+});
+$("#saveFreebies").addEventListener("click",async()=>{
+ const rows=[...document.querySelectorAll(".freebie-entry")];
+ const items=[];
+ for(const row of rows){
+  const title=row.querySelector("[data-freebie-title]");
+  const date=row.querySelector("[data-freebie-date]");
+  const download=row.querySelector("[data-freebie-download]");
+  if(!title.reportValidity()||!date.reportValidity()||!download.reportValidity())return;
+  const data={
+   id:row.dataset.freebieId,
+   title:title.value.trim(),
+   category:row.querySelector("[data-freebie-category]").value,
+   artist:row.querySelector("[data-freebie-artist]").value,
+   release_date:date.value,
+   description:row.querySelector("[data-freebie-description]").value.trim(),
+   download_url:download.value.trim(),
+   preview_url:row.querySelector("[data-freebie-preview]").value.trim(),
+   cover_url:row.querySelector("[data-freebie-cover]").value.trim(),
+   usage_note:row.querySelector("[data-freebie-usage]").value.trim(),
+   published:row.querySelector("[data-freebie-published]").checked
+  };
+  if(!data.title||!data.download_url||!data.release_date){
+   $("#globalMessage").textContent="Each freebie needs a title, release date, and direct download URL.";
+   return;
+  }
+  items.push(data);
+ }
+ try{await saveSetting("freebies",items);renderFreebies()}
+ catch(error){$("#globalMessage").textContent=error.message}
+});
+
 function readAudioTracks(){
  return [...document.querySelectorAll(".audio-track-row")].map(row=>({
   title:row.querySelector("[data-audio-title]").value.trim(),
@@ -162,6 +252,6 @@ $("#saveCommissionStatus").addEventListener("click",async()=>{try{await saveSett
 function renderLinks(){const x=settings.studio_links||{};$("#discordLink").value=x.discord||"";$("#portfolioLink").value=x.portfolio||"";$("#youtubeLink").value=x.youtube||"";$("#vgenLink").value=x.vgen||"";$("#emailLink").value=x.email||"";$("#twitterLink").value=x.twitter||""}
 $("#saveLinks").addEventListener("click",async()=>{try{await saveSetting("studio_links",{discord:$("#discordLink").value.trim(),portfolio:$("#portfolioLink").value.trim(),youtube:$("#youtubeLink").value.trim(),vgen:$("#vgenLink").value.trim(),email:$("#emailLink").value.trim(),twitter:$("#twitterLink").value.trim()})}catch(e){$("#globalMessage").textContent=e.message}});
 async function saveSetting(key,value){await api("/api/admin-data",{method:"PATCH",body:JSON.stringify({kind:"setting",key,value})});settings[key]=value;$("#globalMessage").textContent="Changes saved successfully.";showToast("Changes saved successfully.")}
-document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{const key=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(x=>x.setAttribute("aria-selected",String(x===b)));["orders","services","portfolio","audio","analytics","links","commissionStatus"].forEach(k=>{const panel=document.getElementById(k+"Panel");if(panel)panel.classList.toggle("hidden",k!==key)});}));
+document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{const key=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(x=>x.setAttribute("aria-selected",String(x===b)));["orders","services","portfolio","freebies","audio","analytics","links","commissionStatus"].forEach(k=>{const panel=document.getElementById(k+"Panel");if(panel)panel.classList.toggle("hidden",k!==key)});}));
 init();
 </script></body></html>

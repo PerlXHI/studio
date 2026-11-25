@@ -14,7 +14,7 @@ const STATUS_NOTES={
   "Demo ready — Awaiting feedback":"Demo ready — Awaiting feedback",
   "Preparing final delivery":"Preparing final delivery"
 };
-const KEYS=["service_prices","catalog_products","studio_links","portfolio_videos","commission_status","audio_player"];
+const KEYS=["service_prices","catalog_products","studio_links","portfolio_videos","freebies","commission_status","audio_player"];
 async function db(path,options={}) {
   const {url,key}=supabaseConfig();
   return fetch(url+"/rest/v1/"+path,{...options,headers:supabaseHeaders(key,{"Content-Type":"application/json",...(options.headers||{})})});
@@ -103,6 +103,40 @@ export default async function handler(req,res) {
               if(!allowedCreators.includes(creator))return res.status(400).json({ok:false,message:"Choose a valid producer for each video credit."});
               if(assignedUrls.has(assignedUrl))return res.status(400).json({ok:false,message:"Each video can only be credited once per category."});
               assignedUrls.add(assignedUrl);
+            }
+          }
+        }
+        if(body.key==="freebies" && Array.isArray(value)){
+          const allowedCategories=["bgm","sound-alerts","stinger"];
+          const allowedArtists=["Perivelle Studio","bybi","rei","yoz"];
+          if(value.length>100)return res.status(400).json({ok:false,message:"The Freebies library can contain up to 100 releases."});
+          const ids=new Set();
+          for(const item of value){
+            const id=String(item&&item.id||"").trim();
+            const title=String(item&&item.title||"").trim();
+            const category=String(item&&item.category||"");
+            const artist=String(item&&item.artist||"");
+            const date=String(item&&item.release_date||"");
+            const description=String(item&&item.description||"");
+            const downloadUrl=String(item&&item.download_url||"").trim();
+            const previewUrl=String(item&&item.preview_url||"").trim();
+            const coverUrl=String(item&&item.cover_url||"").trim();
+            const usageNote=String(item&&item.usage_note||"");
+            if(!id||id.length>120||!/^[a-zA-Z0-9_-]+$/.test(id))return res.status(400).json({ok:false,message:"Each freebie needs a valid unique release ID."});
+            if(ids.has(id))return res.status(400).json({ok:false,message:"Each freebie must have a unique release ID."});
+            ids.add(id);
+            if(!title||title.length>100)return res.status(400).json({ok:false,message:"Each freebie needs a title up to 100 characters."});
+            if(!allowedCategories.includes(category))return res.status(400).json({ok:false,message:"Choose BGM, Sound Alerts, or Stinger as the audio type."});
+            if(!allowedArtists.includes(artist))return res.status(400).json({ok:false,message:"Choose a valid artist or Perivelle Studio as the credit."});
+            if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||Number.isNaN(new Date(date+"T00:00:00Z").getTime())||new Date(date+"T00:00:00Z").toISOString().slice(0,10)!==date)return res.status(400).json({ok:false,message:"Each freebie needs a valid release date."});
+            if(description.length>420||usageNote.length>700)return res.status(400).json({ok:false,message:"The description or usage notes are too long."});
+            if(typeof item.published!=="boolean")return res.status(400).json({ok:false,message:"Set each release to published or draft."});
+            let parsedDownload;try{parsedDownload=new URL(downloadUrl)}catch{return res.status(400).json({ok:false,message:"Enter a direct download file URL."})}
+            if(parsedDownload.protocol!=="https:")return res.status(400).json({ok:false,message:"Freebie download links must use HTTPS."});
+            for(const [label,rawUrl] of [["preview",previewUrl],["cover",coverUrl]]){
+              if(!rawUrl)continue;
+              let parsed;try{parsed=new URL(rawUrl)}catch{return res.status(400).json({ok:false,message:"Enter a valid HTTPS "+label+" URL or leave it blank."})}
+              if(parsed.protocol!=="https:")return res.status(400).json({ok:false,message:"Freebie "+label+" links must use HTTPS."});
             }
           }
         }
