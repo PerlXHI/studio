@@ -36,7 +36,11 @@ async function ensurePublicBucket(url, key, fileSize) {
     return;
   }
   if (response.status !== 404) {
-    throw new Error("Could not check the Supabase Storage bucket. " + response.status);
+    const errorText = await response.text().catch(() => "");
+    let detail = {};
+    try { detail = JSON.parse(errorText); } catch {}
+    const reason = detail.message || detail.error || detail.hint || errorText || "No error details were returned by Supabase.";
+    throw new Error("Could not check the Supabase Storage bucket. HTTP " + response.status + ": " + String(reason).slice(0, 500));
   }
   response = await fetch(url + "/storage/v1/bucket", {
     method: "POST",
