@@ -68,7 +68,7 @@ a{color:#c6a9f3}
 <section id="portfolioPanel" class="panel hidden"><h2>Portfolio video previews</h2><p>Add or replace each category video preview. Choose a producer from the selector beside each URL to credit that work to bybi, rei, or yoz. Visitors can select a producer on the Studio page to open the Works page filtered to their credited projects. You can also choose one featured video per category for the public Works page.</p><div id="portfolioVideoRows"></div><div class="save-row"><button class="btn" id="savePortfolioVideos">Save portfolio previews</button></div></section>
 <section id="freebiesPanel" class="panel hidden">
  <h2>Free audio drops</h2>
- <p>Manage the public Freebies library. Add one release each week, paste a direct HTTPS file URL, and publish it when the download is ready. Future release dates appear as Coming Soon.</p>
+ <p>Manage the public Freebies library. Add one release each week. The download file URL also powers the MP3 player when no separate preview URL is provided. Publish when ready; future release dates appear as Coming Soon.</p>
  <div id="freebieRows"></div>
  <div class="freebie-admin-actions">
   <button class="btn alt" type="button" id="addFreebie">+ Add freebie</button>
@@ -164,7 +164,7 @@ function freebieRow(item){
    '<label>Release date<input data-freebie-date type="date" required value="'+esc(data.release_date||localAdminDate())+'"></label>'+
    '<label class="freebie-admin-wide">Short description<textarea data-freebie-description rows="2" maxlength="420" placeholder="Describe the mood, use case, and sound...">'+esc(data.description||"")+'</textarea></label>'+
    '<label class="freebie-admin-wide">Direct download file URL *<input data-freebie-download type="url" required value="'+esc(data.download_url||"")+'" placeholder="https://your-storage.com/freebies/track.wav"></label>'+
-   '<label>Audio preview URL (optional)<input data-freebie-preview type="url" value="'+esc(data.preview_url||"")+'" placeholder="https://.../preview.mp3"></label>'+
+   '<label>Preview MP3 URL (optional — falls back to download file)<input data-freebie-preview type="url" value="'+esc(data.preview_url||"")+'" placeholder="https://.../preview.mp3"></label>'+
    '<label>Cover image URL (optional)<input data-freebie-cover type="url" value="'+esc(data.cover_url||"")+'" placeholder="https://.../cover.webp"></label>'+
    '<label class="freebie-admin-wide">Usage notes (optional)<textarea data-freebie-usage rows="2" maxlength="700" placeholder="Set the usage terms you want clients to see before using this audio.">'+esc(data.usage_note||"")+'</textarea></label>'+
   '</div>'+

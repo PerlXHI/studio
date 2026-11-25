@@ -2308,7 +2308,7 @@ html:not([data-theme="dark"]) #contactWidget .contact-trigger[aria-expanded="tru
       <a class="navlink" href="#home" data-page-link="home" aria-current="page">Home</a>
       <a class="navlink" href="#team" data-page-link="team">Studio</a>
       <a class="navlink" href="#portfolio" data-page-link="portfolio">Works</a>
-      <a class="navlink" href="#freebies" data-page-link="freebies">Freebies</a>
+      
       <a class="navlink" href="#services" data-page-link="services">Services</a>
       <a class="navlink" href="#custom" data-page-link="custom">Commission</a>
       <a class="navlink pv-track-navlink" href="#track" data-page-link="track">Track Order</a>
@@ -2511,39 +2511,18 @@ html:not([data-theme="dark"]) #contactWidget .contact-trigger[aria-expanded="tru
 <div class="page-view" data-page="freebies" hidden>
  <section class="section freebies-page" id="freebies">
   <div class="wrap">
-   <header class="freebies-hero">
-    <div class="freebies-hero-copy">
-     <p class="eyebrow">PERIVELLE FREE AUDIO DROPS</p>
-     <h2>Good sounds should <em>travel.</em></h2>
-     <p>Free BGM, sound alerts, and little audio details for your streams, videos, and creative worlds. A fresh drop is planned every week.</p>
-     <div class="freebies-hero-note"><span aria-hidden="true">✦</span> NEW FREE AUDIO · WEEKLY RELEASES</div>
-    </div>
-    <div class="freebies-hero-art" aria-hidden="true">
-     <div class="freebies-disc"><span>♫</span><i></i><i></i><i></i><small>FREE SOUND / PERIVELLE</small></div>
-     <span class="freebies-orbit-star">✧</span>
-    </div>
+   <header class="freebies-heading">
+    <p class="eyebrow">PERIVELLE FREE AUDIO</p>
+    <h2>Little sounds. <em>Free to use.</em></h2>
+    <p>A fresh sound drop, every week.</p>
    </header>
-   <div class="freebies-library-head">
-    <div><p class="eyebrow">THE FREE SOUND LIBRARY</p><h2>Pick a sound. Make it yours.</h2></div>
-    <p>Listen to the preview, check the usage notes, and download the file you need.</p>
-   </div>
-   <nav class="freebies-filter" aria-label="Filter free downloads">
-    <span class="freebies-filter-label">BROWSE BY TYPE</span>
-    <div class="freebies-filter-options">
-     <button type="button" data-freebies-filter="all" aria-pressed="true">All freebies</button>
-     <button type="button" data-freebies-filter="bgm" aria-pressed="false">BGM</button>
-     <button type="button" data-freebies-filter="sound-alerts" aria-pressed="false">Sound Alerts</button>
-     <button type="button" data-freebies-filter="stinger" aria-pressed="false">Stinger</button>
-    </div>
-   </nav>
-   <div class="freebies-grid" id="freebiesGrid" aria-live="polite"></div>
+   <div class="freebies-list" id="freebiesGrid" aria-live="polite"></div>
    <div class="freebies-empty" id="freebiesEmpty" hidden>
     <span aria-hidden="true">♫</span>
     <h3 id="freebiesEmptyTitle">The first free drop is on its way.</h3>
-    <p id="freebiesEmptyText">New BGM, sound alerts, and more will appear here. Check back for the next Perivelle release.</p>
-    <button type="button" data-freebies-filter="all">View all freebies</button>
+    <p id="freebiesEmptyText">Check back soon for free BGM, sound alerts, and more from Perivelle.</p>
    </div>
-   <p class="freebies-footnote">Free downloads are provided by Perivelle Studio. Please read the usage notes attached to each release before using the audio.</p>
+   <p class="freebies-footnote">Please check the usage notes on each release before using the audio in your content.</p>
   </div>
  </section>
 </div>
@@ -2609,6 +2588,10 @@ html:not([data-theme="dark"]) #contactWidget .contact-trigger[aria-expanded="tru
 </div>
 
 <div class="page-view" data-page="faq" hidden><section class="section" id="faq" style="padding-top:0"><div class="wrap faq"><p class="eyebrow" data-t="faqEyebrow">ORDER INFORMATION</p><h2 data-t="faqTitle">Before you choose.</h2><details><summary data-t="faqQ1">How do I order?</summary><p data-t="faqA1">Submit the commission form to generate your brief, then copy it and send it to Perivelle on Discord. We will review your request and send a quotation. Full payment is required after you approve the quotation and before production begins.</p></details><details><summary data-t="faqQ2">Are audio previews available?</summary><p data-t="faqA2">Audio preview files have not yet been added to this sample catalog. Add an official preview link for each product before launch.</p></details><details><summary data-t="faqQ3">Is my custom brief sent automatically?</summary><p data-t="faqA3">No. Your brief is generated in your browser, copied, and Discord opens so you can send it manually. No data is stored on a server.</p></details></div></section></div>
+<a class="freebies-edge-tab" href="#freebies" data-page-link="freebies" aria-label="Discover free audio downloads">
+ <span class="freebies-edge-label">FREE AUDIO DROPS</span>
+ <span class="freebies-edge-icon" aria-hidden="true">✧</span>
+</a>
 </main>
 
 
@@ -3212,10 +3195,9 @@ setLanguage("en");
 </script>
 
 <script>
-/* Public Freebies library — weekly BGM, sound alerts and stingers. */
+/* Public Freebies list — direct MP3 preview and download. */
 (function(){
  const categories={bgm:"BGM","sound-alerts":"Sound Alerts",stinger:"Stinger"};
- let activeCategory="all";
  const grid=document.getElementById("freebiesGrid");
  const empty=document.getElementById("freebiesEmpty");
  const emptyTitle=document.getElementById("freebiesEmptyTitle");
@@ -3234,113 +3216,105 @@ setLanguage("en");
   const date=new Date(value+"T00:00:00");
   return Number.isNaN(date.getTime())?"Release date to be announced":date.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
  }
- function iconFor(category){
-  return category==="sound-alerts"?"✦":category==="stinger"?"↗":"♫";
- }
- function makeCard(item,isLatest){
-  const category=categories[item.category]||"Free Audio";
-  const fileUrl=safeHttps(item.download_url);
-  const previewUrl=safeHttps(item.preview_url);
-  const coverUrl=safeHttps(item.cover_url);
-  if(!fileUrl)return null;
+ function makeRow(item,isLatest){
+  const downloadUrl=safeHttps(item.download_url);
+  const previewUrl=safeHttps(item.preview_url)||downloadUrl;
+  if(!downloadUrl)return null;
+  const released=String(item.release_date||"")<=localDate();
 
-  const card=document.createElement("article");
-  card.className="freebie-card"+(isLatest?" is-latest":"");
-  card.dataset.category=item.category;
-  const cover=document.createElement("div");
-  cover.className="freebie-cover";
-  if(coverUrl){
-   const image=document.createElement("img");image.src=coverUrl;image.alt="Cover art for "+item.title;image.loading="lazy";
-   image.addEventListener("error",function(){cover.replaceChildren();cover.classList.add("has-fallback");const mark=document.createElement("span");mark.textContent=iconFor(item.category);cover.appendChild(mark)},{once:true});
-   cover.appendChild(image);
-  }else{
-   cover.classList.add("has-fallback");
-   const mark=document.createElement("span");mark.textContent=iconFor(item.category);cover.appendChild(mark);
-  }
+  const row=document.createElement("article");
+  row.className="freebie-row"+(isLatest?" is-latest":"");
 
-  const top=document.createElement("div");top.className="freebie-card-top";
-  const type=document.createElement("span");type.className="freebie-type";type.textContent=category;
-  const stamp=document.createElement("span");stamp.className="freebie-stamp";
-  const isReleased=String(item.release_date||"")<=localDate();
-  stamp.textContent=isReleased?(isLatest?"LATEST DROP":"FREE DOWNLOAD"):"COMING SOON";
-  top.append(type,stamp);
+  const info=document.createElement("div");
+  info.className="freebie-info";
+  const meta=document.createElement("div");
+  meta.className="freebie-meta";
+  const category=document.createElement("span");
+  category.className="freebie-category";
+  category.textContent=categories[item.category]||"Free Audio";
+  const date=document.createElement("span");
+  date.className="freebie-date";
+  date.textContent=formatDate(item.release_date);
+  meta.append(category,date);
 
-  const title=document.createElement("h3");title.textContent=item.title;
-  const artist=document.createElement("p");artist.className="freebie-artist";artist.textContent="By "+(item.artist||"Perivelle Studio");
-  const description=document.createElement("p");description.className="freebie-description";description.textContent=item.description||"A free audio release from Perivelle Studio.";
-  const date=document.createElement("p");date.className="freebie-date";date.textContent="RELEASED · "+formatDate(item.release_date);
+  const title=document.createElement("h3");
+  title.textContent=item.title;
+  const artist=document.createElement("p");
+  artist.className="freebie-artist";
+  artist.textContent="By "+(item.artist||"Perivelle Studio");
+  info.append(meta,title,artist);
 
-  const details=document.createElement("div");details.className="freebie-card-details";
-  if(previewUrl){
-   const audio=document.createElement("audio");audio.controls=true;audio.preload="none";audio.src=previewUrl;audio.setAttribute("aria-label","Preview "+item.title);
-   details.appendChild(audio);
-  }
-  if(item.usage_note){
-   const usage=document.createElement("p");usage.className="freebie-usage";usage.textContent=item.usage_note;details.appendChild(usage);
-  }
+  const preview=document.createElement("div");
+  preview.className="freebie-preview";
+  const previewLabel=document.createElement("span");
+  previewLabel.className="freebie-preview-label";
+  previewLabel.textContent="PREVIEW MP3";
+  const audio=document.createElement("audio");
+  audio.controls=true;
+  audio.preload="none";
+  audio.src=previewUrl;
+  audio.setAttribute("aria-label","Preview "+item.title);
+  preview.append(previewLabel,audio);
 
-  const footer=document.createElement("div");footer.className="freebie-card-footer";
-  const file=document.createElement("span");file.className="freebie-file-note";file.textContent="FREE AUDIO FILE";
-  footer.appendChild(file);
-  if(isReleased){
+  const actions=document.createElement("div");
+  actions.className="freebie-actions";
+  const previewLink=document.createElement("a");
+  previewLink.className="freebie-preview-link";
+  previewLink.href=previewUrl;
+  previewLink.target="_blank";
+  previewLink.rel="noopener noreferrer";
+  previewLink.textContent="Open MP3 ↗";
+  actions.appendChild(previewLink);
+
+  if(released){
    const download=document.createElement("a");
    download.className="freebie-download";
-   download.href=fileUrl;
-   download.target="_blank";
-   download.rel="noopener noreferrer";
+   download.href=downloadUrl;
    download.setAttribute("download","");
-   download.textContent="Download free ↗";
-   footer.appendChild(download);
+   download.textContent="Download ↓";
+   actions.appendChild(download);
   }else{
-   const soon=document.createElement("span");soon.className="freebie-coming";soon.textContent="Available "+formatDate(item.release_date);
-   footer.appendChild(soon);
+   const coming=document.createElement("span");
+   coming.className="freebie-coming";
+   coming.textContent="Available "+formatDate(item.release_date);
+   actions.appendChild(coming);
   }
 
-  card.append(cover,top,title,artist,description,date,details,footer);
-  return card;
+  row.append(info,preview,actions);
+  if(item.usage_note){
+   const details=document.createElement("details");
+   details.className="freebie-usage";
+   const summary=document.createElement("summary");
+   summary.textContent="Usage notes";
+   const note=document.createElement("p");
+   note.textContent=item.usage_note;
+   details.append(summary,note);
+   row.appendChild(details);
+  }
+  return row;
  }
 
+ window.perivelleFreebiesData=Array.isArray(window.perivelleFreebiesData)?window.perivelleFreebiesData:[];
  window.perivelleRenderFreebies=function(entries){
   const items=(Array.isArray(entries)?entries:[])
    .filter(item=>item&&item.published===true&&categories[item.category])
    .slice()
    .sort((a,b)=>String(b.release_date||"").localeCompare(String(a.release_date||"")));
-  grid.replaceChildren();
   const today=localDate();
-  const latestReleased=items.find(item=>String(item.release_date||"")<=today);
-  const filtered=items.filter(item=>activeCategory==="all"||item.category===activeCategory);
-  filtered.forEach(function(item){
-   const card=makeCard(item,item===latestReleased);
-   if(card)grid.appendChild(card);
+  const visible=items.filter(item=>String(item.release_date||"")<=today);
+  const latest=visible[0]||null;
+  grid.replaceChildren();
+  items.forEach(function(item){
+   const row=makeRow(item,item===latest);
+   if(row)grid.appendChild(row);
   });
-  empty.hidden=filtered.length>0;
-  if(!filtered.length){
-   if(items.length){
-    emptyTitle.textContent="No "+(categories[activeCategory]||"matching")+" freebies yet.";
-    emptyText.textContent="This collection is still growing. Choose another audio type or check back after the next release.";
-   }else{
-    emptyTitle.textContent="The first free drop is on its way.";
-    emptyText.textContent="New BGM, sound alerts, and more will appear here. Check back for the next Perivelle release.";
-   }
+  empty.hidden=items.length>0;
+  if(!items.length){
+   emptyTitle.textContent="The first free drop is on its way.";
+   emptyText.textContent="Check back soon for free BGM, sound alerts, and more from Perivelle.";
   }
-  document.querySelectorAll("[data-freebies-filter]").forEach(function(button){
-   const value=button.dataset.freebiesFilter;
-   const active=value===activeCategory;
-   button.setAttribute("aria-pressed",String(active));
-  });
  };
- document.addEventListener("click",function(event){
-  const button=event.target.closest&&event.target.closest("[data-freebies-filter]");
-  if(!button)return;
-  activeCategory=button.dataset.freebiesFilter||"all";
-  window.perivelleRenderFreebies(window.perivelleFreebiesData||[]);
-  const page=document.querySelector('.page-view[data-page="freebies"]');
-  if(page&&document.documentElement.dataset.activeView==="freebies"){
-   const gridTop=grid.getBoundingClientRect().top+window.scrollY;
-   if(gridTop<window.scrollY+120)window.scrollTo({top:Math.max(0,gridTop-150),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
-  }
- });
- window.perivelleRenderFreebies(window.perivelleFreebiesData||[]);
+ window.perivelleRenderFreebies(window.perivelleFreebiesData);
 })();
 </script>
 
