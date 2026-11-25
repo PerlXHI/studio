@@ -15,6 +15,19 @@ const STATUS_NOTES={
   "Preparing final delivery":"Preparing final delivery"
 };
 const KEYS=["service_prices","catalog_products","studio_links","portfolio_videos","freebies","commission_status","audio_player"];
+function storageObjectPath(rawUrl,projectUrl){
+  if(!rawUrl)return "";
+  try{
+    const parsed=new URL(String(rawUrl));
+    const project=new URL(projectUrl);
+    if(parsed.protocol!=="https:"||parsed.origin!==project.origin)return "";
+    const prefix="/storage/v1/object/public/freebies/";
+    if(!parsed.pathname.startsWith(prefix))return "";
+    const encodedPath=parsed.pathname.slice(prefix.length);
+    if(!encodedPath||encodedPath.split("/").some(part=>!part||part==="."||part===".."))return "";
+    return encodedPath.split("/").map(part=>decodeURIComponent(part)).join("/");
+  }catch{return ""}
+}
 async function db(path,options={}) {
   const {url,key}=supabaseConfig();
   return fetch(url+"/rest/v1/"+path,{...options,headers:supabaseHeaders(key,{"Content-Type":"application/json",...(options.headers||{})})});
@@ -154,10 +167,37 @@ export default async function handler(req,res) {
           if(audioSettings.enabled!==undefined&&typeof audioSettings.enabled!=="boolean")return res.status(400).json({ok:false,message:"Player visibility must be enabled or disabled."});
         }
         if(!value||typeof value!=="object")return res.status(400).json({ok:false,message:"Setting value must be an object or array."});
+        let removedStorageFiles=0;
+        let storageCleanupWarning="";
+        let removedPaths=new Set();
+        if(body.key==="freebies" && Array.isArray(value)){
+          const currentResponse=await db("studio_settings?setting_key=eq.freebies&select=setting_value");
+          if(!currentResponse.ok)throw new Error("Could not read the current Freebies list.");
+          const currentRows=await currentResponse.json();
+          const previous=Array.isArray(currentRows[0]?.setting_value)?currentRows[0].setting_value:[];
+          const nextPaths=new Set();
+          for(const item of value) for(const field of ["download_url","preview_url","cover_url"]){
+            const path=storageObjectPath(item?.[field],url);
+            if(path)nextPaths.add(path);
+          }
+          for(const item of previous) for(const field of ["download_url","preview_url","cover_url"]){
+            const path=storageObjectPath(item?.[field],url);
+            if(path&&!nextPaths.has(path))removedPaths.add(path);
+          }
+        }
         const payload={setting_key:body.key,setting_value:value};
         const response=await db("studio_settings?on_conflict=setting_key",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=representation"},body:JSON.stringify(payload)});
         if(!response.ok)throw new Error("Setting save failed");
-        return res.status(200).json({ok:true});
+        if(removedPaths.size){
+          const deleteResponse=await fetch(url+"/storage/v1/object/freebies",{
+            method:"DELETE",
+            headers:supabaseHeaders(key,{"Content-Type":"application/json"}),
+            body:JSON.stringify({prefixes:[...removedPaths]})
+          });
+          if(deleteResponse.ok)removedStorageFiles=removedPaths.size;
+          else storageCleanupWarning="The Freebies list was saved, but some old files could not be deleted from Storage.";
+        }
+        return res.status(200).json({ok:true,removedStorageFiles,warning:storageCleanupWarning});
       }
       return res.status(400).json({ok:false,message:"Unknown update type."});
     } catch { return res.status(502).json({ok:false,message:"Could not save changes. Check the database schema and try again."}); }
