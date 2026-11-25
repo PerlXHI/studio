@@ -1,0 +1,43 @@
+/* =====================================================================
+   PERIVELLE PUBLIC SITE — FIXES & POLISH
+   Pasang PALING AKHIR di <head> (setelah <style> terakhir dan semua
+   file CSS eksternal):
+   <link rel="stylesheet" href="assets/css/site-polish.css">
+   ===================================================================== */
+
+/* 1. Dock audio kosong menampilkan instruksi admin ke pengunjung.
+      Sembunyikan sampai ada track sungguhan. */
+.pv-audio-dock[data-empty="true"]{display:none!important}
+
+/* 2. Navbar HP: aturan lama menyembunyikan <a> ke-4 = "Works".
+      Nav sudah bisa digeser, jadi semua link dibiarkan terlihat. */
+@media(max-width:520px){
+  .pv-header .navlink:nth-of-type(4){display:inline-block}
+}
+
+/* 3. Halaman FAQ: footer 5 kolom dipaksa position:fixed sehingga
+      menutupi isi halaman. Kembalikan ke alur normal. */
+body:has(.page-view[data-page="faq"]:not([hidden])) footer{
+  position:static!important;box-shadow:none!important
+}
+body:has(.page-view[data-page="faq"]:not([hidden])) main{padding-bottom:0!important}
+
+/* 4. Kontras: catatan kecil di bawah Selected Works (≈3,5:1 → ≈5,6:1) */
+.pv-concept-note{color:#6f5f78}
+
+/* 5. Aksesibilitas: skip link + fokus programatik tanpa cincin jelek */
+.skip-link{position:fixed;left:16px;top:-80px;z-index:100;padding:10px 16px;border-radius:999px;
+  background:#462e52;color:#fff;font-weight:700;text-decoration:none;transition:top .2s}
+.skip-link:focus{top:12px}
+[tabindex="-1"]:focus{outline:none}
+
+/* 6. Tombol "Request this service" di kartu layanan */
+.service-request{display:inline-flex;align-items:center;align-self:flex-start;margin-top:14px;
+  padding:9px 16px;border:1px solid #c9a5ea;border-radius:999px;background:rgba(255,255,255,.6);
+  color:#5c348d;font-size:.82rem;font-weight:700;text-decoration:none;
+  transition:background .2s,border-color .2s}
+.service-request:hover{background:#f4e9fc;border-color:#a77ad6}
+html[data-theme="dark"] .service-request{background:#2d233b;color:#efdfff;border-color:#8d70a8}
+html[data-theme="dark"] .service-request:hover{background:#3a2d4b}
+
+@media(prefers-reduced-motion:reduce){.skip-link,.service-request{transition:none}}
