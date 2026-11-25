@@ -264,7 +264,7 @@ $("#addFreebie").addEventListener("click",()=>{
  const empty=$("#freebieRows .empty");if(empty)empty.remove();
  $("#freebieRows").insertAdjacentHTML("beforeend",freebieRow({release_date:localAdminDate(),published:false}));
 });
-$("#freebieRows").addEventListener("click",event=>{
+$("#freebieRows").addEventListener("click",async event=>{
  const toggle=event.target.closest("[data-toggle-freebie]");
  if(toggle){
   const entry=toggle.closest(".freebie-entry"),collapsed=entry.classList.toggle("is-collapsed");
@@ -278,7 +278,15 @@ $("#freebieRows").addEventListener("click",event=>{
  if(remove){
   const entry=remove.closest(".freebie-entry");
   const title=entry.querySelector("[data-freebie-title]")?.value.trim()||"this release";
-  if(!window.confirm('Remove "'+title+'" from the Freebies list? Its Supabase files will be deleted only after you click Save freebies, and only if no other release uses them.'))return;
+  if(!window.confirm('Remove "'+title+'" from the Freebies list? Saved files will be deleted after Save freebies. An uploaded but unsaved file will be deleted now.'))return;
+  const uploadPath=entry.dataset.uploadPath;
+  if(uploadPath){
+   try{
+    const cleanup=await fetch("/api/admin-upload",{method:"DELETE",credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify({path:uploadPath})});
+    const result=await cleanup.json().catch(()=>({}));
+    if(!cleanup.ok||result.ok===false)showToast(result.message||"The unused upload could not be deleted from Storage.");
+   }catch{showToast("Could not reach Storage cleanup. The uploaded file may remain in Storage.");}
+  }
   entry.remove();
  }
 });
