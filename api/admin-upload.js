@@ -62,8 +62,8 @@ async function ensurePublicBucket(url, key, fileSize) {
 }
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
+  if (!["POST","DELETE"].includes(req.method)) {
+    res.setHeader("Allow", "POST, DELETE");
     return send(res, 405, { ok: false, message: "Method not allowed." });
   }
   if (!isAdmin(req)) return send(res, 401, { ok: false, message: "Please sign in to the admin dashboard." });
@@ -87,6 +87,40 @@ export default async function handler(req, res) {
 
   const { url, key } = supabaseConfig();
   if (!url || !key) return send(res, 503, { ok: false, message: "Supabase server configuration is missing. Check SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel." });
+
+  if (req.method === "DELETE") {
+    const path = String(body.path || "");
+    if (!/^(bgm|sound-alerts|stinger)\/\d{4}\/\d{2}\/[a-zA-Z0-9_-]+\.mp3$/.test(path)) {
+      return send(res, 400, { ok: false, message: "Invalid staged Freebies file path." });
+    }
+    try {
+      const settingsResponse = await fetch(url + "/rest/v1/studio_settings?setting_key=eq.freebies&select=setting_value", {
+        headers: supabaseHeaders(key)
+      });
+      if (!settingsResponse.ok) return send(res, 502, { ok: false, message: "Could not verify whether this file is already in use." });
+      const rows = await settingsResponse.json();
+      const releases = Array.isArray(rows[0]?.setting_value) ? rows[0].setting_value : [];
+      const isUsed = releases.some(item => ["download_url","preview_url","cover_url"].some(field => {
+        try {
+          const parsed = new URL(String(item?.[field] || ""));
+          const project = new URL(url);
+          const prefix = "/storage/v1/object/public/freebies/";
+          return parsed.origin === project.origin && parsed.pathname.startsWith(prefix) &&
+            parsed.pathname.slice(prefix.length).split("/").map(decodeURIComponent).join("/") === path;
+        } catch { return false; }
+      }));
+      if (isUsed) return send(res, 409, { ok: false, message: "This file is already used by a saved Freebies release." });
+      const deleted = await fetch(url + "/storage/v1/object/" + BUCKET + "/" + encodePath(path), {
+        method: "DELETE",
+        headers: supabaseHeaders(key)
+      });
+      if (!deleted.ok && deleted.status !== 404) return send(res, 502, { ok: false, message: "Could not remove the unused file from Supabase Storage." });
+      return send(res, 200, { ok: true, deleted: deleted.status !== 404 });
+    } catch (error) {
+      console.error("[admin-upload] Unused file cleanup failed", { name: error?.name || "Error" });
+      return send(res, 502, { ok: false, message: "Could not remove the unused file from Supabase Storage." });
+    }
+  }
 
   try {
     await ensurePublicBucket(url, key, fileSize);
