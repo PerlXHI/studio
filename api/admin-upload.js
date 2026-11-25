@@ -76,15 +76,6 @@ export default async function handler(req, res) {
   }
   if (!body || typeof body !== "object") return send(res, 400, { ok: false, message: "Invalid upload request." });
 
-  const fileName = String(body.fileName || "").trim();
-  const fileSize = Number(body.fileSize);
-  const category = String(body.category || "");
-  if (!fileName || !/\.mp3$/i.test(fileName)) return send(res, 400, { ok: false, message: "Choose an MP3 file (.mp3)." });
-  if (!Number.isSafeInteger(fileSize) || fileSize <= 0 || fileSize > MAX_FILE_SIZE) {
-    return send(res, 400, { ok: false, message: "MP3 files must be between 1 byte and 50 MB." });
-  }
-  if (!CATEGORIES.has(category)) return send(res, 400, { ok: false, message: "Choose BGM, Sound Alerts, or Stinger." });
-
   const { url, key } = supabaseConfig();
   if (!url || !key) return send(res, 503, { ok: false, message: "Supabase server configuration is missing. Check SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel." });
 
@@ -121,6 +112,15 @@ export default async function handler(req, res) {
       return send(res, 502, { ok: false, message: "Could not remove the unused file from Supabase Storage." });
     }
   }
+
+  const fileName = String(body.fileName || "").trim();
+  const fileSize = Number(body.fileSize);
+  const category = String(body.category || "");
+  if (!fileName || !/\.mp3$/i.test(fileName)) return send(res, 400, { ok: false, message: "Choose an MP3 file (.mp3)." });
+  if (!Number.isSafeInteger(fileSize) || fileSize <= 0 || fileSize > MAX_FILE_SIZE) {
+    return send(res, 400, { ok: false, message: "MP3 files must be between 1 byte and 50 MB." });
+  }
+  if (!CATEGORIES.has(category)) return send(res, 400, { ok: false, message: "Choose BGM, Sound Alerts, or Stinger." });
 
   try {
     await ensurePublicBucket(url, key, fileSize);
