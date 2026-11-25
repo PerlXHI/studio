@@ -189,13 +189,17 @@ export default async function handler(req,res) {
         const response=await db("studio_settings?on_conflict=setting_key",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=representation"},body:JSON.stringify(payload)});
         if(!response.ok)throw new Error("Setting save failed");
         if(removedPaths.size){
-          const deleteResponse=await fetch(url+"/storage/v1/object/freebies",{
-            method:"DELETE",
-            headers:supabaseHeaders(key,{"Content-Type":"application/json"}),
-            body:JSON.stringify({prefixes:[...removedPaths]})
-          });
-          if(deleteResponse.ok)removedStorageFiles=removedPaths.size;
-          else storageCleanupWarning="The Freebies list was saved, but some old files could not be deleted from Storage.";
+          try {
+            const deleteResponse=await fetch(url+"/storage/v1/object/freebies",{
+              method:"DELETE",
+              headers:supabaseHeaders(key,{"Content-Type":"application/json"}),
+              body:JSON.stringify({prefixes:[...removedPaths]})
+            });
+            if(deleteResponse.ok)removedStorageFiles=removedPaths.size;
+            else storageCleanupWarning="The Freebies list was saved, but some old files could not be deleted from Storage.";
+          } catch {
+            storageCleanupWarning="The Freebies list was saved, but Storage cleanup could not connect. Please check for unused files in the freebies bucket.";
+          }
         }
         return res.status(200).json({ok:true,removedStorageFiles,warning:storageCleanupWarning});
       }
