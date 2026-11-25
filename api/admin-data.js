@@ -14,7 +14,7 @@ const STATUS_NOTES={
   "Demo ready — Awaiting feedback":"Demo ready — Awaiting feedback",
   "Preparing final delivery":"Preparing final delivery"
 };
-const KEYS=["service_prices","studio_links","portfolio_videos","portfolio_categories","studio_producers","freebies","commission_status","audio_player"];
+const KEYS=["service_prices","studio_links","portfolio_videos","portfolio_categories","featured_portfolio","studio_producers","freebies","commission_status","audio_player"];
 function storageObjectPath(rawUrl,projectUrl){
   if(!rawUrl)return "";
   try{
@@ -106,6 +106,21 @@ export default async function handler(req,res) {
           if(String(item.batch||"").length>60||String(item.slots||"").length>80)return res.status(400).json({ok:false,message:"Commission status details are too long."});
         }
         if(body.key==="studio_links"){for(const [name,item] of Object.entries(value||{})){if(!item)continue;if(name==="email"){if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(item)))return res.status(400).json({ok:false,message:"Enter a valid contact email address."});}else if(!/^https:\/\//i.test(String(item)))return res.status(400).json({ok:false,message:"Studio links must use HTTPS URLs."});}}
+
+        if(body.key==="featured_portfolio" && Array.isArray(value)){
+          const allowedHosts=["youtube.com","www.youtube.com","youtube-nocookie.com","www.youtube-nocookie.com","youtu.be","vimeo.com","www.vimeo.com","player.vimeo.com"];
+          if(value.length>50)return res.status(400).json({ok:false,message:"Featured Portfolio can contain up to 50 works."});
+          const ids=new Set();
+          for(const item of value){
+            const id=String(item&&item.id||"").trim(),title=String(item&&item.title||"").trim(),category=String(item&&item.category||"").trim();
+            if(!/^[a-z0-9][a-z0-9_-]{1,79}$/.test(id)||ids.has(id)||!title||title.length>100||!category)return res.status(400).json({ok:false,message:"Each featured work needs a unique ID, title, and category."});
+            ids.add(id);
+            if(String(item.description||"").length>400)return res.status(400).json({ok:false,message:"Featured work descriptions must be 400 characters or fewer."});
+            if(item.image){let image;try{image=new URL(String(item.image))}catch{return res.status(400).json({ok:false,message:"Enter a valid HTTPS cover image URL."})}if(image.protocol!=="https:")return res.status(400).json({ok:false,message:"Cover image URLs must use HTTPS."});}
+            if(item.video_url){let video;try{video=new URL(String(item.video_url))}catch{return res.status(400).json({ok:false,message:"Enter a valid YouTube or Vimeo preview URL."})}if(video.protocol!=="https:"||!allowedHosts.includes(video.hostname.toLowerCase()))return res.status(400).json({ok:false,message:"Featured video previews must use HTTPS YouTube or Vimeo URLs."});}
+            if(item.creator&&!/^[a-z0-9][a-z0-9_-]{1,49}$/.test(String(item.creator)))return res.status(400).json({ok:false,message:"Choose a valid producer credit."});
+          }
+        }
         if(body.key==="portfolio_videos" && Array.isArray(value)){
           const allowed=["youtube.com","www.youtube.com","youtube-nocookie.com","www.youtube-nocookie.com","youtu.be","vimeo.com","www.vimeo.com","player.vimeo.com"];
           
@@ -195,7 +210,7 @@ export default async function handler(req,res) {
             if(path&&!nextPaths.has(path))removedPaths.add(path);
           }
         }
-        if(body.key==="studio_producers"){
+        if(["studio_producers","featured_portfolio"].includes(body.key)){
           const currentResponse=await db("studio_settings?select=setting_key,setting_value");
           if(!currentResponse.ok)throw new Error("Could not inspect existing studio image references.");
           const currentRows=await currentResponse.json();
