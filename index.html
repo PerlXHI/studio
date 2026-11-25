@@ -2701,6 +2701,8 @@ function showProduct(id){
  var hasAudio=p.preview&&/\.(mp3|wav|ogg|m4a|aac|flac)(?:$|\?)/i.test(p.preview);
  var previewBlock=hasAudio
   ?'<div class="product-detail-audio"><span>LISTEN TO THE PREVIEW</span><audio src="'+esc(p.preview)+'" controls preload="none"></audio></div>'
+  :p.preview?'<div class="product-detail-audio"><a href="'+esc(p.preview)+'" target="_blank" rel="noopener noreferrer">Open product preview ↗</a></div>'
+  :p.cover?'<img src="'+esc(p.cover)+'" alt="'+esc(p.name)+' cover" style="width:100%;border-radius:16px;object-fit:cover">'
   :'<div class="product-detail-preview-placeholder" aria-hidden="true"><span class="product-detail-preview-label">MP3 / AUDIO PREVIEW SLOT</span><span class="product-detail-preview-mark">♫</span><span class="product-detail-preview-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><small>Audio preview will appear here after upload</small></div>';
  $("#productDetail").innerHTML='<p>'+esc(p.description)+'</p>'+previewBlock+'<p><strong>'+esc(tr("price"))+':</strong> '+fmt(p.price)+'</p><p><strong>'+esc(tr("type"))+':</strong> '+esc(p.type)+' · <strong>'+esc(tr("mood"))+':</strong> '+esc(moodName(p.mood))+' · <strong>'+esc(tr("genre"))+':</strong> '+esc(p.genre)+'</p><p><strong>'+esc(tr("duration"))+':</strong> '+esc(p.duration)+' · <strong>'+esc(tr("format"))+':</strong> '+esc(p.format)+'</p><p class="help">'+esc("Please confirm licensing and availability through Discord.")+'</p>';
  $("#detailAdd").dataset.add=id;$("#productDialog").showModal();
