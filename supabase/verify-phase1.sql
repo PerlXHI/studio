@@ -16,7 +16,7 @@ order by resource;
 
 select
   table_name,
-  row_security
+  c.relrowsecurity as row_security
 from information_schema.tables t
 join pg_class c on c.relname=t.table_name
 join pg_namespace n on n.oid=c.relnamespace and n.nspname='public'
