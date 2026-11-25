@@ -239,7 +239,7 @@ function freebieRow(item){
    '<label>Artist / producer<select data-freebie-artist required>'+artistOptions+'</select></label>'+
    '<label>Release date<input data-freebie-date type="date" required value="'+esc(data.release_date||localAdminDate())+'"></label>'+
    '<label class="freebie-admin-wide">Short description<textarea data-freebie-description rows="2" maxlength="420" placeholder="Describe the mood, use case, and sound...">'+esc(data.description||"")+'</textarea></label>'+
-   '<label class="freebie-upload-box freebie-admin-wide" data-freebie-dropzone><input class="freebie-upload-input" data-freebie-file type="file" accept=".mp3,audio/mpeg"><span class="freebie-upload-icon" aria-hidden="true">♫</span><span class="freebie-upload-copy"><strong>Drop your MP3 here</strong><span>Or click to browse · MP3 only · Up to 50 MB</span></span><span class="freebie-upload-action">Choose file</span></label>'+
+   '<label class="freebie-upload-box freebie-admin-wide" data-freebie-dropzone><input class="freebie-upload-input" data-freebie-file type="file" accept=".mp3,audio/mpeg,audio/mp3,audio/x-mpeg,audio/x-mpeg-3"><span class="freebie-upload-icon" aria-hidden="true">♫</span><span class="freebie-upload-copy"><strong>Drop your MP3 here</strong><span>Or click to browse · MP3 only · Up to 50 MB</span></span><span class="freebie-upload-action">Choose file</span></label>'+
   '<div class="freebie-upload-feedback freebie-admin-wide" aria-live="polite"><div class="freebie-upload-status" data-freebie-upload-status data-state="idle">Upload your audio to auto-fill the preview and download links.</div><div class="freebie-upload-progress" data-freebie-upload-progress><span data-freebie-upload-bar></span></div></div>'+
    '<label class="freebie-admin-wide">Direct download file URL *<input data-freebie-download type="url" required value="'+esc(data.download_url||"")+'" placeholder="https://your-storage.com/freebies/track.wav"></label>'+
    '<label>Preview MP3 URL (optional — falls back to download file)<input data-freebie-preview type="url" value="'+esc(data.preview_url||"")+'" placeholder="https://.../preview.mp3"></label>'+
@@ -289,11 +289,25 @@ function putFreebieFile(uploadUrl,file,onProgress){
   xhr.send(file);
  });
 }
+async function isAcceptedMp3(file){
+ const name=String(file&&file.name||"").trim().toLowerCase();
+ const mime=String(file&&file.type||"").trim().toLowerCase();
+ if(name.endsWith(".mp3"))return true;
+ if(["audio/mpeg","audio/mp3","audio/x-mpeg","audio/x-mpeg-3"].includes(mime))return true;
+ try{
+  const bytes=new Uint8Array(await file.slice(0,4).arrayBuffer());
+  const hasId3=bytes.length>=3&&bytes[0]===0x49&&bytes[1]===0x44&&bytes[2]===0x33;
+  const hasMpegFrame=bytes.length>=2&&bytes[0]===0xff&&(bytes[1]&0xe0)===0xe0;
+  return hasId3||hasMpegFrame;
+ }catch{return false;}
+}
 async function uploadFreebieFile(row,file){
  if(!row||!file)return;
  const maxBytes=50*1024*1024;
- if(!/\.mp3$/i.test(file.name)){
-  setFreebieUploadState(row,"Please choose an MP3 file (.mp3).","error");return;
+ if(!await isAcceptedMp3(file)){
+  const fileType=file.type||"unknown";
+  const fileName=file.name||"unnamed file";
+  setFreebieUploadState(row,"This file was not recognized as MP3 ("+fileName+" · "+fileType+"). Choose an MP3 export.","error");return;
  }
  if(file.size<=0||file.size>maxBytes){
   setFreebieUploadState(row,"This file is empty or larger than 50 MB.","error");return;
