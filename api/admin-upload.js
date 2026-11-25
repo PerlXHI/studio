@@ -116,7 +116,7 @@ export default async function handler(req, res) {
   if (body.assetType === "image") {
     const fileName=String(body.fileName||"").trim(),mimeType=String(body.mimeType||"").toLowerCase(),fileSize=Number(body.fileSize),category=String(body.category||"");
     const allowedTypes=new Set(["image/jpeg","image/png","image/webp","image/avif"]);
-    if(!["producers","portfolio","catalog"].includes(category))return send(res,400,{ok:false,message:"Choose a valid image destination."});
+    if(!["producers","portfolio"].includes(category))return send(res,400,{ok:false,message:"Choose a valid image destination."});
     if(!fileName||!allowedTypes.has(mimeType))return send(res,400,{ok:false,message:"Use a JPG, PNG, WebP, or AVIF image."});
     if(!Number.isSafeInteger(fileSize)||fileSize<=0||fileSize>10*1024*1024)return send(res,400,{ok:false,message:"Images must be between 1 byte and 10 MB."});
     try{
