@@ -22,9 +22,6 @@ export default async function handler(req, res) {
   }
 
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
-  if (!webhookUrl) {
-    return res.status(503).json({ ok: false, message: "Commission delivery is not configured yet." });
-  }
 
   let data = req.body;
   if (typeof data === "string") {
@@ -169,6 +166,10 @@ export default async function handler(req, res) {
     timestamp: new Date().toISOString()
   };
 
+  if (!webhookUrl) {
+    console.error("[commission] DISCORD_WEBHOOK_URL is not configured; request saved without notification.");
+    return res.status(200).json({ ok: true, requestId, status: "Awaiting Review", notificationPending: true, message: "Your commission request has been saved. Our team may take a little longer to receive the notification." });
+  }
   try {
     const discordResponse = await fetch(webhookUrl, {
       method: "POST",
@@ -177,19 +178,13 @@ export default async function handler(req, res) {
     });
 
     if (!discordResponse.ok) {
-      await fetch(supabaseUrl.replace(/\/$/, "") + "/rest/v1/commission_requests?request_id=eq." + encodeURIComponent(requestId), {
-        method: "DELETE",
-        headers: databaseHeaders
-      }).catch(() => {});
-      return res.status(502).json({ ok: false, message: "Discord could not receive the request. Please try again later." });
+      const detail = (await discordResponse.text().catch(() => "")).slice(0, 500);
+      console.error("[commission] Discord notification failed", { status: discordResponse.status, response: detail });
+      return res.status(200).json({ ok: true, requestId, status: "Awaiting Review", notificationPending: true, message: "Your commission request has been saved. Our team may take a little longer to receive the notification." });
     }
-
     return res.status(200).json({ ok: true, requestId, status: "Awaiting Review", message: "Your commission request has been sent to Perivelle." });
-  } catch {
-    await fetch(supabaseUrl.replace(/\/$/, "") + "/rest/v1/commission_requests?request_id=eq." + encodeURIComponent(requestId), {
-      method: "DELETE",
-      headers: databaseHeaders
-    }).catch(() => {});
-    return res.status(502).json({ ok: false, message: "Unable to send your request right now. Please try again later." });
+  } catch (error) {
+    console.error("[commission] Discord notification request failed", { name: error?.name || "Error" });
+    return res.status(200).json({ ok: true, requestId, status: "Awaiting Review", notificationPending: true, message: "Your commission request has been saved. Our team may take a little longer to receive the notification." });
   }
 }
