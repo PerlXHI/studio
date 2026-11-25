@@ -28,6 +28,7 @@ returns text
 language sql
 immutable
 parallel safe
+set search_path = pg_catalog
 as $$
   select trim(both '-' from regexp_replace(lower(coalesce(input_text, '')), '[^a-z0-9]+', '-', 'g'));
 $$;
@@ -35,7 +36,8 @@ $$;
 create or replace function public.perivelle_touch_updated_at()
 returns trigger
 language plpgsql
-as $$
+set search_path = pg_catalog
+as $
 begin
   new.updated_at = now();
   return new;
@@ -225,7 +227,7 @@ $;
 
 drop trigger if exists tos_sections_immutable_after_publish on public.tos_sections;
 create trigger tos_sections_immutable_after_publish
-before update or delete on public.tos_sections
+before insert or update or delete on public.tos_sections
 for each row execute function public.perivelle_protect_published_tos_section();
 
 -- Commission form definitions and immutable published snapshots.
@@ -260,7 +262,8 @@ create table if not exists public.commission_form_versions (
 create or replace function public.perivelle_protect_published_form_version()
 returns trigger
 language plpgsql
-as $$
+set search_path = pg_catalog
+as $
 begin
   if tg_op = 'DELETE' then
     if old.status = 'published' then
@@ -289,7 +292,8 @@ for each row execute function public.perivelle_protect_published_form_version();
 create or replace function public.perivelle_protect_published_tos_version()
 returns trigger
 language plpgsql
-as $$
+set search_path = pg_catalog
+as $
 begin
   if tg_op = 'DELETE' then
     if old.status = 'published' then
@@ -336,17 +340,17 @@ begin
   if not exists (select 1 from pg_constraint where conname = 'commission_requests_service_id_fkey') then
     alter table public.commission_requests
       add constraint commission_requests_service_id_fkey
-      foreign key (service_id) references public.services(service_id) on delete set null;
+      foreign key (service_id) references public.services(service_id) on delete restrict;
   end if;
   if not exists (select 1 from pg_constraint where conname = 'commission_requests_form_version_id_fkey') then
     alter table public.commission_requests
       add constraint commission_requests_form_version_id_fkey
-      foreign key (form_version_id) references public.commission_form_versions(form_version_id) on delete set null;
+      foreign key (form_version_id) references public.commission_form_versions(form_version_id) on delete restrict;
   end if;
   if not exists (select 1 from pg_constraint where conname = 'commission_requests_tos_version_id_fkey') then
     alter table public.commission_requests
       add constraint commission_requests_tos_version_id_fkey
-      foreign key (tos_version_id) references public.tos_versions(tos_version_id) on delete set null;
+      foreign key (tos_version_id) references public.tos_versions(tos_version_id) on delete restrict;
   end if;
 end;
 $$;
