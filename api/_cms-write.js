@@ -114,6 +114,60 @@ const RESOURCES = {
       display_order: { type: "integer" }
     }
   },
+  tos_versions: {
+    table: "tos_versions",
+    key: ["tos_version_id"],
+    required: ["version_number", "title", "agreement_text"],
+    archive: { status: "archived" },
+    fields: {
+      service_id: { type: "text", max: 80, nullable: true },
+      version_number: { type: "integer" },
+      title: { type: "text", max: 160 },
+      agreement_text: { type: "text", max: 500 },
+      status: { type: "enum", values: ["draft", "published", "archived"] },
+      effective_at: { type: "text", max: 60 },
+      published_at: { type: "text", max: 60 }
+    }
+  },
+  tos_sections: {
+    table: "tos_sections",
+    key: ["tos_section_id"],
+    required: ["tos_version_id", "section_key", "heading"],
+    hardDelete: true,
+    fields: {
+      tos_version_id: { type: "text", max: 80 },
+      section_key: { type: "slug", max: 80 },
+      heading: { type: "text", max: 180 },
+      content_markdown: { type: "text", max: 16000 },
+      display_order: { type: "integer" }
+    }
+  },
+  commission_forms: {
+    table: "commission_forms",
+    key: ["form_id"],
+    required: ["service_id", "name"],
+    archive: { is_active: false },
+    fields: {
+      service_id: { type: "text", max: 80 },
+      name: { type: "text", max: 140 },
+      description: { type: "text", max: 1000 },
+      is_active: { type: "boolean" },
+      display_order: { type: "integer" }
+    }
+  },
+  commission_form_versions: {
+    table: "commission_form_versions",
+    key: ["form_version_id"],
+    required: ["form_id", "version_number", "schema"],
+    archive: { status: "archived" },
+    fields: {
+      form_id: { type: "text", max: 80 },
+      version_number: { type: "integer" },
+      status: { type: "enum", values: ["draft", "published", "archived"] },
+      schema: { type: "object" },
+      published_at: { type: "text", max: 60 }
+    }
+  },
   work_producers: {
     table: "work_producers",
     key: ["work_id", "producer_id"],
