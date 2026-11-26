@@ -304,7 +304,7 @@
       } else if (field.type === "tags") {
         payload[field.key] = node.value.split(/[\n,]/).map(item => item.trim()).filter(Boolean);
       } else {
-        payload[field.key] = node.value.trim();
+        payload[field.key] = field.nullable && node.value.trim() === "" ? null : node.value.trim();
       }
     }
     if (!state.editing) {
@@ -381,10 +381,12 @@
       if (archive) archiveRecord(Number(archive.dataset.cmsArchive));
     });
     $("#cmsAddRecord").addEventListener("click", () => openEditor());
-    $("#cmsCancelEdit").addEventListener("click", () => {
+    const closeEditor = () => {
       $("#cmsEditor").classList.add("hidden");
       state.editing = null;
-    });
+    };
+    $("#cmsCancelEdit").addEventListener("click", closeEditor);
+    $("#cmsCancelEditBottom").addEventListener("click", closeEditor);
     $("#cmsSaveRecord").addEventListener("click", saveEditor);
     $("#cmsRefresh").addEventListener("click", loadData);
     $("#cmsSearch").addEventListener("input", renderRecords);
