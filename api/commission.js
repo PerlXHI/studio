@@ -55,7 +55,7 @@ export default async function handler(req, res) {
   };
 
 
-  // Shared, persistent rate limit: 3 valid submissions per IP every 15 minutes.
+  // Shared, persistent rate limit: 3 submission attempts per IP every 15 minutes.
   // The IP is hashed with a server-side secret; the raw address is never stored.
   const forwardedFor = String(req.headers["x-forwarded-for"] || "");
   const forwardedIps = forwardedFor.split(",").map(value => value.trim()).filter(Boolean);
