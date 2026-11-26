@@ -1,0 +1,207 @@
+/* Public CMS integration: audio-first Works cards and normalized service details. */
+.portfolio-category-group .cms-audio-work-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-top: 1px solid #e6e1ef;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.cms-audio-work-art {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: linear-gradient(145deg,#2c2740,#242d42);
+}
+.cms-audio-work-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cms-audio-work-art .asset-placeholder-visual {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+.cms-audio-work-body {
+  display: grid;
+  gap: 8px;
+  padding: 13px 14px 15px;
+}
+.cms-audio-work-body h4 {
+  margin: 0;
+  color: #393253;
+  font: 650 .92rem/1.3 Inter,system-ui,sans-serif;
+}
+.cms-audio-work-body p {
+  margin: 0;
+  color: #77718f;
+  font-size: .76rem;
+  line-height: 1.5;
+}
+.cms-audio-work-body audio {
+  width: 100%;
+  min-width: 0;
+  height: 38px;
+}
+.cms-audio-work-credit {
+  color: #8b82a6;
+  font-size: .68rem;
+}
+.portfolio-category-group .portfolio-video-rail .portfolio-video-frame {
+  position: relative;
+}
+.cms-work-video-caption {
+  position: absolute;
+  z-index: 2;
+  inset: auto 0 0;
+  display: grid;
+  gap: 3px;
+  padding: 20px 13px 11px;
+  color: #fff;
+  background: linear-gradient(180deg,transparent,rgba(10,8,18,.78));
+  pointer-events: none;
+}
+.cms-work-video-caption strong {
+  font-size: .76rem;
+  line-height: 1.25;
+}
+.cms-work-video-caption small {
+  color: #eee8fb;
+  font-size: .62rem;
+}
+.cms-service-long-description {
+  margin: -5px 0 10px;
+  color: #77718f;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+.cms-service-options-group {
+  display: grid;
+  gap: 9px;
+  margin: 3px 0 12px;
+}
+.cms-service-options {
+  padding: 12px 13px;
+  border: 1px solid #e9e4f6;
+  border-radius: 14px;
+  background: #ffffffaa;
+}
+.cms-service-options h4 {
+  margin: 0 0 8px;
+  color: #665b9b;
+  font: 750 .7rem Inter,system-ui,sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.cms-service-option-list {
+  display: grid;
+  gap: 8px;
+}
+.cms-service-option {
+  display: grid;
+  gap: 4px;
+  padding-top: 8px;
+  border-top: 1px solid #e9e4f6;
+}
+.cms-service-option:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.cms-service-option-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+.cms-service-option-top strong {
+  color: #393253;
+  font-size: .8rem;
+}
+.cms-service-option-top span {
+  flex: 0 0 auto;
+  color: #665b9b;
+  font-size: .72rem;
+  font-weight: 750;
+}
+.cms-service-option p {
+  margin: 0;
+  color: #77718f;
+  font-size: .73rem;
+}
+.cms-service-option small {
+  color: #8b82a6;
+  font-size: .64rem;
+}
+.cms-service-option ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 14px;
+  margin: 2px 0 0;
+  padding-left: 17px;
+  color: #77718f;
+  font-size: .68rem;
+}
+.cms-service-art.has-cms-art::before,
+.cms-service-art.has-cms-art::after {
+  display: none;
+}
+.cms-service-art .cms-service-art-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cms-services-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 22px;
+  border: 1px dashed #d8d0e9;
+  border-radius: 16px;
+  color: #77718f;
+  text-align: center;
+}
+@media (max-width:560px) {
+  .cms-service-option-top {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+html[data-theme="dark"] .cms-audio-work-body h4,
+html[data-theme="dark"] .cms-service-option-top strong {
+  color: #eee9ff;
+}
+html[data-theme="dark"] .cms-audio-work-body p,
+html[data-theme="dark"] .cms-service-long-description,
+html[data-theme="dark"] .cms-service-option p,
+html[data-theme="dark"] .cms-service-option ul {
+  color: #c0b8d4;
+}
+html[data-theme="dark"] .cms-service-options {
+  border-color: #4a405f;
+  background: #241f32;
+}
+html[data-theme="dark"] .cms-service-option {
+  border-color: #4a405f;
+}
+html[data-theme="dark"] .cms-service-option-top span,
+html[data-theme="dark"] .cms-service-options h4 {
+  color: #c8b3f2;
+}
+html[data-theme="dark"] .cms-service-option small,
+html[data-theme="dark"] .cms-audio-work-credit {
+  color: #aaa0c2;
+}
+html[data-theme="dark"] .cms-services-empty {
+  border-color: #4a405f;
+  color: #c0b8d4;
+}
