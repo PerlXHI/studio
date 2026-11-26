@@ -353,6 +353,12 @@ async function validatePublication(resource, filters, payload) {
       if (!fields.some(field => field.system === requiredSystem)) fail("The form must include required system fields: name, contact, license and character.");
     }
   } else if (resource === "tos_versions") {
+    const versionParams = new URLSearchParams({ select: "status", tos_version_id: "eq." + filters.tos_version_id, limit: "1" });
+    const versionResponse = await fetch(url.replace(/\/$/, "") + "/rest/v1/tos_versions?" + versionParams.toString(), { headers });
+    const versions = await versionResponse.json().catch(() => []);
+    if (!versionResponse.ok || !Array.isArray(versions) || !versions[0] || versions[0].status !== "draft") {
+      fail("Only a saved draft Terms version can be published.", 400);
+    }
     const params = new URLSearchParams({
       select: "tos_section_id,heading,content_markdown",
       tos_version_id: "eq." + filters.tos_version_id,
