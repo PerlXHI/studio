@@ -353,6 +353,7 @@ async function validatePublication(resource, filters, payload) {
     const ids = new Set();
     for (const field of fields) {
       if (!field || !/^[a-z][a-zA-Z0-9_-]{0,39}$/.test(field.id || "") ||
+          ["form_version_id","service_id","tos_version_id","tos_accepted","answers","website"].includes(field.id) ||
           !cleanText(field.label || "", 160) || !allowed.includes(field.type) || ids.has(field.id)) {
         fail("Every commission form field needs a unique ID, label and supported field type.");
       }
@@ -368,8 +369,18 @@ async function validatePublication(resource, filters, payload) {
         fail("A commission form field has an invalid maximum length.");
       }
     }
+    const systems = new Set();
+    const systemTypes = { name: ["text","textarea"], contact: ["text","email"], license: ["text","select"], character: ["text","textarea"] };
+    for (const field of fields) {
+      if (!field.system) continue;
+      if (systems.has(field.system)) fail("Each commission form system field can only appear once.");
+      systems.add(field.system);
+      if (systemTypes[field.system] && !systemTypes[field.system].includes(field.type)) {
+        fail("A required contact or brief system field uses an unsupported field type.");
+      }
+    }
     for (const requiredSystem of ["name","contact","license","character"]) {
-      if (!fields.some(field => field.system === requiredSystem)) fail("The form must include required system fields: name, contact, license and character.");
+      if (!systems.has(requiredSystem)) fail("The form must include required system fields: name, contact, license and character.");
     }
   } else if (resource === "tos_versions") {
     const versionParams = new URLSearchParams({ select: "status", tos_version_id: "eq." + filters.tos_version_id, limit: "1" });
