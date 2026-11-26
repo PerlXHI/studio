@@ -10,7 +10,7 @@ Connect the public Perivelle site to the normalized CMS introduced in Phase 1 an
 - Portfolio category filters and category video galleries use visible \`portfolio_categories\` and published \`works\`.
 - Featured Portfolio uses published Works with \`is_featured = true\`, excluding migrated portfolio-video markers that belong in the category video rail.
 - Work credit assignments are used only when present in \`work_producers\`; no credits are inferred from names or legacy data.
-- Audio-first / artwork-first Works without a video URL are rendered as playable asset cards inside their category.
+- Audio-first / artwork-first Works without a video URL are rendered as asset cards inside their category; audio controls appear when an MP3 URL exists. Producer/service filters include these cards.
 - Service cards are ordered from published \`services\`; descriptions, thumbnails and price labels use CMS values. Active packages and add-ons appear below their parent service.
 
 ## Legacy content intentionally retained
@@ -25,6 +25,7 @@ If the public CMS endpoint is unavailable or its response is incomplete, the web
 - No client-side Supabase key is introduced; the browser calls the existing Vercel public-CMS endpoint.
 - The endpoint returns the existing allowlisted public projections only. Draft, archived, hidden producer/category records and unpublished services/Works remain excluded.
 - CMS values are inserted into the DOM with text nodes / \`textContent\`; URLs used for images and audio must be HTTPS, and video URLs continue through the existing YouTube/Vimeo allowlist normalizer.
+- Producer credits are resolved from the published work_producers relationship only; the gallery does not infer ownership from a legacy profile or project title.
 - Legacy settings remain unchanged and can serve as fallback during rollout.
 
 ## Validation performed

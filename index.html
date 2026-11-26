@@ -3054,7 +3054,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
        const caption=document.createElement("div");caption.className="cms-work-video-caption";
        const title=document.createElement("strong");title.textContent=String(videoWork.title||"Selected work");
        caption.appendChild(title);
-       const producer=(window.perivelleProducerData||[]).find(function(person){return person.id===videoWork.creator});
+       const producer=(Array.isArray(settings.studio_producers)?settings.studio_producers:[]).find(function(person){return person.id===videoWork.creator});
        if(producer){const credit=document.createElement("small");credit.textContent="Produced by "+producer.name;caption.appendChild(credit)}
        frame.appendChild(caption);
       }
@@ -3094,7 +3094,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
      if(work.description){const description=document.createElement("p");description.textContent=String(work.description);body.appendChild(description)}
      const audioUrl=(()=>{try{const url=new URL(String(work.audio_url||""));return url.protocol==="https:"?url.href:""}catch(error){return""}})();
      if(audioUrl){const audio=document.createElement("audio");audio.controls=true;audio.preload="none";audio.src=audioUrl;audio.setAttribute("aria-label","Audio preview for "+String(work.title||"Selected work"));body.appendChild(audio)}
-     const producer=(window.perivelleProducerData||[]).find(function(person){return person.id===work.creator});
+     const producer=(Array.isArray(settings.studio_producers)?settings.studio_producers:[]).find(function(person){return person.id===work.creator});
      if(producer){const credit=document.createElement("small");credit.className="cms-audio-work-credit";credit.textContent="Produced by "+producer.name;body.appendChild(credit)}
      card.append(art,body);grid.appendChild(card);
     });
@@ -3306,15 +3306,16 @@ setLanguage("en");
    const serviceId=group.dataset.portfolioCategory||"";
    const matchesService=!filters.service||serviceId===filters.service;
    const frames=[...group.querySelectorAll(".portfolio-video-frame")];
+   const audioCards=[...group.querySelectorAll(".cms-audio-work-card")];
    const placeholder=group.querySelector(".portfolio-asset-placeholder");
    if(placeholder)placeholder.hidden=Boolean(filters.creator)||!matchesService;
    let visibleCount=0;
 
-   frames.forEach(function(frame){
-    const matchesCreator=!filters.creator||frame.dataset.creatorId===filters.creator;
+   frames.concat(audioCards).forEach(function(workCard){
+    const matchesCreator=!filters.creator||workCard.dataset.creatorId===filters.creator;
     const visible=matchesService&&matchesCreator;
-    frame.hidden=!visible;
-    frame.style.display=visible?"":"none";
+    workCard.hidden=!visible;
+    workCard.style.display=visible?"":"none";
     if(visible)visibleCount++;
    });
 
