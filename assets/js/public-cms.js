@@ -455,6 +455,8 @@
       const oldOptions = card.querySelector(".cms-service-options-group");
       if (oldOptions) oldOptions.remove();
 
+      const legacyRequestLink = card.querySelector("a.service-request");
+      if (legacyRequestLink) legacyRequestLink.remove();
       let priceNode = card.querySelector(".starting");
       if (!priceNode) {
         priceNode = document.createElement("span");
