@@ -89,13 +89,15 @@ The editor reuses the existing `/api/admin-upload` signed upload flow for image 
 
 - JavaScript syntax checks passed for `assets/js/admin-cms.js`, `api/_cms-write.js`, `api/admin-cms.js` and the existing Admin Dashboard inline script.
 - Simulated API-write tests passed for producer creation, category update, Works soft-archive and removal of a work-credit association.
-- Validation tests confirmed that unsupported fields, unsafe URL protocols, invalid enum values and invalid producer/category/service IDs are rejected.
+- Validation tests confirmed that unsupported fields, unsafe URL protocols, invalid enum values and invalid producer/category/work/service IDs are rejected.
+- Admin UI selector audit found no missing static element IDs; searching the record list no longer closes an open editor or discards its draft values.
+- The latest Vercel status check is **success** and Preview is reported **Ready** for the updated Phase 2 head `46b83dbcbe781f539b4b5d3320802f4e8df6e4e1`.
 - The test harness used a mocked PostgREST response; it did not write test records into the connected Supabase database.
 - Live schema was checked against the CMS write allowlists. No Phase 2 database migration was required.
 
 ## Deployment status — 26 November 2026
 
-The current Phase 2 head at the time of this check, `be853d618bb57ed55fcf8aa26f594e1109374172`, has a successful Vercel status check and a Ready Preview deployment:
+The current Phase 2 head at the time of this check, `46b83dbcbe781f539b4b5d3320802f4e8df6e4e1`, has a successful Vercel status check and a Ready Preview deployment:
 
 - Preview: [Perivelle Phase 2 Admin CMS](https://perivelle-git-phase-2-admin-cms-studio-perlx.vercel.app)
 - Vercel deployment record: [Open deployment](https://vercel.com/perlx/perivelle/EREdBikGHvAQYn4zs8KTbJuEcMoK)
