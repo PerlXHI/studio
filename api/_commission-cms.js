@@ -110,6 +110,7 @@ export async function validateCmsCommissionSubmission({ data, baseUrl, headers }
     const systemValues = {};
     for (const field of schemaFields) {
       if (!field || !/^[a-z][a-zA-Z0-9_-]{0,39}$/.test(field.id || "") ||
+          ["form_version_id","service_id","tos_version_id","tos_accepted","answers","website"].includes(field.id) ||
           !String(field.label || "").trim() || !allowedTypes.includes(field.type) || seen.has(field.id)) {
         fail("The published commission form contains an invalid field. Please contact Perivelle.", 503);
       }
