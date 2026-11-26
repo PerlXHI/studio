@@ -387,8 +387,8 @@
     advanced.appendChild(reloadBuilder);
 
     const types = ["text","textarea","select","checkbox","email","url","number","date"];
-    const systems = ["","name","contact","license","moodBpm","duration","character","reference","deadline","budget","extra","type"];
-    const labels = { "": "No mapping", name: "Client name", contact: "Discord contact", license: "License preference", moodBpm: "Genre / mood / BPM", duration: "Duration / deliverables", character: "Creative brief", reference: "References", deadline: "Preferred deadline", budget: "Budget", extra: "Additional notes", type: "Service (use service selector)" };
+    const systems = ["","name","contact","license","moodBpm","duration","character","reference","deadline","budget","extra"];
+    const labels = { "": "No mapping", name: "Client name", contact: "Discord contact", license: "License preference", moodBpm: "Genre / mood / BPM", duration: "Duration / deliverables", character: "Creative brief", reference: "References", deadline: "Preferred deadline", budget: "Budget", extra: "Additional notes" };
 
     function sync() {
       rawNode.value = JSON.stringify({ fields }, null, 2);
