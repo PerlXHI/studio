@@ -85,6 +85,14 @@ The editor reuses the existing `/api/admin-upload` signed upload flow for image 
 - Dynamic commission form builder/versioning and submission binding (Phase 4).
 - New bulk import, file cleanup or production data backfill.
 
+## Validation performed — 26 November 2026
+
+- JavaScript syntax checks passed for `assets/js/admin-cms.js`, `api/_cms-write.js`, `api/admin-cms.js` and the existing Admin Dashboard inline script.
+- Simulated API-write tests passed for producer creation, category update, Works soft-archive and removal of a work-credit association.
+- Validation tests confirmed that unsupported fields, unsafe URL protocols, invalid enum values and invalid producer/category/service IDs are rejected.
+- The test harness used a mocked PostgREST response; it did not write test records into the connected Supabase database.
+- Live schema was checked against the CMS write allowlists. No Phase 2 database migration was required.
+
 ## Deployment status
 
 The Phase 2 branch is built on top of `phase-1/cms-foundation`. Preview deployment and route-level checks must be reviewed after Vercel reports a current-head deployment. The Phase 1 Vercel status success does not prove the Phase 2 endpoint/UI is deployed.
