@@ -16,7 +16,7 @@ const schema = {
   ]
 };
 
-function mockFetch({ formServiceId = serviceId, terms = true, termsEffectiveAt = "2026-11-26T00:00:00Z" } = {}) {
+function mockFetch({ formServiceId = serviceId, terms = true, globalTerms = false, termsEffectiveAt = "2026-11-26T00:00:00Z" } = {}) {
   return async input => {
     const url = new URL(String(input));
     const table = url.pathname.split("/").pop();
@@ -29,6 +29,10 @@ function mockFetch({ formServiceId = serviceId, terms = true, termsEffectiveAt =
     if (table === "tos_versions" && url.searchParams.get("service_id") === "eq." + serviceId && terms) rows = [{
       tos_version_id: tosVersionId, service_id: serviceId, version_number: 3,
       title: "Custom BGM Terms", agreement_text: "I agree.", effective_at: termsEffectiveAt
+    }];
+    if (table === "tos_versions" && url.searchParams.get("service_id") === "is.null" && globalTerms) rows = [{
+      tos_version_id: "44444444-4444-4444-8444-444444444444", service_id: null, version_number: 1,
+      title: "Global Terms", agreement_text: "I agree to the global Terms.", effective_at: "2026-11-26T00:00:00Z"
     }];
     if (table === "tos_sections") rows = [{
       section_key: "scope", heading: "Scope", content_markdown: "Custom work is scoped in the quotation.", display_order: 0
@@ -154,6 +158,26 @@ test("does not require future-dated Terms before they become effective", async (
     });
     assert.equal(result.tosVersionId, null);
     assert.equal(result.tosAcceptedAt, null);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+
+test("requires global Terms acceptance when no service ID is available", async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = mockFetch({ terms: false, globalTerms: true });
+  try {
+    const data = {
+      type: "Legacy custom service",
+      tos_version_id: "44444444-4444-4444-8444-444444444444",
+      tos_accepted: "true"
+    };
+    const result = await validateCmsCommissionSubmission({
+      data, baseUrl: "https://db.example", headers: {}
+    });
+    assert.equal(result.tosVersionId, "44444444-4444-4444-8444-444444444444");
+    assert.equal(result.tosAcceptedAt != null, true);
   } finally {
     globalThis.fetch = originalFetch;
   }
