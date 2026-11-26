@@ -1,0 +1,51 @@
+name: Phase 5 quality checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - phase-3/public-cms-integration
+
+jobs:
+  syntax-and-commission-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check JavaScript module syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          find api assets/js -type f -name '*.js' -print0 | while IFS= read -r -d '' file; do
+            echo "Checking $file"
+            node --experimental-default-type=module --check "$file"
+          done
+      - name: Check inline page scripts
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, subprocess
+          pages = ["index.html", "studio-console-7f3c9a.html", "custom-order.html", "gallery.html"]
+          pattern = re.compile(r"<script\b([^>]*)>([\s\S]*?)</script\s*>", re.I)
+          for page in pages:
+              source = pathlib.Path(page).read_text(encoding="utf-8")
+              for number, match in enumerate(pattern.finditer(source), 1):
+                  attrs, code = match.group(1), match.group(2)
+                  if re.search(r"\bsrc\s*=", attrs, re.I) or not code.strip():
+                      continue
+                  script_type = re.search(r'\btype\s*=\s*["\']([^"\']+)', attrs, re.I)
+                  if script_type and script_type.group(1).lower() not in ("text/javascript", "module", "application/javascript"):
+                      continue
+                  subprocess.run(
+                      ["node", "--experimental-default-type=module", "--check"],
+                      input=code, text=True, check=True
+                  )
+                  print(f"Checked inline script {number} in {page}")
+          PY
+      - name: Run commission CMS validation tests
+        run: node --experimental-default-type=module --test tests/*.test.mjs
