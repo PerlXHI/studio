@@ -340,11 +340,154 @@
       ${hint}</label>`;
   }
 
+  function initCommissionFormBuilder() {
+    const rawNode = $('[data-cms-field="schema"]', $("#cmsEditorFields"));
+    if (!rawNode) return;
+    const rawField = rawNode.closest(".cms-field");
+    let parsed = {};
+    try { parsed = JSON.parse(rawNode.value || "{}"); } catch {}
+    let fields = Array.isArray(parsed.fields) ? parsed.fields.map(field => ({ ...field })) : [];
+
+    const host = document.createElement("section");
+    host.className = "cms-form-builder";
+    const head = document.createElement("div");
+    head.className = "cms-form-builder-head";
+    const copy = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = "Form field builder";
+    const hint = document.createElement("p");
+    hint.textContent = "Add and arrange the questions clients will answer. Map the four required fields to Name, Contact, License and Creative brief.";
+    copy.append(title, hint);
+    head.appendChild(copy);
+    const list = document.createElement("div");
+    list.className = "cms-form-builder-list";
+    const add = document.createElement("button");
+    add.type = "button";
+    add.className = "btn alt cms-form-builder-add";
+    add.textContent = "+ Add field";
+    const advanced = document.createElement("details");
+    advanced.className = "cms-form-builder-advanced";
+    const summary = document.createElement("summary");
+    summary.textContent = "Advanced JSON editor";
+    advanced.append(summary, rawField);
+    host.append(head, list, add, advanced);
+    rawField.before(host);
+
+    const types = ["text","textarea","select","checkbox","email","url","number","date"];
+    const systems = ["","name","contact","license","moodBpm","duration","character","reference","deadline","budget","extra","type"];
+    const labels = { "": "No mapping", name: "Client name", contact: "Discord contact", license: "License preference", moodBpm: "Genre / mood / BPM", duration: "Duration / deliverables", character: "Creative brief", reference: "References", deadline: "Preferred deadline", budget: "Budget", extra: "Additional notes", type: "Service (use service selector)" };
+
+    function sync() {
+      rawNode.value = JSON.stringify({ fields }, null, 2);
+    }
+    function control(labelText, value, type, onChange) {
+      const wrap = document.createElement("label");
+      wrap.className = "cms-form-builder-control";
+      const label = document.createElement("span");
+      label.textContent = labelText;
+      const input = document.createElement(type === "textarea" ? "textarea" : "input");
+      if (type !== "textarea") input.type = type || "text";
+      input.value = value == null ? "" : String(value);
+      input.addEventListener("input", () => onChange(input.value));
+      wrap.append(label, input);
+      return wrap;
+    }
+    function selectControl(labelText, value, options, onChange) {
+      const wrap = document.createElement("label");
+      wrap.className = "cms-form-builder-control";
+      const label = document.createElement("span");
+      label.textContent = labelText;
+      const select = document.createElement("select");
+      options.forEach(option => {
+        const item = document.createElement("option");
+        item.value = option.value;
+        item.textContent = option.label;
+        select.appendChild(item);
+      });
+      select.value = value || "";
+      select.addEventListener("change", () => onChange(select.value));
+      wrap.append(label, select);
+      return wrap;
+    }
+    function render() {
+      list.replaceChildren();
+      fields.forEach((field, index) => {
+        const row = document.createElement("article");
+        row.className = "cms-form-builder-item";
+        const top = document.createElement("div");
+        top.className = "cms-form-builder-item-head";
+        const itemTitle = document.createElement("strong");
+        itemTitle.textContent = "FIELD " + String(index + 1).padStart(2, "0");
+        const actions = document.createElement("div");
+        actions.className = "cms-form-builder-item-actions";
+        [["↑", index > 0, () => { [fields[index - 1], fields[index]] = [fields[index], fields[index - 1]]; render(); }],
+         ["↓", index < fields.length - 1, () => { [fields[index + 1], fields[index]] = [fields[index], fields[index + 1]]; render(); }],
+         ["Remove", true, () => { fields.splice(index, 1); render(); }]].forEach(([label, enabled, action]) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = label;
+          button.disabled = !enabled;
+          button.addEventListener("click", action);
+          actions.appendChild(button);
+        });
+        top.append(itemTitle, actions);
+
+        const grid = document.createElement("div");
+        grid.className = "cms-form-builder-grid";
+        grid.append(
+          control("Field ID", field.id, "text", value => { field.id = value.trim(); sync(); }),
+          control("Question label", field.label, "text", value => { field.label = value; sync(); }),
+          selectControl("Input type", field.type, types.map(value => ({ value, label: value })), value => { field.type = value; if (value === "select" && !Array.isArray(field.options)) field.options = ["Option 1","Option 2"]; render(); }),
+          selectControl("System mapping", field.system, systems.map(value => ({ value, label: labels[value] })), value => { if (value) field.system = value; else delete field.system; sync(); })
+        );
+        const required = document.createElement("label");
+        required.className = "cms-form-builder-required";
+        const check = document.createElement("input");
+        check.type = "checkbox";
+        check.checked = field.required === true;
+        check.addEventListener("change", () => { field.required = check.checked; sync(); });
+        const requiredText = document.createElement("span");
+        requiredText.textContent = "Required field";
+        required.append(check, requiredText);
+        grid.appendChild(required);
+        grid.append(
+          control("Placeholder", field.placeholder, "text", value => { field.placeholder = value; sync(); }),
+          control("Helper text", field.help, "text", value => { field.help = value; sync(); }),
+          control("Minimum length", field.minLength, "number", value => { if (value === "") delete field.minLength; else field.minLength = Number(value); sync(); }),
+          control("Maximum length", field.maxLength, "number", value => { if (value === "") delete field.maxLength; else field.maxLength = Number(value); sync(); })
+        );
+        if (field.type === "number") {
+          grid.append(
+            control("Minimum value", field.min, "number", value => { if (value === "") delete field.min; else field.min = Number(value); sync(); }),
+            control("Maximum value", field.max, "number", value => { if (value === "") delete field.max; else field.max = Number(value); sync(); })
+          );
+        }
+        if (field.type === "select") {
+          const options = control("Options (one per line)", Array.isArray(field.options) ? field.options.join("\n") : "", "textarea", value => {
+            field.options = value.split(/\r?\n/).map(item => item.trim()).filter(Boolean);
+            sync();
+          });
+          options.classList.add("cms-form-builder-wide");
+          grid.appendChild(options);
+        }
+        row.append(top, grid);
+        list.appendChild(row);
+      });
+      sync();
+    }
+    add.addEventListener("click", () => {
+      fields.push({ id: "custom_field_" + (fields.length + 1), label: "New question", type: "text", required: false });
+      render();
+    });
+    render();
+  }
+
   function openEditor(record = null) {
     const def = activeDefinition();
     state.editing = record ? { ...record } : null;
     $("#cmsEditorTitle").textContent = record ? "Edit " + def.noun : "Add " + def.noun;
     $("#cmsEditorFields").innerHTML = def.fields.map(field => renderField(field, record?.[field.key], Boolean(record))).join("");
+    if (state.resource === "commission_form_versions") initCommissionFormBuilder();
     if (record && ["service_packages","service_addons"].includes(state.resource)) {
       $("#cmsEditorMeta").textContent = "Record ID: " + record[def.keys[0]];
     } else {
