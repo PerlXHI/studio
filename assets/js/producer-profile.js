@@ -54,9 +54,16 @@
       Number(a.work.display_order || 0) - Number(b.work.display_order || 0));
   }
 
-  function openProfile(producerId) {
+  function openProfile(producerId, card) {
     const producers = Array.isArray(window.perivelleProducerData) ? window.perivelleProducerData : [];
-    const producer = producers.find(item => clean(item.id) === clean(producerId));
+    const producer = producers.find(item => clean(item.id) === clean(producerId)) || (card ? {
+      id: producerId,
+      name: clean(card.querySelector(".team-info h3")?.textContent) || "Producer Name",
+      role: clean(card.querySelector(".team-info .eyebrow")?.textContent) || "Music Producer",
+      bio: clean(card.querySelector(".team-bio")?.textContent),
+      photo: card.querySelector(".team-avatar img")?.src || "",
+      tags: Array.from(card.querySelectorAll(".team-tags span")).map(tag => clean(tag.textContent))
+    } : null);
     if (!producer) return;
     const dialog = getDialog();
     const inner = dialog.querySelector(".producer-profile-inner");
@@ -134,11 +141,14 @@
     else dialog.setAttribute("open", "");
   }
 
+  // Capture the click before the site's hash/SPA navigation handler can route to Works.
   document.addEventListener("click", event => {
-    const card = event.target.closest(".page-view[data-page='team'] .team-card[data-producer-id]");
-    if (!card) return;
+    const card = event.target.closest(".team-card[data-producer-id]");
+    if (!card || !card.closest(".page-view[data-page='team']")) return;
     event.preventDefault();
-    openProfile(card.dataset.producerId);
-  });
+    event.stopPropagation();
+    if (typeof event.stopImmediatePropagation === "function") event.stopImmediatePropagation();
+    openProfile(card.dataset.producerId, card);
+  }, true);
   window.perivelleOpenProducerProfile = openProfile;
 })();
