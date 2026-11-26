@@ -47,6 +47,7 @@ Only the seven collections listed above accept mutations. ToS/form tables are re
 - Every mutation additionally requires the request Origin to match the current deployment host.
 - Table names and writable columns are explicit server-side allowlists; clients cannot pass raw table names or arbitrary column names.
 - Text lengths, URL protocols, enum values, numeric types, JSON shapes and stable ID patterns are validated before PostgREST is called.
+- Required fields are checked on create and cannot be blanked by a partial update sent directly to the API.
 - The service-role key remains server-side and is never sent to the browser.
 - Main records are archived through their visibility/status/active field instead of hard-deleted. Only the many-to-many work-credit link has a hard delete operation.
 - PostgREST receives `Prefer: return=representation`; the API returns the updated record or a clear status/message.
@@ -90,17 +91,18 @@ The editor reuses the existing `/api/admin-upload` signed upload flow for image 
 - JavaScript syntax checks passed for `assets/js/admin-cms.js`, `api/_cms-write.js`, `api/admin-cms.js` and the existing Admin Dashboard inline script.
 - Simulated API-write tests passed for producer creation, category update, Works soft-archive and removal of a work-credit association.
 - Validation tests confirmed that unsupported fields, unsafe URL protocols, invalid enum values and invalid producer/category/work/service IDs are rejected.
+- Additional mock API tests confirm that direct updates cannot blank required producer names or work slugs, while valid partial updates and creates remain allowed.
 - Admin UI selector audit found no missing static element IDs; searching the record list no longer closes an open editor or discards its draft values.
-- The latest Vercel status check is **success** and Preview is reported **Ready** for the updated Phase 2 head `46b83dbcbe781f539b4b5d3320802f4e8df6e4e1`.
+- Before this hardening patch, Vercel reported **success** for Phase 2 head `f24f7288be42e26ee143d4fa888b1dfec67712cf`; the new branch head requires its own deployment-status check.
 - The test harness used a mocked PostgREST response; it did not write test records into the connected Supabase database.
 - Live schema was checked against the CMS write allowlists. No Phase 2 database migration was required.
 
 ## Deployment status — 26 November 2026
 
-The current Phase 2 head at the time of this check, `46b83dbcbe781f539b4b5d3320802f4e8df6e4e1`, has a successful Vercel status check and a Ready Preview deployment:
+The previous Phase 2 head, `f24f7288be42e26ee143d4fa888b1dfec67712cf`, had a successful Vercel status check and a Ready Preview deployment. The hardening patch creates a new head, so its deployment status must be verified separately:
 
 - Preview: [Perivelle Phase 2 Admin CMS](https://perivelle-git-phase-2-admin-cms-studio-perlx.vercel.app)
-- Vercel deployment record: [Open deployment](https://vercel.com/perlx/perivelle/EREdBikGHvAQYn4zs8KTbJuEcMoK)
+- Previous Vercel deployment record: [Open deployment](https://vercel.com/perlx/perivelle/CVi1Wmd1aG9H4pKrrned2rq73Uin)
 
 Deployment readiness is not the same as route-level or browser verification. The automated inspection client could not reach the Preview hostname in this session, so the actual HTTP response and browser UI smoke tests remain pending. Open the Preview, sign in, and select **CMS Studio** to check the Admin UI and read-only collection loading.
 

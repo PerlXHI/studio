@@ -231,6 +231,14 @@ function normalizePayload(resource, raw, creating) {
       }
     }
     validateIdentifiers(resource, result);
+  } else {
+    // Keep partial updates flexible, but never allow a required value to be blanked.
+    for (const field of config.required) {
+      if (config.key.includes(field) || raw[field] === undefined) continue;
+      if (result[field] === null || (typeof result[field] === "string" && result[field] === "")) {
+        fail("Required fields cannot be empty.");
+      }
+    }
   }
   if (!creating && !Object.keys(result).length) fail("No editable fields were provided.");
   return result;
