@@ -194,6 +194,9 @@ function normalizeValue(field, value) {
 }
 
 function validateIdentifiers(resource, values) {
+  if (resource === "works" && !/^[a-z0-9][a-z0-9_-]{1,79}$/.test(values.work_id || "")) {
+    fail("Work ID must use lowercase letters, numbers, hyphens or underscores.");
+  }
   if (resource === "producers" && !/^[a-z0-9][a-z0-9_-]{1,49}$/.test(values.producer_id || "")) {
     fail("Producer ID must use lowercase letters, numbers, hyphens or underscores.");
   }
