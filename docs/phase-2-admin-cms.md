@@ -93,6 +93,13 @@ The editor reuses the existing `/api/admin-upload` signed upload flow for image 
 - The test harness used a mocked PostgREST response; it did not write test records into the connected Supabase database.
 - Live schema was checked against the CMS write allowlists. No Phase 2 database migration was required.
 
-## Deployment status
+## Deployment status — 26 November 2026
 
-The Phase 2 branch is built on top of `phase-1/cms-foundation`. Preview deployment and route-level checks must be reviewed after Vercel reports a current-head deployment. The Phase 1 Vercel status success does not prove the Phase 2 endpoint/UI is deployed.
+The current Phase 2 head at the time of this check, `be853d618bb57ed55fcf8aa26f594e1109374172`, has a successful Vercel status check and a Ready Preview deployment:
+
+- Preview: [Perivelle Phase 2 Admin CMS](https://perivelle-git-phase-2-admin-cms-studio-perlx.vercel.app)
+- Vercel deployment record: [Open deployment](https://vercel.com/perlx/perivelle/EREdBikGHvAQYn4zs8KTbJuEcMoK)
+
+Deployment readiness is not the same as route-level or browser verification. The automated inspection client could not reach the Preview hostname in this session, so the actual HTTP response and browser UI smoke tests remain pending. Open the Preview, sign in, and select **CMS Studio** to check the Admin UI and read-only collection loading.
+
+Do not test create/update/archive against Preview until you confirm that its `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` point to a dedicated staging Supabase project. The current connected Supabase project already contains live Perivelle data; avoid dummy mutations there.
