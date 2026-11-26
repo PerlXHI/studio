@@ -16,7 +16,7 @@ const schema = {
   ]
 };
 
-function mockFetch({ formServiceId = serviceId, terms = true } = {}) {
+function mockFetch({ formServiceId = serviceId, terms = true, termsEffectiveAt = "2026-11-26T00:00:00Z" } = {}) {
   return async input => {
     const url = new URL(String(input));
     const table = url.pathname.split("/").pop();
@@ -28,7 +28,7 @@ function mockFetch({ formServiceId = serviceId, terms = true } = {}) {
     }];
     if (table === "tos_versions" && url.searchParams.get("service_id") === "eq." + serviceId && terms) rows = [{
       tos_version_id: tosVersionId, service_id: serviceId, version_number: 3,
-      title: "Custom BGM Terms", agreement_text: "I agree.", effective_at: "2026-11-26T00:00:00Z"
+      title: "Custom BGM Terms", agreement_text: "I agree.", effective_at: termsEffectiveAt
     }];
     if (table === "tos_sections") rows = [{
       section_key: "scope", heading: "Scope", content_markdown: "Custom work is scoped in the quotation.", display_order: 0
@@ -119,6 +119,41 @@ test("rejects answers outside published select options", async () => {
       validateCmsCommissionSubmission({ data, baseUrl: "https://db.example", headers: {} }),
       /valid option/i
     );
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+
+test("rejects overlong answers instead of silently truncating them", async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = mockFetch({ terms: false });
+  try {
+    const data = baseData();
+    data.answers.client = "A".repeat(81);
+    data.tos_version_id = "";
+    data.tos_accepted = "false";
+    await assert.rejects(
+      validateCmsCommissionSubmission({ data, baseUrl: "https://db.example", headers: {} }),
+      /too long/i
+    );
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("does not require future-dated Terms before they become effective", async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = mockFetch({ termsEffectiveAt: "2099-01-01T00:00:00Z" });
+  try {
+    const data = baseData();
+    data.tos_version_id = "";
+    data.tos_accepted = "false";
+    const result = await validateCmsCommissionSubmission({
+      data, baseUrl: "https://db.example", headers: {}
+    });
+    assert.equal(result.tosVersionId, null);
+    assert.equal(result.tosAcceptedAt, null);
   } finally {
     globalThis.fetch = originalFetch;
   }
