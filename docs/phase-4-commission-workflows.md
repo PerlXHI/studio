@@ -10,7 +10,7 @@ New collections:
 - tos_versions — global or service-specific Terms versions.
 - tos_sections — ordered Terms content sections belonging to a version.
 - commission_forms — active form definitions associated with a published service.
-- commission_form_versions — immutable versioned field schemas.
+- commission_form_versions — immutable versioned field schemas, edited through a visual field builder with an advanced JSON editor.
 
 Publishing workflow:
 - New records begin as drafts.
