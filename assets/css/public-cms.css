@@ -259,3 +259,35 @@ html[data-theme="dark"] .producer-profile-bio { color:#c0b8d4; }
 html[data-theme="dark"] .producer-profile-close { border-color:#4a405f;background:#2b2540;color:#eee9ff; }
 html[data-theme="dark"] .producer-profile-work { border-color:#4a405f;color:#eee9ff; }
 html[data-theme="dark"] .producer-profile-tags span { border-color:#4a405f;background:#2b2540;color:#d6c8f5; }
+
+
+/* Producer profile mock content */
+.producer-profile-tags.is-placeholder span {
+  border-style: dashed;
+  color: #a49bb8;
+  background: #fcfbfe;
+}
+.producer-profile-work.is-placeholder {
+  border-style: dashed;
+  background: #fcfbfe;
+  cursor: default;
+}
+.producer-profile-work.is-placeholder em {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #f0edf7;
+  color: #8b82a6;
+  font-size: .62rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+html[data-theme="dark"] .producer-profile-tags.is-placeholder span,
+html[data-theme="dark"] .producer-profile-work.is-placeholder {
+  border-color: #5a506d;
+  background: #272236;
+  color: #b9afca;
+}
+html[data-theme="dark"] .producer-profile-work.is-placeholder em {
+  background: #39304b;
+  color: #c0b8d4;
+}
