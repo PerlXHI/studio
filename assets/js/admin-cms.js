@@ -372,6 +372,19 @@
     host.append(head, list, add, advanced);
     rawField.before(host);
     advanced.append(summary, rawField);
+    const reloadBuilder = document.createElement("button");
+    reloadBuilder.type = "button";
+    reloadBuilder.className = "btn alt cms-form-builder-reload";
+    reloadBuilder.textContent = "Load JSON into builder";
+    reloadBuilder.addEventListener("click", () => {
+      try {
+        const nextSchema = JSON.parse(rawNode.value || "{}");
+        fields = Array.isArray(nextSchema.fields) ? nextSchema.fields.map(field => ({ ...field })) : [];
+        render();
+        setNotice("Visual builder reloaded from the advanced JSON.", "success");
+      } catch { setNotice("The advanced form JSON is invalid. Fix it before reloading.", "error"); }
+    });
+    advanced.appendChild(reloadBuilder);
 
     const types = ["text","textarea","select","checkbox","email","url","number","date"];
     const systems = ["","name","contact","license","moodBpm","duration","character","reference","deadline","budget","extra","type"];
