@@ -39,22 +39,22 @@ const RESOURCES = {
   tos_versions: {
     table: "tos_versions",
     admin: "select=*&order=created_at.desc&limit=500",
-    public: null
+    public: "select=tos_version_id,service_id,version_number,title,agreement_text,status,effective_at,published_at&status=eq.published&order=effective_at.desc&limit=500"
   },
   tos_sections: {
     table: "tos_sections",
     admin: "select=*&order=display_order.asc&limit=2000",
-    public: null
+    public: "select=tos_section_id,tos_version_id,section_key,heading,content_markdown,display_order,version:tos_versions!inner(status,service_id)&version.status=eq.published&order=display_order.asc&limit=2000"
   },
   commission_forms: {
     table: "commission_forms",
     admin: "select=*&order=display_order.asc&limit=500",
-    public: null
+    public: "select=form_id,service_id,name,description,is_active,display_order,service:services!inner(status)&is_active=eq.true&service.status=eq.published&order=display_order.asc&limit=500"
   },
   commission_form_versions: {
     table: "commission_form_versions",
     admin: "select=*&order=created_at.desc&limit=1000",
-    public: null
+    public: "select=form_version_id,form_id,version_number,status,schema,published_at,form:commission_forms!inner(service_id,is_active,service:services!inner(status))&status=eq.published&form.is_active=eq.true&form.service.status=eq.published&order=version_number.desc&limit=1000"
   }
 };
 
