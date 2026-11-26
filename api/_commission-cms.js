@@ -144,7 +144,7 @@ export async function validateCmsCommissionSubmission({ data, baseUrl, headers }
   let tosSnapshot = null;
   let tosVersionId = null;
   let tosAcceptedAt = null;
-  if (serviceId) {
+  {
     const specificParams = new URLSearchParams({
       select: "tos_version_id,service_id,version_number,title,agreement_text,effective_at,published_at",
       service_id: "eq." + serviceId,
@@ -158,7 +158,7 @@ export async function validateCmsCommissionSubmission({ data, baseUrl, headers }
       limit: "1"
     });
     const [specific, global] = await Promise.all([
-      readRows(baseUrl, headers, "tos_versions", specificParams),
+      serviceId ? readRows(baseUrl, headers, "tos_versions", specificParams) : Promise.resolve([]),
       readRows(baseUrl, headers, "tos_versions", globalParams)
     ]);
     const now = Date.now();
