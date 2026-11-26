@@ -189,7 +189,9 @@
   }
 
   function applicableTerms(serviceId) {
-    const versions = (cms?.tos_versions || []).filter(row => row.status === "published");
+    const now = Date.now();
+    const versions = (cms?.tos_versions || []).filter(row => row.status === "published" &&
+      (!row.effective_at || (Number.isFinite(Date.parse(row.effective_at)) && Date.parse(row.effective_at) <= now)));
     return versions.find(row => row.service_id === serviceId) || versions.find(row => row.service_id == null) || null;
   }
 
