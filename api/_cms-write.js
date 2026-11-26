@@ -175,8 +175,9 @@ function normalizeValue(field, value) {
     if ((config.type === "array" || config.type === "stringArray") && !Array.isArray(parsed)) {
       fail("This field must contain a JSON array.");
     }
-    if (config.type === "stringArray" && parsed.some(item => typeof item !== "string")) {
-      fail("This list can only contain text values.");
+    if (config.type === "stringArray") {
+      if (parsed.some(item => typeof item !== "string")) fail("This list can only contain text values.");
+      return parsed.map(item => cleanText(item, 160));
     }
     return parsed;
   }
@@ -248,7 +249,7 @@ async function sendDb(resource, method, payload, filters) {
   const params = new URLSearchParams();
   if (filters) for (const [field, value] of Object.entries(filters)) params.set(field, "eq." + value);
   params.set("select", "*");
-  const endpoint = url + "/rest/v1/" + config.table + (method === "POST" ? "?" + params.toString() : "?" + params.toString());
+  const endpoint = url + "/rest/v1/" + config.table + "?" + params.toString();
   const response = await fetch(endpoint, {
     method,
     headers: supabaseHeaders(key, {
