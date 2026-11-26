@@ -130,7 +130,7 @@
       tags: toArray(producer.specializations).length
         ? producer.specializations
         : toArray(producer.genres),
-      photo: producer.avatar_url || "",
+      photo: safeHttps(producer.avatar_url),
       active: true
     }));
 

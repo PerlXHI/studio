@@ -150,8 +150,8 @@
   color: #77718f;
   font-size: .68rem;
 }
-.cms-service-art.has-cms-art::before,
-.cms-service-art.has-cms-art::after {
+.service-art.has-cms-art::before,
+.service-art.has-cms-art::after {
   display: none;
 }
 .cms-service-art .cms-service-art-image {
