@@ -141,7 +141,7 @@
         { key: "tos_version_id", label: "Terms version", type: "relation", relation: "tos_versions", relationKey: "tos_version_id", relationLabel: r => (r.title || "Terms") + " · v" + r.version_number, relationFilter: r => r.status === "draft", required: true },
         { key: "section_key", label: "Section key", type: "slug", required: true },
         { key: "heading", label: "Heading", type: "text", required: true },
-        { key: "content_markdown", label: "Section content", type: "textarea", wide: true },
+        { key: "content_markdown", label: "Section content", type: "textarea", wide: true, hint: "Supports headings (#), bullets (-), bold (**text**) and italic (*text*)." },
         { key: "display_order", label: "Display order", type: "number", integer: true, default: 0 }
       ]
     },
