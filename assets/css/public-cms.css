@@ -327,3 +327,40 @@ html[data-theme="dark"] .cms-service-dialog-options .cms-service-option-top{colo
 html[data-theme="dark"] .cms-service-dialog-options .cms-service-option p,html[data-theme="dark"] .cms-service-dialog-options .cms-service-option ul{color:#c0b8d4}
 @media(max-width:620px){.cms-service-dialog-inner{grid-template-columns:1fr}.cms-service-dialog-art{min-height:150px;max-height:190px}.cms-service-dialog-art img{min-height:190px;max-height:190px}.cms-service-dialog-content{padding:28px 20px 24px}.cms-service-dialog-close{top:10px;right:10px}}
 @media(prefers-reduced-motion:reduce){.cms-service-card .cms-service-details-button{transition:none}}
+
+/* CMS-powered commission form and Terms of Service */
+.cms-dynamic-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:4px 0 18px}
+.cms-dynamic-form-intro{grid-column:1/-1;margin:0;color:#77718f;font-size:.88rem;line-height:1.65}
+.cms-dynamic-field{min-width:0}
+.cms-dynamic-field.wide{grid-column:1/-1}
+.cms-dynamic-field input,.cms-dynamic-field select,.cms-dynamic-field textarea{width:100%;min-width:0}
+.cms-dynamic-field-hint{display:block;margin-top:5px;color:#8b82a6;font-size:.72rem;line-height:1.5}
+.cms-dynamic-checkbox{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1px solid #e5e0f4;border-radius:14px;background:#fff}
+.cms-dynamic-checkbox input{width:18px;height:18px;min-height:18px;flex:0 0 auto;margin:2px 0 0;accent-color:#8b7bd0}
+.cms-dynamic-checkbox span{font-size:.88rem;line-height:1.5}
+.cms-terms-acceptance{padding:14px 16px;border:1px solid #e5e0f4;border-radius:16px;background:#ffffffb8}
+.cms-terms-row{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.cms-terms-check{display:flex;align-items:flex-start;gap:10px;min-width:0;font-size:.82rem;line-height:1.55}
+.cms-terms-check input{width:18px;height:18px;min-height:18px;flex:0 0 auto;margin:2px 0 0;accent-color:#8b7bd0}
+.cms-terms-read{flex:0 0 auto;border:0;background:transparent;color:#665b9b;font:inherit;font-size:.76rem;font-weight:750;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cms-terms-dialog{width:min(720px,calc(100vw - 28px));max-width:720px;max-height:min(86vh,820px);padding:0;border:1px solid #e5e0f4;border-radius:22px;background:#fff;color:#393253;box-shadow:0 24px 80px #21193635;overflow:auto}
+.cms-terms-dialog::backdrop{background:#21193685;backdrop-filter:blur(5px)}
+.cms-terms-dialog-inner{position:relative;padding:clamp(24px,5vw,38px)}
+.cms-terms-close{position:absolute;top:14px;right:14px;width:38px;height:38px;border:1px solid #e5e0f4;border-radius:50%;background:#fff;color:#665b9b;font-size:22px;cursor:pointer}
+.cms-terms-dialog-inner>.eyebrow{margin:0 48px 8px 0;color:#8b82a6;font-size:.68rem;letter-spacing:.13em}
+.cms-terms-dialog h2{margin:0;color:#393253;font-size:clamp(1.5rem,4vw,2rem)}
+.cms-terms-version{margin:8px 0 22px;color:#8b82a6;font-size:.76rem}
+.cms-terms-content{display:grid;gap:18px}
+.cms-terms-content section{padding-top:16px;border-top:1px solid #eeeaf5}
+.cms-terms-content h3{margin:0 0 8px;color:#51466e;font-size:1rem}
+.cms-terms-content p{margin:0;color:#6e6880;font-size:.84rem;line-height:1.8;white-space:pre-line}
+html[data-theme="dark"] .cms-dynamic-form-intro,html[data-theme="dark"] .cms-dynamic-field-hint{color:#c0b8d4}
+html[data-theme="dark"] .cms-dynamic-checkbox,html[data-theme="dark"] .cms-terms-acceptance{border-color:#4a405f;background:#272236}
+html[data-theme="dark"] .cms-dynamic-checkbox span,html[data-theme="dark"] .cms-terms-check{color:#eee9ff}
+html[data-theme="dark"] .cms-terms-read{color:#c8b3f2}
+html[data-theme="dark"] .cms-terms-dialog{border-color:#4a405f;background:#211c2d;color:#eee9ff}
+html[data-theme="dark"] .cms-terms-close{border-color:#4a405f;background:#2b2540;color:#eee9ff}
+html[data-theme="dark"] .cms-terms-dialog h2,html[data-theme="dark"] .cms-terms-content h3{color:#eee9ff}
+html[data-theme="dark"] .cms-terms-content section{border-color:#4a405f}
+html[data-theme="dark"] .cms-terms-content p,html[data-theme="dark"] .cms-terms-version{color:#c0b8d4}
+@media(max-width:640px){.cms-dynamic-fields{grid-template-columns:1fr}.cms-dynamic-field.wide{grid-column:auto}.cms-terms-row{align-items:flex-start;flex-direction:column;gap:10px}}
