@@ -375,7 +375,7 @@ async function validatePublication(resource, filters, payload) {
           field.options.some(option => typeof option !== "string" || !option.trim() || option.length > 160))) {
         fail("Every select field needs 1–50 valid text options.");
       }
-      if (field.system && !["name","contact","license","moodBpm","duration","character","reference","deadline","budget","extra","type"].includes(field.system)) {
+      if (field.system && !["name","contact","license","moodBpm","duration","character","reference","deadline","budget","extra"].includes(field.system)) {
         fail("A commission form contains an unsupported system field.");
       }
       if (field.maxLength != null && (!Number.isInteger(Number(field.maxLength)) || Number(field.maxLength) < 1 || Number(field.maxLength) > 2000)) {
