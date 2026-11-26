@@ -364,3 +364,15 @@ html[data-theme="dark"] .cms-terms-dialog h2,html[data-theme="dark"] .cms-terms-
 html[data-theme="dark"] .cms-terms-content section{border-color:#4a405f}
 html[data-theme="dark"] .cms-terms-content p,html[data-theme="dark"] .cms-terms-version{color:#c0b8d4}
 @media(max-width:640px){.cms-dynamic-fields{grid-template-columns:1fr}.cms-dynamic-field.wide{grid-column:auto}.cms-terms-row{align-items:flex-start;flex-direction:column;gap:10px}}
+
+.cms-service-dialog-options .cms-service-text-section ul{display:grid;gap:7px;margin:0;padding-left:19px;color:#6e6880;font-size:.78rem;line-height:1.65}
+.cms-service-dialog-options .cms-service-terms-section p{margin:0;color:#6e6880;font-size:.78rem;line-height:1.75;white-space:pre-line}
+.cms-service-dialog-options .cms-service-faq-section article{padding:10px 0;border-top:1px solid #eeeaf5}
+.cms-service-dialog-options .cms-service-faq-section article:first-of-type{border-top:0;padding-top:0}
+.cms-service-dialog-options .cms-service-faq-section strong{display:block;color:#51466e;font-size:.78rem}
+.cms-service-dialog-options .cms-service-faq-section p{margin:5px 0 0;color:#777087;font-size:.76rem;line-height:1.65}
+html[data-theme="dark"] .cms-service-dialog-options .cms-service-text-section ul,
+html[data-theme="dark"] .cms-service-dialog-options .cms-service-terms-section p,
+html[data-theme="dark"] .cms-service-dialog-options .cms-service-faq-section p{color:#c0b8d4}
+html[data-theme="dark"] .cms-service-dialog-options .cms-service-faq-section article{border-color:#4a405f}
+html[data-theme="dark"] .cms-service-dialog-options .cms-service-faq-section strong{color:#eee9ff}
