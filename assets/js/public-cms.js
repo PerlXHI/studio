@@ -261,6 +261,43 @@
     return card;
   }
 
+  let serviceDialog;
+  function ensureServiceDialog() {
+    if (serviceDialog) return serviceDialog;
+    serviceDialog = document.createElement("dialog");
+    serviceDialog.className = "cms-service-dialog";
+    serviceDialog.setAttribute("aria-labelledby", "cmsServiceDialogTitle");
+    serviceDialog.innerHTML = '<div class="cms-service-dialog-inner"><button class="cms-service-dialog-close" type="button" aria-label="Close service details">×</button><div class="cms-service-dialog-art"></div><div class="cms-service-dialog-content"><p class="eyebrow cms-service-dialog-eyebrow">PERIVELLE SERVICE</p><h2 id="cmsServiceDialogTitle"></h2><p class="cms-service-dialog-description"></p><p class="cms-service-dialog-price"></p><div class="cms-service-dialog-options"></div><a class="cms-service-dialog-cta" href="#custom">Start a commission <span aria-hidden="true">↗</span></a></div></div>';
+    document.body.appendChild(serviceDialog);
+    serviceDialog.querySelector(".cms-service-dialog-close").addEventListener("click", () => serviceDialog.close());
+    serviceDialog.addEventListener("click", event => { if (event.target === serviceDialog) serviceDialog.close(); });
+    serviceDialog.querySelector(".cms-service-dialog-cta").addEventListener("click", () => serviceDialog.close());
+    return serviceDialog;
+  }
+
+  function showServiceDetails(service, packages, addons, card) {
+    const dialog = ensureServiceDialog();
+    const title = cleanString(service.name) || "Audio service";
+    dialog.querySelector("#cmsServiceDialogTitle").textContent = title;
+    dialog.querySelector(".cms-service-dialog-description").textContent = cleanString(service.description) || cleanString(service.short_description) || "Get in touch with our team to discuss this service.";
+    dialog.querySelector(".cms-service-dialog-price").textContent = servicePriceLabel(service, packages);
+    const art = dialog.querySelector(".cms-service-dialog-art");
+    art.replaceChildren();
+    const sourceArt = card && card.querySelector(".service-art");
+    if (sourceArt) {
+      const image = sourceArt.querySelector("img");
+      if (image && safeHttps(image.src)) { const clone = document.createElement("img"); clone.src = safeHttps(image.src); clone.alt = title + " artwork"; art.appendChild(clone); }
+      else art.className = "cms-service-dialog-art " + Array.from(sourceArt.classList).filter(name => name.startsWith("service-art-")).join(" ");
+    }
+    const options = dialog.querySelector(".cms-service-dialog-options");
+    options.replaceChildren();
+    const packageSection = createOptionRows("Packages", packages, "packages");
+    const addonSection = createOptionRows("Add-ons", addons, "addons");
+    if (packageSection) options.appendChild(packageSection);
+    if (addonSection) options.appendChild(addonSection);
+    if (!options.childElementCount) { const note = document.createElement("p"); note.className = "cms-service-dialog-note"; note.textContent = "Package details and optional add-ons can be discussed with our team when you request a quote."; options.appendChild(note); }
+    dialog.showModal();
+  }
   function renderCmsServices(services, packages, addons) {
     const grid = document.querySelector(".page-view[data-page='services'] .service-grid");
     if (!grid) return;
@@ -327,29 +364,11 @@
 
       const oldLongDescription = card.querySelector(".cms-service-long-description");
       if (oldLongDescription) oldLongDescription.remove();
-      if (shortDescription && fullDescription && shortDescription !== fullDescription) {
-        const longDescription = document.createElement("p");
-        longDescription.className = "cms-service-long-description";
-        longDescription.textContent = fullDescription;
-        const priceNode = card.querySelector(".starting");
-        card.insertBefore(longDescription, priceNode || null);
-      }
 
       const servicePackages = toArray(packages).filter(row => row.service_id === service.service_id);
       const serviceAddons = toArray(addons).filter(row => row.service_id === service.service_id);
       const oldOptions = card.querySelector(".cms-service-options-group");
       if (oldOptions) oldOptions.remove();
-
-      const options = document.createElement("div");
-      options.className = "cms-service-options-group";
-      const packageSection = createOptionRows("Packages", servicePackages, "packages");
-      const addonSection = createOptionRows("Add-ons", serviceAddons, "addons");
-      if (packageSection) options.appendChild(packageSection);
-      if (addonSection) options.appendChild(addonSection);
-      if (options.childElementCount) {
-        const priceNode = card.querySelector(".starting");
-        card.insertBefore(options, priceNode || null);
-      }
 
       let priceNode = card.querySelector(".starting");
       if (!priceNode) {
@@ -358,6 +377,16 @@
         card.appendChild(priceNode);
       }
       priceNode.textContent = servicePriceLabel(service, servicePackages);
+      let detailsButton = card.querySelector(".cms-service-details-button");
+      if (!detailsButton) {
+        detailsButton = document.createElement("button");
+        detailsButton.type = "button";
+        detailsButton.className = "cms-service-details-button";
+        detailsButton.textContent = "Explore service";
+        detailsButton.setAttribute("aria-haspopup", "dialog");
+        card.appendChild(detailsButton);
+      }
+      detailsButton.onclick = () => showServiceDetails(service, servicePackages, serviceAddons, card);
       grid.appendChild(card);
     });
 
