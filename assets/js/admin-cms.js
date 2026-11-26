@@ -141,7 +141,7 @@
         { key: "tos_version_id", label: "Terms version", type: "relation", relation: "tos_versions", relationKey: "tos_version_id", relationLabel: r => (r.title || "Terms") + " · v" + r.version_number, required: true },
         { key: "section_key", label: "Section key", type: "slug", required: true },
         { key: "heading", label: "Heading", type: "text", required: true },
-        { key: "content_markdown", label: "Section content (Markdown)", type: "textarea", wide: true },
+        { key: "content_markdown", label: "Section content", type: "textarea", wide: true },
         { key: "display_order", label: "Display order", type: "number", integer: true, default: 0 }
       ]
     },
@@ -461,7 +461,7 @@
         const latest = siblings.slice().sort((a,b) => Number(b.version_number)-Number(a.version_number))[0];
         await api("commission_form_versions", "POST", {
           form_id: record.form_id, version_number: version, status: "draft",
-          schema: latest?.schema || { fields: [] }
+          schema: latest?.schema || JSON.parse(byId("commission_form_versions").fields.find(field => field.key === "schema").default)
         });
         await loadData();
         state.resource = "commission_form_versions";
