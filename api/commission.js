@@ -54,36 +54,6 @@ export default async function handler(req, res) {
     ...(supabaseKey.startsWith("sb_secret_") ? {} : { "Authorization": "Bearer " + supabaseKey })
   };
 
-  let cmsContext;
-  try {
-    cmsContext = await validateCmsCommissionSubmission({ data, baseUrl: supabaseRestUrl, headers: databaseHeaders });
-  } catch (error) {
-    return res.status(error.status || 400).json({ ok: false, message: error.message || "The commission form could not be verified." });
-  }
-
-  const fields = [
-    ["Name / stage name", clean(data.name, 80)],
-    ["Discord username", clean(data.contact, 120)],
-    ["Service type", clean(data.type, 120)],
-    ["Usage / license preference", clean(data.license, 120)],
-    ["Genre / mood / BPM", clean(data.moodBpm, 180) || "—"],
-    ["Duration / deliverables", clean(data.duration, 180) || "—"],
-    ["Project concept & creative direction", clean(data.character, 1500)],
-    ["References", clean(data.reference, 900) || "—"],
-    ["Preferred deadline", clean(data.deadline, 40) || "—"],
-    ["Budget range", clean(data.budget, 100) || "—"],
-    ["Additional notes", clean(data.extra, 900) || "—"]
-  ];
-
-  if (!fields[0][1] || !fields[1][1] || !fields[2][1] || !fields[3][1] || fields[6][1].length < 20) {
-    return res.status(400).json({ ok: false, message: "Please complete all required fields." });
-  }
-
-  const idPart = (value, max = 80) => clean(value, max).normalize("NFKC").replace(/-/g, " ").replace(/[^\p{L}\p{N} '&.]/gu, "").replace(/\s+/g, " ").trim().slice(0, max) || "Unknown";
-  const dateParts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Jakarta", year: "2-digit", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
-  const dateCode = ["year", "month", "day"].map(key => dateParts.find(part => part.type === key)?.value || "").join("");
-  const baseRequestId = dateCode + " - " + idPart(fields[2][1]) + " - " + idPart(fields[0][1]);
-  let requestId = baseRequestId;
 
   // Shared, persistent rate limit: 3 valid submissions per IP every 15 minutes.
   // The IP is hashed with a server-side secret; the raw address is never stored.
@@ -117,6 +87,38 @@ export default async function handler(req, res) {
     console.error("[commission] Rate limit request failed", { name: error?.name || "Error" });
     return res.status(503).json({ ok: false, message: "The commission form is temporarily unavailable. Please try again later." });
   }
+
+  let cmsContext;
+  try {
+    cmsContext = await validateCmsCommissionSubmission({ data, baseUrl: supabaseRestUrl, headers: databaseHeaders });
+  } catch (error) {
+    return res.status(error.status || 400).json({ ok: false, message: error.message || "The commission form could not be verified." });
+  }
+
+  const fields = [
+    ["Name / stage name", clean(data.name, 80)],
+    ["Discord username", clean(data.contact, 120)],
+    ["Service type", clean(data.type, 120)],
+    ["Usage / license preference", clean(data.license, 120)],
+    ["Genre / mood / BPM", clean(data.moodBpm, 180) || "—"],
+    ["Duration / deliverables", clean(data.duration, 180) || "—"],
+    ["Project concept & creative direction", clean(data.character, 1500)],
+    ["References", clean(data.reference, 900) || "—"],
+    ["Preferred deadline", clean(data.deadline, 40) || "—"],
+    ["Budget range", clean(data.budget, 100) || "—"],
+    ["Additional notes", clean(data.extra, 900) || "—"]
+  ];
+
+  if (!fields[0][1] || !fields[1][1] || !fields[2][1] || !fields[3][1] || fields[6][1].length < 20) {
+    return res.status(400).json({ ok: false, message: "Please complete all required fields." });
+  }
+
+  const idPart = (value, max = 80) => clean(value, max).normalize("NFKC").replace(/-/g, " ").replace(/[^\p{L}\p{N} '&.]/gu, "").replace(/\s+/g, " ").trim().slice(0, max) || "Unknown";
+  const dateParts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Jakarta", year: "2-digit", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
+  const dateCode = ["year", "month", "day"].map(key => dateParts.find(part => part.type === key)?.value || "").join("");
+  const baseRequestId = dateCode + " - " + idPart(fields[2][1]) + " - " + idPart(fields[0][1]);
+  let requestId = baseRequestId;
+
   try {
     let saveResponse;
     for (let attempt = 0; attempt < 10; attempt++) {
