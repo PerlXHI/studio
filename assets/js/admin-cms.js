@@ -120,6 +120,69 @@
       ]
     },
     {
+      id: "tos_versions", label: "Terms of Service", noun: "Terms version", keys: ["tos_version_id"], title: r => (r.title || "Terms of Service") + " · v" + r.version_number,
+      subtitle: r => r.service_id ? (state.data.services?.find(x => x.service_id === r.service_id)?.name || r.service_id) : "Global policy",
+      status: r => r.status === "published" ? "Published" : r.status === "archived" ? "Archived" : "Draft",
+      fields: [
+        { key: "service_id", label: "Applies to service", type: "relation", relation: "services", relationKey: "service_id", relationLabel: r => r.name, nullable: true, emptyLabel: "Global Terms of Service" },
+        { key: "version_number", label: "Version number", type: "number", integer: true, required: true, default: 1 },
+        { key: "title", label: "Policy title", type: "text", required: true, default: "Terms of Service" },
+        { key: "agreement_text", label: "Acceptance statement", type: "text", required: true, default: "I have read and agree to the Terms of Service." },
+        { key: "status", label: "Status", type: "select", options: [["draft","Draft"],["published","Published"],["archived","Archived"]], default: "draft" },
+        { key: "effective_at", label: "Effective date (ISO format)", type: "text", nullable: true, hint: "Optional ISO timestamp. Leave blank to publish immediately." },
+        { key: "published_at", label: "Published at", type: "text", nullable: true }
+      ]
+    },
+    {
+      id: "tos_sections", label: "ToS sections", noun: "ToS section", keys: ["tos_section_id"], title: r => r.heading || r.section_key,
+      subtitle: r => state.data.tos_versions?.find(x => x.tos_version_id === r.tos_version_id)?.title || r.tos_version_id,
+      status: r => state.data.tos_versions?.find(x => x.tos_version_id === r.tos_version_id)?.status || "Unlinked",
+      fields: [
+        { key: "tos_version_id", label: "Terms version", type: "relation", relation: "tos_versions", relationKey: "tos_version_id", relationLabel: r => (r.title || "Terms") + " · v" + r.version_number, required: true },
+        { key: "section_key", label: "Section key", type: "slug", required: true },
+        { key: "heading", label: "Heading", type: "text", required: true },
+        { key: "content_markdown", label: "Section content (Markdown)", type: "textarea", wide: true },
+        { key: "display_order", label: "Display order", type: "number", integer: true, default: 0 }
+      ]
+    },
+    {
+      id: "commission_forms", label: "Commission forms", noun: "commission form", keys: ["form_id"], title: r => r.name,
+      subtitle: r => state.data.services?.find(x => x.service_id === r.service_id)?.name || r.service_id,
+      status: r => r.is_active ? "Active" : "Inactive",
+      fields: [
+        { key: "service_id", label: "Service", type: "relation", relation: "services", relationKey: "service_id", relationLabel: r => r.name, required: true },
+        { key: "name", label: "Form name", type: "text", required: true },
+        { key: "description", label: "Description", type: "textarea", wide: true },
+        { key: "is_active", label: "Active", type: "boolean", default: true },
+        { key: "display_order", label: "Display order", type: "number", integer: true, default: 0 }
+      ]
+    },
+    {
+      id: "commission_form_versions", label: "Form versions", noun: "form version", keys: ["form_version_id"], title: r => {
+        const form = state.data.commission_forms?.find(x => x.form_id === r.form_id);
+        return (form?.name || "Commission form") + " · v" + r.version_number;
+      },
+      subtitle: r => state.data.commission_forms?.find(x => x.form_id === r.form_id)?.service_id || r.form_id,
+      status: r => r.status === "published" ? "Published" : r.status === "archived" ? "Archived" : "Draft",
+      fields: [
+        { key: "form_id", label: "Commission form", type: "relation", relation: "commission_forms", relationKey: "form_id", relationLabel: r => r.name, required: true },
+        { key: "version_number", label: "Version number", type: "number", integer: true, required: true, default: 1 },
+        { key: "status", label: "Status", type: "select", options: [["draft","Draft"],["published","Published"],["archived","Archived"]], default: "draft" },
+        { key: "schema", label: "Form fields (JSON schema)", type: "json", wide: true, default: JSON.stringify({ fields: [
+          { id: "name", label: "Name / stage name", type: "text", required: true, system: "name", maxLength: 80 },
+          { id: "contact", label: "Discord username", type: "text", required: true, system: "contact", maxLength: 120 },
+          { id: "license", label: "Usage / license preference", type: "select", required: true, system: "license", options: ["Non-Exclusive", "Exclusive / Full Buyout", "Not sure — please advise"] },
+          { id: "moodBpm", label: "Genre / mood / BPM", type: "text", system: "moodBpm", maxLength: 180 },
+          { id: "duration", label: "Duration / deliverables", type: "text", system: "duration", maxLength: 180 },
+          { id: "character", label: "Project concept & creative direction", type: "textarea", required: true, system: "character", minLength: 20, maxLength: 1500 },
+          { id: "reference", label: "References", type: "textarea", system: "reference", maxLength: 900 },
+          { id: "deadline", label: "Preferred deadline", type: "date", system: "deadline" },
+          { id: "budget", label: "Budget range", type: "text", system: "budget", maxLength: 100 },
+          { id: "extra", label: "Additional notes", type: "textarea", system: "extra", maxLength: 900 }
+        ] }, null, 2) }
+      ]
+    },
+    {
       id: "work_producers", label: "Work credits", noun: "credit", keys: ["work_id","producer_id"],
       title: r => {
         const work = state.data.works?.find(w => w.work_id === r.work_id);
@@ -207,7 +270,9 @@
         <small>${escapeHtml(keyLabel)}</small>
       </div>
       <div class="cms-record-actions">
-        <button class="btn alt" type="button" data-cms-edit="${index}">Edit</button>
+        ${(["tos_versions","commission_form_versions"].includes(state.resource) && record.status === "draft") ? '<button class="btn" type="button" data-cms-publish="' + index + '">Publish</button>' : ""}
+        ${(["tos_versions","commission_forms"].includes(state.resource)) ? '<button class="btn alt" type="button" data-cms-next-version="' + index + '">New version</button>' : ""}
+        <button class="btn alt" type="button" data-cms-edit="${index}" ${(["tos_versions","commission_form_versions"].includes(state.resource) && record.status === "published") ? "disabled" : ""}>Edit</button>
         <button class="btn alt" type="button" data-cms-archive="${index}">${state.resource === "work_producers" ? "Remove link" : "Archive"}</button>
       </div>
     </article>`;
@@ -367,6 +432,97 @@
     }
   }
 
+  async function createNextVersion(index) {
+    const record = activeRecords()[index];
+    if (!record) return;
+    try {
+      if (state.resource === "tos_versions") {
+        const siblings = (state.data.tos_versions || []).filter(row => row.service_id === record.service_id);
+        const version = Math.max(0, ...siblings.map(row => Number(row.version_number) || 0)) + 1;
+        const created = await api("tos_versions", "POST", {
+          service_id: record.service_id || null, version_number: version, title: record.title || "Terms of Service",
+          agreement_text: record.agreement_text || "I have read and agree to the Terms of Service.", status: "draft"
+        });
+        const next = created.data;
+        const sections = (state.data.tos_sections || []).filter(row => row.tos_version_id === record.tos_version_id);
+        for (const section of sections) {
+          await api("tos_sections", "POST", {
+            tos_version_id: next.tos_version_id, section_key: section.section_key, heading: section.heading,
+            content_markdown: section.content_markdown || "", display_order: section.display_order || 0
+          });
+        }
+        await loadData();
+        state.resource = "tos_versions";
+        renderRecords();
+        setNotice("Draft Terms v" + version + " created with a copy of the previous sections. Edit the draft before publishing.", "success");
+      } else {
+        const siblings = (state.data.commission_form_versions || []).filter(row => row.form_id === record.form_id);
+        const version = Math.max(0, ...siblings.map(row => Number(row.version_number) || 0)) + 1;
+        const latest = siblings.slice().sort((a,b) => Number(b.version_number)-Number(a.version_number))[0];
+        await api("commission_form_versions", "POST", {
+          form_id: record.form_id, version_number: version, status: "draft",
+          schema: latest?.schema || { fields: [] }
+        });
+        await loadData();
+        state.resource = "commission_form_versions";
+        renderRecords();
+        setNotice("Draft form v" + version + " created. Edit its field schema, then publish it when ready.", "success");
+      }
+    } catch (error) { setNotice(error.message, "error"); }
+  }
+
+  async function publishVersion(index) {
+    const record = activeRecords()[index];
+    if (!record || record.status !== "draft") return;
+    const resource = state.resource;
+    const versions = state.data[resource] || [];
+    if (resource === "tos_versions") {
+      const sections = (state.data.tos_sections || []).filter(row => row.tos_version_id === record.tos_version_id);
+      if (!sections.length || sections.some(row => !String(row.content_markdown || "").trim())) {
+        setNotice("Add at least one complete Terms section before publishing.", "error");
+        return;
+      }
+    } else {
+      const fields = record.schema?.fields;
+      const allowed = ["text","textarea","select","checkbox","email","url","number","date"];
+      if (!Array.isArray(fields) || !fields.length) { setNotice("Add at least one form field before publishing.", "error"); return; }
+      const ids = new Set();
+      for (const field of fields) {
+        if (!field || !/^[a-z][a-zA-Z0-9_-]{0,39}$/.test(field.id || "") || !String(field.label || "").trim() || !allowed.includes(field.type)) {
+          setNotice("Each form field needs a valid ID, label, and supported type.", "error"); return;
+        }
+        if (ids.has(field.id)) { setNotice("Form field IDs must be unique.", "error"); return; }
+        ids.add(field.id);
+        if (field.type === "select" && (!Array.isArray(field.options) || !field.options.length || field.options.some(option => typeof option !== "string" || !option.trim()))) {
+          setNotice("Every select field needs at least one text option.", "error"); return;
+        }
+      }
+      const systemKeys = ["name","contact","license","character"];
+      const systems = new Set(fields.map(field => field.system));
+      if (systemKeys.some(key => !systems.has(key))) {
+        setNotice("The form must include the required system fields: name, contact, license, and character.", "error"); return;
+      }
+    }
+    const scope = resource === "tos_versions" ? row => row.service_id === record.service_id : row => row.form_id === record.form_id;
+    const current = versions.find(row => row.status === "published" && scope(row));
+    try {
+      if (current) {
+        const key = resource === "tos_versions" ? { tos_version_id: current.tos_version_id } : { form_version_id: current.form_version_id };
+        await api(resource, "PATCH", { status: "archived" }, key);
+      }
+      const key = resource === "tos_versions" ? { tos_version_id: record.tos_version_id } : { form_version_id: record.form_version_id };
+      await api(resource, "PATCH", { status: "published", published_at: new Date().toISOString(), ...(resource === "tos_versions" && !record.effective_at ? { effective_at: new Date().toISOString() } : {}) }, key);
+      await loadData();
+      setNotice("Version published successfully. Previous published version archived.", "success");
+    } catch (error) {
+      if (current) {
+        const key = resource === "tos_versions" ? { tos_version_id: current.tos_version_id } : { form_version_id: current.form_version_id };
+        await api(resource, "PATCH", { status: "published" }, key).catch(() => {});
+      }
+      setNotice(error.message, "error");
+    }
+  }
+
   function bindEvents() {
     $("#cmsResourceNav").addEventListener("click", event => {
       const button = event.target.closest("[data-cms-resource]");
@@ -381,8 +537,12 @@
     $("#cmsRecords").addEventListener("click", event => {
       const edit = event.target.closest("[data-cms-edit]");
       const archive = event.target.closest("[data-cms-archive]");
+      const publish = event.target.closest("[data-cms-publish]");
+      const nextVersion = event.target.closest("[data-cms-next-version]");
       if (edit) openEditor(activeRecords()[Number(edit.dataset.cmsEdit)]);
       if (archive) archiveRecord(Number(archive.dataset.cmsArchive));
+      if (publish) publishVersion(Number(publish.dataset.cmsPublish));
+      if (nextVersion) createNextVersion(Number(nextVersion.dataset.cmsNextVersion));
     });
     $("#cmsAddRecord").addEventListener("click", () => openEditor());
     const closeEditor = () => {
