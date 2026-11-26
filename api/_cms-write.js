@@ -312,6 +312,28 @@ function getFilters(resource, query, body = {}) {
   return filters;
 }
 
+async function validateFormServiceChange(filters, payload) {
+  if (payload.service_id === undefined) return;
+  const { url, key } = supabaseConfig();
+  if (!url || !key) fail("CMS database connection is not configured.", 503);
+  const base = url.replace(/\/$/, "");
+  const headers = supabaseHeaders(key);
+  const formParams = new URLSearchParams({ select: "service_id", form_id: "eq." + filters.form_id, limit: "1" });
+  const formResponse = await fetch(base + "/rest/v1/commission_forms?" + formParams.toString(), { headers });
+  const forms = await formResponse.json().catch(() => []);
+  if (!formResponse.ok || !Array.isArray(forms) || !forms[0]) fail("Commission form could not be checked.", 502);
+  if (forms[0].service_id === payload.service_id) return;
+  const versionParams = new URLSearchParams({
+    select: "form_version_id", form_id: "eq." + filters.form_id, status: "eq.published", limit: "1"
+  });
+  const versionResponse = await fetch(base + "/rest/v1/commission_form_versions?" + versionParams.toString(), { headers });
+  const versions = await versionResponse.json().catch(() => []);
+  if (!versionResponse.ok) fail("Published form versions could not be checked.", 502);
+  if (Array.isArray(versions) && versions.length) {
+    fail("A form with a published version cannot be reassigned to another service. Create a new commission form instead.");
+  }
+}
+
 async function validatePublication(resource, filters, payload) {
   if (payload.status !== "published") return;
   const { url, key } = supabaseConfig();
@@ -421,6 +443,7 @@ export async function updateCmsRecord(resource, query, raw) {
   if (!RESOURCES[resource]) fail("This CMS resource cannot be changed.");
   const filters = getFilters(resource, query, raw);
   const payload = normalizePayload(resource, raw, false);
+  if (resource === "commission_forms") await validateFormServiceChange(filters, payload);
   await validatePublication(resource, filters, payload);
   return sendDb(resource, "PATCH", payload, filters);
 }
