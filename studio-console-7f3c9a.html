@@ -352,8 +352,8 @@ input::placeholder,textarea::placeholder{color:#9b90aa!important}
  <div class="admin-nav-group"><span class="admin-nav-label">STUDIO</span><div class="tabs" role="tablist" aria-label="Studio"><button class="tab" data-tab="analytics" aria-selected="false">Analytics</button><button class="tab" data-tab="links" aria-selected="false">Studio links</button></div></div>
 </nav>
 <section id="cmsPanel" class="panel hidden">
- <div class="cms-intro"><div><h2>CMS Studio</h2><p>Manage normalized content records for producers, Works, services, packages and credits in one place.</p></div><span class="cms-phase-label">Phase 2 · CMS management</span></div>
- <div class="cms-mode-note"><strong>Important:</strong> Records saved here live in the new CMS tables. The existing public pages still use legacy settings until Phase 3 connects the website to this CMS. Your current editors remain available and unchanged.</div>
+ <div class="cms-intro"><div><h2>CMS Studio</h2><p>Manage the studio catalogue, producer credits, Terms of Service, and versioned commission forms in one place.</p></div><span class="cms-phase-label">CMS STUDIO · CONTENT MANAGEMENT</span></div>
+ <div class="cms-mode-note"><strong>Publishing workflow:</strong> Save content as a draft, review it, then use Publish on a version to make it public. Published Terms and form versions are immutable; create a new version when the wording or fields need to change.</div>
  <div id="cmsNotice" class="cms-notice" role="status" aria-live="polite"></div>
  <div class="cms-layout">
   <nav id="cmsResourceNav" class="cms-resource-nav" aria-label="CMS collections">
@@ -364,6 +364,10 @@ input::placeholder,textarea::placeholder{color:#9b90aa!important}
    <button type="button" data-cms-resource="service_packages" aria-pressed="false">Packages <span data-cms-count="service_packages">0</span></button>
    <button type="button" data-cms-resource="service_addons" aria-pressed="false">Add-ons <span data-cms-count="service_addons">0</span></button>
    <button type="button" data-cms-resource="work_producers" aria-pressed="false">Work credits <span data-cms-count="work_producers">0</span></button>
+   <button type="button" data-cms-resource="tos_versions" aria-pressed="false">Terms of Service <span data-cms-count="tos_versions">0</span></button>
+   <button type="button" data-cms-resource="tos_sections" aria-pressed="false">ToS sections <span data-cms-count="tos_sections">0</span></button>
+   <button type="button" data-cms-resource="commission_forms" aria-pressed="false">Commission forms <span data-cms-count="commission_forms">0</span></button>
+   <button type="button" data-cms-resource="commission_form_versions" aria-pressed="false">Form versions <span data-cms-count="commission_form_versions">0</span></button>
   </nav>
   <div class="cms-content">
    <div class="cms-collection-heading"><h3 id="cmsCollectionTitle">Producers</h3><small id="cmsCollectionMeta">Loading…</small></div>
