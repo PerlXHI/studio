@@ -2696,6 +2696,7 @@ html[data-theme="dark"] .featured-audio-time{color:#b4aec8}
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script src="/assets/js/public-cms.js"></script>
 <script src="/assets/js/producer-profile.js" defer></script>
+<script src="/assets/js/commission-cms.js" defer></script>
 <script>
 var DISCORD_URL="https://discord.com/app";
 // Set public MP3 URLs here after uploading previews to external object storage.
@@ -2976,6 +2977,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
    if(cmsPayload.ok&&cmsPayload.data){
     settings=window.perivelleApplyPublicCms(settings,cmsPayload.data);
     window.perivellePublicCmsData=cmsPayload.data;
+    document.dispatchEvent(new CustomEvent("perivelle-public-cms-ready",{detail:cmsPayload.data}));
    }
   }
   if((!legacyResponse||!legacyResponse.ok)&&(!cmsResponse||!cmsResponse.ok))return;
