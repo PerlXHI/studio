@@ -57,22 +57,69 @@ The migration provisions a private `commission-references` bucket for future cli
 
 These endpoints are a foundation. They do not yet replace the existing Admin Dashboard forms or public frontend rendering; that integration belongs to Phase 2 and Phase 3.
 
-## Apply the migration
+## Execution and verification status — 26 November 2026
 
-1. Make sure the Supabase project has a current backup or export.
-2. Confirm the existing base migrations have already been applied:
-   - `supabase/commission-tracking.sql`
-   - `supabase/admin-dashboard.sql`
-3. Open the Supabase project → SQL Editor.
-4. Run `supabase/migrations/202611250001_cms_foundation.sql`.
-5. Run `supabase/verify-phase1.sql` and inspect the row counts, RLS status, bucket and new commission columns.
-6. Deploy the branch to a Vercel Preview and check:
-   - `/api/public-cms?resource=producers`
-   - `/api/public-cms?resource=works`
-   - `/api/public-cms?resource=services`
-   - `/api/admin-cms?resource=all` while signed in to Admin.
+### Supabase migration
 
-The admin endpoint uses the existing HMAC admin session. The service-role key remains server-side and is never returned by these APIs.
+`202611250001_cms_foundation` is present in the connected Supabase migration history. It was applied on 25 November 2026. The verification queries were run again on 26 November 2026; the migration itself was not replayed because it is already recorded and the checks are read-only.
+
+| Check | Verified result |
+|---|---:|
+| Producer profiles | 3 |
+| Portfolio categories | 6 |
+| Works | 13 |
+| Work/producer assignments | 0 |
+| Services | 5 |
+| Service packages / add-ons | 0 / 0 |
+| ToS versions / sections | 0 / 0 |
+| Commission forms / versions | 0 / 0 |
+| Historical commission requests retained | 7 of 7 |
+| Historical answers equal original briefs | 7 of 7 |
+| Submission snapshots populated | 7 of 7 |
+| Existing `studio_settings` rows / expected keys | 12 / 12 |
+| New CMS tables with RLS enabled | 11 of 11 |
+| Direct table privileges for `anon` / `authenticated` | 0 |
+
+The zero work/producer assignments reflect the legacy source: it had no video assignments and the featured item had no creator ID. Empty packages, add-ons, ToS and form tables are intentional foundations awaiting Phase 2/4 content entry; they are not failed backfills.
+
+Storage verification:
+- `commission-references`: exists, private, 50 MB limit.
+- `freebies`: remains public, 50 MB limit.
+
+### Supabase advisors
+
+- Health advisor: no findings.
+- Security advisor: 15 informational `rls_enabled_no_policy` notices across new and existing server-only tables. This is intentional for the current architecture: browser roles have no table grants, and the APIs use the server-side service-role key. Do not add public policies simply to silence this notice.
+- Performance advisor: 12 informational unused-index notices. These indexes support the new CMS query patterns but have not been used because the site/admin are not yet integrated with the normalized tables. Reassess after Phase 2/3 traffic; do not drop them during this foundation phase.
+
+### Deployment and API smoke tests
+
+The current Phase 1 branch head is `f27e57192efca3565af5cd55f1bd15ff3dd12bfe`. Its Vercel status check is failing with `api-deployments-free-per-day` / deployment rate limit. This is an external deployment quota restriction, not a Supabase migration error. Therefore the following tests remain pending against the current branch head:
+
+- `GET /api/public-cms?resource=producers`
+- `GET /api/public-cms?resource=categories`
+- `GET /api/public-cms?resource=works`
+- `GET /api/public-cms?resource=services`
+- `GET /api/admin-cms?resource=all` while signed in as admin
+- Negative checks: public access to ToS/forms returns 400, and unauthenticated admin access returns 401.
+
+A previous Vercel preview event reported Ready on 25 November, but it is not proof that the current branch head deployed or that its API routes passed smoke tests.
+
+When the deployment quota clears, redeploy the branch and run the endpoint checks above. For local full-stack verification, use the Vercel CLI in the repository directory:
+
+```bash
+npm install -g vercel
+vercel login
+vercel link
+vercel pull --environment=preview
+vercel dev
+```
+
+Then test the routes at `http://localhost:3000`. Keep `SUPABASE_SERVICE_ROLE_KEY` server-side; never paste it into the browser or commit it.
+
+## Read-only verification
+
+Run `supabase/verify-phase1.sql` after the migration or whenever you need to re-check the live state. It is read-only. Do not replay the migration just to verify the current database; the migration is already recorded.
 
 ## Environment
 
@@ -80,6 +127,7 @@ The API uses the existing server-side variables already used by the project:
 
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
+- `ADMIN_SESSION_SECRET` for the existing admin session
 
 No new public environment variable is introduced.
 
@@ -90,7 +138,7 @@ No new public environment variable is introduced.
 - Existing commission columns and rows are not dropped.
 - Do not drop the new tables to roll back after content has been entered. First export any new data; a rollback should be a deliberate, reviewed migration.
 - The new APIs can be rolled back independently because existing routes and frontend code do not call them yet.
-- Apply to a Supabase backup/staging project first when one is available. The repository migration cannot be executed against the user's Supabase project from GitHub.
+- Keep CMS table access server-only until the public and admin application flows are deliberately integrated.
 
 ## Known Phase 1 boundaries
 
@@ -99,3 +147,4 @@ No new public environment variable is introduced.
 - Existing producer data lacks full social links, genres, equipment, and appearance settings; those fields are initialized empty and will be populated through the upcoming CMS.
 - Legacy `portfolio_videos` records may only have a video URL and producer credit; the migration preserves source JSON so details can be enriched later.
 - TOS and dynamic forms are schema foundations only; they remain unpublished until created and reviewed through the future admin tools.
+- Public and admin endpoint smoke tests against the current branch head remain pending because Vercel rate-limited the latest deployment.
