@@ -318,7 +318,16 @@ async function validatePublication(resource, filters, payload) {
   if (!url || !key) fail("CMS database connection is not configured.", 503);
   const headers = supabaseHeaders(key);
   if (resource === "commission_form_versions") {
-    const schema = payload.schema;
+    let schema = payload.schema;
+    if (!schema) {
+      const params = new URLSearchParams({ select: "schema,status", form_version_id: "eq." + filters.form_version_id, limit: "1" });
+      const response = await fetch(url.replace(/\/$/, "") + "/rest/v1/commission_form_versions?" + params.toString(), { headers });
+      const rows = await response.json().catch(() => []);
+      if (!response.ok || !Array.isArray(rows) || !rows[0] || rows[0].status !== "draft") {
+        fail("Only a saved draft form version can be published.", 400);
+      }
+      schema = rows[0].schema;
+    }
     const fields = schema?.fields;
     const allowed = ["text","textarea","select","checkbox","email","url","number","date"];
     if (!Array.isArray(fields) || !fields.length || fields.length > 40) fail("Add between 1 and 40 commission form fields before publishing.");
