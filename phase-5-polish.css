@@ -1,0 +1,117 @@
+/* Phase 5 — responsive and interaction polish
+   This file is intentionally last in the public stylesheet order. It refines
+   the existing Perivelle plum / lilac / rose system without introducing a new theme. */
+
+html,body{min-width:320px}
+body{overflow-x:clip}
+#main-content,.page-view{min-width:0;max-width:100%}
+#main-content .page-view[hidden]{display:none!important}
+#main-content .page-view:not([hidden]){display:block}
+
+/* Navigation remains one continuous row and can be swiped on narrow screens. */
+.pv-header .wrap{min-width:0}
+.pv-header nav{
+  display:flex;
+  align-items:center;
+  min-width:0;
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.pv-header nav::-webkit-scrollbar{display:none}
+.pv-header .pv-brand,.pv-header .navlink,.pv-header .pv-nav-cta{flex:0 0 auto;white-space:nowrap}
+.pv-header .pv-brand{margin-right:clamp(8px,1.4vw,18px)}
+.pv-header .pv-nav-cta{margin-left:auto}
+
+/* Grid children must be allowed to shrink instead of forcing page overflow. */
+#main-content .page-view :is(.wrap,.section-head,.pv-section-head,.pv-hero-grid,.pv-hero-copy,.pv-hero-art,.team-card,.service-card,.featured-portfolio-card,.portfolio-category-group,.commission-form-layout,.commission-form,.order-fields){min-width:0}
+#main-content .page-view :is(.team-grid,.service-grid,.workflow-grid,.credit-grid,.featured-portfolio-grid,.pv-work-grid,.pv-service-grid){
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));
+}
+#main-content .page-view :is(.team-card,.service-card,.step-card,.credit-card,.license-panel,.featured-portfolio-card){height:100%}
+#main-content .page-view :is(.team-card,.service-card) :is(h3,p){overflow-wrap:anywhere}
+#main-content .page-view img{max-width:100%;height:auto}
+#main-content .page-view :is(.portfolio-video-rail,.portfolio-filter-links,.portfolio-filter-bar){min-width:0;max-width:100%}
+#main-content .page-view .portfolio-filter-links{flex-wrap:wrap}
+#main-content .page-view .portfolio-video-rail{
+  overflow-x:auto;
+  overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;
+  scrollbar-width:thin;
+}
+#main-content .page-view .portfolio-video-frame{scroll-snap-align:start;min-width:0}
+#main-content .page-view .cms-audio-work-card audio{max-width:100%}
+
+/* Home hero — keep the mascot, copy and CTAs balanced as the viewport narrows. */
+#main-content .page-view[data-page="home"] .pv-hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);
+  align-items:center;
+}
+#main-content .page-view[data-page="home"] .pv-hero-art{min-width:0}
+#main-content .page-view[data-page="home"] .pv-mascot{display:block;width:100%;max-width:640px;height:auto;object-fit:contain}
+#main-content .page-view[data-page="home"] .pv-actions{display:flex;flex-wrap:wrap;gap:10px}
+#main-content .page-view[data-page="home"] .pv-actions .btn{max-width:100%}
+
+/* Forms and dialogs — controls stay within their columns and keep touch targets. */
+#main-content .page-view :is(.field,.cms-dynamic-field,.commission-form-layout,.commission-form){min-width:0}
+#main-content .page-view :is(input,select,textarea){max-width:100%}
+#main-content .page-view :is(.btn,button,.track-resource-link,.cms-terms-read){touch-action:manipulation}
+.cms-service-dialog,.cms-terms-dialog,.producer-profile-dialog{overscroll-behavior:contain}
+.cms-service-dialog-options,.cms-terms-content{min-width:0}
+.cms-service-dialog-options :is(p,li,strong,small){overflow-wrap:anywhere}
+.cms-service-dialog-cta{max-width:100%}
+
+/* Footer columns collapse naturally rather than becoming narrow text strips. */
+.pv-footer-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}
+.pv-footer-grid>*{min-width:0}
+
+/* Tablet */
+@media(max-width:900px){
+  #main-content .page-view[data-page="home"] .pv-hero-grid{grid-template-columns:minmax(0,1fr) minmax(260px,.82fr);gap:26px}
+  .pv-header nav{gap:5px}
+  .pv-header .navlink{padding-inline:9px}
+}
+
+/* Mobile */
+@media(max-width:680px){
+  .pv-header nav{gap:4px;padding-block:4px}
+  .pv-header .pv-brand{margin-right:5px}
+  .pv-header .navlink{min-height:38px;padding:8px 10px;font-size:.76rem}
+  .pv-header .pv-nav-cta{min-height:38px;padding:8px 12px;font-size:.76rem}
+  #main-content .page-view[data-page="home"] .pv-hero-grid{grid-template-columns:1fr;gap:20px}
+  #main-content .page-view[data-page="home"] .pv-hero-copy{max-width:unset}
+  #main-content .page-view[data-page="home"] .pv-hero-art{width:min(100%,520px);margin-inline:auto}
+  #main-content .page-view[data-page="home"] .pv-hero{padding-top:42px}
+  #main-content .page-view :is(.team-grid,.service-grid,.featured-portfolio-grid,.pv-work-grid,.pv-service-grid){grid-template-columns:1fr}
+  #main-content .page-view .workflow-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #main-content .page-view :is(.section-head,.pv-section-head){align-items:flex-start}
+  #main-content .page-view .section-head .sub{max-width:unset}
+  #main-content .page-view .portfolio-filter-links{gap:7px}
+  #main-content .page-view .portfolio-filter-links a{max-width:100%;white-space:normal}
+  #main-content .page-view .freebie-row{grid-template-columns:36px minmax(0,1fr);gap:12px}
+  #main-content .page-view .freebie-player,
+  #main-content .page-view .freebie-actions{grid-column:2}
+  #main-content .page-view .cms-dynamic-fields{grid-template-columns:1fr}
+  #main-content .page-view .cms-dynamic-field.wide{grid-column:auto}
+  .pv-footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* Small phones */
+@media(max-width:420px){
+  .pv-header .navlink{padding-inline:8px;font-size:.72rem}
+  .pv-header .pv-nav-cta{padding-inline:10px;font-size:.72rem}
+  #main-content .page-view[data-page="home"] .pv-actions{display:grid;grid-template-columns:1fr}
+  #main-content .page-view[data-page="home"] .pv-actions .btn{width:100%;justify-content:center}
+  #main-content .page-view .workflow-grid{grid-template-columns:1fr}
+  #main-content .page-view .freebie-row{grid-template-columns:30px minmax(0,1fr);padding:13px}
+  .pv-footer-grid{grid-template-columns:1fr}
+}
+
+/* Motion and keyboard focus follow user preferences. */
+@media(prefers-reduced-motion:reduce){
+  .pv-header nav{scroll-behavior:auto}
+  #main-content .page-view .portfolio-video-rail{scroll-behavior:auto}
+}
