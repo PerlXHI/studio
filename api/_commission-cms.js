@@ -127,7 +127,7 @@ export async function validateCmsCommissionSubmission({ data, baseUrl, headers }
         }
         systemValues[field.system] = value;
       }
-      customFields.push({ name: cleanAnswer(field.label, 100) || field.id, value: cleanAnswer(value, 900) || "—" });
+      if (!field.system) customFields.push({ name: cleanAnswer(field.label, 100) || field.id, value: cleanAnswer(value, 900) || "—" });
     }
     for (const key of ["name","contact","license","character"]) {
       if (!String(systemValues[key] ?? "").trim()) fail("The commission form is missing a required contact or brief field. Please contact Perivelle.", 503);
