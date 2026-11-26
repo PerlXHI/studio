@@ -358,6 +358,19 @@ async function validatePublication(resource, filters, payload) {
         fail("Every commission form field needs a unique ID, label and supported field type.");
       }
       ids.add(field.id);
+      if (field.required !== undefined && typeof field.required !== "boolean") fail("Commission form required flags must be true or false.");
+      if (field.minLength != null && (!Number.isInteger(Number(field.minLength)) || Number(field.minLength) < 0 || Number(field.minLength) > 2000)) {
+        fail("A commission form field has an invalid minimum length.");
+      }
+      if (field.maxLength != null && (!Number.isInteger(Number(field.maxLength)) || Number(field.maxLength) < 1 || Number(field.maxLength) > 2000)) {
+        fail("A commission form field has an invalid maximum length.");
+      }
+      if (field.minLength != null && field.maxLength != null && Number(field.minLength) > Number(field.maxLength)) {
+        fail("A commission form field minimum length cannot exceed its maximum length.");
+      }
+      if (field.type === "number" && ((field.min != null && !Number.isFinite(Number(field.min))) || (field.max != null && !Number.isFinite(Number(field.max))) || (field.min != null && field.max != null && Number(field.min) > Number(field.max)))) {
+        fail("A commission form number field has an invalid range.");
+      }
       if (field.type === "select" && (!Array.isArray(field.options) || !field.options.length || field.options.length > 50 ||
           field.options.some(option => typeof option !== "string" || !option.trim() || option.length > 160))) {
         fail("Every select field needs 1–50 valid text options.");
