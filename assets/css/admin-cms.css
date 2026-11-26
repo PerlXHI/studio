@@ -87,3 +87,4 @@ html[data-theme="dark"] .cms-form-builder-item-actions button,html[data-theme="d
 html[data-theme="dark"] .cms-form-builder-advanced{border-color:#4b405d}
 html[data-theme="dark"] .cms-form-builder-advanced summary{color:#d6c8f5}
 @media(max-width:640px){.cms-form-builder{padding:13px}.cms-form-builder-grid{grid-template-columns:1fr}.cms-form-builder-wide{grid-column:auto}.cms-form-builder-item{padding:11px}}
+.cms-form-builder-reload{margin-top:10px;font-size:.72rem}
