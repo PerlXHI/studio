@@ -9,7 +9,7 @@ Connect the public Perivelle site to the normalized CMS introduced in Phase 1 an
 - Producer cards and producer avatars use visible \`producer_profiles\` records.
 - Portfolio category filters and category video galleries use visible \`portfolio_categories\` and published \`works\`.
 - Featured Portfolio uses published Works with \`is_featured = true\`, excluding migrated portfolio-video markers that belong in the category video rail.
-- Work credit assignments are used only when present in \`work_producers\`; no credits are inferred from names or legacy data.
+- Work credit assignments are used only when present in \`work_producers\`; all assigned producer names and roles are displayed and producer filters include every credited producer. No credits are inferred from names or legacy data.
 - Audio-first / artwork-first Works without a video URL are rendered as asset cards inside their category; audio controls appear when an MP3 URL exists. Producer/service filters include these cards.
 - Service cards are ordered from published \`services\`; descriptions, thumbnails and price labels use CMS values. Active packages and add-ons appear below their parent service.
 

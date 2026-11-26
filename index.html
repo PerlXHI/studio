@@ -3044,18 +3044,30 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     function makeVideoFrame(src,index,rawUrl){
      const frame=document.createElement("div");frame.className="portfolio-video-frame";
      const assignment=assignments.find(function(entry){return entry.url===rawUrl});
-     if(assignment&&/^[a-z0-9][a-z0-9_-]{1,49}$/.test(assignment.creator||""))frame.dataset.creatorId=assignment.creator;
+     const videoWork=(Array.isArray(item.video_works)?item.video_works:[]).find(function(work){return work.video_url===rawUrl});
+     const creditIds=videoWork&&Array.isArray(videoWork.creators)&&videoWork.creators.length
+      ?videoWork.creators:(assignment&&Array.isArray(assignment.creators)&&assignment.creators.length
+       ?assignment.creators:(assignment&&assignment.creator?[assignment.creator]:[]));
+     const validCreditIds=creditIds.filter(function(id){return /^[a-z0-9][a-z0-9_-]{1,49}$/.test(id||"")});
+     if(validCreditIds.length){
+      frame.dataset.creatorId=validCreditIds[0];
+      frame.dataset.creatorIds=validCreditIds.join(",");
+     }
      frame.dataset.portfolioCategory=base.id;
      frame.dataset.portfolioCategoryName=base.name;
-     const videoWork=(Array.isArray(item.video_works)?item.video_works:[]).find(function(work){return work.video_url===rawUrl});
      if(videoWork){
       frame.dataset.workId=videoWork.work_id||"";
       if(videoWork.metadata?.legacy_source!=="portfolio_videos"){
        const caption=document.createElement("div");caption.className="cms-work-video-caption";
        const title=document.createElement("strong");title.textContent=String(videoWork.title||"Selected work");
        caption.appendChild(title);
-       const producer=(Array.isArray(settings.studio_producers)?settings.studio_producers:[]).find(function(person){return person.id===videoWork.creator});
-       if(producer){const credit=document.createElement("small");credit.textContent="Produced by "+producer.name;caption.appendChild(credit)}
+       const people=Array.isArray(settings.studio_producers)?settings.studio_producers:[];
+       const credits=Array.isArray(videoWork.credits)?videoWork.credits:[];
+       const labels=credits.map(function(credit){
+        const producer=people.find(function(person){return person.id===credit.producer_id});
+        return producer?((credit.role?credit.role+": ":"")+producer.name):"";
+       }).filter(Boolean);
+       if(labels.length){const credit=document.createElement("small");credit.textContent="Credits: "+labels.join(" · ");caption.appendChild(credit)}
        frame.appendChild(caption);
       }
      }
@@ -3083,7 +3095,12 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     audioWorks.forEach(function(work){
      const card=document.createElement("article");card.className="product portfolio-video-card cms-audio-work-card";
      card.dataset.portfolioCategory=base.id;
-     if(work.creator)card.dataset.creatorId=work.creator;
+     const creatorIds=Array.isArray(work.creators)?work.creators:(work.creator?[work.creator]:[]);
+     const validCreatorIds=creatorIds.filter(function(id){return /^[a-z0-9][a-z0-9_-]{1,49}$/.test(id||"")});
+     if(validCreatorIds.length){
+      card.dataset.creatorId=validCreatorIds[0];
+      card.dataset.creatorIds=validCreatorIds.join(",");
+     }
      if(work.work_id)card.dataset.workId=work.work_id;
      const art=document.createElement("div");art.className="cms-audio-work-art";
      const coverUrl=(()=>{try{const url=new URL(String(work.cover_image_url||""));return url.protocol==="https:"?url.href:""}catch(error){return""}})();
@@ -3094,8 +3111,13 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
      if(work.description){const description=document.createElement("p");description.textContent=String(work.description);body.appendChild(description)}
      const audioUrl=(()=>{try{const url=new URL(String(work.audio_url||""));return url.protocol==="https:"?url.href:""}catch(error){return""}})();
      if(audioUrl){const audio=document.createElement("audio");audio.controls=true;audio.preload="none";audio.src=audioUrl;audio.setAttribute("aria-label","Audio preview for "+String(work.title||"Selected work"));body.appendChild(audio)}
-     const producer=(Array.isArray(settings.studio_producers)?settings.studio_producers:[]).find(function(person){return person.id===work.creator});
-     if(producer){const credit=document.createElement("small");credit.className="cms-audio-work-credit";credit.textContent="Produced by "+producer.name;body.appendChild(credit)}
+     const people=Array.isArray(settings.studio_producers)?settings.studio_producers:[];
+     const credits=Array.isArray(work.credits)?work.credits:[];
+     const labels=credits.map(function(credit){
+      const producer=people.find(function(person){return person.id===credit.producer_id});
+      return producer?((credit.role?credit.role+": ":"")+producer.name):"";
+     }).filter(Boolean);
+     if(labels.length){const credit=document.createElement("small");credit.className="cms-audio-work-credit";credit.textContent="Credits: "+labels.join(" · ");body.appendChild(credit)}
      card.append(art,body);grid.appendChild(card);
     });
     if(validVideos.length||audioWorks.length){group.dataset.assetState="ready";}else{group.dataset.assetState="placeholder";grid.appendChild(makePortfolioPlaceholder(base));}
@@ -3137,8 +3159,13 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
       audioPlayer=player;
      }
      const description=document.createElement("p");description.className="featured-work-description";description.textContent=String(entry.description||"");
-     const producer=(Array.isArray(settings.studio_producers)?settings.studio_producers:[]).find(function(p){return p.id===entry.creator&&p.active!==false});
-     card.append(meta,title,frame);if(audioPlayer)card.appendChild(audioPlayer);if(entry.description)card.appendChild(description);if(producer){const credit=document.createElement("small");credit.className="featured-work-credit";credit.textContent="Produced by "+producer.name;card.appendChild(credit)}
+     const people=Array.isArray(settings.studio_producers)?settings.studio_producers:[];
+     const credits=Array.isArray(entry.credits)?entry.credits:[];
+     const labels=credits.map(function(credit){
+      const producer=people.find(function(person){return person.id===credit.producer_id&&person.active!==false});
+      return producer?((credit.role?credit.role+": ":"")+producer.name):"";
+     }).filter(Boolean);
+     card.append(meta,title,frame);if(audioPlayer)card.appendChild(audioPlayer);if(entry.description)card.appendChild(description);if(labels.length){const credit=document.createElement("small");credit.className="featured-work-credit";credit.textContent="Credits: "+labels.join(" · ");card.appendChild(credit)}
      featuredGrid.appendChild(card);featuredCount++;
     }
     if(Array.isArray(settings.featured_portfolio)){
@@ -3312,7 +3339,8 @@ setLanguage("en");
    let visibleCount=0;
 
    frames.concat(audioCards).forEach(function(workCard){
-    const matchesCreator=!filters.creator||workCard.dataset.creatorId===filters.creator;
+    const creatorIds=String(workCard.dataset.creatorIds||"").split(",").filter(Boolean);
+    const matchesCreator=!filters.creator||workCard.dataset.creatorId===filters.creator||creatorIds.includes(filters.creator);
     const visible=matchesService&&matchesCreator;
     workCard.hidden=!visible;
     workCard.style.display=visible?"":"none";

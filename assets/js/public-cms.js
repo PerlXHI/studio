@@ -13,14 +13,20 @@
     }
   }
 
-  function firstCredit(creditsByWork, workId) {
-    const credits = creditsByWork.get(workId) || [];
-    return credits[0] || null;
+  function mapWorkCredits(work, creditsByWork) {
+    return (creditsByWork.get(work.work_id) || []).map(credit => ({
+      producer_id: credit.producer_id,
+      role: cleanString(credit.credit_role) || "Producer"
+    }));
   }
 
   function mapWorkCredit(work, creditsByWork) {
-    const credit = firstCredit(creditsByWork, work.work_id);
-    return credit ? credit.producer_id : "";
+    const credits = mapWorkCredits(work, creditsByWork);
+    return credits.length ? credits[0].producer_id : "";
+  }
+
+  function mapCreatorIds(work, creditsByWork) {
+    return mapWorkCredits(work, creditsByWork).map(credit => credit.producer_id);
   }
 
   function projectPublicCmsSettings(legacySettings, cmsData) {
@@ -64,8 +70,10 @@
 
       const videoAssignments = [];
       videoWorks.forEach(work => {
-        const producerId = mapWorkCredit(work, creditsByWork);
-        if (producerId) videoAssignments.push({ url: work.video_url, creator: producerId });
+        const creators = mapCreatorIds(work, creditsByWork);
+        if (creators.length) {
+          videoAssignments.push({ url: work.video_url, creator: creators[0], creators });
+        }
       });
 
       return {
@@ -78,15 +86,19 @@
           title: work.title,
           description: work.description,
           metadata: work.metadata || {},
-          creator: mapWorkCredit(work, creditsByWork)
+          creator: mapWorkCredit(work, creditsByWork),
+          creators: mapCreatorIds(work, creditsByWork),
+          credits: mapWorkCredits(work, creditsByWork)
         })),
-        audio_works: audioWorks.map(work => ({
+        audio_works: audioWorks.filter(work => work.is_featured !== true).map(work => ({
           work_id: work.work_id,
           title: work.title,
           description: work.description,
           cover_image_url: work.cover_image_url,
           audio_url: work.audio_url,
-          creator: mapWorkCredit(work, creditsByWork)
+          creator: mapWorkCredit(work, creditsByWork),
+          creators: mapCreatorIds(work, creditsByWork),
+          credits: mapWorkCredits(work, creditsByWork)
         }))
       };
     });
@@ -105,6 +117,8 @@
         video_url: work.video_url || "",
         audio_url: work.audio_url || "",
         creator: mapWorkCredit(work, creditsByWork),
+        creators: mapCreatorIds(work, creditsByWork),
+        credits: mapWorkCredits(work, creditsByWork),
         active: true
       }));
 
