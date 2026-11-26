@@ -94,7 +94,9 @@ Storage verification:
 
 ### Deployment and API smoke tests
 
-The current Phase 1 branch head is `f27e57192efca3565af5cd55f1bd15ff3dd12bfe`. Its Vercel status check is failing with `api-deployments-free-per-day` / deployment rate limit. This is an external deployment quota restriction, not a Supabase migration error. Therefore the following tests remain pending against the current branch head:
+The current Phase 1 branch head at the time of this audit is `7bbf794f67af40dc21b1326e19b5737074e71a47`. Its GitHub Vercel status check is now `success`; the earlier `api-deployments-free-per-day` block is no longer present on that commit.
+
+The deployment result does not, by itself, confirm that each route returns the expected payload. These HTTP smoke tests remain pending because the Preview hostname could not be reached by the automated inspection client in this session:
 
 - `GET /api/public-cms?resource=producers`
 - `GET /api/public-cms?resource=categories`
@@ -103,9 +105,7 @@ The current Phase 1 branch head is `f27e57192efca3565af5cd55f1bd15ff3dd12bfe`. I
 - `GET /api/admin-cms?resource=all` while signed in as admin
 - Negative checks: public access to ToS/forms returns 400, and unauthenticated admin access returns 401.
 
-A previous Vercel preview event reported Ready on 25 November, but it is not proof that the current branch head deployed or that its API routes passed smoke tests.
-
-When the deployment quota clears, redeploy the branch and run the endpoint checks above. For local full-stack verification, use the Vercel CLI in the repository directory:
+The Vercel GitHub event previously supplied this branch Preview URL: [Perivelle Phase 1 Preview](https://perivelle-git-phase-1-cms-foundation-perlx.vercel.app). Open it in a browser after confirming the newest deployment is Ready, then run the route checks above. For local full-stack verification, use the Vercel CLI in the repository directory:
 
 ```bash
 npm install -g vercel
