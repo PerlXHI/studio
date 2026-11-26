@@ -9,7 +9,7 @@ async function authorize(req) {
   const token = String(req.headers.authorization || "").replace(/^Bearer\\s+/i,"").trim();
   const url = process.env.SUPABASE_URL, anon = process.env.SUPABASE_ANON_KEY, adminEmail = String(process.env.ADMIN_EMAIL || "").trim().toLowerCase();
   if (!token || !url || !anon || !adminEmail) return null;
-  const response = await fetch(url.replace(/\\/$/,"") + "/auth/v1/user", { headers: { apikey: anon, Authorization: "Bearer " + token } });
+  const response = await fetch(url.replace(/\/$/,"") + "/auth/v1/user", { headers: { apikey: anon, Authorization: "Bearer " + token } });
   if (!response.ok) return null;
   const user = await response.json();
   return user && String(user.email || "").toLowerCase() === adminEmail ? user : null;
@@ -20,7 +20,7 @@ export default async function handler(req,res) {
   if (!user) return res.status(401).json({ok:false,message:"Admin sign-in required."});
   const url = process.env.SUPABASE_URL, key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) return res.status(503).json({ok:false,message:"Database connection is not configured."});
-  const base = url.replace(/\\/$/,"") + "/rest/v1/commission_requests";
+  const base = url.replace(/\/$/,"") + "/rest/v1/commission_requests";
   const headers = { apikey:key, Authorization:"Bearer "+key, "Content-Type":"application/json" };
   if (req.method === "GET") {
     const q = new URLSearchParams({select:"request_id,status,status_note,created_at,updated_at,client_name,discord_contact,service_type,license_preference,mood_bpm,duration,project_concept,references_text,preferred_deadline,budget_range,additional_notes,price_amount,price_currency,quotation_note,preview_url,delivery_url,internal_note",order:"created_at.desc",limit:"100"});
