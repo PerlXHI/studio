@@ -75,21 +75,22 @@
 
     const heading = make("div");
     heading.append(
-      make("p", "producer-profile-eyebrow", "PERIVELLE SOUND COLLECTIVE"),
-      make("h2", "producer-profile-name", clean(producer.name)),
-      make("p", "producer-profile-role", clean(producer.role) || "Music Producer")
+      make("p", "producer-profile-eyebrow", "PERIVELLE SOUND COLLECTIVE · PROFILE PREVIEW"),
+      make("h2", "producer-profile-name", clean(producer.name) || "Producer Name"),
+      make("p", "producer-profile-role", clean(producer.role) || "Music Producer · Role placeholder")
     );
     header.append(avatar, heading);
     inner.appendChild(header);
 
-    if (clean(producer.bio)) inner.appendChild(make("p", "producer-profile-bio", clean(producer.bio)));
+    inner.appendChild(make("p", "producer-profile-bio", clean(producer.bio) ||
+      "A short introduction about this producer will appear here. Share their sound, creative approach, and the kind of projects they love working on."));
 
     const tags = Array.isArray(producer.tags) ? producer.tags.map(clean).filter(Boolean) : [];
-    if (tags.length) {
-      const tagList = make("div", "producer-profile-tags");
-      tags.forEach(tag => tagList.appendChild(make("span", "", tag)));
-      inner.appendChild(tagList);
-    }
+    const tagList = make("div", "producer-profile-tags");
+    (tags.length ? tags : ["Genre / Style", "Specialty", "DAW / Tools"]).forEach(tag =>
+      tagList.appendChild(make("span", "", tag)));
+    if (!tags.length) tagList.classList.add("is-placeholder");
+    inner.appendChild(tagList);
 
     const projects = creditedWorks(producer);
     const section = make("section", "producer-profile-works");
@@ -107,7 +108,19 @@
       });
       section.appendChild(list);
     } else {
-      section.appendChild(make("p", "producer-profile-bio", "Selected projects will appear here once this producer is credited in the CMS."));
+      const placeholderList = make("div", "producer-profile-work-list", "");
+      [
+        ["Project title", "BGM / Original Song", "Composer · Producer"],
+        ["Another project", "Sound Design", "Arrangement · Mixing"],
+        ["Featured collaboration", "Collaboration", "Producer"]
+      ].forEach(([title, category, role]) => {
+        const item = make("div", "producer-profile-work is-placeholder");
+        const copy = make("span");
+        copy.append(make("strong", "", title), make("small", "", category + " · " + role));
+        item.append(copy, make("em", "", "Preview"));
+        placeholderList.appendChild(item);
+      });
+      section.appendChild(placeholderList);
     }
     inner.appendChild(section);
 
