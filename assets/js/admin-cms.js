@@ -382,7 +382,7 @@
     }
     function control(labelText, value, type, onChange) {
       const wrap = document.createElement("label");
-      wrap.className = "cms-form-builder-control";
+      wrap.className = "cms-form-builder-control" + (type === "textarea" ? " cms-form-builder-wide" : "");
       const label = document.createElement("span");
       label.textContent = labelText;
       const input = document.createElement(type === "textarea" ? "textarea" : "input");
