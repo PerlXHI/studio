@@ -17,7 +17,7 @@
         Urutan sama dengan kartu di halaman Services. */
   var OPTIONS=["Custom BGM","Sound Alerts","Lore / Cinematic Music","Original Song (OG Song)","VTuber Debut Bundle"];
   document.querySelectorAll('.page-view[data-page="services"] .service-card').forEach(function(card,i){
-    if(!OPTIONS[i]||card.querySelector(".service-request"))return;
+    if(card.classList.contains("cms-service-card")||card.dataset.serviceSlug||!OPTIONS[i]||card.querySelector(".service-request"))return;
     var a=document.createElement("a");
     a.className="service-request";
     a.href="#commission-request";
