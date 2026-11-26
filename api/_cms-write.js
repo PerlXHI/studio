@@ -193,6 +193,18 @@ function normalizeValue(field, value) {
   return normalized;
 }
 
+function validateIdentifiers(resource, values) {
+  if (resource === "producers" && !/^[a-z0-9][a-z0-9_-]{1,49}$/.test(values.producer_id || "")) {
+    fail("Producer ID must use lowercase letters, numbers, hyphens or underscores.");
+  }
+  if (resource === "categories" && !/^[a-z0-9][a-z0-9_-]{0,59}$/.test(values.category_id || "")) {
+    fail("Category ID must use lowercase letters, numbers, hyphens or underscores.");
+  }
+  if (resource === "services" && !/^[a-z0-9][a-z0-9_-]{0,79}$/.test(values.service_id || "")) {
+    fail("Service ID must use lowercase letters, numbers, hyphens or underscores.");
+  }
+}
+
 function normalizePayload(resource, raw, creating) {
   if (!raw || typeof raw !== "object" || Array.isArray(raw)) fail("Request body must be a JSON object.");
   const config = RESOURCES[resource];
@@ -215,6 +227,7 @@ function normalizePayload(resource, raw, creating) {
         fail("Please complete all required fields.");
       }
     }
+    validateIdentifiers(resource, result);
   }
   if (!creating && !Object.keys(result).length) fail("No editable fields were provided.");
   return result;
@@ -230,15 +243,7 @@ function getFilters(resource, query, body = {}) {
     }
     filters[key] = cleanText(value, 120);
   }
-  if (resource === "producers" && !/^[a-z0-9][a-z0-9_-]{1,49}$/.test(filters.producer_id)) {
-    fail("Producer ID must use lowercase letters, numbers, hyphens or underscores.");
-  }
-  if (resource === "categories" && !/^[a-z0-9][a-z0-9_-]{0,59}$/.test(filters.category_id)) {
-    fail("Category ID must use lowercase letters, numbers, hyphens or underscores.");
-  }
-  if (resource === "services" && !/^[a-z0-9][a-z0-9_-]{0,79}$/.test(filters.service_id)) {
-    fail("Service ID must use lowercase letters, numbers, hyphens or underscores.");
-  }
+  validateIdentifiers(resource, filters);
   return filters;
 }
 
