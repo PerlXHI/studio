@@ -107,6 +107,7 @@
       projects.forEach(({work,category,role}) => {
         const link = make("a", "producer-profile-work");
         link.href = "#portfolio?creator=" + encodeURIComponent(producer.id);
+        link.addEventListener("click", () => { if (dialog.open) dialog.close(); });
         const copy = make("span");
         copy.append(make("strong", "", clean(work.title) || "Untitled work"),
           make("small", "", category + (role ? " · " + role : "")));
@@ -134,6 +135,8 @@
     const actions = make("div", "producer-profile-actions");
     const worksLink = make("a", "", "Explore portfolio ↗");
     worksLink.href = "#portfolio?creator=" + encodeURIComponent(producer.id);
+    // Close the profile first, then let the existing SPA/hash navigation run normally.
+    worksLink.addEventListener("click", () => { if (dialog.open) dialog.close(); });
     actions.appendChild(worksLink);
     inner.appendChild(actions);
 
