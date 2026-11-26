@@ -279,6 +279,30 @@
     return serviceDialog;
   }
 
+  function createServiceMetaSection(service) {
+    const items = [];
+    if (service.estimated_delivery_days != null) items.push(["Estimated delivery", service.estimated_delivery_days + " days"]);
+    if (service.included_revisions != null) items.push(["Included revisions", service.included_revisions]);
+    if (!items.length) return null;
+    const section = document.createElement("section");
+    section.className = "cms-service-options cms-service-meta-section";
+    const heading = document.createElement("h4");
+    heading.textContent = "At a glance";
+    const list = document.createElement("div");
+    list.className = "cms-service-meta-list";
+    items.forEach(([label, value]) => {
+      const item = document.createElement("div");
+      const name = document.createElement("small");
+      name.textContent = label;
+      const detail = document.createElement("strong");
+      detail.textContent = String(value);
+      item.append(name, detail);
+      list.appendChild(item);
+    });
+    section.append(heading, list);
+    return section;
+  }
+
   function createServiceTextSection(title, values) {
     const rows = toArray(values).map(itemLabel).filter(Boolean);
     if (!rows.length) return null;
@@ -349,11 +373,12 @@
     const addonSection = createOptionRows("Add-ons", addons, "addons");
     if (packageSection) options.appendChild(packageSection);
     if (addonSection) options.appendChild(addonSection);
+    const meta = createServiceMetaSection(service);
     const deliverables = createServiceTextSection("Deliverables", service.deliverables);
     const requirements = createServiceTextSection("What we need from you", service.client_requirements);
     const terms = createServiceTermsSection(service.terms_markdown);
     const faq = createServiceFaqSection(service.faq);
-    [deliverables, requirements, terms, faq].forEach(section => { if (section) options.appendChild(section); });
+    [meta, deliverables, requirements, terms, faq].forEach(section => { if (section) options.appendChild(section); });
     if (!options.childElementCount) { const note = document.createElement("p"); note.className = "cms-service-dialog-note"; note.textContent = "Package details and optional add-ons can be discussed with our team when you request a quote."; options.appendChild(note); }
     dialog.showModal();
   }
