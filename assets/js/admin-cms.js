@@ -262,6 +262,7 @@
     const title = def.title(record);
     const subtitle = def.subtitle(record) || def.keys.map(key => record[key]).join(" · ");
     const status = def.status(record);
+    const lockedSection = state.resource === "tos_sections" && status === "Published";
     const keyLabel = def.keys.map(key => record[key]).join(" / ");
     return `<article class="cms-record">
       <div class="cms-record-copy">
@@ -272,8 +273,8 @@
       <div class="cms-record-actions">
         ${(["tos_versions","commission_form_versions"].includes(state.resource) && record.status === "draft") ? '<button class="btn" type="button" data-cms-publish="' + index + '">Publish</button>' : ""}
         ${(["tos_versions","commission_forms"].includes(state.resource)) ? '<button class="btn alt" type="button" data-cms-next-version="' + index + '">New version</button>' : ""}
-        <button class="btn alt" type="button" data-cms-edit="${index}" ${(["tos_versions","commission_form_versions"].includes(state.resource) && record.status === "published") ? "disabled" : ""}>Edit</button>
-        <button class="btn alt" type="button" data-cms-archive="${index}">${state.resource === "work_producers" ? "Remove link" : "Archive"}</button>
+        <button class="btn alt" type="button" data-cms-edit="${index}" ${(["tos_versions","commission_form_versions"].includes(state.resource) && record.status === "published") || lockedSection ? "disabled" : ""}>Edit</button>
+        <button class="btn alt" type="button" data-cms-archive="${index}" ${lockedSection ? "disabled" : ""}>${state.resource === "work_producers" ? "Remove link" : "Archive"}</button>
       </div>
     </article>`;
   }
