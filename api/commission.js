@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { validateCmsCommissionSubmission } from "./_commission-cms.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -40,6 +41,26 @@ export default async function handler(req, res) {
   if (clean(data.website, 120)) return res.status(200).json({ ok: true });
 
 
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!supabaseUrl || !supabaseKey) {
+    return res.status(503).json({ ok: false, message: "Commission tracking is not configured yet. Please contact Perivelle." });
+  }
+  const supabaseRestUrl = supabaseUrl.replace(/\/$/, "");
+  const createdAt = new Date().toISOString();
+  const databaseHeaders = {
+    "Content-Type": "application/json",
+    "apikey": supabaseKey,
+    ...(supabaseKey.startsWith("sb_secret_") ? {} : { "Authorization": "Bearer " + supabaseKey })
+  };
+
+  let cmsContext;
+  try {
+    cmsContext = await validateCmsCommissionSubmission({ data, baseUrl: supabaseRestUrl, headers: databaseHeaders });
+  } catch (error) {
+    return res.status(error.status || 400).json({ ok: false, message: error.message || "The commission form could not be verified." });
+  }
+
   const fields = [
     ["Name / stage name", clean(data.name, 80)],
     ["Discord username", clean(data.contact, 120)],
@@ -63,22 +84,6 @@ export default async function handler(req, res) {
   const dateCode = ["year", "month", "day"].map(key => dateParts.find(part => part.type === key)?.value || "").join("");
   const baseRequestId = dateCode + " - " + idPart(fields[2][1]) + " - " + idPart(fields[0][1]);
   let requestId = baseRequestId;
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!supabaseUrl || !supabaseKey) {
-    return res.status(503).json({ ok: false, message: "Commission tracking is not configured yet. Please contact Perivelle." });
-  }
-
-  const supabaseRestUrl = supabaseUrl.replace(/\/$/, "");
-
-  const createdAt = new Date().toISOString();
-  // Supabase secret keys (sb_secret_...) are API keys, not JWTs:
-  // send them through apikey only. Legacy service_role JWTs use both headers.
-  const databaseHeaders = {
-    "Content-Type": "application/json",
-    "apikey": supabaseKey,
-    ...(supabaseKey.startsWith("sb_secret_") ? {} : { "Authorization": "Bearer " + supabaseKey })
-  };
 
   // Shared, persistent rate limit: 3 valid submissions per IP every 15 minutes.
   // The IP is hashed with a server-side secret; the raw address is never stored.
@@ -120,6 +125,13 @@ export default async function handler(req, res) {
         headers: { ...databaseHeaders, "Prefer": "return=minimal" },
         body: JSON.stringify({
           request_id: requestId,
+          service_id: cmsContext.serviceId,
+          form_version_id: cmsContext.formVersionId,
+          tos_version_id: cmsContext.tosVersionId,
+          tos_accepted_at: cmsContext.tosAcceptedAt,
+          answers: cmsContext.answers,
+          reference_files: [],
+          submission_snapshot: cmsContext.submissionSnapshot,
           brief: {
             name: fields[0][1], contact: fields[1][1], type: fields[2][1], license: fields[3][1],
             moodBpm: fields[4][1], duration: fields[5][1], character: fields[6][1],
@@ -160,7 +172,9 @@ export default async function handler(req, res) {
     fields: [
       { name: "Request ID", value: requestId, inline: true },
       { name: "Current Status", value: "Awaiting Review", inline: true },
-      ...fields.map(([name, value]) => ({ name, value: value || "—", inline: false }))
+      ...fields.map(([name, value]) => ({ name, value: value || "—", inline: false })),
+      ...cmsContext.customFields.filter(item => !fields.some(([name]) => name === item.name)).slice(0, 12).map(item => ({ name: item.name, value: item.value || "—", inline: false })),
+      ...(cmsContext.tosVersionId ? [{ name: "Terms accepted", value: "ToS v" + (cmsContext.submissionSnapshot.terms?.version_number || ""), inline: true }] : [])
     ],
     footer: { text: "PERIVELLE STUDIO · Status: Awaiting Review" },
     timestamp: new Date().toISOString()
