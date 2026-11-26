@@ -3127,7 +3127,7 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
    const featuredSection=document.getElementById("featuredPortfolio"),featuredGrid=document.getElementById("featuredPortfolioGrid");featuredGrid.replaceChildren();let featuredCount=0;
     function renderFeaturedWork(entry){
      if(!entry||entry.active===false)return;
-     const card=document.createElement("article");card.className="featured-portfolio-card";if(entry.creator)card.dataset.creatorId=entry.creator;if(entry.category)card.dataset.portfolioCategory=entry.category;
+     const card=document.createElement("article");card.className="featured-portfolio-card";const featuredCreatorIds=(Array.isArray(entry.creators)?entry.creators:(entry.creator?[entry.creator]:[])).filter(function(id){return /^[a-z0-9][a-z0-9_-]{1,49}$/.test(id||"")});if(featuredCreatorIds.length){card.dataset.creatorId=featuredCreatorIds[0];card.dataset.creatorIds=featuredCreatorIds.join(",");}if(entry.category)card.dataset.portfolioCategory=entry.category;
      const title=document.createElement("h3");title.textContent=String(entry.title||"Featured work");
      const category=defaults.find(function(item){return item.id===entry.category});
      const meta=document.createElement("p");meta.className="eyebrow";meta.textContent=category?category.name:"SELECTED WORK";
@@ -3370,7 +3370,21 @@ setLanguage("en");
   });
 
   const featured=document.getElementById("featuredPortfolio");
-  if(featured)featured.hidden=Boolean(filters.creator||filters.service)||featured.dataset.hasFeatured==="false";
+  if(featured){
+   const featuredCards=[...featured.querySelectorAll(".featured-portfolio-card")];
+   let visibleFeatured=0;
+   featuredCards.forEach(function(card){
+    const creatorIds=String(card.dataset.creatorIds||card.dataset.creatorId||"").split(",").filter(Boolean);
+    const matchesCreator=!filters.creator||creatorIds.includes(filters.creator);
+    const matchesService=!filters.service||card.dataset.portfolioCategory===filters.service;
+    const visible=matchesCreator&&matchesService;
+    card.hidden=!visible;
+    if(visible)visibleFeatured++;
+   });
+   const hasFilters=Boolean(filters.creator||filters.service);
+   featured.hidden=hasFilters?visibleFeatured===0:(featured.dataset.hasFeatured==="false");
+   if(hasFilters)visibleTotal+=visibleFeatured;
+  }
 
   const label=document.querySelector(".portfolio-section-label span:first-child");
   const count=document.querySelector(".portfolio-section-label span:last-child");
