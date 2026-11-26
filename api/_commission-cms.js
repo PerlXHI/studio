@@ -41,7 +41,9 @@ function validateFieldValue(field, raw) {
     if (field.required && !value) fail("Please complete: " + field.label + ".");
     return value;
   }
-  const value = cleanAnswer(raw, maxLength);
+  const rawText = String(raw ?? "").trim();
+  if (rawText.length > maxLength) fail(field.label + " is too long.");
+  const value = cleanAnswer(rawText, maxLength);
   if (field.required && !value) fail("Please complete: " + field.label + ".");
   if (value.length < (Number(field.minLength) || 0)) fail(field.label + " is too short.");
   if (!value) return "";
@@ -104,6 +106,7 @@ export async function validateCmsCommissionSubmission({ data, baseUrl, headers }
     const rawAnswers = safeObject(data.answers);
     const allowedTypes = ["text","textarea","select","checkbox","email","url","number","date"];
     const seen = new Set();
+    const seenSystems = new Set();
     const systemValues = {};
     for (const field of schemaFields) {
       if (!field || !/^[a-z][a-zA-Z0-9_-]{0,39}$/.test(field.id || "") ||
@@ -115,6 +118,12 @@ export async function validateCmsCommissionSubmission({ data, baseUrl, headers }
       const value = validateFieldValue(field, raw);
       answers[field.id] = value;
       if (field.system && ["name","contact","license","moodBpm","duration","character","reference","deadline","budget","extra"].includes(field.system)) {
+        if (seenSystems.has(field.system)) fail("The published form contains duplicate system fields. Please contact Perivelle.", 503);
+        seenSystems.add(field.system);
+        const allowedSystemTypes = { name: ["text","textarea"], contact: ["text","email"], license: ["text","select"], character: ["text","textarea"] };
+        if (allowedSystemTypes[field.system] && !allowedSystemTypes[field.system].includes(field.type)) {
+          fail("The published form contains an invalid contact or brief field. Please contact Perivelle.", 503);
+        }
         systemValues[field.system] = value;
       }
       customFields.push({ name: cleanAnswer(field.label, 100) || field.id, value: cleanAnswer(value, 900) || "—" });
