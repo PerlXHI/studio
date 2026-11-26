@@ -227,8 +227,6 @@
       ? visible.map(({ record, index }) => recordSummary(record, def, index)).join("")
       : '<div class="cms-empty">' + (search ? "No records match this search." : "No records yet. Add the first one to get started.") + '</div>';
     $("#cmsAddRecord").textContent = "＋ Add " + def.noun;
-    $("#cmsEditor").classList.add("hidden");
-    state.editing = null;
   }
 
   function currentRelationOptions(field) {
@@ -360,6 +358,8 @@
     const keys = Object.fromEntries(def.keys.map(key => [key, record[key]]));
     try {
       await api(state.resource, "DELETE", {}, keys);
+      $("#cmsEditor").classList.add("hidden");
+      state.editing = null;
       await loadData();
       setNotice(state.resource === "work_producers" ? "Credit link removed." : "Record archived. Its data remains in the database.", "success");
     } catch (error) {
@@ -371,6 +371,10 @@
     $("#cmsResourceNav").addEventListener("click", event => {
       const button = event.target.closest("[data-cms-resource]");
       if (!button) return;
+      if (state.resource !== button.dataset.cmsResource) {
+        $("#cmsEditor").classList.add("hidden");
+        state.editing = null;
+      }
       state.resource = button.dataset.cmsResource;
       renderRecords();
     });
