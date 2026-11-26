@@ -279,6 +279,56 @@
     return serviceDialog;
   }
 
+  function createServiceTextSection(title, values) {
+    const rows = toArray(values).map(itemLabel).filter(Boolean);
+    if (!rows.length) return null;
+    const section = document.createElement("section");
+    section.className = "cms-service-options cms-service-text-section";
+    const heading = document.createElement("h4");
+    heading.textContent = title;
+    const list = document.createElement("ul");
+    rows.forEach(value => {
+      const item = document.createElement("li");
+      item.textContent = value;
+      list.appendChild(item);
+    });
+    section.append(heading, list);
+    return section;
+  }
+
+  function createServiceTermsSection(value) {
+    const text = cleanString(value);
+    if (!text) return null;
+    const section = document.createElement("section");
+    section.className = "cms-service-options cms-service-terms-section";
+    const heading = document.createElement("h4");
+    heading.textContent = "Service terms";
+    const body = document.createElement("p");
+    body.textContent = text;
+    section.append(heading, body);
+    return section;
+  }
+
+  function createServiceFaqSection(items) {
+    const rows = toArray(items).filter(item => item && cleanString(item.question) && cleanString(item.answer));
+    if (!rows.length) return null;
+    const section = document.createElement("section");
+    section.className = "cms-service-options cms-service-faq-section";
+    const heading = document.createElement("h4");
+    heading.textContent = "Frequently asked questions";
+    section.appendChild(heading);
+    rows.forEach(item => {
+      const entry = document.createElement("article");
+      const question = document.createElement("strong");
+      question.textContent = cleanString(item.question);
+      const answer = document.createElement("p");
+      answer.textContent = cleanString(item.answer);
+      entry.append(question, answer);
+      section.appendChild(entry);
+    });
+    return section;
+  }
+
   function showServiceDetails(service, packages, addons, card) {
     const dialog = ensureServiceDialog();
     const title = cleanString(service.name) || "Audio service";
@@ -299,6 +349,11 @@
     const addonSection = createOptionRows("Add-ons", addons, "addons");
     if (packageSection) options.appendChild(packageSection);
     if (addonSection) options.appendChild(addonSection);
+    const deliverables = createServiceTextSection("Deliverables", service.deliverables);
+    const requirements = createServiceTextSection("What we need from you", service.client_requirements);
+    const terms = createServiceTermsSection(service.terms_markdown);
+    const faq = createServiceFaqSection(service.faq);
+    [deliverables, requirements, terms, faq].forEach(section => { if (section) options.appendChild(section); });
     if (!options.childElementCount) { const note = document.createElement("p"); note.className = "cms-service-dialog-note"; note.textContent = "Package details and optional add-ons can be discussed with our team when you request a quote."; options.appendChild(note); }
     dialog.showModal();
   }
@@ -322,6 +377,7 @@
       const slug = cleanString(service.slug);
       if (!slug) return;
       const card = bySlug.get(slug) || createServiceCard(service);
+      card.classList.add("cms-service-card");
       used.add(card);
       card.hidden = false;
       card.dataset.serviceSlug = slug;
