@@ -479,6 +479,10 @@
     const resource = state.resource;
     const versions = state.data[resource] || [];
     if (resource === "tos_versions") {
+      if (record.effective_at && Date.parse(record.effective_at) > Date.now()) {
+        setNotice("This Terms version has a future effective date. Publish it when that date arrives.", "error");
+        return;
+      }
       const sections = (state.data.tos_sections || []).filter(row => row.tos_version_id === record.tos_version_id);
       if (!sections.length || sections.some(row => !String(row.content_markdown || "").trim())) {
         setNotice("Add at least one complete Terms section before publishing.", "error");
