@@ -161,7 +161,9 @@ export async function validateCmsCommissionSubmission({ data, baseUrl, headers }
       readRows(baseUrl, headers, "tos_versions", specificParams),
       readRows(baseUrl, headers, "tos_versions", globalParams)
     ]);
-    const applicable = specific[0] || global[0] || null;
+    const now = Date.now();
+    const isEffective = row => row && (!row.effective_at || (Number.isFinite(Date.parse(row.effective_at)) && Date.parse(row.effective_at) <= now));
+    const applicable = specific.find(isEffective) || global.find(isEffective) || null;
     if (applicable) {
       if (String(data.tos_version_id || "") !== applicable.tos_version_id ||
           !(data.tos_accepted === true || data.tos_accepted === "true" || data.tos_accepted === "on")) {
