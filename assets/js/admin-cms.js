@@ -138,7 +138,7 @@
       subtitle: r => state.data.tos_versions?.find(x => x.tos_version_id === r.tos_version_id)?.title || r.tos_version_id,
       status: r => state.data.tos_versions?.find(x => x.tos_version_id === r.tos_version_id)?.status || "Unlinked",
       fields: [
-        { key: "tos_version_id", label: "Terms version", type: "relation", relation: "tos_versions", relationKey: "tos_version_id", relationLabel: r => (r.title || "Terms") + " · v" + r.version_number, required: true },
+        { key: "tos_version_id", label: "Terms version", type: "relation", relation: "tos_versions", relationKey: "tos_version_id", relationLabel: r => (r.title || "Terms") + " · v" + r.version_number, relationFilter: r => r.status === "draft", required: true },
         { key: "section_key", label: "Section key", type: "slug", required: true },
         { key: "heading", label: "Heading", type: "text", required: true },
         { key: "content_markdown", label: "Section content", type: "textarea", wide: true },
@@ -165,7 +165,7 @@
       subtitle: r => state.data.commission_forms?.find(x => x.form_id === r.form_id)?.service_id || r.form_id,
       status: r => r.status === "published" ? "Published" : r.status === "archived" ? "Archived" : "Draft",
       fields: [
-        { key: "form_id", label: "Commission form", type: "relation", relation: "commission_forms", relationKey: "form_id", relationLabel: r => r.name, required: true },
+        { key: "form_id", label: "Commission form", type: "relation", relation: "commission_forms", relationKey: "form_id", relationLabel: r => r.name, relationFilter: r => r.is_active === true, required: true },
         { key: "version_number", label: "Version number", type: "number", integer: true, required: true, default: 1 },
         { key: "status", label: "Status", type: "select", options: [["draft","Draft"],["published","Published"],["archived","Archived"]], default: "draft" },
         { key: "schema", label: "Form fields (JSON schema)", type: "json", wide: true, default: JSON.stringify({ fields: [
@@ -296,7 +296,8 @@
   }
 
   function currentRelationOptions(field) {
-    return state.data[field.relation] || [];
+    const rows = state.data[field.relation] || [];
+    return typeof field.relationFilter === "function" ? rows.filter(field.relationFilter) : rows;
   }
 
   function renderField(field, value, editing) {
