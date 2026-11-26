@@ -639,11 +639,12 @@
       if (!Array.isArray(fields) || !fields.length) { setNotice("Add at least one form field before publishing.", "error"); return; }
       const ids = new Set();
       for (const field of fields) {
-        if (!field || !/^[a-z][a-zA-Z0-9_-]{0,39}$/.test(field.id || "") || !String(field.label || "").trim() || !allowed.includes(field.type)) {
+        if (!field || !/^[a-z][a-zA-Z0-9_-]{0,39}$/.test(field.id || "") || ["form_version_id","service_id","tos_version_id","tos_accepted","answers","website"].includes(field.id) || !String(field.label || "").trim() || !allowed.includes(field.type)) {
           setNotice("Each form field needs a valid ID, label, and supported type.", "error"); return;
         }
         if (ids.has(field.id)) { setNotice("Form field IDs must be unique.", "error"); return; }
         ids.add(field.id);
+        if (field.required !== undefined && typeof field.required !== "boolean") { setNotice("Required flags must be true or false.", "error"); return; }
         if (field.type === "select" && (!Array.isArray(field.options) || !field.options.length || field.options.some(option => typeof option !== "string" || !option.trim()))) {
           setNotice("Every select field needs at least one text option.", "error"); return;
         }
