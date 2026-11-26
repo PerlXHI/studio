@@ -376,3 +376,12 @@ html[data-theme="dark"] .cms-service-dialog-options .cms-service-terms-section p
 html[data-theme="dark"] .cms-service-dialog-options .cms-service-faq-section p{color:#c0b8d4}
 html[data-theme="dark"] .cms-service-dialog-options .cms-service-faq-section article{border-color:#4a405f}
 html[data-theme="dark"] .cms-service-dialog-options .cms-service-faq-section strong{color:#eee9ff}
+
+.cms-service-meta-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.cms-service-meta-list>div{display:grid;gap:4px;padding:10px 12px;border:1px solid #eeeaf5;border-radius:12px;background:#faf9fd}
+.cms-service-meta-list small{color:#8b82a6;font-size:.66rem}
+.cms-service-meta-list strong{color:#51466e;font-size:.8rem}
+html[data-theme="dark"] .cms-service-meta-list>div{border-color:#4a405f;background:#272236}
+html[data-theme="dark"] .cms-service-meta-list strong{color:#eee9ff}
+html[data-theme="dark"] .cms-service-meta-list small{color:#c0b8d4}
+@media(max-width:420px){.cms-service-meta-list{grid-template-columns:1fr}}
