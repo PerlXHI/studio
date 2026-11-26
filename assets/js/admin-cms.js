@@ -369,9 +369,9 @@
     advanced.className = "cms-form-builder-advanced";
     const summary = document.createElement("summary");
     summary.textContent = "Advanced JSON editor";
-    advanced.append(summary, rawField);
     host.append(head, list, add, advanced);
     rawField.before(host);
+    advanced.append(summary, rawField);
 
     const types = ["text","textarea","select","checkbox","email","url","number","date"];
     const systems = ["","name","contact","license","moodBpm","duration","character","reference","deadline","budget","extra","type"];
