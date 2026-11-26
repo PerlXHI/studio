@@ -87,6 +87,60 @@
     return wrap;
   }
 
+  function appendInlineTerms(parent, text) {
+    const pattern = /(\*\*[^*]+\*\*|\*[^*]+\*)/g;
+    let cursor = 0;
+    for (const match of text.matchAll(pattern)) {
+      if (match.index > cursor) parent.appendChild(document.createTextNode(text.slice(cursor, match.index)));
+      const token = match[0];
+      const strong = token.startsWith("**");
+      const node = document.createElement(strong ? "strong" : "em");
+      node.textContent = strong ? token.slice(2, -2) : token.slice(1, -1);
+      parent.appendChild(node);
+      cursor = match.index + token.length;
+    }
+    if (cursor < text.length) parent.appendChild(document.createTextNode(text.slice(cursor)));
+  }
+
+  function renderTermsContent(container, markdown) {
+    container.replaceChildren();
+    const lines = String(markdown || "").replace(/\r\n?/g, "\n").split("\n");
+    let paragraph = [];
+    let list = null;
+    const flushParagraph = () => {
+      if (!paragraph.length) return;
+      const p = document.createElement("p");
+      appendInlineTerms(p, paragraph.join(" "));
+      container.appendChild(p);
+      paragraph = [];
+    };
+    const flushList = () => { list = null; };
+    lines.forEach(line => {
+      const value = line.trim();
+      if (!value) { flushParagraph(); flushList(); return; }
+      const heading = value.match(/^(#{1,4})\s+(.+)$/);
+      if (heading) {
+        flushParagraph(); flushList();
+        const h = document.createElement(heading[1].length <= 2 ? "h4" : "h5");
+        appendInlineTerms(h, heading[2]);
+        container.appendChild(h);
+        return;
+      }
+      const bullet = value.match(/^[-*]\s+(.+)$/);
+      if (bullet) {
+        flushParagraph();
+        if (!list) { list = document.createElement("ul"); container.appendChild(list); }
+        const item = document.createElement("li");
+        appendInlineTerms(item, bullet[1]);
+        list.appendChild(item);
+        return;
+      }
+      flushList();
+      paragraph.push(value);
+    });
+    flushParagraph();
+  }
+
   function ensureDynamicContainer() {
     const form = $("#customForm");
     if (!form) return null;
@@ -225,8 +279,9 @@
       const article = document.createElement("section");
       const heading = document.createElement("h3");
       heading.textContent = clean(section.heading);
-      const body = document.createElement("p");
-      body.textContent = clean(section.content_markdown);
+      const body = document.createElement("div");
+      body.className = "cms-terms-section-content";
+      renderTermsContent(body, section.content_markdown);
       article.append(heading, body);
       content.appendChild(article);
     });
