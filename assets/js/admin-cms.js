@@ -476,7 +476,9 @@
       sync();
     }
     add.addEventListener("click", () => {
-      fields.push({ id: "custom_field_" + (fields.length + 1), label: "New question", type: "text", required: false });
+      let suffix = fields.length + 1;
+      while (fields.some(field => field.id === "custom_field_" + suffix)) suffix += 1;
+      fields.push({ id: "custom_field_" + suffix, label: "New question", type: "text", required: false });
       render();
     });
     render();
