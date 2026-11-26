@@ -152,7 +152,11 @@
       service_prices: servicePrices,
       cms_services: services,
       cms_service_packages: toArray(cmsData.service_packages),
-      cms_service_addons: toArray(cmsData.service_addons)
+      cms_service_addons: toArray(cmsData.service_addons),
+      cms_tos_versions: toArray(cmsData.tos_versions),
+      cms_tos_sections: toArray(cmsData.tos_sections),
+      cms_commission_forms: toArray(cmsData.commission_forms),
+      cms_commission_form_versions: toArray(cmsData.commission_form_versions)
     });
   }
 
