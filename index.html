@@ -3382,7 +3382,7 @@ setLanguage("en");
     if(visible)visibleFeatured++;
    });
    const hasFilters=Boolean(filters.creator||filters.service);
-   featured.hidden=hasFilters?visibleFeatured===0:(featured.dataset.hasFeatured==="false");
+   featured.hidden=hasFilters?visibleFeatured===0:!(featured.dataset.hasFeatured==="true"||featured.dataset.hasFeatured==="placeholder");
    if(hasFilters)visibleTotal+=visibleFeatured;
   }
 
