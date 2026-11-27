@@ -1216,6 +1216,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .pv-services-preview{padding-top:24px}
 .pv-service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
 .pv-service-grid .service-card:last-child{grid-column:span 2}
+.page-view[data-page="services"] .service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.page-view[data-page="services"] .service-grid .service-card:last-child{grid-column:span 2}
 .pv-service-card{min-height:190px;padding:18px 16px;border:1px solid #e8dced;border-radius:20px;background:linear-gradient(150deg,rgba(255,255,255,.95),rgba(248,238,252,.8));text-decoration:none;box-shadow:0 9px 24px rgba(74,49,89,.04);transition:transform .22s,border-color .22s}
 .pv-service-card:hover{transform:translateY(-4px);border-color:#d7b9e8}
 .pv-service-icon{display:grid;place-items:center;width:40px;height:40px;margin-bottom:15px;border-radius:13px;background:linear-gradient(140deg,#f5d7f1,#e6d8ff);color:#a64dc4;font-size:1.55rem;font-weight:800}
@@ -1228,8 +1230,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .pv-about-copy h2{max-width:11ch;font-size:clamp(1.8rem,3.3vw,2.55rem)}
 .pv-about-copy>p:not(.pv-eyebrow){max-width:440px;margin:14px 0 20px;color:#74647b;font-size:.88rem}
 .pv-about-copy .btn{padding:10px 18px;font-size:.8rem}
-.pv-about-art{position:relative;height:300px;overflow:hidden;border-radius:22px;clip-path:ellipse(82% 94% at 60% 50%)}
-.pv-about-art img{width:100%;height:100%;object-fit:cover;object-position:center 65%}
+.pv-about-art{position:relative;height:330px;overflow:hidden;border-radius:22px;clip-path:ellipse(82% 94% at 60% 50%)}
+.pv-about-art img{width:100%;height:100%;object-fit:cover;object-position:center 75%}
 .pv-about-sticker{position:absolute;right:14px;top:13px;padding:10px 13px;border:1px solid #fff;border-radius:13px;background:#fff9;color:#8e51bb;font-size:.62rem;font-weight:850;letter-spacing:.08em;transform:rotate(6deg)}
 .pv-team-preview{padding:30px 0 42px}
 .pv-team-row{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:20px 0;border-top:1px solid #eee2ef;border-bottom:1px solid #eee2ef}
@@ -1487,7 +1489,7 @@ img{height:auto}
 .pv-brand-mark img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;padding:1px;image-rendering:auto}
 .pv-mascot{display:block;width:min(100%,720px);height:auto;aspect-ratio:1500/941;object-fit:contain;object-position:center}
 .pv-work-card>img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
-.pv-about-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.pv-about-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 75%}
 .pv-team-avatar>img{display:block;width:63px;height:63px;aspect-ratio:1;object-fit:contain;object-position:center}
 .pv-bottom-cta-inner>img{display:block;object-fit:contain;object-position:center bottom}
 .contact-trigger .contact-logo{width:25px;height:25px;aspect-ratio:1;object-fit:contain}
@@ -2350,7 +2352,7 @@ html[data-theme="dark"] .featured-audio-time{color:#b4aec8}
       <a class="navlink" href="#services" data-page-link="services">Services</a>
       <a class="navlink" href="#custom" data-page-link="custom">Commission</a>
       <a class="navlink pv-track-navlink" href="#track" data-page-link="track">Track Order</a>
-      <a class="pv-nav-cta" href="#custom">Contact <span aria-hidden="true">↗</span></a>
+      <a class="pv-nav-cta" href="#" data-open-contact>Contact</a>
     </nav>
   </div>
 </header>
@@ -2654,7 +2656,7 @@ html[data-theme="dark"] .featured-audio-time{color:#b4aec8}
     <div class="pv-footer-brand"><a class="brand" href="#home" data-page-link="home"><span class="pv-brand-mark"><img src="assets/brand/pfp.webp" alt="" aria-hidden="true"></span><span>perivelle<span class="pv-brand-star">✦</span></span></a><p>Original audio for creators, characters, and the worlds they bring to life.</p><small>© 2026 Perivelle Studio. All rights reserved.</small></div>
     <div><strong>Explore</strong><a href="#home">Home</a><a href="#team">Studio</a><a href="#portfolio">Works</a><a href="#track">Track Order</a></div>
     <div><strong>Services</strong><a href="#services">BGM &amp; Soundtrack</a><a href="#services">Original Song</a><a href="#services">Sound Alerts</a><a href="#services">Stingers &amp; Jingles</a></div>
-    <div><strong>Company</strong><a href="#custom">Contact</a><a href="#license">Terms of Service</a><a href="#license">Privacy &amp; Licensing</a><a href="#faq">FAQ</a></div>
+    <div><strong>Company</strong><a href="#" data-open-contact>Contact</a><a href="#license">Terms of Service</a><a href="#license">Privacy &amp; Licensing</a><a href="#faq">FAQ</a></div>
     <div><strong>Get in touch</strong><p>Have a project in mind? Reach out and let’s make something memorable.</p><a class="pv-footer-cta" href="#custom">Start a commission ↗</a></div>
   </div>
 </footer>

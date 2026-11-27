@@ -163,7 +163,7 @@
     }
     function apply(){
       var hideFooter=footerVisible;
-      if(widget)widget.classList.toggle("is-hidden",hideFooter||(scrollHidden&&!menuOpen()));
+      if(widget)widget.classList.toggle("is-hidden",(hideFooter||scrollHidden)&&!menuOpen());
       if(dock)dock.classList.toggle("is-hidden",hideFooter||(scrollHidden&&!dockBusy()));
     }
     if(footer&&"IntersectionObserver" in window){
@@ -207,4 +207,22 @@
     tile.textContent=(name.slice(0,1).toUpperCase()||"?");
     img.replaceWith(tile);
   },true);
+
+  /* 10. "Contact" links (navbar CTA + footer Company) open the floating
+        contact menu instead of navigating to the commission form.
+        They used to point at #custom, so every Contact click landed on
+        the commission tab. The menu shows the real contact options
+        (Discord / X / VGen / Email) from the CMS. */
+  document.addEventListener("click",function(event){
+    var link=event.target.closest?event.target.closest("[data-open-contact]"):null;
+    if(!link)return;
+    event.preventDefault();
+    var widget=document.getElementById("contactWidget");
+    var menu=document.getElementById("contactMenu");
+    var trigger=document.getElementById("contactTrigger");
+    if(!widget||!menu||!trigger)return;
+    widget.classList.remove("is-hidden");
+    menu.hidden=false;
+    trigger.setAttribute("aria-expanded","true");
+  });
 })();
