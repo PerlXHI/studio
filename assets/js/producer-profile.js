@@ -27,8 +27,10 @@
     close.type = "button";
     close.setAttribute("aria-label", "Close producer profile");
     close.addEventListener("click", () => dialog.close());
-    inner.appendChild(close);
     dialog.appendChild(inner);
+    // Close is a direct child of the dialog (not of the scrolling inner),
+    // so it always paints above the header/content and never sits under it.
+    dialog.appendChild(close);
     dialog.addEventListener("click", event => {
       if (event.target === dialog) dialog.close();
     });
@@ -67,7 +69,7 @@
     if (!producer) return;
     const dialog = getDialog();
     const inner = dialog.querySelector(".producer-profile-inner");
-    inner.querySelectorAll(":scope > :not(.producer-profile-close)").forEach(node => node.remove());
+    inner.replaceChildren();
 
     const header = make("header", "producer-profile-header");
     const avatar = make("div", "producer-profile-avatar");
