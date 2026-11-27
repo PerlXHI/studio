@@ -987,7 +987,7 @@ html:not([data-theme="dark"]) textarea:focus-visible{outline-color:#d889b7!impor
   box-shadow:0 0 14px #a18cde66;
 }
 .portfolio-category-group>.portfolio-category:after{
-  content:"0" counter(portfolio-category) " / COLLECTION";
+  content:var(--portfolio-number,"0" counter(portfolio-category)) " / COLLECTION";
   margin-left:auto;color:#9b91b9;
   font:500 .56rem "DM Mono",monospace;letter-spacing:.12em;
 }
@@ -3038,8 +3038,8 @@ $("#search").addEventListener("input",renderProducts);$("#mood").addEventListene
     const note=document.createElement("p");note.className="featured-placeholder-note";note.textContent="Project cover + preview video";
     card.append(heading,frame,note);return card;
    }
-   defaults.forEach(function(base){
-    const group=document.createElement("section");group.className="portfolio-category-group";group.dataset.portfolioCategory=base.id;const heading=document.createElement("h3");heading.className="portfolio-category";heading.textContent=base.name;const grid=document.createElement("div");grid.className="portfolio-grid";group.append(heading,grid);if(categoryList)categoryList.appendChild(group);
+   defaults.forEach(function(base,index){
+    const group=document.createElement("section");group.className="portfolio-category-group";group.style.setProperty("--portfolio-number",'"'+String(index+1).padStart(2,"0")+'"');group.dataset.portfolioCategory=base.id;const heading=document.createElement("h3");heading.className="portfolio-category";heading.textContent=base.name;const grid=document.createElement("div");grid.className="portfolio-grid";group.append(heading,grid);if(categoryList)categoryList.appendChild(group);
     const item=portfolioEntries.find(function(entry){return entry.id===base.id})||base;
     const urls=Array.isArray(item.videos)?item.videos:(item.url?[item.url]:base.videos);
     const assignments=Array.isArray(item.video_assignments)?item.video_assignments:[];
