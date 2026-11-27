@@ -77,7 +77,9 @@
     const inner = dialog.querySelector(".producer-profile-inner");
     inner.replaceChildren();
 
-    const header = make("header", "producer-profile-header");
+    // <div>, not <header>: the site's global `header` element rules (with
+    // !important) would paint over this panel and hide the gradient.
+    const header = make("div", "producer-profile-header");
     const avatar = make("div", "producer-profile-avatar");
     const photo = safeUrl(producer.photo);
     if (photo) {
@@ -85,12 +87,15 @@
       img.src = photo;
       img.alt = clean(producer.name) + " portrait";
       img.loading = "lazy";
+      // A dead photo URL must fall back to the initial tile, never a
+      // broken-image icon with clipped alt text.
+      img.addEventListener("error", function(){ avatar.textContent = clean(producer.name).slice(0,1).toUpperCase() || "?"; });
       avatar.appendChild(img);
     } else avatar.textContent = clean(producer.name).slice(0,1).toUpperCase() || "?";
 
     const heading = make("div");
     heading.append(
-      make("p", "producer-profile-eyebrow", "PERIVELLE SOUND COLLECTIVE · PROFILE PREVIEW"),
+      make("p", "producer-profile-eyebrow", "PERIVELLE SOUND COLLECTIVE"),
       make("h2", "producer-profile-name", clean(producer.name) || "Producer Name"),
       make("p", "producer-profile-role", clean(producer.role) || "Music Producer · Role placeholder")
     );
@@ -100,17 +105,21 @@
     inner.appendChild(make("p", "producer-profile-bio", clean(producer.bio) ||
       "A short introduction about this producer will appear here. Share their sound, creative approach, and the kind of projects they love working on."));
 
+    // Only show tags that actually have values; an empty label-only pill
+    // looks unfinished, so with no tags the whole row is omitted.
     const tags = Array.isArray(producer.tags) ? producer.tags.map(clean).filter(Boolean) : [];
-    const tagList = make("div", "producer-profile-tags");
-    (tags.length ? tags : ["Genre / Style", "Specialty", "DAW / Tools"]).forEach(tag =>
-      tagList.appendChild(make("span", "", tag)));
-    if (!tags.length) tagList.classList.add("is-placeholder");
-    inner.appendChild(tagList);
+    if (tags.length) {
+      const tagList = make("div", "producer-profile-tags");
+      tags.forEach(tag => tagList.appendChild(make("span", "", tag)));
+      inner.appendChild(tagList);
+    }
 
+    // Only show "Selected works" when the producer actually has linked
+    // works; generic placeholder boxes make the modal look unfinished.
     const projects = creditedWorks(producer);
-    const section = make("section", "producer-profile-works");
-    section.appendChild(make("h3", "", "Selected works"));
     if (projects.length) {
+      const section = make("section", "producer-profile-works");
+      section.appendChild(make("h3", "", "Selected works"));
       const list = make("div", "producer-profile-work-list");
       projects.forEach(({work,category,role}) => {
         const link = make("a", "producer-profile-work");
@@ -123,22 +132,8 @@
         list.appendChild(link);
       });
       section.appendChild(list);
-    } else {
-      const placeholderList = make("div", "producer-profile-work-list", "");
-      [
-        ["Project title", "BGM / Original Song", "Composer · Producer"],
-        ["Another project", "Sound Design", "Arrangement · Mixing"],
-        ["Featured collaboration", "Collaboration", "Producer"]
-      ].forEach(([title, category, role]) => {
-        const item = make("div", "producer-profile-work is-placeholder");
-        const copy = make("span");
-        copy.append(make("strong", "", title), make("small", "", category + " · " + role));
-        item.append(copy, make("em", "", "Preview"));
-        placeholderList.appendChild(item);
-      });
-      section.appendChild(placeholderList);
+      inner.appendChild(section);
     }
-    inner.appendChild(section);
 
     const actions = make("div", "producer-profile-actions");
     const worksLink = make("a", "", "Explore portfolio ↗");

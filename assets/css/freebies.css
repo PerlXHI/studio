@@ -190,7 +190,7 @@
 .freebie-row{
   position:relative;
   display:grid;
-  grid-template-columns:44px minmax(205px,.88fr) minmax(275px,1.18fr) auto;
+  grid-template-columns:44px minmax(180px,.62fr) minmax(300px,1.35fr) auto;
   align-items:center;
   gap:clamp(14px,1.8vw,21px);
   min-width:0;
@@ -473,7 +473,7 @@
   color:#fff;
   text-decoration:none;
   box-shadow:0 10px 28px rgba(138,73,135,.2);
-  transform:translateX(calc(100% - 25px));
+  transform:translateX(calc(100% - 46px));
   transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease;
 }
 .freebies-edge-tab:hover,.freebies-edge-tab:focus-visible{

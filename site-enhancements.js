@@ -140,4 +140,71 @@
       tag(document);
     }).observe(root,{attributes:true,attributeFilter:["data-active-view"]});
   })();
+
+  /* 8. Floating widgets (Contact Us pill, audio dock) get out of the way:
+        they slide away while the user scrolls down or reads the footer,
+        so they never cover headings, cards or the copyright line. They
+        return when the user scrolls back up. Never hide while the contact
+        menu is open or the audio panel is expanded/playing. */
+  (function(){
+    var widget=document.getElementById("contactWidget");
+    var dock=document.getElementById("pvAudioDock");
+    var footer=document.querySelector("footer");
+    if(!widget&&!dock)return;
+    var footerVisible=false,lastY=window.scrollY||0,scrollHidden=false;
+    function dockBusy(){
+      if(!dock)return false;
+      return dock.classList.contains("is-open")||dock.classList.contains("is-playing")||dock.matches(":hover,:focus-within");
+    }
+    function menuOpen(){
+      if(!widget)return false;
+      var menu=document.getElementById("contactMenu");
+      return !!menu&&!menu.hidden;
+    }
+    function apply(){
+      var hideFooter=footerVisible;
+      if(widget)widget.classList.toggle("is-hidden",hideFooter||(scrollHidden&&!menuOpen()));
+      if(dock)dock.classList.toggle("is-hidden",hideFooter||(scrollHidden&&!dockBusy()));
+    }
+    if(footer&&"IntersectionObserver" in window){
+      new IntersectionObserver(function(entries){
+        footerVisible=!!(entries[0]&&entries[0].isIntersecting);
+        apply();
+      },{rootMargin:"0px 0px -40px 0px"}).observe(footer);
+    }
+    window.addEventListener("scroll",function(){
+      var y=window.scrollY||0;
+      scrollHidden=y>140&&y>lastY;
+      lastY=y;
+      apply();
+    },{passive:true});
+  })();
+
+  /* 9. A dead avatar/photo URL must never show a broken-image icon: swap
+        it for the initial-letter tile instead (team cards, producer
+        modal, home avatar strip). Capture phase, so it catches the error
+        before the browser paints the broken icon. */
+  document.addEventListener("error",function(event){
+    var img=event.target;
+    if(!img||img.tagName!=="IMG"||img.dataset.fallbackDone)return;
+    var box=img.closest(".producer-profile-avatar,.team-avatar,.pv-team-avatar");
+    if(!box)return;
+    img.dataset.fallbackDone="true";
+    var name=(img.alt||"").replace(/ portrait$/i,"").trim();
+    if(!name){
+      var card=img.closest("[data-producer-id]");
+      if(card)name=card.getAttribute("data-producer-id")||"";
+    }
+    if(!name){
+      var link=img.closest("[aria-label]");
+      if(link){
+        var label=link.getAttribute("aria-label")||"";
+        var words=label.trim().split(/\s+/);
+        name=words[words.length-1]||"";
+      }
+    }
+    var tile=document.createElement("span");
+    tile.textContent=(name.slice(0,1).toUpperCase()||"?");
+    img.replaceWith(tile);
+  },true);
 })();
