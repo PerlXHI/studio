@@ -23,6 +23,7 @@ ToS and commission-form records remain readable through the Admin CMS API but do
 The Admin Dashboard adds a **CMS Studio** tab with:
 - Collection navigation, record counts, search and refresh.
 - Create/edit forms generated from collection-specific field definitions.
+- Existing-record editors open directly beneath the selected record; new-record editors open above the collection list. Draft form values stay mounted while searching or refreshing the collection.
 - Category, service, work and producer selectors for related records.
 - JSON editors for flexible structured metadata and line-based editors for text arrays.
 - Existing signed Admin image-upload flow for producer portraits/banners and Works/service images.
@@ -93,6 +94,7 @@ The editor reuses the existing `/api/admin-upload` signed upload flow for image 
 - Validation tests confirmed that unsupported fields, unsafe URL protocols, invalid enum values and invalid producer/category/work/service IDs are rejected.
 - Additional mock API tests confirm that direct updates cannot blank required producer names or work slugs, while valid partial updates and creates remain allowed.
 - Admin UI selector audit found no missing static element IDs; searching the record list no longer closes an open editor or discards its draft values.
+- Existing-record editors are now mounted immediately below the selected record card. The editor is detached before list refresh/filter re-render and reattached by primary key, preserving unsaved input.
 - Before this hardening patch, Vercel reported **success** for Phase 2 head `f24f7288be42e26ee143d4fa888b1dfec67712cf`; the new branch head requires its own deployment-status check.
 - The test harness used a mocked PostgREST response; it did not write test records into the connected Supabase database.
 - Live schema was checked against the CMS write allowlists. No Phase 2 database migration was required.
