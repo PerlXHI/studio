@@ -114,6 +114,60 @@ const RESOURCES = {
       display_order: { type: "integer" }
     }
   },
+  tos_versions: {
+    table: "tos_versions",
+    key: ["tos_version_id"],
+    required: ["version_number", "title", "agreement_text"],
+    archive: { status: "archived" },
+    fields: {
+      service_id: { type: "text", max: 80, nullable: true },
+      version_number: { type: "integer" },
+      title: { type: "text", max: 160 },
+      agreement_text: { type: "text", max: 500 },
+      status: { type: "enum", values: ["draft", "published", "archived"] },
+      effective_at: { type: "text", max: 60 },
+      published_at: { type: "text", max: 60 }
+    }
+  },
+  tos_sections: {
+    table: "tos_sections",
+    key: ["tos_section_id"],
+    required: ["tos_version_id", "section_key", "heading"],
+    hardDelete: true,
+    fields: {
+      tos_version_id: { type: "text", max: 80 },
+      section_key: { type: "slug", max: 80 },
+      heading: { type: "text", max: 180 },
+      content_markdown: { type: "text", max: 16000 },
+      display_order: { type: "integer" }
+    }
+  },
+  commission_forms: {
+    table: "commission_forms",
+    key: ["form_id"],
+    required: ["service_id", "name"],
+    archive: { is_active: false },
+    fields: {
+      service_id: { type: "text", max: 80 },
+      name: { type: "text", max: 140 },
+      description: { type: "text", max: 1000 },
+      is_active: { type: "boolean" },
+      display_order: { type: "integer" }
+    }
+  },
+  commission_form_versions: {
+    table: "commission_form_versions",
+    key: ["form_version_id"],
+    required: ["form_id", "version_number", "schema"],
+    archive: { status: "archived" },
+    fields: {
+      form_id: { type: "text", max: 80 },
+      version_number: { type: "integer" },
+      status: { type: "enum", values: ["draft", "published", "archived"] },
+      schema: { type: "object" },
+      published_at: { type: "text", max: 60 }
+    }
+  },
   work_producers: {
     table: "work_producers",
     key: ["work_id", "producer_id"],
@@ -258,6 +312,114 @@ function getFilters(resource, query, body = {}) {
   return filters;
 }
 
+async function validateFormServiceChange(filters, payload) {
+  if (payload.service_id === undefined) return;
+  const { url, key } = supabaseConfig();
+  if (!url || !key) fail("CMS database connection is not configured.", 503);
+  const base = url.replace(/\/$/, "");
+  const headers = supabaseHeaders(key);
+  const formParams = new URLSearchParams({ select: "service_id", form_id: "eq." + filters.form_id, limit: "1" });
+  const formResponse = await fetch(base + "/rest/v1/commission_forms?" + formParams.toString(), { headers });
+  const forms = await formResponse.json().catch(() => []);
+  if (!formResponse.ok || !Array.isArray(forms) || !forms[0]) fail("Commission form could not be checked.", 502);
+  if (forms[0].service_id === payload.service_id) return;
+  const versionParams = new URLSearchParams({
+    select: "form_version_id", form_id: "eq." + filters.form_id, status: "eq.published", limit: "1"
+  });
+  const versionResponse = await fetch(base + "/rest/v1/commission_form_versions?" + versionParams.toString(), { headers });
+  const versions = await versionResponse.json().catch(() => []);
+  if (!versionResponse.ok) fail("Published form versions could not be checked.", 502);
+  if (Array.isArray(versions) && versions.length) {
+    fail("A form with a published version cannot be reassigned to another service. Create a new commission form instead.");
+  }
+}
+
+async function validatePublication(resource, filters, payload) {
+  if (payload.status !== "published") return;
+  const { url, key } = supabaseConfig();
+  if (!url || !key) fail("CMS database connection is not configured.", 503);
+  const headers = supabaseHeaders(key);
+  if (resource === "commission_form_versions") {
+    const params = new URLSearchParams({ select: "schema,status", form_version_id: "eq." + filters.form_version_id, limit: "1" });
+    const response = await fetch(url.replace(/\/$/, "") + "/rest/v1/commission_form_versions?" + params.toString(), { headers });
+    const rows = await response.json().catch(() => []);
+    if (!response.ok || !Array.isArray(rows) || !rows[0] || rows[0].status !== "draft") {
+      fail("Only a saved draft form version can be published.", 400);
+    }
+    const schema = payload.schema || rows[0].schema;
+    const fields = schema?.fields;
+    const allowed = ["text","textarea","select","checkbox","email","url","number","date"];
+    if (!Array.isArray(fields) || !fields.length || fields.length > 40) fail("Add between 1 and 40 commission form fields before publishing.");
+    const ids = new Set();
+    for (const field of fields) {
+      if (!field || !/^[a-z][a-zA-Z0-9_-]{0,39}$/.test(field.id || "") ||
+          ["form_version_id","service_id","tos_version_id","tos_accepted","answers","website"].includes(field.id) ||
+          !cleanText(field.label || "", 160) || !allowed.includes(field.type) || ids.has(field.id)) {
+        fail("Every commission form field needs a unique ID, label and supported field type.");
+      }
+      ids.add(field.id);
+      if (field.required !== undefined && typeof field.required !== "boolean") fail("Commission form required flags must be true or false.");
+      if (field.minLength != null && (!Number.isInteger(Number(field.minLength)) || Number(field.minLength) < 0 || Number(field.minLength) > 2000)) {
+        fail("A commission form field has an invalid minimum length.");
+      }
+      if (field.maxLength != null && (!Number.isInteger(Number(field.maxLength)) || Number(field.maxLength) < 1 || Number(field.maxLength) > 2000)) {
+        fail("A commission form field has an invalid maximum length.");
+      }
+      if (field.minLength != null && field.maxLength != null && Number(field.minLength) > Number(field.maxLength)) {
+        fail("A commission form field minimum length cannot exceed its maximum length.");
+      }
+      if (field.type === "number" && ((field.min != null && !Number.isFinite(Number(field.min))) || (field.max != null && !Number.isFinite(Number(field.max))) || (field.min != null && field.max != null && Number(field.min) > Number(field.max)))) {
+        fail("A commission form number field has an invalid range.");
+      }
+      if (field.type === "select" && (!Array.isArray(field.options) || !field.options.length || field.options.length > 50 ||
+          field.options.some(option => typeof option !== "string" || !option.trim() || option.length > 160))) {
+        fail("Every select field needs 1–50 valid text options.");
+      }
+      if (field.system && !["name","contact","license","moodBpm","duration","character","reference","deadline","budget","extra"].includes(field.system)) {
+        fail("A commission form contains an unsupported system field.");
+      }
+      if (field.maxLength != null && (!Number.isInteger(Number(field.maxLength)) || Number(field.maxLength) < 1 || Number(field.maxLength) > 2000)) {
+        fail("A commission form field has an invalid maximum length.");
+      }
+    }
+    const systems = new Set();
+    const systemTypes = { name: ["text","textarea"], contact: ["text","email"], license: ["text","select"], character: ["text","textarea"] };
+    for (const field of fields) {
+      if (!field.system) continue;
+      if (systems.has(field.system)) fail("Each commission form system field can only appear once.");
+      systems.add(field.system);
+      if (systemTypes[field.system] && !systemTypes[field.system].includes(field.type)) {
+        fail("A required contact or brief system field uses an unsupported field type.");
+      }
+    }
+    for (const requiredSystem of ["name","contact","license","character"]) {
+      if (!systems.has(requiredSystem)) fail("The form must include required system fields: name, contact, license and character.");
+    }
+  } else if (resource === "tos_versions") {
+    const versionParams = new URLSearchParams({ select: "status,effective_at", tos_version_id: "eq." + filters.tos_version_id, limit: "1" });
+    const versionResponse = await fetch(url.replace(/\/$/, "") + "/rest/v1/tos_versions?" + versionParams.toString(), { headers });
+    const versions = await versionResponse.json().catch(() => []);
+    if (!versionResponse.ok || !Array.isArray(versions) || !versions[0] || versions[0].status !== "draft") {
+      fail("Only a saved draft Terms version can be published.", 400);
+    }
+    if (versions[0].effective_at && Date.parse(versions[0].effective_at) > Date.now()) {
+      fail("A Terms version cannot be published before its effective date. Publish it when that date arrives.", 400);
+    }
+    const params = new URLSearchParams({
+      select: "tos_section_id,heading,content_markdown",
+      tos_version_id: "eq." + filters.tos_version_id,
+      order: "display_order.asc",
+      limit: "200"
+    });
+    const response = await fetch(url.replace(/\/$/, "") + "/rest/v1/tos_sections?" + params.toString(), { headers });
+    const sections = await response.json().catch(() => []);
+    if (!response.ok) fail("Terms sections could not be checked before publishing.", 502);
+    if (!Array.isArray(sections) || !sections.length || sections.some(section => !String(section.content_markdown || "").trim())) {
+      fail("Add at least one complete Terms section before publishing.");
+    }
+  }
+}
+
 async function sendDb(resource, method, payload, filters) {
   const config = RESOURCES[resource];
   const { url, key } = supabaseConfig();
@@ -298,6 +460,9 @@ export function getMutableCmsResources() {
 export async function createCmsRecord(resource, raw) {
   if (!RESOURCES[resource]) fail("This CMS resource cannot be changed.");
   const payload = normalizePayload(resource, raw, true);
+  if (["tos_versions","commission_form_versions"].includes(resource) && payload.status === "published") {
+    fail("Create a draft version first, then publish it after review.");
+  }
   return sendDb(resource, "POST", payload);
 }
 
@@ -305,6 +470,8 @@ export async function updateCmsRecord(resource, query, raw) {
   if (!RESOURCES[resource]) fail("This CMS resource cannot be changed.");
   const filters = getFilters(resource, query, raw);
   const payload = normalizePayload(resource, raw, false);
+  if (resource === "commission_forms") await validateFormServiceChange(filters, payload);
+  await validatePublication(resource, filters, payload);
   return sendDb(resource, "PATCH", payload, filters);
 }
 

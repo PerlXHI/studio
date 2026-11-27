@@ -120,6 +120,69 @@
       ]
     },
     {
+      id: "tos_versions", label: "Terms of Service", noun: "Terms version", keys: ["tos_version_id"], title: r => (r.title || "Terms of Service") + " · v" + r.version_number,
+      subtitle: r => r.service_id ? (state.data.services?.find(x => x.service_id === r.service_id)?.name || r.service_id) : "Global policy",
+      status: r => r.status === "published" ? "Published" : r.status === "archived" ? "Archived" : "Draft",
+      fields: [
+        { key: "service_id", label: "Applies to service", type: "relation", relation: "services", relationKey: "service_id", relationLabel: r => r.name, nullable: true, emptyLabel: "Global Terms of Service" },
+        { key: "version_number", label: "Version number", type: "number", integer: true, required: true, default: 1 },
+        { key: "title", label: "Policy title", type: "text", required: true, default: "Terms of Service" },
+        { key: "agreement_text", label: "Acceptance statement", type: "text", required: true, default: "I have read and agree to the Terms of Service." },
+        { key: "status", label: "Status", type: "select", options: [["draft","Draft"],["published","Published"],["archived","Archived"]], default: "draft" },
+        { key: "effective_at", label: "Effective date (ISO format)", type: "text", nullable: true, hint: "Optional ISO timestamp. Leave blank to publish immediately." },
+        { key: "published_at", label: "Published at", type: "text", nullable: true }
+      ]
+    },
+    {
+      id: "tos_sections", label: "ToS sections", noun: "ToS section", keys: ["tos_section_id"], title: r => r.heading || r.section_key,
+      subtitle: r => state.data.tos_versions?.find(x => x.tos_version_id === r.tos_version_id)?.title || r.tos_version_id,
+      status: r => state.data.tos_versions?.find(x => x.tos_version_id === r.tos_version_id)?.status || "Unlinked",
+      fields: [
+        { key: "tos_version_id", label: "Terms version", type: "relation", relation: "tos_versions", relationKey: "tos_version_id", relationLabel: r => (r.title || "Terms") + " · v" + r.version_number, relationFilter: r => r.status === "draft", required: true },
+        { key: "section_key", label: "Section key", type: "slug", required: true },
+        { key: "heading", label: "Heading", type: "text", required: true },
+        { key: "content_markdown", label: "Section content", type: "textarea", wide: true, hint: "Supports headings (#), bullets (-), bold (**text**) and italic (*text*)." },
+        { key: "display_order", label: "Display order", type: "number", integer: true, default: 0 }
+      ]
+    },
+    {
+      id: "commission_forms", label: "Commission forms", noun: "commission form", keys: ["form_id"], title: r => r.name,
+      subtitle: r => state.data.services?.find(x => x.service_id === r.service_id)?.name || r.service_id,
+      status: r => r.is_active ? "Active" : "Inactive",
+      fields: [
+        { key: "service_id", label: "Service", type: "relation", relation: "services", relationKey: "service_id", relationLabel: r => r.name, required: true },
+        { key: "name", label: "Form name", type: "text", required: true },
+        { key: "description", label: "Description", type: "textarea", wide: true },
+        { key: "is_active", label: "Active", type: "boolean", default: true },
+        { key: "display_order", label: "Display order", type: "number", integer: true, default: 0 }
+      ]
+    },
+    {
+      id: "commission_form_versions", label: "Form versions", noun: "form version", keys: ["form_version_id"], title: r => {
+        const form = state.data.commission_forms?.find(x => x.form_id === r.form_id);
+        return (form?.name || "Commission form") + " · v" + r.version_number;
+      },
+      subtitle: r => state.data.commission_forms?.find(x => x.form_id === r.form_id)?.service_id || r.form_id,
+      status: r => r.status === "published" ? "Published" : r.status === "archived" ? "Archived" : "Draft",
+      fields: [
+        { key: "form_id", label: "Commission form", type: "relation", relation: "commission_forms", relationKey: "form_id", relationLabel: r => r.name, relationFilter: r => r.is_active === true, required: true },
+        { key: "version_number", label: "Version number", type: "number", integer: true, required: true, default: 1 },
+        { key: "status", label: "Status", type: "select", options: [["draft","Draft"],["published","Published"],["archived","Archived"]], default: "draft" },
+        { key: "schema", label: "Form fields (JSON schema)", type: "json", wide: true, default: JSON.stringify({ fields: [
+          { id: "name", label: "Name / stage name", type: "text", required: true, system: "name", maxLength: 80 },
+          { id: "contact", label: "Discord username", type: "text", required: true, system: "contact", maxLength: 120 },
+          { id: "license", label: "Usage / license preference", type: "select", required: true, system: "license", options: ["Non-Exclusive", "Exclusive / Full Buyout", "Not sure — please advise"] },
+          { id: "moodBpm", label: "Genre / mood / BPM", type: "text", system: "moodBpm", maxLength: 180 },
+          { id: "duration", label: "Duration / deliverables", type: "text", system: "duration", maxLength: 180 },
+          { id: "character", label: "Project concept & creative direction", type: "textarea", required: true, system: "character", minLength: 20, maxLength: 1500 },
+          { id: "reference", label: "References", type: "textarea", system: "reference", maxLength: 900 },
+          { id: "deadline", label: "Preferred deadline", type: "date", system: "deadline" },
+          { id: "budget", label: "Budget range", type: "text", system: "budget", maxLength: 100 },
+          { id: "extra", label: "Additional notes", type: "textarea", system: "extra", maxLength: 900 }
+        ] }, null, 2) }
+      ]
+    },
+    {
       id: "work_producers", label: "Work credits", noun: "credit", keys: ["work_id","producer_id"],
       title: r => {
         const work = state.data.works?.find(w => w.work_id === r.work_id);
@@ -236,6 +299,7 @@
     const title = def.title(record);
     const subtitle = def.subtitle(record) || def.keys.map(key => record[key]).join(" · ");
     const status = def.status(record);
+    const lockedSection = state.resource === "tos_sections" && status === "Published";
     const keyLabel = def.keys.map(key => record[key]).join(" / ");
     return `<div class="cms-record-wrap" data-cms-record-index="${index}">
       <article class="cms-record">
@@ -245,8 +309,10 @@
         <small>${escapeHtml(keyLabel)}</small>
       </div>
       <div class="cms-record-actions">
-        <button class="btn alt" type="button" data-cms-edit="${index}">Edit</button>
-        <button class="btn alt" type="button" data-cms-archive="${index}">${state.resource === "work_producers" ? "Remove link" : "Archive"}</button>
+        ${(["tos_versions","commission_form_versions"].includes(state.resource) && record.status === "draft") ? '<button class="btn" type="button" data-cms-publish="' + index + '">Publish</button>' : ""}
+        ${(["tos_versions","commission_forms"].includes(state.resource)) ? '<button class="btn alt" type="button" data-cms-next-version="' + index + '">New version</button>' : ""}
+        <button class="btn alt" type="button" data-cms-edit="${index}" ${(["tos_versions","commission_form_versions"].includes(state.resource) && record.status === "published") || lockedSection ? "disabled" : ""}>Edit</button>
+        <button class="btn alt" type="button" data-cms-archive="${index}" ${lockedSection ? "disabled" : ""}>${state.resource === "work_producers" ? "Remove link" : "Archive"}</button>
       </div>
       </article>
     </div>`;
@@ -271,7 +337,8 @@
   }
 
   function currentRelationOptions(field) {
-    return state.data[field.relation] || [];
+    const rows = state.data[field.relation] || [];
+    return typeof field.relationFilter === "function" ? rows.filter(field.relationFilter) : rows;
   }
 
   function renderField(field, value, editing) {
@@ -314,12 +381,170 @@
       ${hint}</label>`;
   }
 
+  function initCommissionFormBuilder() {
+    const rawNode = $('[data-cms-field="schema"]', $("#cmsEditorFields"));
+    if (!rawNode) return;
+    const rawField = rawNode.closest(".cms-field");
+    let parsed = {};
+    try { parsed = JSON.parse(rawNode.value || "{}"); } catch {}
+    let fields = Array.isArray(parsed.fields) ? parsed.fields.map(field => ({ ...field })) : [];
+
+    const host = document.createElement("section");
+    host.className = "cms-form-builder";
+    const head = document.createElement("div");
+    head.className = "cms-form-builder-head";
+    const copy = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = "Form field builder";
+    const hint = document.createElement("p");
+    hint.textContent = "Add and arrange the questions clients will answer. Map the four required fields to Name, Contact, License and Creative brief.";
+    copy.append(title, hint);
+    head.appendChild(copy);
+    const list = document.createElement("div");
+    list.className = "cms-form-builder-list";
+    const add = document.createElement("button");
+    add.type = "button";
+    add.className = "btn alt cms-form-builder-add";
+    add.textContent = "+ Add field";
+    const advanced = document.createElement("details");
+    advanced.className = "cms-form-builder-advanced";
+    const summary = document.createElement("summary");
+    summary.textContent = "Advanced JSON editor";
+    host.append(head, list, add, advanced);
+    rawField.before(host);
+    advanced.append(summary, rawField);
+    const reloadBuilder = document.createElement("button");
+    reloadBuilder.type = "button";
+    reloadBuilder.className = "btn alt cms-form-builder-reload";
+    reloadBuilder.textContent = "Load JSON into builder";
+    reloadBuilder.addEventListener("click", () => {
+      try {
+        const nextSchema = JSON.parse(rawNode.value || "{}");
+        fields = Array.isArray(nextSchema.fields) ? nextSchema.fields.map(field => ({ ...field })) : [];
+        render();
+        setNotice("Visual builder reloaded from the advanced JSON.", "success");
+      } catch { setNotice("The advanced form JSON is invalid. Fix it before reloading.", "error"); }
+    });
+    advanced.appendChild(reloadBuilder);
+
+    const types = ["text","textarea","select","checkbox","email","url","number","date"];
+    const systems = ["","name","contact","license","moodBpm","duration","character","reference","deadline","budget","extra"];
+    const labels = { "": "No mapping", name: "Client name", contact: "Discord contact", license: "License preference", moodBpm: "Genre / mood / BPM", duration: "Duration / deliverables", character: "Creative brief", reference: "References", deadline: "Preferred deadline", budget: "Budget", extra: "Additional notes" };
+
+    function sync() {
+      rawNode.value = JSON.stringify({ fields }, null, 2);
+    }
+    function control(labelText, value, type, onChange) {
+      const wrap = document.createElement("label");
+      wrap.className = "cms-form-builder-control" + (type === "textarea" ? " cms-form-builder-wide" : "");
+      const label = document.createElement("span");
+      label.textContent = labelText;
+      const input = document.createElement(type === "textarea" ? "textarea" : "input");
+      if (type !== "textarea") input.type = type || "text";
+      input.value = value == null ? "" : String(value);
+      input.addEventListener("input", () => onChange(input.value));
+      wrap.append(label, input);
+      return wrap;
+    }
+    function selectControl(labelText, value, options, onChange) {
+      const wrap = document.createElement("label");
+      wrap.className = "cms-form-builder-control";
+      const label = document.createElement("span");
+      label.textContent = labelText;
+      const select = document.createElement("select");
+      options.forEach(option => {
+        const item = document.createElement("option");
+        item.value = option.value;
+        item.textContent = option.label;
+        select.appendChild(item);
+      });
+      select.value = value || "";
+      select.addEventListener("change", () => onChange(select.value));
+      wrap.append(label, select);
+      return wrap;
+    }
+    function render() {
+      list.replaceChildren();
+      fields.forEach((field, index) => {
+        const row = document.createElement("article");
+        row.className = "cms-form-builder-item";
+        const top = document.createElement("div");
+        top.className = "cms-form-builder-item-head";
+        const itemTitle = document.createElement("strong");
+        itemTitle.textContent = "FIELD " + String(index + 1).padStart(2, "0");
+        const actions = document.createElement("div");
+        actions.className = "cms-form-builder-item-actions";
+        [["↑", index > 0, () => { [fields[index - 1], fields[index]] = [fields[index], fields[index - 1]]; render(); }],
+         ["↓", index < fields.length - 1, () => { [fields[index + 1], fields[index]] = [fields[index], fields[index + 1]]; render(); }],
+         ["Remove", true, () => { fields.splice(index, 1); render(); }]].forEach(([label, enabled, action]) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = label;
+          button.disabled = !enabled;
+          button.addEventListener("click", action);
+          actions.appendChild(button);
+        });
+        top.append(itemTitle, actions);
+
+        const grid = document.createElement("div");
+        grid.className = "cms-form-builder-grid";
+        grid.append(
+          control("Field ID", field.id, "text", value => { field.id = value.trim(); sync(); }),
+          control("Question label", field.label, "text", value => { field.label = value; sync(); }),
+          selectControl("Input type", field.type, types.map(value => ({ value, label: value })), value => { field.type = value; if (value === "select" && !Array.isArray(field.options)) field.options = ["Option 1","Option 2"]; render(); }),
+          selectControl("System mapping", field.system, systems.map(value => ({ value, label: labels[value] })), value => { if (value) field.system = value; else delete field.system; sync(); })
+        );
+        const required = document.createElement("label");
+        required.className = "cms-form-builder-required";
+        const check = document.createElement("input");
+        check.type = "checkbox";
+        check.checked = field.required === true;
+        check.addEventListener("change", () => { field.required = check.checked; sync(); });
+        const requiredText = document.createElement("span");
+        requiredText.textContent = "Required field";
+        required.append(check, requiredText);
+        grid.appendChild(required);
+        grid.append(
+          control("Placeholder", field.placeholder, "text", value => { field.placeholder = value; sync(); }),
+          control("Helper text", field.help, "text", value => { field.help = value; sync(); }),
+          control("Minimum length", field.minLength, "number", value => { if (value === "") delete field.minLength; else field.minLength = Number(value); sync(); }),
+          control("Maximum length", field.maxLength, "number", value => { if (value === "") delete field.maxLength; else field.maxLength = Number(value); sync(); })
+        );
+        if (field.type === "number") {
+          grid.append(
+            control("Minimum value", field.min, "number", value => { if (value === "") delete field.min; else field.min = Number(value); sync(); }),
+            control("Maximum value", field.max, "number", value => { if (value === "") delete field.max; else field.max = Number(value); sync(); })
+          );
+        }
+        if (field.type === "select") {
+          const options = control("Options (one per line)", Array.isArray(field.options) ? field.options.join("\n") : "", "textarea", value => {
+            field.options = value.split(/\r?\n/).map(item => item.trim()).filter(Boolean);
+            sync();
+          });
+          options.classList.add("cms-form-builder-wide");
+          grid.appendChild(options);
+        }
+        row.append(top, grid);
+        list.appendChild(row);
+      });
+      sync();
+    }
+    add.addEventListener("click", () => {
+      let suffix = fields.length + 1;
+      while (fields.some(field => field.id === "custom_field_" + suffix)) suffix += 1;
+      fields.push({ id: "custom_field_" + suffix, label: "New question", type: "text", required: false });
+      render();
+    });
+    render();
+  }
+
   function openEditor(record = null) {
     const def = activeDefinition();
     state.editing = record ? { ...record } : null;
     state.editorTarget = record ? Object.fromEntries(def.keys.map(key => [key, record[key]])) : null;
     $("#cmsEditorTitle").textContent = record ? "Edit " + def.noun : "Add " + def.noun;
     $("#cmsEditorFields").innerHTML = def.fields.map(field => renderField(field, record?.[field.key], Boolean(record))).join("");
+    if (state.resource === "commission_form_versions") initCommissionFormBuilder();
     if (record && ["service_packages","service_addons"].includes(state.resource)) {
       $("#cmsEditorMeta").textContent = "Record ID: " + record[def.keys[0]];
     } else {
@@ -408,6 +633,102 @@
     }
   }
 
+  async function createNextVersion(index) {
+    const record = activeRecords()[index];
+    if (!record) return;
+    try {
+      if (state.resource === "tos_versions") {
+        const siblings = (state.data.tos_versions || []).filter(row => row.service_id === record.service_id);
+        const version = Math.max(0, ...siblings.map(row => Number(row.version_number) || 0)) + 1;
+        const created = await api("tos_versions", "POST", {
+          service_id: record.service_id || null, version_number: version, title: record.title || "Terms of Service",
+          agreement_text: record.agreement_text || "I have read and agree to the Terms of Service.", status: "draft"
+        });
+        const next = created.data;
+        const sections = (state.data.tos_sections || []).filter(row => row.tos_version_id === record.tos_version_id);
+        for (const section of sections) {
+          await api("tos_sections", "POST", {
+            tos_version_id: next.tos_version_id, section_key: section.section_key, heading: section.heading,
+            content_markdown: section.content_markdown || "", display_order: section.display_order || 0
+          });
+        }
+        await loadData();
+        state.resource = "tos_versions";
+        renderRecords();
+        setNotice("Draft Terms v" + version + " created with a copy of the previous sections. Edit the draft before publishing.", "success");
+      } else {
+        const siblings = (state.data.commission_form_versions || []).filter(row => row.form_id === record.form_id);
+        const version = Math.max(0, ...siblings.map(row => Number(row.version_number) || 0)) + 1;
+        const latest = siblings.slice().sort((a,b) => Number(b.version_number)-Number(a.version_number))[0];
+        await api("commission_form_versions", "POST", {
+          form_id: record.form_id, version_number: version, status: "draft",
+          schema: latest?.schema || JSON.parse(byId("commission_form_versions").fields.find(field => field.key === "schema").default)
+        });
+        await loadData();
+        state.resource = "commission_form_versions";
+        renderRecords();
+        setNotice("Draft form v" + version + " created. Edit its field schema, then publish it when ready.", "success");
+      }
+    } catch (error) { setNotice(error.message, "error"); }
+  }
+
+  async function publishVersion(index) {
+    const record = activeRecords()[index];
+    if (!record || record.status !== "draft") return;
+    const resource = state.resource;
+    const versions = state.data[resource] || [];
+    if (resource === "tos_versions") {
+      if (record.effective_at && Date.parse(record.effective_at) > Date.now()) {
+        setNotice("This Terms version has a future effective date. Publish it when that date arrives.", "error");
+        return;
+      }
+      const sections = (state.data.tos_sections || []).filter(row => row.tos_version_id === record.tos_version_id);
+      if (!sections.length || sections.some(row => !String(row.content_markdown || "").trim())) {
+        setNotice("Add at least one complete Terms section before publishing.", "error");
+        return;
+      }
+    } else {
+      const fields = record.schema?.fields;
+      const allowed = ["text","textarea","select","checkbox","email","url","number","date"];
+      if (!Array.isArray(fields) || !fields.length) { setNotice("Add at least one form field before publishing.", "error"); return; }
+      const ids = new Set();
+      for (const field of fields) {
+        if (!field || !/^[a-z][a-zA-Z0-9_-]{0,39}$/.test(field.id || "") || ["form_version_id","service_id","tos_version_id","tos_accepted","answers","website"].includes(field.id) || !String(field.label || "").trim() || !allowed.includes(field.type)) {
+          setNotice("Each form field needs a valid ID, label, and supported type.", "error"); return;
+        }
+        if (ids.has(field.id)) { setNotice("Form field IDs must be unique.", "error"); return; }
+        ids.add(field.id);
+        if (field.required !== undefined && typeof field.required !== "boolean") { setNotice("Required flags must be true or false.", "error"); return; }
+        if (field.type === "select" && (!Array.isArray(field.options) || !field.options.length || field.options.some(option => typeof option !== "string" || !option.trim()))) {
+          setNotice("Every select field needs at least one text option.", "error"); return;
+        }
+      }
+      const systemKeys = ["name","contact","license","character"];
+      const systems = new Set(fields.map(field => field.system));
+      if (systemKeys.some(key => !systems.has(key))) {
+        setNotice("The form must include the required system fields: name, contact, license, and character.", "error"); return;
+      }
+    }
+    const scope = resource === "tos_versions" ? row => row.service_id === record.service_id : row => row.form_id === record.form_id;
+    const current = versions.find(row => row.status === "published" && scope(row));
+    try {
+      if (current) {
+        const key = resource === "tos_versions" ? { tos_version_id: current.tos_version_id } : { form_version_id: current.form_version_id };
+        await api(resource, "PATCH", { status: "archived" }, key);
+      }
+      const key = resource === "tos_versions" ? { tos_version_id: record.tos_version_id } : { form_version_id: record.form_version_id };
+      await api(resource, "PATCH", { status: "published", published_at: new Date().toISOString(), ...(resource === "tos_versions" && !record.effective_at ? { effective_at: new Date().toISOString() } : {}) }, key);
+      await loadData();
+      setNotice("Version published successfully. Previous published version archived.", "success");
+    } catch (error) {
+      if (current) {
+        const key = resource === "tos_versions" ? { tos_version_id: current.tos_version_id } : { form_version_id: current.form_version_id };
+        await api(resource, "PATCH", { status: "published" }, key).catch(() => {});
+      }
+      setNotice(error.message, "error");
+    }
+  }
+
   function bindEvents() {
     $("#cmsResourceNav").addEventListener("click", event => {
       const button = event.target.closest("[data-cms-resource]");
@@ -419,8 +740,12 @@
     $("#cmsRecords").addEventListener("click", event => {
       const edit = event.target.closest("[data-cms-edit]");
       const archive = event.target.closest("[data-cms-archive]");
+      const publish = event.target.closest("[data-cms-publish]");
+      const nextVersion = event.target.closest("[data-cms-next-version]");
       if (edit) openEditor(activeRecords()[Number(edit.dataset.cmsEdit)]);
       if (archive) archiveRecord(Number(archive.dataset.cmsArchive));
+      if (publish) publishVersion(Number(publish.dataset.cmsPublish));
+      if (nextVersion) createNextVersion(Number(nextVersion.dataset.cmsNextVersion));
     });
     $("#cmsAddRecord").addEventListener("click", () => openEditor());
     const closeEditorAction = () => closeEditor();
