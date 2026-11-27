@@ -43,3 +43,12 @@ html[data-theme="dark"] .service-request:hover{background:#3a2d4b}
 @media(prefers-reduced-motion:reduce){.skip-link,.service-request{transition:none}}
 
 html[data-theme="dark"] .pv-concept-note{color:#d0c4dc}
+
+/* 7. Smooth scroll (Lenis): while Lenis drives scrolling, neutralise
+      the CSS scroll-behavior so the two do not fight. Without the
+      .lenis class (CDN failed or reduced motion) the CSS smooth
+      fallback stays active. */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}

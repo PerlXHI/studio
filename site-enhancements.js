@@ -73,7 +73,31 @@
     var now=root.dataset.activeView||"";
     if(!now||now===last)return;
     last=now;
-    var view=document.querySelector('.page-view[data-page="'+now+'"]:not([hidden])');
+    var view=document.querySelector('.page-view[data-page="'+now+']:not([hidden])');
     var heading=view&&view.querySelector("h1,h2");
     if(heading){heading.setAttribute("tabindex","-1");heading.focus({preventScroll:true})}
   }).observe(root,{attributes:true,attributeFilter:["data-active-view"]});
+
+  /* 6. Smooth scroll (Lenis): inertial wheel scrolling.
+        Lenis loads from CDN; if the CDN is unreachable or the
+        user prefers reduced motion, nothing changes — the CSS
+        scroll-behavior:smooth fallback stays active. */
+  (function(){
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+    function start(){
+      if(typeof Lenis==="undefined")return;
+      try{
+        var lenis=new Lenis({duration:1.15,smoothWheel:true});
+        window.__perivelleLenis=lenis;
+        var raf=function(time){lenis.raf(time);requestAnimationFrame(raf)};
+        requestAnimationFrame(raf);
+      }catch(err){/* fall back to CSS smooth scroll */}
+    }
+    if(typeof Lenis!=="undefined"){start();return;}
+    var s=document.createElement("script");
+    s.src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js";
+    s.defer=true;
+    s.onload=start;
+    document.head.appendChild(s);
+  })();
+})();
