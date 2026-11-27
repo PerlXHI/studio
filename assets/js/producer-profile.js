@@ -26,9 +26,12 @@
     // wheel events over this dialog, or the page behind scrolls instead.
     dialog.setAttribute("data-lenis-prevent", "");
     const inner = make("div", "producer-profile-inner");
-    const close = make("button", "producer-profile-close", "×");
+    const close = make("button", "producer-profile-close");
     close.type = "button";
     close.setAttribute("aria-label", "Close producer profile");
+    // SVG, not the "×" glyph: a glyph's ink is never optically centred in
+    // its em box, so it always sat off-centre in the circle on some fonts.
+    close.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
     close.addEventListener("click", () => dialog.close());
     dialog.appendChild(inner);
     // Close is a direct child of the dialog (not of the scrolling inner),
