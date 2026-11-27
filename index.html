@@ -2649,7 +2649,7 @@ html[data-theme="dark"] .featured-audio-time{color:#b4aec8}
     <div><strong>Get in touch</strong><p>Have a project in mind? Reach out and let’s make something memorable.</p><a class="pv-footer-cta" href="#custom">Start a commission ↗</a></div>
   </div>
 </footer>
-<dialog class="modal" id="cartDialog" aria-labelledby="cartHeading"><div class="modal-head"><h2 id="cartHeading" data-t="cartTitle">Your selection</h2><button class="close" type="button" data-close="cartDialog" aria-label="Close">×</button></div><p class="help" data-t="cartInfo">Checkout is not connected yet. Copy your selection and send it through Discord for confirmation.</p><div id="cartContent"></div><textarea class="summary" id="cartSummary" readonly hidden aria-label="Selection summary"></textarea><div class="modal-actions"><button class="btn" id="sendCart" type="button" hidden data-t="sendDiscord">Copy & Open Discord ↗</button><button class="quiet" id="clearCart" type="button" data-t="clearCart">Clear selection</button></div><p class="status" id="cartStatus" role="status" aria-live="polite"></p></dialog>
+<dialog class="modal" id="cartDialog" data-lenis-prevent aria-labelledby="cartHeading"><div class="modal-head"><h2 id="cartHeading" data-t="cartTitle">Your selection</h2><button class="close" type="button" data-close="cartDialog" aria-label="Close">×</button></div><p class="help" data-t="cartInfo">Checkout is not connected yet. Copy your selection and send it through Discord for confirmation.</p><div id="cartContent"></div><textarea class="summary" id="cartSummary" readonly hidden aria-label="Selection summary"></textarea><div class="modal-actions"><button class="btn" id="sendCart" type="button" hidden data-t="sendDiscord">Copy & Open Discord ↗</button><button class="quiet" id="clearCart" type="button" data-t="clearCart">Clear selection</button></div><p class="status" id="cartStatus" role="status" aria-live="polite"></p></dialog>
 <dialog class="modal success-dialog" id="commissionSuccessDialog" aria-labelledby="commissionSuccessTitle">
  <div class="success-mark" aria-hidden="true">✦</div>
  <p class="eyebrow success-eyebrow">COMMISSION REQUEST RECEIVED</p>
@@ -2660,7 +2660,7 @@ html[data-theme="dark"] .featured-audio-time{color:#b4aec8}
  <p class="success-followup">Keep your Request ID for follow-ups. You can use it anytime on the Track page.</p>
  <div class="modal-actions"><button class="btn" type="button" data-close="commissionSuccessDialog">Lovely, thank you ✧</button></div>
 </dialog>
-<dialog class="modal" id="productDialog" aria-labelledby="productHeading"><div class="modal-head"><h2 id="productHeading"></h2><button class="close" type="button" data-close="productDialog" aria-label="Close">×</button></div><div id="productDetail"></div></dialog>
+<dialog class="modal" id="productDialog" data-lenis-prevent aria-labelledby="productHeading"><div class="modal-head"><h2 id="productHeading"></h2><button class="close" type="button" data-close="productDialog" aria-label="Close">×</button></div><div id="productDetail"></div></dialog>
 <div class="contact-widget" id="contactWidget">
  <button class="contact-trigger" id="contactTrigger" type="button" aria-expanded="false" aria-controls="contactMenu"><img class="contact-logo" src="assets/illustrations/perivellelogo.jpg" alt="Perivelle mascot" aria-hidden="true"><span>Contact Us</span></button>
  <nav class="contact-menu" id="contactMenu" aria-label="Contact options" hidden>

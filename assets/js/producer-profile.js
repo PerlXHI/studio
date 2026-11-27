@@ -22,6 +22,9 @@
     dialog = make("dialog", "producer-profile-dialog");
     dialog.id = "producerProfileDialog";
     dialog.setAttribute("aria-labelledby", "producerProfileName");
+    // Let the modal scroll natively: Lenis (smooth scroll) must not hijack
+    // wheel events over this dialog, or the page behind scrolls instead.
+    dialog.setAttribute("data-lenis-prevent", "");
     const inner = make("div", "producer-profile-inner");
     const close = make("button", "producer-profile-close", "×");
     close.type = "button";
@@ -144,6 +147,8 @@
 
     if (typeof dialog.showModal === "function") dialog.showModal();
     else dialog.setAttribute("open", "");
+    // The dialog is reused: always open it scrolled to the top.
+    dialog.scrollTop = 0;
   }
 
   // Capture the click before the site's hash/SPA navigation handler can route to Works.

@@ -233,6 +233,8 @@
       const dialog = document.createElement("dialog");
       dialog.id = "cmsTermsDialog";
       dialog.className = "cms-terms-dialog";
+      // Let the modal scroll natively: Lenis must not hijack wheel events here.
+      dialog.setAttribute("data-lenis-prevent", "");
       dialog.innerHTML = '<div class="cms-terms-dialog-inner"><button type="button" class="cms-terms-close" aria-label="Close Terms">×</button><p class="eyebrow">PERIVELLE · TERMS OF SERVICE</p><h2 id="cmsTermsDialogTitle">Terms of Service</h2><p class="cms-terms-version"></p><div class="cms-terms-content"></div></div>';
       document.body.appendChild(dialog);
       dialog.querySelector(".cms-terms-close").addEventListener("click", () => dialog.close());

@@ -271,6 +271,8 @@
     serviceDialog = document.createElement("dialog");
     serviceDialog.className = "cms-service-dialog";
     serviceDialog.setAttribute("aria-labelledby", "cmsServiceDialogTitle");
+    // Let the modal scroll natively: Lenis must not hijack wheel events here.
+    serviceDialog.setAttribute("data-lenis-prevent", "");
     serviceDialog.innerHTML = '<div class="cms-service-dialog-inner"><button class="cms-service-dialog-close" type="button" aria-label="Close service details">×</button><div class="cms-service-dialog-art"></div><div class="cms-service-dialog-content"><p class="eyebrow cms-service-dialog-eyebrow">PERIVELLE SERVICE</p><h2 id="cmsServiceDialogTitle"></h2><p class="cms-service-dialog-description"></p><p class="cms-service-dialog-price"></p><div class="cms-service-dialog-options"></div><a class="cms-service-dialog-cta" href="#custom">Start a commission <span aria-hidden="true">↗</span></a></div></div>';
     document.body.appendChild(serviceDialog);
     serviceDialog.querySelector(".cms-service-dialog-close").addEventListener("click", () => serviceDialog.close());
@@ -381,6 +383,8 @@
     [meta, deliverables, requirements, terms, faq].forEach(section => { if (section) options.appendChild(section); });
     if (!options.childElementCount) { const note = document.createElement("p"); note.className = "cms-service-dialog-note"; note.textContent = "Package details and optional add-ons can be discussed with our team when you request a quote."; options.appendChild(note); }
     dialog.showModal();
+    // The dialog is reused: always open it scrolled to the top.
+    dialog.scrollTop = 0;
   }
   function renderCmsServices(services, packages, addons) {
     const grid = document.querySelector(".page-view[data-page='services'] .service-grid");
