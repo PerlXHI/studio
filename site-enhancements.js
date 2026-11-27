@@ -77,3 +77,67 @@
     var heading=view&&view.querySelector("h1,h2");
     if(heading){heading.setAttribute("tabindex","-1");heading.focus({preventScroll:true})}
   }).observe(root,{attributes:true,attributeFilter:["data-active-view"]});
+
+  /* 6. Smooth scroll (Lenis): inertial wheel scrolling.
+        Lenis loads from CDN; if the CDN is unreachable or the
+        user prefers reduced motion, nothing changes — the CSS
+        scroll-behavior:smooth fallback stays active. */
+  (function(){
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+    function start(){
+      if(typeof Lenis==="undefined")return;
+      try{
+        var lenis=new Lenis({duration:1.15,smoothWheel:true});
+        window.__perivelleLenis=lenis;
+        var raf=function(time){lenis.raf(time);requestAnimationFrame(raf)};
+        requestAnimationFrame(raf);
+      }catch(err){/* fall back to CSS smooth scroll */}
+    }
+    if(typeof Lenis!=="undefined"){start();return;}
+    var s=document.createElement("script");
+    s.src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js";
+    s.defer=true;
+    s.onload=start;
+    document.head.appendChild(s);
+  })();
+
+  /* 7. Reveal on scroll: cards and section heads fade/slide in when
+        they enter the viewport. No-op without IntersectionObserver
+        or when the user prefers reduced motion — content stays
+        fully visible in both cases. */
+  (function(){
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+    if(typeof IntersectionObserver==="undefined")return;
+    var SELECTOR=".pv-work-card,.service-card,.pv-section-head,.pv-team-avatar,.pv-about-copy";
+    var root=document.documentElement;
+    root.classList.add("js-reveal");
+    var observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting)return;
+        var el=entry.target;
+        observer.unobserve(el);
+        el.classList.add("is-visible");
+        setTimeout(function(){el.removeAttribute("data-reveal");el.style.transitionDelay="";},1000);
+      });
+    },{threshold:.12,rootMargin:"0px 0px -8% 0px"});
+    function tag(scope){
+      (scope||document).querySelectorAll(SELECTOR).forEach(function(el){
+        if(el.hasAttribute("data-reveal")||el.classList.contains("is-visible"))return;
+        var parent=el.parentNode;
+        var siblings=parent?Array.prototype.filter.call(parent.children,function(s){return s.matches&&s.matches(SELECTOR)}):[el];
+        el.setAttribute("data-reveal","");
+        el.style.transitionDelay=Math.min(Math.max(siblings.indexOf(el),0)*70,280)+"ms";
+        observer.observe(el);
+      });
+    }
+    tag(document);
+    /* Re-scan when the router switches views (new content enters). */
+    var lastView=root.dataset.activeView||"";
+    new MutationObserver(function(){
+      var now=root.dataset.activeView||"";
+      if(!now||now===lastView)return;
+      lastView=now;
+      tag(document);
+    }).observe(root,{attributes:true,attributeFilter:["data-active-view"]});
+  })();
+})();

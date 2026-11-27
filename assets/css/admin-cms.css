@@ -55,6 +55,10 @@
 @media(max-width:560px){.cms-intro{display:block}.cms-phase-label{margin-top:10px}.cms-editor-fields{grid-template-columns:1fr}.cms-field-wide{grid-column:auto}.cms-record{flex-direction:column;align-items:stretch}.cms-record-actions{flex-direction:row;justify-content:flex-end}.cms-toolbar .btn{flex:1}.cms-editor{padding:14px}}
 
 
+/* Keep record editors adjacent to the selected CMS record. */
+.cms-editor-host:not(.has-editor){display:none}
+.cms-record-wrap{display:grid;gap:0;min-width:0}
+.cms-record-wrap>.cms-editor{margin-top:8px}
 /* Visual commission form builder */
 .cms-form-builder{display:grid;gap:14px;margin:8px 0 18px;padding:18px;border:1px solid #e8e1f2;border-radius:18px;background:#faf8fd}
 .cms-form-builder-head{display:flex;justify-content:space-between;gap:16px}
@@ -88,3 +92,4 @@ html[data-theme="dark"] .cms-form-builder-advanced{border-color:#4b405d}
 html[data-theme="dark"] .cms-form-builder-advanced summary{color:#d6c8f5}
 @media(max-width:640px){.cms-form-builder{padding:13px}.cms-form-builder-grid{grid-template-columns:1fr}.cms-form-builder-wide{grid-column:auto}.cms-form-builder-item{padding:11px}}
 .cms-form-builder-reload{margin-top:10px;font-size:.72rem}
+

@@ -1,7 +1,7 @@
 (() => {
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-  const state = { data: {}, resource: "producers", editing: null, loading: false, loaded: false };
+  const state = { data: {}, resource: "producers", editing: null, editorTarget: null, loading: false, loaded: false };
   const definitions = [
     {
       id: "producers", label: "Producers", noun: "producer", keys: ["producer_id"], title: r => r.display_name || r.producer_id,
@@ -227,9 +227,46 @@
     node.classList.toggle("is-visible", Boolean(message));
   }
 
+  function returnEditorToHost() {
+    const editor = $("#cmsEditor");
+    const host = $("#cmsEditorHost");
+    if (!editor || !host) return;
+    host.appendChild(editor);
+    host.classList.toggle("has-editor", !editor.classList.contains("hidden"));
+  }
+
+  function placeEditorUnderTarget() {
+    const editor = $("#cmsEditor");
+    const host = $("#cmsEditorHost");
+    if (!editor || !host) return;
+    returnEditorToHost();
+    if (editor.classList.contains("hidden") || !state.editorTarget) return;
+
+    const def = activeDefinition();
+    const targetIndex = activeRecords().findIndex(record =>
+      def.keys.every(key => String(record[key]) === String(state.editorTarget[key]))
+    );
+    if (targetIndex < 0) return;
+
+    const target = $('[data-cms-record-index="' + targetIndex + '"]', $("#cmsRecords"));
+    if (target) {
+      target.appendChild(editor);
+      host.classList.remove("has-editor");
+    }
+  }
+
+  function closeEditor() {
+    const editor = $("#cmsEditor");
+    if (editor) editor.classList.add("hidden");
+    state.editing = null;
+    state.editorTarget = null;
+    returnEditorToHost();
+  }
+
   async function loadData() {
     if (state.loading) return;
     state.loading = true;
+    returnEditorToHost();
     $("#cmsRecords").innerHTML = '<div class="cms-empty">Loading CMS records…</div>';
     try {
       const result = await api("all");
@@ -264,7 +301,8 @@
     const status = def.status(record);
     const lockedSection = state.resource === "tos_sections" && status === "Published";
     const keyLabel = def.keys.map(key => record[key]).join(" / ");
-    return `<article class="cms-record">
+    return `<div class="cms-record-wrap" data-cms-record-index="${index}">
+      <article class="cms-record">
       <div class="cms-record-copy">
         <div class="cms-record-topline"><strong>${escapeHtml(title)}</strong><span class="cms-status">${escapeHtml(status)}</span></div>
         <p>${escapeHtml(subtitle)}</p>
@@ -276,7 +314,8 @@
         <button class="btn alt" type="button" data-cms-edit="${index}" ${(["tos_versions","commission_form_versions"].includes(state.resource) && record.status === "published") || lockedSection ? "disabled" : ""}>Edit</button>
         <button class="btn alt" type="button" data-cms-archive="${index}" ${lockedSection ? "disabled" : ""}>${state.resource === "work_producers" ? "Remove link" : "Archive"}</button>
       </div>
-    </article>`;
+      </article>
+    </div>`;
   }
 
   function renderRecords() {
@@ -286,6 +325,7 @@
     const visible = records.map((record, index) => ({ record, index })).filter(({ record }) => {
       return !search || JSON.stringify(record).toLowerCase().includes(search);
     });
+    returnEditorToHost();
     renderResources();
     $("#cmsCollectionTitle").textContent = def.label;
     $("#cmsCollectionMeta").textContent = records.length + (records.length === 1 ? " record" : " records");
@@ -293,6 +333,7 @@
       ? visible.map(({ record, index }) => recordSummary(record, def, index)).join("")
       : '<div class="cms-empty">' + (search ? "No records match this search." : "No records yet. Add the first one to get started.") + '</div>';
     $("#cmsAddRecord").textContent = "＋ Add " + def.noun;
+    placeEditorUnderTarget();
   }
 
   function currentRelationOptions(field) {
@@ -500,6 +541,7 @@
   function openEditor(record = null) {
     const def = activeDefinition();
     state.editing = record ? { ...record } : null;
+    state.editorTarget = record ? Object.fromEntries(def.keys.map(key => [key, record[key]])) : null;
     $("#cmsEditorTitle").textContent = record ? "Edit " + def.noun : "Add " + def.noun;
     $("#cmsEditorFields").innerHTML = def.fields.map(field => renderField(field, record?.[field.key], Boolean(record))).join("");
     if (state.resource === "commission_form_versions") initCommissionFormBuilder();
@@ -509,7 +551,8 @@
       $("#cmsEditorMeta").textContent = record ? def.keys.map(key => key + ": " + record[key]).join(" · ") : "New record";
     }
     $("#cmsEditor").classList.remove("hidden");
-    $("#cmsEditor").scrollIntoView({ behavior: "smooth", block: "start" });
+    placeEditorUnderTarget();
+    $("#cmsEditor").scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
   function serializeEditor() {
@@ -562,8 +605,7 @@
       } else {
         await api(state.resource, "POST", payload);
       }
-      $("#cmsEditor").classList.add("hidden");
-      state.editing = null;
+      closeEditor();
       await loadData();
       setNotice(def.noun[0].toUpperCase() + def.noun.slice(1) + " saved successfully.", "success");
     } catch (error) {
@@ -583,8 +625,7 @@
     const keys = Object.fromEntries(def.keys.map(key => [key, record[key]]));
     try {
       await api(state.resource, "DELETE", {}, keys);
-      $("#cmsEditor").classList.add("hidden");
-      state.editing = null;
+      closeEditor();
       await loadData();
       setNotice(state.resource === "work_producers" ? "Credit link removed." : "Record archived. Its data remains in the database.", "success");
     } catch (error) {
@@ -692,10 +733,7 @@
     $("#cmsResourceNav").addEventListener("click", event => {
       const button = event.target.closest("[data-cms-resource]");
       if (!button) return;
-      if (state.resource !== button.dataset.cmsResource) {
-        $("#cmsEditor").classList.add("hidden");
-        state.editing = null;
-      }
+      if (state.resource !== button.dataset.cmsResource) closeEditor();
       state.resource = button.dataset.cmsResource;
       renderRecords();
     });
@@ -710,12 +748,9 @@
       if (nextVersion) createNextVersion(Number(nextVersion.dataset.cmsNextVersion));
     });
     $("#cmsAddRecord").addEventListener("click", () => openEditor());
-    const closeEditor = () => {
-      $("#cmsEditor").classList.add("hidden");
-      state.editing = null;
-    };
-    $("#cmsCancelEdit").addEventListener("click", closeEditor);
-    $("#cmsCancelEditBottom").addEventListener("click", closeEditor);
+    const closeEditorAction = () => closeEditor();
+    $("#cmsCancelEdit").addEventListener("click", closeEditorAction);
+    $("#cmsCancelEditBottom").addEventListener("click", closeEditorAction);
     $("#cmsSaveRecord").addEventListener("click", saveEditor);
     $("#cmsRefresh").addEventListener("click", loadData);
     $("#cmsSearch").addEventListener("input", renderRecords);
