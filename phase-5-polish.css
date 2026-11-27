@@ -115,3 +115,18 @@ body{overflow-x:clip}
   .pv-header nav{scroll-behavior:auto}
   #main-content .page-view .portfolio-video-rail{scroll-behavior:auto}
 }
+
+
+/* Commission request dialog: focused form entry from the custom commission page. */
+.commission-request-dialog{width:min(1120px,calc(100% - 28px));max-width:none;max-height:min(90dvh,900px);margin:auto;padding:clamp(16px,3vw,30px);overflow:auto;overscroll-behavior:contain;border:1px solid var(--line,#ddd);border-radius:22px;background:var(--card,#fff);color:var(--ink,#222);box-shadow:0 24px 90px rgba(20,16,36,.28)}
+.commission-request-dialog::backdrop{background:rgba(17,14,29,.66);backdrop-filter:blur(5px)}
+.commission-request-dialog[open]{animation:commission-dialog-in .22s ease-out}
+.commission-request-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+.commission-request-dialog-head .eyebrow{margin:0}
+.commission-request-close{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border:1px solid var(--line,#ddd);border-radius:50%;background:transparent;color:inherit;font-size:1.6rem;line-height:1;cursor:pointer}
+.commission-request-dialog .commission-form-layout{margin:0;gap:clamp(18px,3vw,34px)}
+.commission-request-dialog .commission-form-intro{position:sticky;top:0;align-self:start}
+.commission-request-dialog .commission-form{min-width:0}
+@keyframes commission-dialog-in{from{opacity:0;transform:translateY(10px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:760px){.commission-request-dialog{width:calc(100% - 16px);max-height:94dvh;padding:15px;border-radius:17px}.commission-request-dialog .commission-form-layout{grid-template-columns:1fr}.commission-request-dialog .commission-form-intro{position:static}.commission-request-dialog .commission-form{grid-template-columns:1fr}.commission-request-dialog .commission-form .field.wide{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){.commission-request-dialog[open]{animation:none}}
