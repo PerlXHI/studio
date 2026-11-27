@@ -1163,8 +1163,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .pv-hero-lead{max-width:475px;margin:0 0 27px;color:#65556f;font-size:1rem;line-height:1.7}
 .pv-actions{display:flex;flex-wrap:wrap;gap:12px}
 .pv-play-icon{font-size:.78rem}
-.pv-hero-status{width:min(100%,560px);margin-top:32px;padding:8px 16px;border:1px solid #e6d7eb;border-radius:17px;background:rgba(255,255,255,.66);box-shadow:0 10px 28px rgba(83,50,106,.06)}
-.pv-hero-status .commission-status-top{display:flex;align-items:center;gap:8px;margin-bottom:0}.pv-hero-status .commission-status-top .commission-status-batch{flex:1;min-width:0;text-align:center;font-size:.88rem;font-weight:600;color:#3a2f52;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;order:2}.pv-hero-status .commission-status-top .commission-status-live{order:3}html[data-theme="dark"] .pv-hero-status .commission-status-top .commission-status-batch{color:#f1edff}
+.pv-hero-status{width:min(100%,500px);margin-top:32px;padding:8px 16px;border:1px solid #e6d7eb;border-radius:17px;background:rgba(255,255,255,.66);box-shadow:0 10px 28px rgba(83,50,106,.06)}
+.pv-hero-status .commission-status-top{display:flex;align-items:center;gap:12px;margin-bottom:0}.pv-hero-status .commission-status-top .commission-status-left{flex:1;display:flex;align-items:center;gap:8px;justify-content:flex-start;min-width:0}.pv-hero-status .commission-status-top .commission-status-batch{flex:0 0 auto;text-align:center;font-size:.88rem;font-weight:600;color:#3a2f52;white-space:nowrap}.pv-hero-status .commission-status-top .commission-status-right{flex:1;display:flex;align-items:center;justify-content:flex-end;min-width:0}.pv-hero-status .commission-status-top .commission-status-live{margin-left:0}html[data-theme="dark"] .pv-hero-status .commission-status-top .commission-status-batch{color:#f1edff}
 .pv-hero-status .commission-status-icon{color:var(--pv-pink)}
 .pv-hero-status .commission-status-label{font-size:.62rem;font-weight:800;letter-spacing:.13em;color:#856991}
 .pv-hero-status .commission-status-live{margin-left:auto;font-size:.61rem;color:#7c6b83}
@@ -2371,7 +2371,7 @@ html[data-theme="dark"] .featured-audio-time{color:#b4aec8}
           <a class="btn pv-secondary" href="#portfolio"><span class="pv-play-icon" aria-hidden="true">▶</span> Our Showreel</a>
         </div>
         <div class="pv-hero-status commission-status-card" id="publicCommissionStatus" aria-label="Commission availability">
-          <div class="commission-status-top"><span class="commission-status-icon" aria-hidden="true">✦</span><span class="commission-status-label">COMMISSION STATUS</span><span id="publicCommissionBatch" class="commission-status-batch">New projects and custom requests welcome</span><span class="commission-status-live"><i></i> LIVE</span></div>
+          <div class="commission-status-top"><span class="commission-status-left"><span class="commission-status-icon" aria-hidden="true">✦</span><span class="commission-status-label">COMMISSION STATUS</span></span><span id="publicCommissionBatch" class="commission-status-batch">New projects and custom requests welcome</span><span class="commission-status-right"><span class="commission-status-live"><i></i> LIVE</span></span></div>
           <div class="commission-status-main"><strong id="publicCommissionAvailability">Status update soon</strong></div>
           <div class="commission-status-bottom"><strong id="publicCommissionSlots">Check availability</strong></div>
         </div>
