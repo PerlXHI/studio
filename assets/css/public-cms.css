@@ -257,7 +257,7 @@ html[data-theme="dark"] .cms-services-empty {
 html[data-theme="dark"] .producer-profile-dialog { border-color:#4a405f;color:#eee9ff;background:#211c2d; }
 html[data-theme="dark"] .producer-profile-name,.html[data-theme="dark"] .producer-profile-works h3 { color:#eee9ff; }
 html[data-theme="dark"] .producer-profile-bio { color:#c0b8d4; }
-html[data-theme="dark"] .producer-profile-close { border-color:#4a405f;background:#2b2540;color:#eee9ff; }
+html[data-theme="dark"] .producer-profile-close { border-color:#cfc6ec;background:#f5f2ff;color:#51466e; }
 html[data-theme="dark"] .producer-profile-work { border-color:#4a405f;color:#eee9ff; }
 html[data-theme="dark"] .producer-profile-tags span { border-color:#4a405f;background:#2b2540;color:#d6c8f5; }
 
@@ -321,7 +321,7 @@ html[data-theme="dark"] .producer-profile-work.is-placeholder em {
 html[data-theme="dark"] .cms-service-dialog{border-color:#4a405f;background:#211c2d;color:#eee9ff}
 html[data-theme="dark"] .cms-service-dialog-content h2,html[data-theme="dark"] .cms-service-dialog-options h4{color:#eee9ff}
 html[data-theme="dark"] .cms-service-dialog-description{color:#c0b8d4}
-html[data-theme="dark"] .cms-service-dialog-close{border-color:#4a405f;background:#2b2540;color:#eee9ff}
+html[data-theme="dark"] .cms-service-dialog-close{border-color:#cfc6ec;background:#f5f2ff;color:#51466e}
 html[data-theme="dark"] .cms-service-dialog-price{background:#39304b;color:#d6c8f5}
 html[data-theme="dark"] .cms-service-dialog-options .cms-service-option{border-color:#4a405f;background:#272236}
 html[data-theme="dark"] .cms-service-dialog-options .cms-service-option-top{color:#eee9ff}
@@ -362,7 +362,7 @@ html[data-theme="dark"] .cms-dynamic-checkbox,html[data-theme="dark"] .cms-terms
 html[data-theme="dark"] .cms-dynamic-checkbox span,html[data-theme="dark"] .cms-terms-check{color:#eee9ff}
 html[data-theme="dark"] .cms-terms-read{color:#c8b3f2}
 html[data-theme="dark"] .cms-terms-dialog{border-color:#4a405f;background:#211c2d;color:#eee9ff}
-html[data-theme="dark"] .cms-terms-close{border-color:#4a405f;background:#2b2540;color:#eee9ff}
+html[data-theme="dark"] .cms-terms-close{border-color:#cfc6ec;background:#f5f2ff;color:#51466e}
 html[data-theme="dark"] .cms-terms-dialog h2,html[data-theme="dark"] .cms-terms-content h3{color:#eee9ff}
 html[data-theme="dark"] .cms-terms-content section{border-color:#4a405f}
 html[data-theme="dark"] .cms-terms-content p,html[data-theme="dark"] .cms-terms-version{color:#c0b8d4}
