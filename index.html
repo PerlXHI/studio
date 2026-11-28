@@ -3280,7 +3280,7 @@ setLanguage("en");
   document.addEventListener("keydown",function(event){if(event.key==="Escape")closeMenu()});
  }
  document.addEventListener("click",function(event){
-  if(event.target.closest("#pvNavMenu [data-page-link]"))closeMenu();
+  if(event.target.closest("#pvNavMenu a"))closeMenu();
   const closeRequest=event.target.closest(".commission-request-close");
   if(closeRequest){document.getElementById("commissionRequestDialog")?.close();if(location.hash==="#commission-request")history.replaceState({view:"custom"},"","#custom");return;}
   const link=event.target.closest('a[href^="#"]');
