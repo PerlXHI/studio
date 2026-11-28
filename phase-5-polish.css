@@ -130,3 +130,54 @@ body{overflow-x:clip}
 @keyframes commission-dialog-in{from{opacity:0;transform:translateY(10px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-width:760px){.commission-request-dialog{width:calc(100% - 16px);max-height:94dvh;padding:15px;border-radius:17px}.commission-request-dialog .commission-form-layout{grid-template-columns:1fr}.commission-request-dialog .commission-form-intro{position:static}.commission-request-dialog .commission-form{grid-template-columns:1fr}.commission-request-dialog .commission-form .field.wide{grid-column:auto}}
 @media(prefers-reduced-motion:reduce){.commission-request-dialog[open]{animation:none}}
+
+
+/* CREATIVE ENTRY EXPERIENCE — playful mascot loading + session audio welcome. */
+body.pv-entry-locked{overflow:hidden}
+.pv-experience-loader,.pv-audio-welcome{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 42%,rgba(111,75,139,.34),transparent 48%),#171321;color:#f8efff}
+.pv-experience-loader{align-content:center;gap:9px;transition:opacity .38s ease,visibility .38s ease}
+.pv-experience-loader.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+.pv-loader-mascot{position:relative;z-index:2;width:88px;height:88px;object-fit:cover;border-radius:27px;box-shadow:0 12px 42px rgba(235,93,174,.25);animation:pv-mascot-bob 1.5s ease-in-out infinite}
+.pv-loader-orbit{position:absolute;width:138px;height:138px;border:1px solid rgba(231,177,255,.24);border-radius:50%;animation:pv-orbit 5s linear infinite}
+.pv-loader-orbit span{position:absolute;width:9px;height:9px;border-radius:50%;background:#ff75bf;box-shadow:0 0 14px #ff75bf}
+.pv-loader-orbit span:nth-child(1){top:10px;left:23px}.pv-loader-orbit span:nth-child(2){right:2px;top:66px;background:#bba2ff}.pv-loader-orbit span:nth-child(3){bottom:9px;left:30px;background:#fff0a8}
+.pv-loader-wordmark{margin:16px 0 0;font:800 1.55rem/1 "Sora",sans-serif;letter-spacing:-.06em}
+.pv-loader-wordmark span{color:#ff77c4;margin-left:4px}
+.pv-loader-caption{margin:0;color:#c9b9d7;font-size:.78rem;letter-spacing:.04em}
+.pv-loader-track{width:148px;height:4px;margin-top:14px;border-radius:99px;background:#ffffff20;overflow:hidden}
+.pv-loader-track i{display:block;width:40%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#b68cff,#ff70b9);animation:pv-loader-progress 1.2s ease-in-out infinite}
+.pv-audio-welcome{z-index:9998;opacity:0;visibility:hidden;transition:opacity .32s ease,visibility .32s ease;background:radial-gradient(ellipse at 50% 10%,rgba(211,115,197,.23),transparent 46%),rgba(20,15,31,.97);backdrop-filter:blur(18px)}
+.pv-audio-welcome[hidden]{display:none!important}
+.pv-audio-welcome.is-visible{opacity:1;visibility:visible}
+.pv-audio-welcome.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+.pv-welcome-card{position:relative;width:min(100%,520px);padding:clamp(25px,5vw,42px);border:1px solid rgba(213,174,244,.28);border-radius:30px;background:linear-gradient(145deg,rgba(54,40,70,.97),rgba(34,27,48,.98));box-shadow:0 28px 100px rgba(0,0,0,.4);text-align:center;overflow:hidden}
+.pv-welcome-card:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,#bd8cff,#ff70b9,#ffe2a2)}
+.pv-welcome-spark{position:absolute;top:23px;right:25px;color:#e6c7ff;font-size:1.5rem;animation:pv-sparkle 2.2s ease-in-out infinite}
+.pv-welcome-mascot{width:92px;height:92px;object-fit:cover;border-radius:28px;box-shadow:0 12px 34px rgba(255,105,190,.2);animation:pv-mascot-bob 2.2s ease-in-out infinite}
+.pv-welcome-eyebrow{margin:18px 0 9px;color:#d7b7ee;font:700 .62rem/1.4 "DM Mono",monospace;letter-spacing:.16em}
+.pv-welcome-card h1{max-width:14ch;margin:0 auto;color:#fff7ff;font:800 clamp(1.8rem,6vw,2.7rem)/1.08 "Sora",sans-serif;letter-spacing:-.055em}
+.pv-welcome-card h1 em{color:#ff83c6;font-style:normal}
+.pv-welcome-card>p:not(.pv-welcome-eyebrow):not(.pv-welcome-footnote){max-width:39ch;margin:14px auto 0;color:#c9bdd4;font-size:.9rem;line-height:1.65}
+.pv-welcome-wave{height:32px;display:flex;justify-content:center;align-items:center;gap:5px;margin:18px 0}
+.pv-welcome-wave i{width:4px;height:var(--h,14px);border-radius:9px;background:linear-gradient(#d3a4ff,#ff7fbd);animation:pv-wave-bounce .72s ease-in-out infinite alternate}
+.pv-welcome-wave i:nth-child(2n){animation-delay:.16s}.pv-welcome-wave i:nth-child(3n){animation-delay:.31s}
+.pv-welcome-wave i:nth-child(1){--h:9px}.pv-welcome-wave i:nth-child(2){--h:21px}.pv-welcome-wave i:nth-child(3){--h:15px}.pv-welcome-wave i:nth-child(4){--h:29px}.pv-welcome-wave i:nth-child(5){--h:18px}.pv-welcome-wave i:nth-child(6){--h:25px}.pv-welcome-wave i:nth-child(7){--h:12px}.pv-welcome-wave i:nth-child(8){--h:22px}.pv-welcome-wave i:nth-child(9){--h:10px}
+.pv-welcome-actions{display:grid;gap:10px;text-align:left}
+.pv-welcome-choice{display:flex;align-items:center;gap:13px;width:100%;min-height:68px;padding:12px 15px;border:1px solid rgba(219,194,239,.24);border-radius:17px;background:rgba(255,255,255,.055);color:#fff;cursor:pointer;text-align:left;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.pv-welcome-choice:hover{transform:translateY(-2px);border-color:#dba8ed;background:rgba(255,255,255,.1)}
+.pv-welcome-choice>span:first-child{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border-radius:13px;background:rgba(205,159,255,.15);color:#f1b7e2;font-size:1.35rem}
+.pv-welcome-choice>span:nth-child(2){display:grid;gap:2px;min-width:0}
+.pv-welcome-choice strong{font-size:.9rem}.pv-welcome-choice small{color:#c4b5d0;font-size:.72rem}
+.pv-welcome-choice>b{margin-left:auto;color:#d6a5ee;font-size:1.15rem}
+.pv-welcome-choice.is-primary{border-color:rgba(255,128,195,.55);background:linear-gradient(100deg,rgba(211,91,167,.28),rgba(150,105,205,.2))}
+.pv-welcome-choice.is-primary>span:first-child{background:linear-gradient(145deg,#db6db7,#9779d9);color:white}
+.pv-welcome-footnote{margin:16px 0 0;color:#a99ab8;font-size:.68rem}
+.pv-audio-notice{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));z-index:9997;transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);padding:11px 16px;border:1px solid rgba(213,174,244,.3);border-radius:99px;background:#2b2238;color:#f8efff;box-shadow:0 10px 35px #0005;font-size:.78rem;text-align:center}
+.pv-audio-notice[hidden]{display:none}
+@keyframes pv-mascot-bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-9px) rotate(3deg)}}
+@keyframes pv-orbit{to{transform:rotate(360deg)}}
+@keyframes pv-loader-progress{0%{transform:translateX(-110%)}100%{transform:translateX(260%)}}
+@keyframes pv-wave-bounce{to{transform:scaleY(.35);opacity:.6}}
+@keyframes pv-sparkle{50%{transform:rotate(18deg) scale(1.2);opacity:.65}}
+@media(max-width:480px){.pv-welcome-card{padding:25px 19px;border-radius:25px}.pv-welcome-mascot{width:78px;height:78px;border-radius:23px}.pv-welcome-choice{min-height:64px;padding:10px 12px}}
+@media(prefers-reduced-motion:reduce){.pv-experience-loader,.pv-audio-welcome,.pv-welcome-choice{transition:none}.pv-loader-mascot,.pv-loader-orbit,.pv-loader-track i,.pv-welcome-mascot,.pv-welcome-spark,.pv-welcome-wave i{animation:none!important}}
