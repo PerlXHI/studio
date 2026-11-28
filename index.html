@@ -2336,7 +2336,30 @@ html[data-theme="dark"] .featured-audio-time{color:#b4aec8}
 <link rel="stylesheet" href="site-polish.css">
 <link rel="stylesheet" href="phase-5-polish.css">
 </head>
-<body>
+<body class="pv-entry-locked">
+<div class="pv-experience-loader" id="pvExperienceLoader" role="status" aria-live="polite" aria-label="Loading Perivelle">
+  <div class="pv-loader-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
+  <img class="pv-loader-mascot" src="/assets/brand/pfp.webp" alt="" width="88" height="88">
+  <p class="pv-loader-wordmark">perivelle<span>✦</span></p>
+  <p class="pv-loader-caption">Tuning the little sounds...</p>
+  <div class="pv-loader-track" aria-hidden="true"><i></i></div>
+</div>
+<section class="pv-audio-welcome" id="pvAudioWelcome" role="dialog" aria-modal="true" aria-labelledby="pvWelcomeTitle" aria-describedby="pvWelcomeCopy" hidden>
+  <div class="pv-welcome-card">
+    <span class="pv-welcome-spark" aria-hidden="true">✦</span>
+    <img class="pv-welcome-mascot" src="/assets/brand/pfp.webp" alt="" width="92" height="92">
+    <p class="pv-welcome-eyebrow">A LITTLE NOTE BEFORE WE BEGIN</p>
+    <h1 id="pvWelcomeTitle">How would you like to experience <em>Perivelle?</em></h1>
+    <p id="pvWelcomeCopy">There are tiny sounds hiding around this little studio. You decide if you want to hear them.</p>
+    <div class="pv-welcome-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="pv-welcome-actions">
+      <button class="pv-welcome-choice is-primary" id="pvAudioWith" type="button"><span aria-hidden="true">♫</span><span><strong>With audio</strong><small>Music & playful sound effects</small></span><b aria-hidden="true">↗</b></button>
+      <button class="pv-welcome-choice" id="pvAudioWithout" type="button"><span aria-hidden="true">◌</span><span><strong>Without audio</strong><small>A quiet browsing experience</small></span><b aria-hidden="true">→</b></button>
+    </div>
+    <p class="pv-welcome-footnote">You can change your audio choice anytime during this visit.</p>
+  </div>
+</section>
+<div class="pv-audio-notice" id="pvAudioNotice" role="status" hidden>Audio is turned off for this visit. Refresh to choose again.</div>
 <header class="pv-header">
   <div class="wrap">
     <nav aria-label="Main navigation">
@@ -3617,5 +3640,7 @@ setLanguage("en");
 })();</script>
 
 <script src="site-enhancements.js" defer></script>
+<script src="/assets/js/experience-entry.js" defer></script>
+
 </body>
 </html>
