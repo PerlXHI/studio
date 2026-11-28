@@ -356,12 +356,32 @@ html[data-theme="dark"] .theme-toggle .pv-theme-sun{display:block}
 
 /* --- 3. Second display typeface: Playfair italic accents inside headings --- */
 #main-content .page-view :is(h1,h2,h3) em{font-family:"Playfair Display",Georgia,serif!important;font-style:italic;font-weight:600;letter-spacing:-.015em}
+/* Hero h1 keeps Sora: Playfair italic is wider and pushes the h1 to an extra
+   line, growing the hero and pushing TRUSTED BY below the fold. */
+#main-content .page-view[data-page="home"] .pv-hero h1 em{font-family:inherit!important;font-style:normal!important;font-weight:800;letter-spacing:-.075em}
+/* Commission Status bar: tolerate the long Preview fallback text. The batch
+   is absolutely centred + nowrap, so the ~300px fallback ("New projects and
+   custom requests welcome") overlaps the side groups. In flow with ellipsis
+   it truncates instead; on production the CMS value ("November Batch") still
+   fits and stays centred (three equal flex thirds). */
+#main-content .page-view[data-page="home"] .pv-hero-status .commission-status-batch{position:static;transform:none;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center}
 
 /* --- 4. Home works: asymmetric editorial grid — 1 large real-work feature + 2 fox/wave cards --- */
 @media(min-width:901px){
-  #main-content .page-view[data-page="home"] .pv-work-grid{grid-template-columns:1.45fr 1fr;grid-template-rows:1fr 1fr}
+  #main-content .page-view[data-page="home"] .pv-work-grid{grid-template-columns:1.45fr 1fr!important;grid-template-rows:1fr 1fr}
   #main-content .page-view[data-page="home"] .pv-work-card.pv-work-featured{grid-row:1/3}
-  #main-content .page-view[data-page="home"] .pv-work-featured>img{height:100%;min-height:340px}
+  /* Feature card: full-bleed cover. The old index.html block forces
+     aspect-ratio:16/10 + height:auto (!important), which left a ~250px
+     empty band inside the tall card. The image now fills the card; the
+     meta sits on a bottom scrim. The centre crop also removes the
+     thumbnail's baked-in edge text; the scrim hides its bottom banner. */
+  #main-content .page-view[data-page="home"] .pv-work-card.pv-work-featured>img{position:absolute;inset:0;width:100%!important;height:100%!important;aspect-ratio:auto!important;min-height:0!important;object-fit:cover!important;object-position:40% center}
+  #main-content .page-view[data-page="home"] .pv-work-card.pv-work-featured .pv-work-meta{position:absolute;left:0;right:0;bottom:0;z-index:2;flex:none;min-height:0;align-content:end;padding:64px 58px 16px 17px;background:linear-gradient(180deg,rgba(24,10,36,0),rgba(24,10,36,.78) 55%,rgba(24,10,36,.9))}
+  #main-content .page-view[data-page="home"] .pv-work-card.pv-work-featured .pv-work-meta strong{color:#fff}
+  #main-content .page-view[data-page="home"] .pv-work-card.pv-work-featured .pv-work-meta small{color:rgba(255,255,255,.82)}
+  /* Play button moves to the centre of the image: the top-right corner
+     covers the "Original Sound Alerts" pill baked into the thumbnail. */
+  #main-content .page-view[data-page="home"] .pv-work-card.pv-work-featured .pv-work-play{left:50%;top:50%;right:auto;transform:translate(-50%,-50%)}
 }
 @media(max-width:900px){
   #main-content .page-view[data-page="home"] .pv-work-grid{grid-template-columns:1fr 1fr}
@@ -401,6 +421,9 @@ html[data-theme="dark"] .theme-toggle .pv-theme-sun{display:block}
   #main-content .page-view[data-page="home"] .pv-service-card:nth-child(1),
   #main-content .page-view[data-page="home"] .pv-service-card:nth-child(2){grid-column:span 3}
   #main-content .page-view[data-page="home"] .pv-service-card:nth-child(n+3){grid-column:span 2}
+  /* The 3+3 / 2+2+2 rhythm only accounts for 5 cards; the 6th ("Other
+     Ideas") landed alone on row 3. Give it the full row. */
+  #main-content .page-view[data-page="home"] .pv-service-card:nth-child(6){grid-column:span 6}
 }
 @media(max-width:680px){
   #main-content .page-view[data-page="home"] .pv-service-grid{grid-template-columns:1fr}
