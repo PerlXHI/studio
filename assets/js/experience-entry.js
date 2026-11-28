@@ -67,13 +67,7 @@
     const withoutTitle = choices.without?.querySelector("strong");
     const withoutDescription = choices.without?.querySelector("small");
     if (loaderText) loaderText.textContent = config.loaderText;
-    if (title) {
-      title.textContent = "";
-      const prefix = document.createTextNode(config.welcomeTitle.replace(/Perivelle\??/i, ""));
-      const emphasis = document.createElement("em");
-      emphasis.textContent = "Perivelle";
-      title.append(prefix, emphasis);
-    }
+    if (title) title.textContent = config.welcomeTitle;
     if (copy) copy.textContent = config.welcomeCopy;
     if (withTitle) withTitle.textContent = config.withAudioLabel;
     if (withDescription) withDescription.textContent = config.withAudioDescription;
