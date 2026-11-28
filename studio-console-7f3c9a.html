@@ -348,7 +348,7 @@ input::placeholder,textarea::placeholder{color:#9b90aa!important}
 <div class="stats"><div class="stat"><b id="statTotal">0</b><span>Total requests</span></div><div class="stat"><b id="statReview">0</b><span>Awaiting review</span></div><div class="stat"><b id="statProduction">0</b><span>In production</span></div><div class="stat"><b id="statDone">0</b><span>Completed</span></div></div>
 <nav class="admin-navigation" aria-label="Admin sections">
  <div class="admin-nav-group"><span class="admin-nav-label">ORDERS</span><div class="tabs" role="tablist" aria-label="Pesanan"><button class="tab" data-tab="orders" aria-selected="true">Commissions</button><button class="tab" data-tab="commissionStatus" aria-selected="false">Commission status</button><button class="tab" data-tab="services" aria-selected="false">Service pricing</button></div></div>
- <div class="admin-nav-group"><span class="admin-nav-label">CONTENT</span><div class="tabs" role="tablist" aria-label="Konten"><button class="tab" data-tab="portfolio" aria-selected="false">Portfolio</button><button class="tab" data-tab="producers" aria-selected="false">Our Producers</button><button class="tab" data-tab="cms" aria-selected="false">CMS Studio</button><button class="tab" data-tab="freebies" aria-selected="false">Freebies</button><button class="tab" data-tab="audio" aria-selected="false">Audio player</button></div></div>
+ <div class="admin-nav-group"><span class="admin-nav-label">CONTENT</span><div class="tabs" role="tablist" aria-label="Konten"><button class="tab" data-tab="portfolio" aria-selected="false">Portfolio</button><button class="tab" data-tab="producers" aria-selected="false">Our Producers</button><button class="tab" data-tab="cms" aria-selected="false">CMS Studio</button><button class="tab" data-tab="freebies" aria-selected="false">Freebies</button><button class="tab" data-tab="audio" aria-selected="false">Audio player</button><button class="tab" data-tab="entryExperience" aria-selected="false">Entry experience</button></div></div>
  <div class="admin-nav-group"><span class="admin-nav-label">STUDIO</span><div class="tabs" role="tablist" aria-label="Studio"><button class="tab" data-tab="analytics" aria-selected="false">Analytics</button><button class="tab" data-tab="links" aria-selected="false">Studio links</button></div></div>
 </nav>
 <section id="cmsPanel" class="panel hidden">
@@ -406,6 +406,21 @@ input::placeholder,textarea::placeholder{color:#9b90aa!important}
  <div class="save-row audio-actions"><button type="button" class="btn alt" id="addAudioTrack">+ Add track</button><button type="button" class="btn" id="saveAudioPlayer">Save audio player</button></div>
  <p class="hint">Up to 12 tracks. Track title and audio URL are required. Artist and cover image are optional. Changes appear on the public website after its settings cache refreshes.</p>
  </section>
+<section id="entryExperiencePanel" class="panel hidden">
+ <h2>Entry experience</h2>
+ <p>Manage the visitor welcome screen, loading animation, and interactive audio choices shown before the homepage. Preferences remain session-only for visitors.</p>
+ <div class="settings-grid">
+  <div class="wide"><label><input id="entryLoaderEnabled" type="checkbox"> Show animated loading screen</label><label for="entryLoaderText">Loading message</label><input id="entryLoaderText" maxlength="120" placeholder="Tuning the little sounds..."></div>
+  <div class="wide"><label><input id="entryWelcomeEnabled" type="checkbox"> Show welcome audio choice screen</label></div>
+  <div class="wide"><label for="entryWelcomeTitle">Welcome headline</label><input id="entryWelcomeTitle" maxlength="120"></div>
+  <div class="wide"><label for="entryWelcomeCopy">Welcome description</label><textarea id="entryWelcomeCopy" rows="3" maxlength="300"></textarea></div>
+  <div><label><input id="entryWithAudioEnabled" type="checkbox"> Offer With Audio</label><label for="entryWithAudioLabel">Button title</label><input id="entryWithAudioLabel" maxlength="120"><label for="entryWithAudioDescription">Button description</label><input id="entryWithAudioDescription" maxlength="120"></div>
+  <div><label><input id="entryWithoutAudioEnabled" type="checkbox"> Offer Without Audio</label><label for="entryWithoutAudioLabel">Button title</label><input id="entryWithoutAudioLabel" maxlength="120"><label for="entryWithoutAudioDescription">Button description</label><input id="entryWithoutAudioDescription" maxlength="120"></div>
+  <div class="wide"><label><input id="entrySoundEffectsEnabled" type="checkbox"> Enable interactive hover and click sound effects</label><label for="entrySoundEffectsVolume">Sound effects volume <span id="entryVolumeValue">0.025</span></label><input id="entrySoundEffectsVolume" type="range" min="0" max="0.08" step="0.005"></div>
+ </div>
+ <div class="save-row"><button type="button" class="btn" id="saveEntryExperience">Save entry experience</button></div>
+ <p class="hint">Audio selection is stored for the current browser session only. Background music still uses the Public mini audio player settings.</p>
+</section>
  <section id="analyticsPanel" class="panel hidden"><h2>Studio analytics</h2><p>Overview based on commission requests stored in the studio database. Revenue is not estimated because quoted prices may use different currencies.</p><div id="analyticsContent"></div></section>
 <section id="commissionStatusPanel" class="panel hidden"><h2>Public commission status</h2><p>Control the commission availability shown on the public Home page.</p><div class="settings-grid"><div><label for="commissionAvailability">Availability</label><select id="commissionAvailability"><option>Open</option><option>Limited slots</option><option>Waitlist</option><option>Closed</option></select></div><div><label for="commissionBatch">Current batch</label><input id="commissionBatch" maxlength="60" placeholder="e.g. November batch"></div><div><label for="commissionSlots">Available slots / note</label><input id="commissionSlots" maxlength="80" placeholder="e.g. 2 slots available"></div></div><div class="save-row"><button class="btn" id="saveCommissionStatus">Save commission status</button></div></section>
 <section id="linksPanel" class="panel hidden"><h2>Studio links</h2><p>Manage public contact and social destinations.</p><div class="settings-grid"><div><label for="discordLink">Discord invite / contact URL</label><input id="discordLink" placeholder="https://discord.gg/..."></div><div><label for="portfolioLink">Portfolio URL</label><input id="portfolioLink" placeholder="https://..."></div><div><label for="youtubeLink">YouTube URL</label><input id="youtubeLink" placeholder="https://youtube.com/..."></div><div><label for="vgenLink">VGen URL</label><input id="vgenLink" placeholder="https://vgen.co/..."></div><div><label for="emailLink">Contact email</label><input id="emailLink" type="email" placeholder="hello@example.com"></div><div><label for="twitterLink">Twitter / X URL</label><input id="twitterLink" placeholder="https://x.com/yourstudio"></div></div><div class="save-row"><button class="btn" id="saveLinks">Save links</button></div></section>
@@ -420,7 +435,7 @@ function showAuth(on){$("#loginView").classList.toggle("hidden",!on);$("#dashboa
 async function init(){setupPanelMinimize();try{const a=await api("/api/admin-auth");if(a.authenticated){showAuth(false);await load()}else showAuth(true)}catch{showAuth(true)}}
 $("#loginForm").addEventListener("submit",async e=>{e.preventDefault();$("#loginButton").disabled=true;$("#loginMessage").textContent="Signing in…";try{await api("/api/admin-auth",{method:"POST",body:JSON.stringify({password:$("#password").value})});$("#password").value="";showAuth(false);await load()}catch(err){$("#loginMessage").textContent=err.message}finally{$("#loginButton").disabled=false}});
 async function signOut(){try{await api("/api/admin-auth?action=logout",{method:"POST",body:JSON.stringify({action:"logout"})})}finally{showAuth(true)}}$("#logoutTop").addEventListener("click",signOut);
-async function load(){const d=await api("/api/admin-data");orders=d.orders||[];orders.forEach(o=>{if(!knownOrderIds.has(o.request_id)){collapsedOrders.add(o.request_id);knownOrderIds.add(o.request_id)}});settings=d.settings||{};renderStats();renderOrders();renderServices();renderPortfolioCategories();renderPortfolioVideos();renderFeaturedPortfolio();renderProducers();renderFreebies();renderLinks();renderCommissionStatus();renderAudioTracks();document.dispatchEvent(new Event("admin-dashboard-loaded"))}
+async function load(){const d=await api("/api/admin-data");orders=d.orders||[];orders.forEach(o=>{if(!knownOrderIds.has(o.request_id)){collapsedOrders.add(o.request_id);knownOrderIds.add(o.request_id)}});settings=d.settings||{};renderStats();renderOrders();renderServices();renderPortfolioCategories();renderPortfolioVideos();renderFeaturedPortfolio();renderProducers();renderFreebies();renderLinks();renderCommissionStatus();renderAudioTracks();renderEntryExperience();document.dispatchEvent(new Event("admin-dashboard-loaded"))}
 function renderStats(){const review=orders.filter(o=>o.status==="Awaiting Review").length,production=orders.filter(o=>o.status==="In Production").length,done=orders.filter(o=>o.status==="Completed").length;$("#statTotal").textContent=orders.length;$("#statReview").textContent=review;$("#statProduction").textContent=production;$("#statDone").textContent=done;$("#statReview").closest(".stat").classList.toggle("is-zero",review===0);$("#statProduction").closest(".stat").classList.toggle("is-zero",production===0);$("#statDone").closest(".stat").classList.toggle("is-zero",done===0);renderAnalytics()}
 function renderAnalytics(){const total=orders.length,completed=orders.filter(o=>o.status==="Completed").length,active=orders.filter(o=>!["Completed","Cancelled"].includes(o.status)).length,rate=total?Math.round(completed/total*100):0;const serviceMap={};orders.forEach(o=>{const name=o.brief?.type||"Unspecified";serviceMap[name]=(serviceMap[name]||0)+1});const services=Object.entries(serviceMap).sort((a,b)=>b[1]-a[1]).slice(0,6);const now=new Date(),months=Array.from({length:6},(_,i)=>{const d=new Date(now.getFullYear(),now.getMonth()-5+i,1);return {label:d.toLocaleDateString("en",{month:"short"}),count:orders.filter(o=>{const x=new Date(o.created_at);return x.getFullYear()===d.getFullYear()&&x.getMonth()===d.getMonth()}).length}});const max=Math.max(1,...months.map(m=>m.count));$("#analyticsContent").innerHTML='<div class="stats"><div class="stat"><b>'+total+'</b><span>Total requests</span></div><div class="stat"><b>'+active+'</b><span>Active requests</span></div><div class="stat"><b>'+completed+'</b><span>Completed</span></div><div class="stat"><b>'+rate+'%</b><span>Completion rate</span></div></div><div class="settings-grid"><div class="panel" style="box-shadow:none"><h3>Requests · last 6 months</h3>'+months.map(m=>'<div style="display:grid;grid-template-columns:42px 1fr 28px;gap:9px;align-items:center;margin:12px 0"><span class="hint">'+m.label+'</span><div style="height:10px;border-radius:99px;background:#40364f;overflow:hidden"><div style="height:100%;width:'+(m.count/max*100)+'%;background:linear-gradient(90deg,#9875cf,#8eb9e5);border-radius:99px"></div></div><strong>'+m.count+'</strong></div>').join("")+'</div><div class="panel" style="box-shadow:none"><h3>Popular services</h3>'+(services.length?services.map(([name,count])=>'<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)"><span>'+esc(name)+'</span><strong>'+count+'</strong></div>').join(""):'<p class="hint">No commission data yet.</p>')+'</div></div>'}
 function field(label,value){return '<div class="field-value"><b>'+esc(label)+'</b>'+esc(value||"—")+'</div>'}
@@ -733,6 +748,44 @@ function renderCommissionStatus(){const x=settings.commission_status||{};$("#com
 $("#saveCommissionStatus").addEventListener("click",async()=>{try{await saveSetting("commission_status",{status:$("#commissionAvailability").value,batch:$("#commissionBatch").value.trim(),slots:$("#commissionSlots").value.trim()})}catch(e){$("#globalMessage").textContent=e.message}});
 function renderLinks(){const x=settings.studio_links||{};$("#discordLink").value=x.discord||"";$("#portfolioLink").value=x.portfolio||"";$("#youtubeLink").value=x.youtube||"";$("#vgenLink").value=x.vgen||"";$("#emailLink").value=x.email||"";$("#twitterLink").value=x.twitter||""}
 $("#saveLinks").addEventListener("click",async()=>{try{await saveSetting("studio_links",{discord:$("#discordLink").value.trim(),portfolio:$("#portfolioLink").value.trim(),youtube:$("#youtubeLink").value.trim(),vgen:$("#vgenLink").value.trim(),email:$("#emailLink").value.trim(),twitter:$("#twitterLink").value.trim()})}catch(e){$("#globalMessage").textContent=e.message}});
+
+const entryExperienceDefaults={
+ loaderEnabled:true,loaderText:"Tuning the little sounds...",welcomeEnabled:true,
+ welcomeTitle:"How would you like to experience Perivelle?",
+ welcomeCopy:"There are tiny sounds hiding around this little studio. You decide if you want to hear them.",
+ withAudioEnabled:true,withAudioLabel:"With audio",withAudioDescription:"Music & playful sound effects",
+ withoutAudioEnabled:true,withoutAudioLabel:"Without audio",withoutAudioDescription:"A quiet browsing experience",
+ soundEffectsEnabled:true,soundEffectsVolume:0.025
+};
+function renderEntryExperience(){
+ const x={...entryExperienceDefaults,...(settings.entry_experience||{})};
+ $("#entryLoaderEnabled").checked=x.loaderEnabled;
+ $("#entryLoaderText").value=x.loaderText;
+ $("#entryWelcomeEnabled").checked=x.welcomeEnabled;
+ $("#entryWelcomeTitle").value=x.welcomeTitle;
+ $("#entryWelcomeCopy").value=x.welcomeCopy;
+ $("#entryWithAudioEnabled").checked=x.withAudioEnabled;
+ $("#entryWithAudioLabel").value=x.withAudioLabel;
+ $("#entryWithAudioDescription").value=x.withAudioDescription;
+ $("#entryWithoutAudioEnabled").checked=x.withoutAudioEnabled;
+ $("#entryWithoutAudioLabel").value=x.withoutAudioLabel;
+ $("#entryWithoutAudioDescription").value=x.withoutAudioDescription;
+ $("#entrySoundEffectsEnabled").checked=x.soundEffectsEnabled;
+ $("#entrySoundEffectsVolume").value=x.soundEffectsVolume;
+ $("#entryVolumeValue").textContent=Number(x.soundEffectsVolume).toFixed(3);
+}
+$("#entrySoundEffectsVolume").addEventListener("input",event=>{$("#entryVolumeValue").textContent=Number(event.target.value).toFixed(3)});
+$("#saveEntryExperience").addEventListener("click",async()=>{
+ const value={
+  loaderEnabled:$("#entryLoaderEnabled").checked,loaderText:$("#entryLoaderText").value.trim(),
+  welcomeEnabled:$("#entryWelcomeEnabled").checked,welcomeTitle:$("#entryWelcomeTitle").value.trim(),welcomeCopy:$("#entryWelcomeCopy").value.trim(),
+  withAudioEnabled:$("#entryWithAudioEnabled").checked,withAudioLabel:$("#entryWithAudioLabel").value.trim(),withAudioDescription:$("#entryWithAudioDescription").value.trim(),
+  withoutAudioEnabled:$("#entryWithoutAudioEnabled").checked,withoutAudioLabel:$("#entryWithoutAudioLabel").value.trim(),withoutAudioDescription:$("#entryWithoutAudioDescription").value.trim(),
+  soundEffectsEnabled:$("#entrySoundEffectsEnabled").checked,soundEffectsVolume:Number($("#entrySoundEffectsVolume").value)
+ };
+ if(!value.loaderText||!value.welcomeTitle||!value.welcomeCopy||!value.withAudioLabel||!value.withAudioDescription||!value.withoutAudioLabel||!value.withoutAudioDescription){$("#globalMessage").textContent="Please complete all entry experience text fields.";return;}
+ try{await saveSetting("entry_experience",value)}catch(error){$("#globalMessage").textContent=error.message}
+});
 async function saveSetting(key,value){
  const result=await api("/api/admin-data",{method:"PATCH",body:JSON.stringify({kind:"setting",key,value})});
  settings[key]=value;
@@ -744,6 +797,6 @@ async function saveSetting(key,value){
  $("#globalMessage").textContent=message;showToast(message);
  return result;
 }
-document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{const key=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(x=>x.setAttribute("aria-selected",String(x===b)));["orders","services","portfolio","producers","cms","freebies","audio","analytics","links","commissionStatus"].forEach(k=>{const panel=document.getElementById(k+"Panel");if(panel)panel.classList.toggle("hidden",k!==key)});}));
+document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{const key=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(x=>x.setAttribute("aria-selected",String(x===b)));["orders","services","portfolio","producers","cms","freebies","audio","entryExperience","analytics","links","commissionStatus"].forEach(k=>{const panel=document.getElementById(k+"Panel");if(panel)panel.classList.toggle("hidden",k!==key)});}));
 init();
 </script><script src="/assets/js/admin-cms.js" defer></script></body></html>
