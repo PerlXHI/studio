@@ -134,7 +134,7 @@ body{overflow-x:clip}
 
 /* MOBILE REFINEMENT — compact page navigation and stable single-column layouts. */
 .pv-menu-toggle{display:none}
-.pv-nav-menu[hidden]{display:none!important}
+@media(min-width:681px){.pv-nav-menu,.pv-nav-menu[hidden]{display:contents!important}}\n@media(max-width:680px){.pv-nav-menu[hidden]{display:none!important}}
 @media(min-width:681px){
   .pv-nav-menu{display:contents}
 }
@@ -291,3 +291,32 @@ body{overflow-x:clip}
 @media(prefers-reduced-motion:reduce){
   .pv-menu-toggle span{transition:none}
 }
+
+/* Welcome gate — friendly animated intro and explicit audio choice. */
+.pv-welcome-gate{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;padding:24px;background:radial-gradient(circle at 15% 20%,rgba(255,108,157,.22),transparent 34%),radial-gradient(circle at 85% 80%,rgba(173,139,224,.22),transparent 36%),#171321;color:#fff0fb;opacity:1;transition:opacity .35s ease,visibility .35s ease}
+.pv-welcome-gate:before,.pv-welcome-gate:after{content:"";position:absolute;width:min(70vw,560px);aspect-ratio:1;border:1px solid rgba(229,178,237,.18);border-radius:50%;pointer-events:none;animation:pv-welcome-orbit 18s linear infinite}
+.pv-welcome-gate:after{width:min(88vw,700px);animation-direction:reverse;border-style:dashed;opacity:.55}
+.pv-welcome-gate.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+.pv-welcome-card{position:relative;z-index:1;width:min(100%,490px);padding:clamp(28px,6vw,48px);text-align:center;border:1px solid rgba(220,185,239,.25);border-radius:30px;background:linear-gradient(145deg,rgba(55,40,73,.94),rgba(34,25,48,.96));box-shadow:0 28px 100px rgba(8,4,20,.45);opacity:0;transform:translateY(18px) scale(.98);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.8,.2,1)}
+.pv-welcome-card.is-visible{opacity:1;transform:translateY(0) scale(1)}
+.pv-welcome-mascot{display:block;width:84px;height:84px;margin:0 auto 18px;border:1px solid rgba(255,191,224,.5);border-radius:26px;object-fit:cover;box-shadow:0 0 35px rgba(255,108,157,.22);animation:pv-welcome-float 3s ease-in-out infinite}
+.pv-welcome-kicker{margin:0 0 10px;color:#d5b5e8;font-size:.68rem;font-weight:800;letter-spacing:.2em}
+.pv-welcome-card h1{margin:0;font:800 clamp(2rem,7vw,3rem)/1.08 "Sora",sans-serif;letter-spacing:-.06em}
+.pv-welcome-card h1 span{color:#ff83bc}
+.pv-welcome-copy{max-width:36ch;margin:16px auto 26px;color:#d7c9df;line-height:1.7}
+.pv-welcome-actions{display:grid;gap:10px}
+.pv-welcome-button{min-height:52px;padding:13px 18px;border:1px solid rgba(224,190,238,.38);border-radius:16px;font-weight:750;cursor:pointer;transition:transform .2s ease,filter .2s ease}
+.pv-welcome-button:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.pv-welcome-audio{background:linear-gradient(100deg,#ed4598,#bd5ac2);color:white;border-color:transparent}
+.pv-welcome-audio span{margin-left:8px;font-size:1.15rem}
+.pv-welcome-silent{background:rgba(255,255,255,.055);color:#f5eafa}
+.pv-welcome-footnote{margin:17px 0 0;color:#a997b5;font-size:.76rem}
+.pv-welcome-loading{position:absolute;z-index:2;bottom:9vh;margin:0;color:#e5c9ef;font-size:.82rem;letter-spacing:.08em;animation:pv-welcome-pulse 1s ease-in-out infinite alternate}
+.pv-welcome-loading[hidden]{display:none}
+.pv-welcome-loading span{display:inline-block;overflow:hidden;vertical-align:bottom;width:0;animation:pv-welcome-dots 1s steps(4,end) infinite}
+@keyframes pv-welcome-float{50%{transform:translateY(-7px) rotate(2deg)}}
+@keyframes pv-welcome-pulse{to{opacity:.45}}
+@keyframes pv-welcome-dots{to{width:1.2em}}
+@keyframes pv-welcome-orbit{to{transform:rotate(360deg)}}
+@media(max-width:480px){.pv-welcome-gate{padding:18px}.pv-welcome-card{padding:30px 22px;border-radius:24px}.pv-welcome-loading{bottom:5vh}}
+@media(prefers-reduced-motion:reduce){.pv-welcome-gate:before,.pv-welcome-gate:after,.pv-welcome-mascot,.pv-welcome-loading{animation:none}.pv-welcome-card,.pv-welcome-gate{transition:none}}

@@ -2337,6 +2337,21 @@ html[data-theme="dark"] .featured-audio-time{color:#b4aec8}
 <link rel="stylesheet" href="phase-5-polish.css">
 </head>
 <body>
+<div class="pv-welcome-gate" id="pvWelcomeGate" role="dialog" aria-modal="true" aria-labelledby="pvWelcomeTitle">
+  <div class="pv-welcome-card">
+    <div class="pv-welcome-orbit" aria-hidden="true"><span>✦</span><i></i><i></i></div>
+    <img class="pv-welcome-mascot" src="assets/brand/pfp.webp" alt="" width="84" height="84">
+    <p class="pv-welcome-kicker">A LITTLE PLACE FOR BIG SOUNDS</p>
+    <h1 id="pvWelcomeTitle">Welcome to <span>Perivelle.</span></h1>
+    <p class="pv-welcome-copy">A cozy corner for music, sound design, and little moments that bring your world to life.</p>
+    <div class="pv-welcome-actions">
+      <button type="button" class="pv-welcome-button pv-welcome-audio" data-welcome-audio="on">Enter with audio <span>♪</span></button>
+      <button type="button" class="pv-welcome-button pv-welcome-silent" data-welcome-audio="off">Enter without audio</button>
+    </div>
+    <p class="pv-welcome-footnote">You can change your sound preference anytime.</p>
+  </div>
+  <p class="pv-welcome-loading" aria-live="polite">Tuning the little sounds<span>...</span></p>
+</div>
 <header class="pv-header">
   <div class="wrap">
     <nav class="pv-navigation" aria-label="Main navigation">
@@ -3641,6 +3656,52 @@ setLanguage("en");
  window.perivelleRenderFreebies(window.perivelleFreebiesData);
 })();</script>
 
+<script>
+/* Welcome gate: user-initiated audio only; preference lasts for this tab session. */
+(function(){
+ const gate=document.getElementById("pvWelcomeGate");
+ if(!gate)return;
+ let preference="";
+ try{preference=sessionStorage.getItem("pv_audio_preference")||""}catch(e){}
+ if(preference==="on"||preference==="off"){gate.remove();document.documentElement.classList.add("pv-welcome-complete");return}
+ const loading=gate.querySelector(".pv-welcome-loading");
+ const card=gate.querySelector(".pv-welcome-card");
+ window.setTimeout(function(){gate.classList.add("is-ready");if(loading)loading.hidden=true;if(card)card.classList.add("is-visible")},850);
+ let audioContext=null;
+ function playWelcomeTone(){
+  try{
+   const AudioContext=window.AudioContext||window.webkitAudioContext;
+   if(!AudioContext)return;
+   audioContext=audioContext||new AudioContext();
+   if(audioContext.state==="suspended")audioContext.resume();
+   const now=audioContext.currentTime;
+   [523.25,659.25,783.99].forEach(function(freq,index){
+    const osc=audioContext.createOscillator(),gain=audioContext.createGain();
+    osc.type="sine";osc.frequency.setValueAtTime(freq,now+index*.09);
+    gain.gain.setValueAtTime(.0001,now+index*.09);
+    gain.gain.exponentialRampToValueAtTime(.045,now+index*.09+.025);
+    gain.gain.exponentialRampToValueAtTime(.0001,now+index*.09+.28);
+    osc.connect(gain);gain.connect(audioContext.destination);
+    osc.start(now+index*.09);osc.stop(now+index*.09+.3);
+   });
+  }catch(e){}
+ }
+ function finish(mode){
+  try{sessionStorage.setItem("pv_audio_preference",mode)}catch(e){}
+  document.documentElement.dataset.audio=mode;
+  gate.classList.add("is-leaving");
+  if(mode==="on")playWelcomeTone();
+  window.setTimeout(function(){gate.remove();document.documentElement.classList.add("pv-welcome-complete")},360);
+ }
+ gate.querySelectorAll("[data-welcome-audio]").forEach(function(button){
+  button.addEventListener("click",function(){finish(button.dataset.welcomeAudio)});
+ });
+ document.addEventListener("click",function(event){
+  if(document.documentElement.dataset.audio!=="on")return;
+  if(event.target.closest("a,button,[role=button]"))playWelcomeTone();
+ },true);
+})();
+</script>
 <script src="site-enhancements.js" defer></script>
 </body>
 </html>
