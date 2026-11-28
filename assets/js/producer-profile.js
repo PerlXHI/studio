@@ -16,6 +16,14 @@
     return node;
   }
 
+  /* Arrow icon from the inline SVG sprite in index.html (same set as the rest of the site). */
+  const ARROW_SVG = '<svg class="pv-icon" aria-hidden="true"><use href="#pv-i-arrow"/></svg>';
+  function makeWithIcon(tag, className, text) {
+    const node = make(tag, className, text);
+    node.insertAdjacentHTML("beforeend", ARROW_SVG);
+    return node;
+  }
+
   function getDialog() {
     let dialog = document.getElementById("producerProfileDialog");
     if (dialog) return dialog;
@@ -128,7 +136,7 @@
         const copy = make("span");
         copy.append(make("strong", "", clean(work.title) || "Untitled work"),
           make("small", "", category + (role ? " · " + role : "")));
-        link.append(copy, make("em", "", "View works ↗"));
+        link.append(copy, makeWithIcon("em", "", "View works "));
         list.appendChild(link);
       });
       section.appendChild(list);
@@ -136,7 +144,7 @@
     }
 
     const actions = make("div", "producer-profile-actions");
-    const worksLink = make("a", "", "Explore portfolio ↗");
+    const worksLink = makeWithIcon("a", "", "Explore portfolio ");
     worksLink.href = "#portfolio?creator=" + encodeURIComponent(producer.id);
     // Close the profile first, then let the existing SPA/hash navigation run normally.
     worksLink.addEventListener("click", () => { if (dialog.open) dialog.close(); });
