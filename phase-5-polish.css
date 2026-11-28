@@ -48,7 +48,7 @@ body{overflow-x:clip}
 #main-content .page-view[data-page="home"] .pv-hero-grid{
   display:grid;
   grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);
-  align-items:center;
+  align-items:start;
 }
 #main-content .page-view[data-page="home"] .pv-hero-art{min-width:0}
 #main-content .page-view[data-page="home"] .pv-mascot{display:block;width:100%;max-width:640px;height:auto;object-fit:contain}

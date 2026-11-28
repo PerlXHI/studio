@@ -53,7 +53,7 @@ button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent}
   padding-bottom:var(--pv-ui-section)!important;
 }
 #main-content .page-view[data-page="home"] .pv-hero{
-  padding-top:clamp(54px,6.5vw,86px);
+  padding-top:clamp(20px,2.5vw,40px);
   padding-bottom:clamp(28px,3.2vw,42px);
 }
 #main-content .page-view[data-page="home"] .pv-hero-grid{
