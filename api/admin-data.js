@@ -14,7 +14,7 @@ const STATUS_NOTES={
   "Demo ready — Awaiting feedback":"Demo ready — Awaiting feedback",
   "Preparing final delivery":"Preparing final delivery"
 };
-const KEYS=["service_prices","studio_links","portfolio_videos","portfolio_categories","featured_portfolio","studio_producers","freebies","commission_status","audio_player"];
+const KEYS=["service_prices","studio_links","portfolio_videos","portfolio_categories","featured_portfolio","studio_producers","freebies","commission_status","audio_player","entry_experience"];
 function storageObjectPath(rawUrl,projectUrl){
   if(!rawUrl)return "";
   try{
@@ -104,6 +104,16 @@ export default async function handler(req,res) {
           const allowed=["Open","Limited slots","Waitlist","Closed"];
           if(!allowed.includes(String(item.status||"")))return res.status(400).json({ok:false,message:"Choose a valid commission status."});
           if(String(item.batch||"").length>60||String(item.slots||"").length>80)return res.status(400).json({ok:false,message:"Commission status details are too long."});
+        }
+
+        if(body.key==="entry_experience"){
+          const item=value||{};
+          for(const key of ["loaderText","welcomeTitle","welcomeCopy","withAudioLabel","withAudioDescription","withoutAudioLabel","withoutAudioDescription"]){
+            if(typeof item[key]!=="string"||item[key].length>(key==="welcomeCopy"?300:120))return res.status(400).json({ok:false,message:"Entry experience text is missing or too long."});
+          }
+          if(typeof item.loaderEnabled!=="boolean"||typeof item.welcomeEnabled!=="boolean"||typeof item.withAudioEnabled!=="boolean"||typeof item.withoutAudioEnabled!=="boolean"||typeof item.soundEffectsEnabled!=="boolean")return res.status(400).json({ok:false,message:"Entry experience toggles must be enabled or disabled."});
+          const volume=Number(item.soundEffectsVolume);
+          if(!Number.isFinite(volume)||volume<0||volume>0.08)return res.status(400).json({ok:false,message:"Sound effects volume must be between 0 and 0.08."});
         }
         if(body.key==="studio_links"){for(const [name,item] of Object.entries(value||{})){if(!item)continue;if(name==="email"){if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(item)))return res.status(400).json({ok:false,message:"Enter a valid contact email address."});}else if(!/^https:\/\//i.test(String(item)))return res.status(400).json({ok:false,message:"Studio links must use HTTPS URLs."});}}
 
