@@ -2339,19 +2339,23 @@ html[data-theme="dark"] .featured-audio-time{color:#b4aec8}
 <body>
 <header class="pv-header">
   <div class="wrap">
-    <nav aria-label="Main navigation">
+    <nav class="pv-navigation" aria-label="Main navigation">
       <a class="brand pv-brand" href="#home" data-page-link="home" aria-label="Perivelle Studio home">
         <span class="pv-brand-mark"><img src="assets/brand/pfp.webp" alt="" aria-hidden="true"></span>
         <span>perivelle<span class="pv-brand-star">✦</span></span>
       </a>
-      <a class="navlink" href="#home" data-page-link="home" aria-current="page">Home</a>
-      <a class="navlink" href="#team" data-page-link="team">Studio</a>
-      <a class="navlink" href="#portfolio" data-page-link="portfolio">Works</a>
-      
-      <a class="navlink" href="#services" data-page-link="services">Services</a>
-      <a class="navlink" href="#custom" data-page-link="custom">Commission</a>
-      <a class="navlink pv-track-navlink" href="#track" data-page-link="track">Track Order</a>
-      <a class="pv-nav-cta" href="#" data-open-contact>Contact</a>
+      <button class="pv-menu-toggle" id="pvMenuToggle" type="button" aria-label="Open page menu" aria-expanded="false" aria-controls="pvNavMenu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="pv-nav-menu" id="pvNavMenu" hidden>
+        <a class="navlink" href="#home" data-page-link="home" aria-current="page">Home</a>
+        <a class="navlink" href="#team" data-page-link="team">Studio</a>
+        <a class="navlink" href="#portfolio" data-page-link="portfolio">Works</a>
+        <a class="navlink" href="#services" data-page-link="services">Services</a>
+        <a class="navlink" href="#custom" data-page-link="custom">Commission</a>
+        <a class="navlink pv-track-navlink" href="#track" data-page-link="track">Track Order</a>
+        <a class="pv-nav-cta" href="#" data-open-contact>Contact</a>
+      </div>
     </nav>
   </div>
 </header>
@@ -3255,7 +3259,28 @@ setLanguage("en");
   if(key==="portfolio"&&window.perivelleApplyProducerFilter)window.perivelleApplyProducerFilter();
   if(scroll)window.scrollTo({top:0,left:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
  }
+ const menuToggle=document.getElementById("pvMenuToggle");
+ const navMenu=document.getElementById("pvNavMenu");
+ function closeMenu(){
+  if(!menuToggle||!navMenu)return;
+  navMenu.hidden=true;
+  menuToggle.setAttribute("aria-expanded","false");
+  menuToggle.setAttribute("aria-label","Open page menu");
+ }
+ if(menuToggle&&navMenu){
+  menuToggle.addEventListener("click",function(){
+   const opening=navMenu.hidden;
+   navMenu.hidden=!opening;
+   menuToggle.setAttribute("aria-expanded",String(opening));
+   menuToggle.setAttribute("aria-label",opening?"Close page menu":"Open page menu");
+  });
+  document.addEventListener("click",function(event){
+   if(!navMenu.hidden&&!event.target.closest(".pv-navigation"))closeMenu();
+  });
+  document.addEventListener("keydown",function(event){if(event.key==="Escape")closeMenu()});
+ }
  document.addEventListener("click",function(event){
+  if(event.target.closest("#pvNavMenu [data-page-link]"))closeMenu();
   const closeRequest=event.target.closest(".commission-request-close");
   if(closeRequest){document.getElementById("commissionRequestDialog")?.close();if(location.hash==="#commission-request")history.replaceState({view:"custom"},"","#custom");return;}
   const link=event.target.closest('a[href^="#"]');
